@@ -1,0 +1,44 @@
+{
+  "criteria": {
+    "testosterone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "testosterone:cholesterol_fluid_bucket",
+              "testosterone:diluted_zinc_fluid_bucket",
+              "testosterone:testosterone_fluid_bucket",
+              "testosterone:testosterone_pill_box",
+              "testosterone:testosterone_pill",
+              "testosterone:testosterone_protein_bar",
+              "testosterone:testosterone_shot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "create:textures/block/raw_zinc_block.png",
+    "description": {
+      "translate": "advancement.testosterone.testosterone.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:testosterone_pill"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.testosterone.title"
+    }
+  },
+  "requirements": [
+    [
+      "testosterone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

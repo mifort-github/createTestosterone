@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "testosterone:has_cholesterol"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "testosterone:cholesterol_fluid"
+    }
+  ]
+}

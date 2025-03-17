@@ -1,0 +1,25 @@
+{
+  "item.testosterone.testosterone_pill": "Testosterone Pill",
+  "item.testosterone.testosterone_pill.tooltip.summary" : "Temporary Source Of _Man Power_.",
+  "item.testosterone.testosterone_shot": "Testosterone Shot",
+  "item.testosterone.testosterone_shot.tooltip.summary" : "Temporary Source Of _Man Power_.",
+
+  "item.testosterone.testosterone_protein_bar": "Testosterone Protein Bar",
+
+  "item.testosterone.add_slot_item": "Add A Necklace Slot",
+  "item.testosterone.reset_slots_item": "Reset All Slots",
+
+  "item.testosterone.diluted_zinc_fluid_bucket": "Bucket Of Diluted Zinc",
+  "fluid.testosterone.diluted_zinc_fluid": "Diluted Zinc",
+
+  "item.testosterone.cholesterol_fluid_bucket": "Bucket Of Cholesterol",
+  "fluid.testosterone.cholesterol_fluid": "Cholesterol",
+
+  "item.testosterone.tie": "Tie",
+
+  "effect.testosterone.testosterone": "Man Power",
+
+  "creativetab.testosterone_tab": "Testosterone",
+
+  "block.testosterone.testosterone_pill_box": "Testosterone Pill Box"
+}

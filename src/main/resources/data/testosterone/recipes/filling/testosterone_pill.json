@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "amount": 250,
+      "fluid": "testosterone:testosterone_fluid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "testosterone:testosterone_pill"
+    }
+  ]
+}

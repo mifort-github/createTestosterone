@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "amount": 250,
+      "fluid": "testosterone:testosterone_fluid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:tipped_arrow",
+      "nbt": {
+        "Potion": "testosterone:testosterone_potion"
+      }
+    }
+  ]
+}

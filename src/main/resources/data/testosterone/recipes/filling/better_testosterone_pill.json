@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "testosterone:testosterone_pill"
+    },
+    {
+      "amount": 250,
+      "fluid": "testosterone:diluted_zinc_fluid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "testosterone:testosterone_shot"
+    }
+  ]
+}

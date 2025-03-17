@@ -1,0 +1,38 @@
+{
+  "parent": "testosterone:testosterone",
+  "criteria": {
+    "cholesterol": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "testosterone:cholesterol_fluid_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.cholesterol.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:cholesterol_fluid_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.cholesterol.title"
+    }
+  },
+  "requirements": [
+    [
+      "cholesterol"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

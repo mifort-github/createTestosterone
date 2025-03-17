@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "testosterone:testosterone_pill_box"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "testosterone:testosterone_pill"
+  }
+}

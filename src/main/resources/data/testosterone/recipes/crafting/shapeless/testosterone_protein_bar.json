@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "testosterone:testosterone_pill"
+    },
+    {
+      "tag": "forge:seeds"
+    },
+    {
+      "item": "create:bar_of_chocolate"
+    }
+
+  ],
+  "result": {
+    "count": 1,
+    "item": "testosterone:testosterone_protein_bar"
+  }
+}

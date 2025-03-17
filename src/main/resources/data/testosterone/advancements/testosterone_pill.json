@@ -1,0 +1,38 @@
+{
+  "parent": "testosterone:testosterone_liquid",
+  "criteria": {
+    "testosterone_pill": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "testosterone:testosterone_pill"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.testosterone_pill.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:testosterone_pill"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.testosterone_pill.title"
+    }
+  },
+  "requirements": [
+    [
+      "testosterone_pill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

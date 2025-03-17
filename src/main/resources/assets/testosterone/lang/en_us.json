@@ -1,0 +1,49 @@
+{
+  "item.testosterone.testosterone_pill": "Testosterone Pill",
+  "item.testosterone.testosterone_pill.tooltip.summary" : "Temporary Source Of _Man Power_.",
+  "item.testosterone.testosterone_shot": "Testosterone Shot",
+  "item.testosterone.testosterone_shot.tooltip.summary" : "Temporary Source Of _Man Power_.",
+
+  "item.testosterone.testosterone_protein_bar": "Testosterone Protein Bar",
+
+  "item.testosterone.add_slot_item": "Add A Necklace Slot",
+  "item.testosterone.reset_slots_item": "Reset All Slots",
+
+  "item.testosterone.diluted_zinc_fluid_bucket": "Bucket Of Diluted Zinc",
+  "fluid.testosterone.diluted_zinc_fluid": "Diluted Zinc",
+
+  "item.testosterone.cholesterol_fluid_bucket": "Bucket Of Cholesterol",
+  "fluid.testosterone.cholesterol_fluid": "Cholesterol",
+
+  "item.testosterone.testosterone_fluid_bucket": "Bucket Of Testosterone",
+  "fluid.testosterone.testosterone_fluid": "Testosterone",
+
+  "item.testosterone.tie": "Tie",
+
+  "effect.testosterone.testosterone": "Man Power",
+
+  "item.minecraft.tipped_arrow.effect.testosterone_potion": "Arrow of Man Power",
+  "item.minecraft.potion.effect.testosterone_potion": "Potion of Man Power",
+  "item.minecraft.splash_potion.effect.testosterone_potion": "Splash Potion of Man Power",
+  "item.minecraft.lingering_potion.effect.testosterone_potion": "Lingering Potion of Man Power",
+
+  "creativetab.testosterone_tab": "Testosterone",
+
+  "block.testosterone.testosterone_pill_box": "Testosterone Pill Box",
+
+
+  "advancement.testosterone.testosterone.title": "Create: Testosterone",
+  "advancement.testosterone.testosterone.description": "An addon for the Estrogen create addon that adds testosterone items.",
+
+  "advancement.testosterone.cholesterol.title": "Heart Stopper",
+  "advancement.testosterone.cholesterol.description": "Collect a bucket of Cholesterol.",
+
+  "advancement.testosterone.testosterone_liquid.title": "Bro Juice",
+  "advancement.testosterone.testosterone_liquid.description": "Collect a bucket of Testosterone.",
+
+  "advancement.testosterone.testosterone_pill.title": "It's not steroids, Mom!",
+  "advancement.testosterone.testosterone_pill.description": "Make a Testosterone Pill.",
+
+  "advancement.testosterone.testosterone_protein_bar.title": "Nutritious Steroids",
+  "advancement.testosterone.testosterone_protein_bar.description": "Eat a bar with high protein (and testosterone) content."
+}

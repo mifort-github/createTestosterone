@@ -1,0 +1,38 @@
+{
+  "parent": "testosterone:testosterone_pill",
+  "criteria": {
+    "testosterone_protein_bar": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "testosterone:testosterone_protein_bar"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.testosterone_protein_bar.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:testosterone_protein_bar"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.testosterone_protein_bar.title"
+    }
+  },
+  "requirements": [
+    [
+      "testosterone_protein_bar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
