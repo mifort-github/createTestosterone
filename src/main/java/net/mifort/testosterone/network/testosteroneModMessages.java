@@ -1,7 +1,8 @@
 package net.mifort.testosterone.network;
 
-import net.mifort.testosterone.network.packet.ExampleC2SPacket;
-import net.mifort.testosterone.network.packet.ExampleS2CPacket;
+import net.mifort.testosterone.network.packet.effectCheckerC2SPacket;
+import net.mifort.testosterone.network.packet.effectCheckerS2CPacket;
+import net.mifort.testosterone.network.packet.hudS2CPacket;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,16 +30,23 @@ public class testosteroneModMessages {
         INSTANCE = net;
 
 
-//        net.messageBuilder(ExampleC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-//                .decoder(ExampleC2SPacket::new)
-//                .encoder(ExampleC2SPacket::toBytes)
-//                .consumerMainThread(ExampleC2SPacket::handle)
-//                .add();
+        net.messageBuilder(effectCheckerC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(effectCheckerC2SPacket::new)
+                .encoder(effectCheckerC2SPacket::toBytes)
+                .consumerMainThread(effectCheckerC2SPacket::handle)
+                .add();
 
-        net.messageBuilder(ExampleS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-                .decoder(ExampleS2CPacket::new)
-                .encoder(ExampleS2CPacket::toBytes)
-                .consumerMainThread(ExampleS2CPacket::handle)
+        net.messageBuilder(effectCheckerS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(effectCheckerS2CPacket::new)
+                .encoder(effectCheckerS2CPacket::toBytes)
+                .consumerMainThread(effectCheckerS2CPacket::handle)
+                .add();
+
+
+        net.messageBuilder(hudS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(hudS2CPacket::new)
+                .encoder(hudS2CPacket::toBytes)
+                .consumerMainThread(hudS2CPacket::handle)
                 .add();
     }
 

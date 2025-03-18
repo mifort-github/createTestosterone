@@ -3,21 +3,20 @@ package net.mifort.testosterone.network.packet;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
 import static net.mifort.testosterone.client.hudOverlay.*;
 
-public class ExampleS2CPacket {
+public class hudS2CPacket {
     private final long[] data;
 
-    public ExampleS2CPacket(long[] Data) {
+    public hudS2CPacket(long[] Data) {
         this.data = Data;
     }
 
-    public ExampleS2CPacket(FriendlyByteBuf buf) {
+    public hudS2CPacket(FriendlyByteBuf buf) {
         this.data = buf.readLongArray();
     }
 

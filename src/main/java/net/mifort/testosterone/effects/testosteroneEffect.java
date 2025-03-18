@@ -5,7 +5,7 @@
 package net.mifort.testosterone.effects;
 
 import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;
-import net.mifort.testosterone.network.packet.ExampleS2CPacket;
+import net.mifort.testosterone.network.packet.hudS2CPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.network.chat.Component;
@@ -76,7 +76,7 @@ public class testosteroneEffect extends MobEffect {
 
                     long[] toSend = {endOfCoolDownTick, entity.getPersistentData().getLong(BEGIN_TICK), (long) DURATION * amplifier};
 
-                    testosteroneModMessages.sendToPlayer(new ExampleS2CPacket(toSend), (ServerPlayer) entity);
+                    testosteroneModMessages.sendToPlayer(new hudS2CPacket(toSend), (ServerPlayer) entity);
                 }
             }
         }
