@@ -28,7 +28,6 @@ public class effectCheckerS2CPacket {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
             // HERE WE ARE ON THE CLIENT!
-//            Minecraft.getInstance().player.sendSystemMessage(Component.literal(Minecraft.getInstance().player + ":" + data));
 
             Minecraft.getInstance().level.getEntity(data[0]).getPersistentData().putInt(EFFECT_CHECKER_KEY, data[1]);
         });

@@ -29,16 +29,7 @@ public class hudOverlay {
         long beginTick = player.getPersistentData().getLong(BEGIN_TICK_KEY);
         long duration = player.getPersistentData().getLong(DURATION_KEY);
 
-//        player.sendSystemMessage(Component.literal("---------------------------------------------"));
-//
-//        player.sendSystemMessage(Component.literal("endOfCooldownTick: " + endOfCooldownTick));
-//        player.sendSystemMessage(Component.literal("actualBeginTick: " + actualBeginTick));
-//        player.sendSystemMessage(Component.literal("beginTick: " + beginTick));
-//        player.sendSystemMessage(Component.literal("duration: " + duration));
-
         long currentTick = Minecraft.getInstance().level.getGameTime();
-
-        // player.sendSystemMessage(Component.literal("current tick: " + currentTick));
 
         if (player.isDeadOrDying()) {
             player.getPersistentData().putLong(END_OF_COOLDOWN_TICK_KEY, 0);
@@ -57,15 +48,11 @@ public class hudOverlay {
         long ticksLeft = endOfCooldownTick - currentTick;
 
         if (currentTick < actualBeginTick + duration && player.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get())) {
-            // player.sendSystemMessage(Component.literal("AVAILABLE FOR: " + (actualBeginTick + duration - currentTick)));
-
             RenderSystem.enableBlend();
             RenderSystem.setShaderColor(1f, 0.82f, 0.467f, ALPHA_MULTIPLIER + ALPHA_BASE);
             guiGraphics.blit(TEMP, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
 
         } else if (ticksLeft > 0) {
-            // player.sendSystemMessage(Component.literal("COOLDOWN LEFT: " + ticksLeft));
-
             RenderSystem.setShaderColor(1f, 1f, 0f, (ticksLeft / (float) beginTick) * ALPHA_MULTIPLIER + ALPHA_BASE);
             guiGraphics.blit(TEMP, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
 

@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 
@@ -33,9 +32,7 @@ public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<Abstrac
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, AbstractClientPlayer pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         testosteroneModMessages.sendToServer(new effectCheckerC2SPacket(pLivingEntity.getId()));
 
-        // boolean hasEffect = Minecraft.getInstance().player.getPersistentData().getBoolean(EFFECT_CHECKER_KEY);
         int hasEffectInt = pLivingEntity.getPersistentData().getInt(EFFECT_CHECKER_KEY);
-        Minecraft.getInstance().player.sendSystemMessage(Component.literal(String.valueOf(hasEffectInt)));
 
         if (hasEffectInt == 1) {
             VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(beardTexture));

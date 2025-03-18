@@ -3,12 +3,10 @@ package net.mifort.testosterone.network.packet;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.UUID;
 import java.util.function.Supplier;
 
 public class effectCheckerC2SPacket {
@@ -47,7 +45,6 @@ public class effectCheckerC2SPacket {
                 int[] nums = {livingEntityID, hasEffectInt};
 
                 testosteroneModMessages.sendToPlayer(new effectCheckerS2CPacket(nums), player);
-//                player.sendSystemMessage(Component.literal(livingEntity + " HAS EFFECT " + hasEffect));
             }
         });
         return true;

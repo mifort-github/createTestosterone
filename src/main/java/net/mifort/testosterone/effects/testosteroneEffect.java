@@ -46,19 +46,14 @@ public class testosteroneEffect extends MobEffect {
 
 
                 if (currentTick < endOfBlockTick) {
-                    entity.sendSystemMessage(Component.literal("BLOCKED"));
-
                     damageTaken += (int) event.getAmount();
                     entity.getPersistentData().putInt(DAMAGE_TAKEN, damageTaken);
                     event.setCanceled(true);
 
                 } else if (currentTick < endOfBlockTick + ((long) damageTaken * MULTIPLIER) / amplifier) {
-                    entity.sendSystemMessage(Component.literal("COOLDOWN"));
                     event.setCanceled(false);
 
                 } else {
-                    entity.sendSystemMessage(Component.literal("BLOCKING BEGINS"));
-
                     endOfBlockTick = currentTick + ((long) DURATION * amplifier);
                     entity.getPersistentData().putLong(END_OF_BLOCK_TICK, endOfBlockTick);
 
