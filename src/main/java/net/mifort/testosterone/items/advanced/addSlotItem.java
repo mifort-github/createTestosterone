@@ -20,7 +20,7 @@ public class addSlotItem extends Item {
     @Override
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack pStack, Level pLevel, @NotNull LivingEntity pLivingEntity) {
         if (!pLevel.isClientSide) {
-            CuriosApi.getCuriosInventory(pLivingEntity).ifPresent(inventory -> inventory.addTransientSlotModifier("necklace", UUID.randomUUID(), "necklace", 1, AttributeModifier.Operation.ADDITION));
+            // CuriosApi.getCuriosInventory(pLivingEntity).ifPresent(inventory -> inventory.addTransientSlotModifier("necklace", UUID.randomUUID(), "necklace", 1, AttributeModifier.Operation.ADDITION));
         }
         return super.finishUsingItem(pStack, pLevel, pLivingEntity);
     }

@@ -86,6 +86,9 @@ minecraft {
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
         }
 
         server {
@@ -131,17 +134,29 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 dependencies {
+
+    // Compile against only the API artifact
+    compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
+    // Use the full Curios API jar at runtime
+    runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
+
+
 //    // implementation fg.deobf("curse.maven:create-328085:4762216")
 //    implementation fg.deobf("curse.maven:create-328085:5838779")
 
     // implementation fg.deobf("curse.maven:estrogen-850410:5538074")
     implementation fg.deobf("curse.maven:estrogen-850410:6052639")
-    implementation fg.deobf("curse.maven:curios-309927:6216710")
-    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
-    implementation fg.deobf("curse.maven:botarium-704113:5486070")
+//    implementation fg.deobf("curse.maven:curios-309927:6216710")
+//    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
+//    implementation fg.deobf("curse.maven:botarium-704113:5486070")
 
     // helpful mods for development
 //    implementation fg.deobf("curse.maven:jei-238222:6075247")

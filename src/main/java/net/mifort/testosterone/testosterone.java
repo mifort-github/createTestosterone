@@ -123,14 +123,14 @@ public class testosterone {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TESTOSTERONE.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TESTOSTERONE.getSource(), RenderType.translucent());
-
-            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.CHOLESTEROL.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.CHOLESTEROL.getSource(), RenderType.translucent());
-
-            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.DILUTED_ZINC.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.DILUTED_ZINC.getSource(), RenderType.translucent());
+//            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TESTOSTERONE.get(), RenderType.translucent());
+//            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TESTOSTERONE.getSource(), RenderType.translucent());
+//
+//            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.CHOLESTEROL.get(), RenderType.translucent());
+//            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.CHOLESTEROL.getSource(), RenderType.translucent());
+//
+//            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.DILUTED_ZINC.get(), RenderType.translucent());
+//            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.DILUTED_ZINC.getSource(), RenderType.translucent());
         }
     }
 }
