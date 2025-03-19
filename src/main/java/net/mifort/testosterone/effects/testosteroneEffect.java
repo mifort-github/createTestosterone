@@ -35,7 +35,7 @@ public class testosteroneEffect extends MobEffect {
         public static void onLivingHurt(LivingHurtEvent event) {
             LivingEntity entity = event.getEntity();
 
-            if (entity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get())) {
+            if (entity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()) && !entity.isBlocking()) {
 
                 long currentTick = ServerLifecycleHooks.getCurrentServer().overworld().getGameTime();
                 int amplifier = entity.getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()).getAmplifier() + 1;
