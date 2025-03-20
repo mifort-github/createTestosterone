@@ -8,7 +8,6 @@ import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;
 import net.mifort.testosterone.network.packet.hudS2CPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

@@ -24,6 +24,8 @@ public class testosteroneModCreativeModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(testosteroneModItems.TESTOSTERONE_PILL.get()))
                     .title(Component.translatable("creativetab.testosterone_tab"))
                     .displayItems((pParameters, pOutput) -> {
+                        pOutput.accept((testosteroneModItems.TIE.get()));
+
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.TESTOSTERONE_FLUID.getBucket().get());
