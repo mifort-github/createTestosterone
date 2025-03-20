@@ -5,12 +5,18 @@ import net.mifort.testosterone.items.advanced.addSlotItem;
 import net.mifort.testosterone.items.advanced.tie;
 import net.mifort.testosterone.items.advanced.resetSlotsItem;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 

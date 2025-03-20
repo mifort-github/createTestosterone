@@ -20,7 +20,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -29,12 +28,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
-//import top.theillusivec4.curios.api.SlotTypeMessage;
-//
-//import static top.theillusivec4.curios.api.SlotTypeMessage.REGISTER_TYPE;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@SuppressWarnings("UnstableApiUsage")
 @Mod(testosterone.MOD_ID)
 public class testosterone {
     public static final String MOD_ID = "testosterone";
@@ -81,10 +75,6 @@ public class testosterone {
 
         // potions
         testosteroneModPotions.register(modEventBus);
-
-
-
-//        InterModComms.sendTo("curios", REGISTER_TYPE, () -> new SlotTypeMessage.Builder("necklace").build());
 
 
         // Register the commonSetup method for modloading
