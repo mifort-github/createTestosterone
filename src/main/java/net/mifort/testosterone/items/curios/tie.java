@@ -33,7 +33,7 @@ public class tie extends Item implements ICurioItem {
 
         if (effect != null) {
             if (effect.getAmplifier() == 0) {
-                MobEffectInstance effectInstance = new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(), effect.getDuration(), 1);
+                MobEffectInstance effectInstance = new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(), effect.getDuration(), 1, effect.isAmbient(), effect.isVisible(), effect.showIcon());
 
                 entity.addEffect(effectInstance);
             }
