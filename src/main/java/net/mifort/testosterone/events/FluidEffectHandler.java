@@ -18,7 +18,7 @@ public class FluidEffectHandler {
     }
 
     private static void applyPotionEffect(LivingEntity entity) {
-        if (entity.isInFluidType(testosteroneFluids.TESTOSTERONE.getType())) {
+        if (entity.isInFluidType(testosteroneFluids.TESTOSTERONE_FLUID.getType())) {
             entity.addEffect(new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(), 20, 0));
         }
     }

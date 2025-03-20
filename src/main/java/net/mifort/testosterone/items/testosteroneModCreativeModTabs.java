@@ -1,7 +1,6 @@
 package net.mifort.testosterone.items;
 
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
-import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.potions.testosteroneModPotions;
 import net.mifort.testosterone.testosterone;
@@ -25,9 +24,9 @@ public class testosteroneModCreativeModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(testosteroneModItems.TESTOSTERONE_PILL.get()))
                     .title(Component.translatable("creativetab.testosterone_tab"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(testosteroneFluids.CHOLESTEROL.getBucket().get());
-                        pOutput.accept(testosteroneFluids.DILUTED_ZINC.getBucket().get());
-                        pOutput.accept(testosteroneFluids.TESTOSTERONE.getBucket().get());
+                        pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.TESTOSTERONE_FLUID.getBucket().get());
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
