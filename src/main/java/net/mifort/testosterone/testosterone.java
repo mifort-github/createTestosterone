@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.fluids.testosteroneFluids;
+import net.mifort.testosterone.items.curios.MyCurioRenderer;
 import net.mifort.testosterone.items.testosteroneModCreativeModTabs;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.effects.testosteroneModEffects;
@@ -28,6 +29,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 @Mod(testosterone.MOD_ID)
 public class testosterone {
@@ -77,6 +79,7 @@ public class testosterone {
         testosteroneModPotions.register(modEventBus);
 
 
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -121,6 +124,8 @@ public class testosterone {
 
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.DILUTED_ZINC_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.DILUTED_ZINC_FLUID.getSource(), RenderType.translucent());
+
+            CuriosRendererRegistry.register(testosteroneModItems.TIE.get(), () -> new MyCurioRenderer());
         }
     }
 }

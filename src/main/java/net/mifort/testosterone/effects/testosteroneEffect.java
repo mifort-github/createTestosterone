@@ -1,7 +1,3 @@
-//
-// TODO add beard, balance
-//
-
 package net.mifort.testosterone.effects;
 
 import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;

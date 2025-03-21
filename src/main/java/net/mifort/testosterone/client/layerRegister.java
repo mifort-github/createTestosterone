@@ -1,5 +1,6 @@
 package net.mifort.testosterone.client;
 
+import net.mifort.testosterone.items.curios.tieModel;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -11,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = testosterone.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class beard {
+public class layerRegister {
     @SubscribeEvent
     public static void addLayerEvent(EntityRenderersEvent.AddLayers event) {
         Set<String> skins = event.getSkins();
@@ -25,5 +26,6 @@ public class beard {
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(beardModel.LAYER_LOCATION, beardModel::createBodyLayer);
+        event.registerLayerDefinition(tieModel.LAYER_LOCATION, tieModel::createBodyLayer);
     }
 }
