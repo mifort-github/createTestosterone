@@ -1,9 +1,11 @@
 package net.mifort.testosterone.effects;
 
 import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;
+import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.network.packet.hudS2CPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -14,6 +16,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 public class testosteroneEffect extends MobEffect {
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
@@ -25,12 +29,23 @@ public class testosteroneEffect extends MobEffect {
         public static final int DURATION = 40;
         public static final int MULTIPLIER = 10;
 
+        private static final int DAMAGE_LIMIT = 100;
+
 
         @SubscribeEvent
         public static void onLivingHurt(LivingHurtEvent event) {
+            boolean hasTie = false;
+
             LivingEntity entity = event.getEntity();
 
             if (entity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()) && !entity.isBlocking()) {
+                if (CuriosApi.getCuriosInventory(event.getEntity()).resolve().isPresent()) {
+                    ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(event.getEntity()).resolve().get();
+
+                    if (curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).isPresent()) {
+                        hasTie = true;
+                    }
+                }
 
                 long currentTick = ServerLifecycleHooks.getCurrentServer().overworld().getGameTime();
                 int amplifier = entity.getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()).getAmplifier() + 1;
@@ -42,6 +57,11 @@ public class testosteroneEffect extends MobEffect {
 
                 if (currentTick < endOfBlockTick) {
                     damageTaken += (int) event.getAmount();
+
+                    if (hasTie && damageTaken > 100) {
+                        damageTaken = 100;
+                    }
+
                     entity.getPersistentData().putInt(DAMAGE_TAKEN, damageTaken);
                     event.setCanceled(true);
 
@@ -55,7 +75,12 @@ public class testosteroneEffect extends MobEffect {
                     entity.getPersistentData().putLong(BEGIN_TICK, currentTick);
 
                     // Update DAMAGE_TAKEN with the current damage amount
-                    damageTaken = (int) event.getAmount();
+                    if (hasTie && event.getAmount() > DAMAGE_LIMIT) {
+                        damageTaken = DAMAGE_LIMIT;
+                    } else {
+                        damageTaken = (int) event.getAmount();
+                    }
+
                     entity.getPersistentData().putInt(DAMAGE_TAKEN, damageTaken);
 
                     event.setCanceled(true);

@@ -16,6 +16,7 @@
   "fluid.testosterone.testosterone_fluid": "Testosterone",
 
   "item.testosterone.tie": "Tie",
+    "item.testosterone.tie.tooltip.summary" : "A Tie that gives you _Knockback Resistance_. Useful with the _Man Power_ effect.",
 
   "effect.testosterone.testosterone": "Man Power",
 
@@ -31,6 +32,9 @@
 
   "advancement.testosterone.testosterone.title": "Create: Testosterone",
   "advancement.testosterone.testosterone.description": "An addon for the Estrogen create addon that adds testosterone items.",
+
+  "advancement.testosterone.tie.title": "Nanomachines, son!",
+  "advancement.testosterone.tie.description": "Craft a stylish Tie.",
 
   "advancement.testosterone.cholesterol.title": "Heart Stopper",
   "advancement.testosterone.cholesterol.description": "Collect a bucket of Cholesterol.",

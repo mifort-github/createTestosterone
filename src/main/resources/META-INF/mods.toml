@@ -39,7 +39,12 @@ authors="${mod_authors}" #optional
 #displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
 
 # The description text for the mod (multi line!) (#mandatory)
-description='''${mod_description}'''
+description='''${mod_description}
+
+Discord: https://discord.gg/qAEWgpaJrZ
+'''
+logoFile="icon.png"
+
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.${mod_id}]] #optional
     # the modid of the dependency

@@ -16,7 +16,8 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 public class tie extends Item implements ICurioItem {
-    public tie() {
+
+    public tie(Properties pProperties) {
         super(new Item.Properties().stacksTo(1).defaultDurability(0));
     }
 

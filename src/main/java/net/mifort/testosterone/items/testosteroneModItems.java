@@ -3,12 +3,13 @@ package net.mifort.testosterone.items;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -26,6 +27,7 @@ public class testosteroneModItems {
             REGISTRATE.item("testosterone_protein_bar", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_PROTEIN_BAR).rarity(Rarity.RARE))
                     .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
+                    .tab(CreativeModeTabs.FOOD_AND_DRINKS)
                     .register();
 
     public static final ItemEntry<Item> TESTOSTERONE_SHOT =
@@ -34,7 +36,12 @@ public class testosteroneModItems {
                     .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                     .register();
 
-    public static final RegistryObject<Item> TIE = ITEMS.register("tie", tie::new);
+
+    public static final ItemEntry<tie> TIE =
+            REGISTRATE.item("tie", tie::new)
+                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
+                    .register();
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
