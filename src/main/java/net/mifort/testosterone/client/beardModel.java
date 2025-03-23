@@ -5,6 +5,7 @@ package net.mifort.testosterone.client;// Made with Blockbench 4.12.3
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.mifort.testosterone.testosterone;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -15,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class beardModel extends Model {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "beardmodel2"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(testosterone.MOD_ID, "beardmodel2"), "main");
 	private final ModelPart bb_main;
 
 	public beardModel(ModelPart root) {

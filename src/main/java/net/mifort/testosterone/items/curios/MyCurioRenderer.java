@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -34,9 +33,12 @@ public class MyCurioRenderer implements ICurioRenderer {
                                                                           float headPitch) {
         // Render code goes here
 
-        Minecraft.getInstance().player.sendSystemMessage(Component.literal("RENDERING"));
         VertexConsumer vBuff = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(tieTexture));
         matrixStack.pushPose();
+
+        ICurioRenderer.translateIfSneaking(matrixStack, slotContext.entity());
+        ICurioRenderer.rotateIfSneaking(matrixStack, slotContext.entity());
+
         TieModel.renderToBuffer(matrixStack, vBuff, light, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
         matrixStack.popPose();
     }
