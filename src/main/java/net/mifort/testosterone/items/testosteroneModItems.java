@@ -1,8 +1,6 @@
 package net.mifort.testosterone.items;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-import net.mifort.testosterone.items.advanced.addSlotItem;
-import net.mifort.testosterone.items.advanced.resetSlotsItem;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.world.item.Item;
@@ -33,19 +31,6 @@ public class testosteroneModItems {
     public static final ItemEntry<Item> TESTOSTERONE_SHOT =
             REGISTRATE.item("testosterone_shot", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_SHOT).rarity(Rarity.EPIC).stacksTo(16))
-                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
-                    .register();
-
-    public static final ItemEntry<addSlotItem> ADD_SLOT_ITEM =
-            REGISTRATE.item("add_slot_item", addSlotItem::new)
-                    .properties(p -> p.food(testosteroneModFoods.ADD_SLOT_ITEM).stacksTo(1))
-                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
-                    .register();
-
-
-    public static final ItemEntry<resetSlotsItem> RESET_SLOTS_ITEM =
-            REGISTRATE.item("reset_slots_item", resetSlotsItem::new)
-                    .properties(p -> p.food(testosteroneModFoods.RESET_SLOTS_ITEM).stacksTo(1))
                     .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                     .register();
 
