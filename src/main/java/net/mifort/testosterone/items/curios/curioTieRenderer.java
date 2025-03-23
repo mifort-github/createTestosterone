@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
-public class MyCurioRenderer implements ICurioRenderer {
+public class curioTieRenderer implements ICurioRenderer {
     public static final ResourceLocation tieTexture = new ResourceLocation(testosterone.MOD_ID, "textures/models/tie_texture.png");
     tieModel TieModel = new tieModel(Minecraft.getInstance().getEntityModels().bakeLayer(tieModel.LAYER_LOCATION));
 
