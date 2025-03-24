@@ -9,11 +9,17 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
+
+import java.util.Arrays;
 
 public class curioTieRenderer implements ICurioRenderer {
     public static final ResourceLocation tieTexture = new ResourceLocation(testosterone.MOD_ID, "textures/models/tie_texture.png");
@@ -39,7 +45,20 @@ public class curioTieRenderer implements ICurioRenderer {
         ICurioRenderer.translateIfSneaking(matrixStack, slotContext.entity());
         ICurioRenderer.rotateIfSneaking(matrixStack, slotContext.entity());
 
-        TieModel.renderToBuffer(matrixStack, vBuff, light, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
+        float[] color = {1, 1, 1};
+
+        if (stack.getTag() != null) {
+            String nbtColor = stack.getTag().getString("color");
+
+            for (int pId = 0; pId < 16; pId++) {
+                if (DyeColor.byId(pId).name().toLowerCase().equals(nbtColor)) {
+                    color = DyeColor.byId(pId).getTextureDiffuseColors();
+                }
+            }
+        }
+
+
+        TieModel.renderToBuffer(matrixStack, vBuff, light, OverlayTexture.NO_OVERLAY, color[0], color[1], color[2], 1f);
         matrixStack.popPose();
     }
 }

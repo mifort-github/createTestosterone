@@ -1,0 +1,25 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": false,
+  "key": {
+    "W": {
+      "item": "minecraft:black_wool"
+    },
+    "I": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "pattern": [
+    "WIW",
+    " W ",
+    " W ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "item": "testosterone:tie",
+    "nbt": {
+      "color": "black"
+    }
+  }
+}

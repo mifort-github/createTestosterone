@@ -39,7 +39,6 @@ public class testosteroneModItems {
 
     public static final ItemEntry<tie> TIE =
             REGISTRATE.item("tie", tie::new)
-                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                     .register();
 
 

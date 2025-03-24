@@ -5,8 +5,10 @@ import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.potions.testosteroneModPotions;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
@@ -31,12 +33,24 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
+
+                        for (int pId = 0; pId < 16; pId++) {
+                            pOutput.accept(tie(DyeColor.byId(pId).name().toLowerCase()));
+                        }
                     })
                     .build());
 
     public static ItemStack tippedArrow(Potion potion) {
         ItemStack stack = new ItemStack(Items.TIPPED_ARROW);
         PotionUtils.setPotion(stack, potion);
+        return stack;
+    }
+
+    public static ItemStack tie(String color) {
+        ItemStack stack = new ItemStack(testosteroneModItems.TIE);
+        CompoundTag nbtData = new CompoundTag();
+        nbtData.putString("color", color);
+        stack.setTag(nbtData);
         return stack;
     }
 

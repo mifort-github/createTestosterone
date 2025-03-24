@@ -3,7 +3,7 @@
   "acceptMirrored": false,
   "key": {
     "W": {
-      "tag": "minecraft:wool"
+      "item": "minecraft:white_wool"
     },
     "I": {
       "tag": "forge:nuggets/iron"
@@ -17,6 +17,9 @@
   ],
   "result": {
     "count": 1,
-    "item": "testosterone:tie"
+    "item": "testosterone:tie",
+    "nbt": {
+      "color": "white"
+    }
   }
 }
