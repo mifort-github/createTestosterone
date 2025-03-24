@@ -53,6 +53,7 @@ public class curioTieRenderer implements ICurioRenderer {
             for (int pId = 0; pId < 16; pId++) {
                 if (DyeColor.byId(pId).name().toLowerCase().equals(nbtColor)) {
                     color = DyeColor.byId(pId).getTextureDiffuseColors();
+                    break;
                 }
             }
         }

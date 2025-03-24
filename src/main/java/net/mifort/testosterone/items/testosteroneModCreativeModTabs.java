@@ -26,13 +26,19 @@ public class testosteroneModCreativeModTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(testosteroneModItems.TESTOSTERONE_PILL.get()))
                     .title(Component.translatable("creativetab.testosterone_tab"))
                     .displayItems((pParameters, pOutput) -> {
+                        pOutput.accept(testosteroneModItems.TESTOSTERONE_PILL);
+                        pOutput.accept(testosteroneModItems.TESTOSTERONE_SHOT);
+                        pOutput.accept(testosteroneModItems.TESTOSTERONE_PROTEIN_BAR);
+
+                        pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
+
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.TESTOSTERONE_FLUID.getBucket().get());
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
-                        pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
+
 
                         for (int pId = 0; pId < 16; pId++) {
                             pOutput.accept(tie(DyeColor.byId(pId).name().toLowerCase()));

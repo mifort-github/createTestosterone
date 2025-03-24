@@ -20,20 +20,17 @@ public class testosteroneModItems {
     public static final ItemEntry<Item> TESTOSTERONE_PILL =
             REGISTRATE.item("testosterone_pill", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_PILL).rarity(Rarity.RARE).stacksTo(16))
-                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                     .register();
 
     public static final ItemEntry<Item> TESTOSTERONE_PROTEIN_BAR =
             REGISTRATE.item("testosterone_protein_bar", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_PROTEIN_BAR).rarity(Rarity.RARE))
-                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                     .tab(CreativeModeTabs.FOOD_AND_DRINKS)
                     .register();
 
     public static final ItemEntry<Item> TESTOSTERONE_SHOT =
             REGISTRATE.item("testosterone_shot", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_SHOT).rarity(Rarity.EPIC).stacksTo(16))
-                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                     .register();
 
 
