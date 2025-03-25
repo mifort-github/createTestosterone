@@ -38,7 +38,7 @@ public class testosteroneModCreativeModTabs {
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
-
+                        pOutput.accept(tie(DyeColor.byId(7).name().toLowerCase()));
 
                         for (int pId = 0; pId < 16; pId++) {
                             pOutput.accept(tie(DyeColor.byId(pId).name().toLowerCase()));

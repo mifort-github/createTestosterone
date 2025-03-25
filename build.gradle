@@ -156,7 +156,7 @@ dependencies {
     implementation fg.deobf("curse.maven:estrogen-850410:6052639")
 //    implementation fg.deobf("curse.maven:curios-309927:6216710")
 //    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
-//    implementation fg.deobf("curse.maven:botarium-704113:5486070")
+    implementation fg.deobf("curse.maven:botarium-704113:5118353")
 
     // helpful mods for development
 //    implementation fg.deobf("curse.maven:jei-238222:6075247")

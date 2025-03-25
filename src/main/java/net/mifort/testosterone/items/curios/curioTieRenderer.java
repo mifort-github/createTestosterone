@@ -9,17 +9,14 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.client.event.RenderTooltipEvent;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
-import java.util.Arrays;
 
 public class curioTieRenderer implements ICurioRenderer {
     public static final ResourceLocation tieTexture = new ResourceLocation(testosterone.MOD_ID, "textures/models/tie_texture.png");
@@ -45,7 +42,11 @@ public class curioTieRenderer implements ICurioRenderer {
         ICurioRenderer.translateIfSneaking(matrixStack, slotContext.entity());
         ICurioRenderer.rotateIfSneaking(matrixStack, slotContext.entity());
 
-        float[] color = {1, 1, 1};
+        long currentTick = ServerLifecycleHooks.getCurrentServer().overworld().getGameTime();
+
+        short colorId = (short) ((currentTick / 12) % 16);
+
+        float[] color = DyeColor.byId(colorId).getTextureDiffuseColors();
 
         if (stack.getTag() != null) {
             String nbtColor = stack.getTag().getString("color");

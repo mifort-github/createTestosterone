@@ -46,5 +46,8 @@
   "advancement.testosterone.testosterone_pill.description": "Make a Testosterone Pill.",
 
   "advancement.testosterone.testosterone_protein_bar.title": "Nutritious Steroids",
-  "advancement.testosterone.testosterone_protein_bar.description": "Eat a bar with high protein (and testosterone) content."
+  "advancement.testosterone.testosterone_protein_bar.description": "Eat a bar with high protein (and testosterone) content.",
+
+  "advancement.testosterone.damage.title": "Dumb Ways To... Live?",
+  "advancement.testosterone.damage.description": "Negate 100 damage with the Man Power effect"
 }

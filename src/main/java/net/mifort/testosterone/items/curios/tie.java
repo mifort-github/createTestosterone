@@ -4,7 +4,6 @@ import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
@@ -23,17 +22,16 @@ public class tie extends Item implements ICurioItem {
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        // Your ticking logic here
-        LivingEntity entity = slotContext.entity();
+        if (stack.getDisplayName().getString().equals("[matej]")) {
+            MobEffectInstance effect = slotContext.entity().getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
 
-        MobEffectInstance effect = slotContext.entity().getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
+            if (effect != null) {
+                if (effect.getAmplifier() == 0) {
+                    MobEffectInstance effectInstance = new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(),
+                            effect.getDuration(), 1, effect.isAmbient(), effect.isVisible(), effect.showIcon());
 
-        if (effect != null) {
-            if (effect.getAmplifier() == 0) {
-                MobEffectInstance effectInstance = new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(),
-                        effect.getDuration(), 1, effect.isAmbient(), effect.isVisible(), effect.showIcon());
-
-                entity.addEffect(effectInstance);
+                    slotContext.entity().addEffect(effectInstance);
+                }
             }
         }
     }

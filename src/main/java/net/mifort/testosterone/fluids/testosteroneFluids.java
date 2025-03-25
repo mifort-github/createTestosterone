@@ -49,4 +49,11 @@ public class testosteroneFluids {
     public static void register() {
 
     }
+
+//    public static void registerFluidInteractions() {
+//        FluidInteractionRegistry.addInteraction(EstrogenFluids.LIQUID_ESTROGEN.getFlowing().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+//                TESTOSTERONE_FLUID.get().getFluidType(),
+//                fluidState -> Blocks.GLASS.defaultBlockState()
+//        ));
+//    }
 }

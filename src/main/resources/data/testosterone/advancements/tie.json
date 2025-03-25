@@ -22,7 +22,8 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "testosterone:tie"
+      "item": "testosterone:tie",
+      "nbt": "{color: gray}"
     },
     "show_toast": true,
     "title": {
