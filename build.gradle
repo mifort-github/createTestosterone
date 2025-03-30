@@ -139,9 +139,16 @@ repositories {
         name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
     }
+
+    maven {
+        name = "Sappho Company"
+        description = "Critter"
+        url = "https://maven.is-immensely.gay/nightly"
+    }
 }
 
 dependencies {
+    implementation "uwu.serenity.critter:critter-forge:0.1-beta.11"
 
     // Compile against only the API artifact
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
@@ -149,19 +156,10 @@ dependencies {
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 
 
-//    // implementation fg.deobf("curse.maven:create-328085:4762216")
-//    implementation fg.deobf("curse.maven:create-328085:5838779")
-
-    // implementation fg.deobf("curse.maven:estrogen-850410:5538074")
     implementation fg.deobf("curse.maven:estrogen-850410:6052639")
-//    implementation fg.deobf("curse.maven:curios-309927:6216710")
-//    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
     implementation fg.deobf("curse.maven:botarium-704113:5118353")
+    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
 
-    // helpful mods for development
-//    implementation fg.deobf("curse.maven:jei-238222:6075247")
-//    implementation fg.deobf("curse.maven:appleskin-248787:4770828")
-//    implementation fg.deobf("curse.maven:tagtooltips-899941:4687165")
 
 
     implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }

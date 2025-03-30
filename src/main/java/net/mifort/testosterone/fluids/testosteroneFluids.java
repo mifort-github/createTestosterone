@@ -46,14 +46,23 @@ public class testosteroneFluids {
                             .explosionResistance(100f))
                     .register();
 
+
     public static void register() {
 
     }
 
 //    public static void registerFluidInteractions() {
-//        FluidInteractionRegistry.addInteraction(EstrogenFluids.LIQUID_ESTROGEN.getFlowing().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+//        final BlockState BLOCK = testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState();
+//
+//        FluidInteractionRegistry.addInteraction(EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
 //                TESTOSTERONE_FLUID.get().getFluidType(),
-//                fluidState -> Blocks.GLASS.defaultBlockState()
+//                fluidState -> BLOCK
+//        ));
+//
+//        FluidInteractionRegistry.addInteraction(TESTOSTERONE_FLUID.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+//                EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(),
+//                fluidState -> BLOCK
 //        ));
 //    }
+
 }

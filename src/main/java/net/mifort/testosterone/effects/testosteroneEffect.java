@@ -11,13 +11,17 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+
+import java.util.Optional;
 
 public class testosteroneEffect extends MobEffect {
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
@@ -35,15 +39,21 @@ public class testosteroneEffect extends MobEffect {
         @SubscribeEvent
         public static void onLivingHurt(LivingHurtEvent event) {
             boolean hasTie = false;
+            boolean matej = false;
 
             LivingEntity entity = event.getEntity();
 
-            if (entity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()) && !entity.isBlocking()) {
+            boolean hasEffect = entity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
+            boolean notBlocking = !entity.isBlocking();
+
+            if (hasEffect && notBlocking) {
                 if (CuriosApi.getCuriosInventory(event.getEntity()).resolve().isPresent()) {
                     ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(event.getEntity()).resolve().get();
 
+
                     if (curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).isPresent()) {
                         hasTie = true;
+                        matej = curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).get().stack().getDisplayName().getString().equals("[matej]");
                     }
                 }
 
@@ -53,9 +63,10 @@ public class testosteroneEffect extends MobEffect {
                 int damageTaken = entity.getPersistentData().getInt(DAMAGE_TAKEN);
                 long endOfBlockTick = entity.getPersistentData().getLong(END_OF_BLOCK_TICK);
 
+                if (event.getSource().type().msgId().equals("genericKill") && !matej) {
+                    event.setCanceled(false);
 
-
-                if (currentTick < endOfBlockTick) {
+                } else if (currentTick < endOfBlockTick) {
                     damageTaken += (int) event.getAmount();
 
                     if (hasTie && damageTaken > 100) {

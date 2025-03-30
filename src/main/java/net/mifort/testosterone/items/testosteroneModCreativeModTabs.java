@@ -31,6 +31,10 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PROTEIN_BAR);
 
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
+//                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE.get());
+//                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_STAIRS.get());
+//                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_SLAB.get());
+//                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_WALL.get());
 
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
@@ -38,6 +42,7 @@ public class testosteroneModCreativeModTabs {
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
+                        pOutput.accept(testosteroneModItems.TIE.get());
                         pOutput.accept(tie(DyeColor.byId(7).name().toLowerCase()));
 
                         for (int pId = 0; pId < 16; pId++) {

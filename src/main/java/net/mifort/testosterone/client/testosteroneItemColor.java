@@ -2,6 +2,7 @@ package net.mifort.testosterone.client;
 
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -9,7 +10,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.server.ServerLifecycleHooks;
 
 public class testosteroneItemColor implements ItemColor {
 
@@ -25,7 +25,12 @@ public class testosteroneItemColor implements ItemColor {
                 }
             }
         }
-        long currentTick = ServerLifecycleHooks.getCurrentServer().overworld().getGameTime();
+
+        long currentTick = 0;
+
+        if (Minecraft.getInstance().level != null) {
+            currentTick = Minecraft.getInstance().level.getGameTime();
+        }
 
         short pId = (short) ((currentTick / 12) % 16);
 

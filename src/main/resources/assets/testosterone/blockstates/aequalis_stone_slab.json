@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "testosterone:block/aequalis_stone_slab"
+    },
+    "type=double": {
+      "model": "testosterone:block/aequalis_stone"
+    },
+    "type=top": {
+      "model": "testosterone:block/aequalis_stone_slab_top"
+    }
+  }
+}

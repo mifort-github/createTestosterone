@@ -70,14 +70,12 @@ public class testosterone {
         testosteroneModPotions.register(modEventBus);
 
 
-
-
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     public void loadComplete(FMLLoadCompleteEvent event) {
-        // event.enqueueWork(testosteroneFluids::registerFluidInteractions);
+//         event.enqueueWork(testosteroneFluids::registerFluidInteractions);
     }
 
 

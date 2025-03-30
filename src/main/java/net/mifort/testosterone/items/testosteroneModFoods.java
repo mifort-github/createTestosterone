@@ -29,17 +29,5 @@ public class testosteroneModFoods {
             .effect(() -> new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(), 6000, 0, false, false, true), 1f)
             .build();
 
-    public static final FoodProperties ADD_SLOT_ITEM = new FoodProperties.Builder()
-            .nutrition(0)
-            .saturationMod(0f)
-            .alwaysEat()
-            .fast()
-            .build();
 
-    public static final FoodProperties RESET_SLOTS_ITEM = new FoodProperties.Builder()
-            .nutrition(0)
-            .saturationMod(0f)
-            .alwaysEat()
-            .fast()
-            .build();
 }

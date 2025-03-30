@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.server.ServerLifecycleHooks;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
@@ -42,7 +41,11 @@ public class curioTieRenderer implements ICurioRenderer {
         ICurioRenderer.translateIfSneaking(matrixStack, slotContext.entity());
         ICurioRenderer.rotateIfSneaking(matrixStack, slotContext.entity());
 
-        long currentTick = ServerLifecycleHooks.getCurrentServer().overworld().getGameTime();
+        long currentTick = 0;
+
+        if (Minecraft.getInstance().level != null) {
+            currentTick = Minecraft.getInstance().level.getGameTime();
+        }
 
         short colorId = (short) ((currentTick / 12) % 16);
 
