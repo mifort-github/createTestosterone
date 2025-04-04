@@ -12,6 +12,8 @@ public class testosteroneModEffects {
 
     public static final RegistryObject<MobEffect> TESTOSTERONE_EFFECT = EFFECTS.register("testosterone", testosteroneEffect::new);
 
+    public static final RegistryObject<MobEffect> AFTERLIFE_EFFECT = EFFECTS.register("afterlife_effect", afterlifeEffect::new);
+
     public static void registerEffects() {
         EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }

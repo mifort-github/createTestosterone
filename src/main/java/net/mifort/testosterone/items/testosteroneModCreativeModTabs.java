@@ -30,6 +30,8 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_SHOT);
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PROTEIN_BAR);
 
+                        pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
+
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
 //                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE.get());
 //                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_STAIRS.get());

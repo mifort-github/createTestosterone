@@ -5,23 +5,18 @@ import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.network.packet.hudS2CPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-
-import java.util.Optional;
 
 public class testosteroneEffect extends MobEffect {
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)

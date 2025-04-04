@@ -3,7 +3,6 @@ package net.mifort.testosterone.items;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -36,6 +35,11 @@ public class testosteroneModItems {
 
     public static final ItemEntry<tie> TIE =
             REGISTRATE.item("tie", tie::new)
+                    .register();
+
+    public static final ItemEntry<Item> AFTERLIFE_TOTEM =
+            REGISTRATE.item("afterlife_totem", Item::new)
+                    .properties(p -> p.rarity(Rarity.EPIC).stacksTo(1))
                     .register();
 
 
