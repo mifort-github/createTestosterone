@@ -18,6 +18,7 @@
 
 <h2><code>Information</code></h2>
 
+> [!TIP]
 > This is a <b>FORGE ONLY</b> addon, we recommend using <strong><a href="https://modrinth.com/mod/emi">EMI</a>/<a href="https://modrinth.com/mod/jei">JEI</a>/<a href="https://modrinth.com/mod/rei">REI</a></strong>
 
 An Addon for Create: Estrogen that adds usable testosterone, along with new items and more!
