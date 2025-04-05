@@ -1,6 +1,6 @@
 <p><img src="https://cdn.modrinth.com/data/pIwmV2xi/images/80e04ee356bd6dfad73d6e347d66f6a34183398d.png" alt="banner"></p>
 
-<center>
+<div align="center">
 <a href="https://modrinth.com/mod/testosterone/versions">
     <img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40intergrav%2Fdevins-badges%403%2Fassets%2Fcozy-minimal%2Favailable%2Fmodrinth_vector.svg&amp;w=100&amp;h=100" alt="Modrinth">
 </a>
@@ -13,7 +13,7 @@
 <a href="https://discord.gg/qAEWgpaJrZ">
     <img src="https://wsrv.nl/?url=https%3A%2F%2Fcdn.jsdelivr.net%2Fnpm%2F%40intergrav%2Fdevins-badges%403%2Fassets%2Fcozy-minimal%2Fsocial%2Fdiscord-plural_vector.svg&amp;w=100&amp;h=100" alt="Discord">
 </a>
-
+</div>
 </center>
 
 <h2><code>Information</code></h2>
