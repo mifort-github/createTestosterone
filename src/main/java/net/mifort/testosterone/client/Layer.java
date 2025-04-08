@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-    public static final String EFFECT_CHECKER_KEY = "effect_checker_key";
+    public static final String EFFECT_CHECKER_KEY = "testosterone:effect_checker_key";
 
     public static final ResourceLocation beardTexture = new ResourceLocation(testosterone.MOD_ID, "textures/models/beard_texture.png");
     beardModel BeardModel;
@@ -40,6 +40,15 @@ public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<Abstrac
             pPoseStack.scale(1f, 1f, 1f);
             getParentModel().head.translateAndRotate(pPoseStack);
             BeardModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
+            pPoseStack.popPose();
+
+        } else {
+            VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(beardTexture));
+            pPoseStack.pushPose();
+            pPoseStack.translate(0, 0, 0); // move the model
+            pPoseStack.scale(1f, 1f, 1f);
+            getParentModel().head.translateAndRotate(pPoseStack);
+            BeardModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 0f);
             pPoseStack.popPose();
         }
     }

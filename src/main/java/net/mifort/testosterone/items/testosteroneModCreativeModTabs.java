@@ -29,6 +29,7 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PILL);
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_SHOT);
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PROTEIN_BAR);
+                        pOutput.accept(testosteroneModItems.BEER_PINT);
 
                         pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
 
@@ -41,6 +42,7 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.TESTOSTERONE_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.BEER_FLUID.getBucket().get());
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 

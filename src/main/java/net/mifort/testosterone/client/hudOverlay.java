@@ -10,10 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 public class hudOverlay {
-    public static final String END_OF_COOLDOWN_TICK_KEY = "end_of_cooldown_tick_key";
-    public static final String ACTUAL_BEGIN_TICK_KEY = "actual_begin_tick_key";
-    public static final String BEGIN_TICK_KEY = "begin_tick_key";
-    public static final String DURATION_KEY = "duration_key";
+    public static final String END_OF_COOLDOWN_TICK_KEY = "testosterone:end_of_cooldown_tick_key";
+    public static final String ACTUAL_BEGIN_TICK_KEY = "testosterone:actual_begin_tick_key";
+    public static final String BEGIN_TICK_KEY = "testosterone:begin_tick_key";
+    public static final String DURATION_KEY = "testosterone:duration_key";
 
     public static final float ALPHA_MULTIPLIER = 0.5f;
     public static final float ALPHA_BASE = 0.3f;

@@ -6,6 +6,10 @@
 
   "item.testosterone.testosterone_protein_bar": "Testosterone Protein Bar",
 
+  "item.testosterone.beer_pint": "Beer Pint",
+
+  "item.testosterone.afterlife_totem": "Afterlife Totem",
+
   "item.testosterone.diluted_zinc_fluid_bucket": "Bucket Of Diluted Zinc",
   "fluid.testosterone.diluted_zinc_fluid": "Diluted Zinc",
 
@@ -14,6 +18,9 @@
 
   "item.testosterone.testosterone_fluid_bucket": "Bucket Of Testosterone",
   "fluid.testosterone.testosterone_fluid": "Testosterone",
+
+  "item.testosterone.beer_fluid_bucket": "Bucket Of Beer",
+  "fluid.testosterone.beer_fluid": "Beer",
 
   "item.testosterone.tie": "Tie",
     "item.testosterone.tie.tooltip.summary" : "A Tie that gives you _Knockback Resistance_. Useful with the _Man Power_ effect.",

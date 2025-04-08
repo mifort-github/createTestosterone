@@ -21,9 +21,9 @@ import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 public class testosteroneEffect extends MobEffect {
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
     public static class ForgeEvents {
-        private static final String BEGIN_TICK = "begin_tick";
-        private static final String DAMAGE_TAKEN = "damage_taken_key";
-        private static final String END_OF_BLOCK_TICK = "end_of_block_tick";
+        private static final String BEGIN_TICK = "testosterone:begin_tick";
+        private static final String DAMAGE_TAKEN = "testosterone:damage_taken_key";
+        private static final String END_OF_BLOCK_TICK = "testosterone:end_of_block_tick";
 
         public static final int DURATION = 40;
         public static final int MULTIPLIER = 10;

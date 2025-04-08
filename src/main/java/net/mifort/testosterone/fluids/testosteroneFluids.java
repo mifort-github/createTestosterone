@@ -46,6 +46,19 @@ public class testosteroneFluids {
                             .explosionResistance(100f))
                     .register();
 
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> BEER_FLUID =
+            REGISTRATE.fluid("beer_fluid", testosterone.rl("block/beer_fluid_still"), testosterone.rl("block/beer_fluid_flow"))
+                    .properties(b -> b.viscosity(1500)
+                            .canExtinguish(true)
+                            .canHydrate(true)
+                            .density(1500))
+                    .fluidProperties(p -> p.levelDecreasePerBlock(1)
+                            .tickRate(5)
+                            .slopeFindDistance(3)
+                            .explosionResistance(100f))
+                    .register();
+
+
 
     public static void register() {
 

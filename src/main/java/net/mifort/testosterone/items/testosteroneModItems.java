@@ -2,6 +2,7 @@ package net.mifort.testosterone.items;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.items.curios.tie;
+import net.mifort.testosterone.items.custom.testosterone_shot;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.mifort.testosterone.items.custom.beerPint;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -27,9 +29,15 @@ public class testosteroneModItems {
                     .tab(CreativeModeTabs.FOOD_AND_DRINKS)
                     .register();
 
-    public static final ItemEntry<Item> TESTOSTERONE_SHOT =
-            REGISTRATE.item("testosterone_shot", Item::new)
-                    .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_SHOT).rarity(Rarity.EPIC).stacksTo(16))
+
+    public static final ItemEntry<testosterone_shot> TESTOSTERONE_SHOT =
+            REGISTRATE.item("testosterone_shot", testosterone_shot::new)
+                    .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
+                    .register();
+
+    public static final ItemEntry<beerPint> BEER_PINT =
+            REGISTRATE.item("beer_pint", beerPint::new)
+                    .properties(p -> p.food(testosteroneModFoods.BLANK).stacksTo(16))
                     .register();
 
 
