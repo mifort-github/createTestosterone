@@ -3,10 +3,16 @@ package net.mifort.testosterone.effects;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -32,10 +38,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-// TODO: sync effect across clients
+// TODO: sync effect across clients, message
 
 public class afterlifeEffect extends MobEffect {
-    private static final int AFTERLIFE_DURATION = 200;
+    private static final int AFTERLIFE_DURATION = 60 * 20;
     private static final String CORPSE_KEY = "testosterone:corpse";
     private static final String PROGRESS_KEY = "testosterone:progress";
 
@@ -45,10 +51,19 @@ public class afterlifeEffect extends MobEffect {
         public static void onLivingDeathEvent(LivingDeathEvent event) {
             LivingEntity entity = event.getEntity();
             if (entity instanceof Player player && !event.getSource().type().msgId().equals("genericKill")) {
-                ItemStack mainHand = player.getMainHandItem();
-                ItemStack offHand = player.getOffhandItem();
+                ItemStack totem = null;
+                boolean hasTotem = false;
 
-                if (mainHand.is(testosteroneModItems.AFTERLIFE_TOTEM.get()) || offHand.is(testosteroneModItems.AFTERLIFE_TOTEM.get())) {
+                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                    totem = player.getInventory().getItem(i);
+                    if (totem.is(testosteroneModItems.AFTERLIFE_TOTEM.get())) {
+                        hasTotem = true;
+                        break;
+                    }
+                }
+
+
+                if (hasTotem)  {
                     event.setCanceled(true);
                     player.setHealth(player.getMaxHealth());
 
@@ -63,11 +78,7 @@ public class afterlifeEffect extends MobEffect {
                             true));
 
 
-                    if (player.getMainHandItem().is(testosteroneModItems.AFTERLIFE_TOTEM.get())) {
-                        player.getMainHandItem().shrink(1);
-                    } else if (player.getOffhandItem().is(testosteroneModItems.AFTERLIFE_TOTEM.get())) {
-                        player.getOffhandItem().shrink(1);
-                    }
+                    totem.shrink(1);
                 }
             }
         }

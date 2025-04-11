@@ -75,7 +75,7 @@ public class testosterone {
     }
 
     public void loadComplete(FMLLoadCompleteEvent event) {
-//         event.enqueueWork(testosteroneFluids::registerFluidInteractions);
+         event.enqueueWork(testosteroneFluids::registerFluidInteractions);
     }
 
 

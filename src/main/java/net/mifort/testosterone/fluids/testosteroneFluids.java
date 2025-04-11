@@ -1,6 +1,10 @@
 package net.mifort.testosterone.fluids;
 
 import com.tterrag.registrate.util.entry.FluidEntry;
+import dev.mayaqq.estrogen.registry.EstrogenFluids;
+import net.mifort.testosterone.blocks.testosteroneModBlocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.mifort.testosterone.testosterone;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -64,18 +68,18 @@ public class testosteroneFluids {
 
     }
 
-//    public static void registerFluidInteractions() {
-//        final BlockState BLOCK = testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState();
-//
-//        FluidInteractionRegistry.addInteraction(EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
-//                TESTOSTERONE_FLUID.get().getFluidType(),
-//                fluidState -> BLOCK
-//        ));
-//
-//        FluidInteractionRegistry.addInteraction(TESTOSTERONE_FLUID.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
-//                EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(),
-//                fluidState -> BLOCK
-//        ));
-//    }
+    public static void registerFluidInteractions() {
+        final BlockState BLOCK = testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState();
+
+        FluidInteractionRegistry.addInteraction(EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+                TESTOSTERONE_FLUID.get().getFluidType(),
+                fluidState -> BLOCK
+        ));
+
+        FluidInteractionRegistry.addInteraction(TESTOSTERONE_FLUID.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+                EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(),
+                fluidState -> BLOCK
+        ));
+    }
 
 }

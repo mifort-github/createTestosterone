@@ -23,17 +23,17 @@ public class testosteroneModBlocks {
 
 
 
-//    public static final RegistryObject<Block> AEQUALIS_STONE = registerBlock("aequalis_stone",
-//            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-//
-//    public static final RegistryObject<Block> AEQUALIS_STONE_STAIRS = registerBlock("aequalis_stone_stairs",
-//            () -> new StairBlock(() -> testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-//
-//    public static final RegistryObject<Block> AEQUALIS_STONE_SLAB = registerBlock("aequalis_stone_slab",
-//            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-//
-//    public static final RegistryObject<Block> AEQUALIS_STONE_WALL = registerBlock("aequalis_stone_wall",
-//            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+    public static final RegistryObject<Block> AEQUALIS_STONE = registerBlock("aequalis_stone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> AEQUALIS_STONE_STAIRS = registerBlock("aequalis_stone_stairs",
+            () -> new StairBlock(() -> testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> AEQUALIS_STONE_SLAB = registerBlock("aequalis_stone_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> AEQUALIS_STONE_WALL = registerBlock("aequalis_stone_wall",
+            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
