@@ -18,7 +18,7 @@ public class beerPint extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity living) {
         if (!level.isClientSide) {
-            living.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 6000, 1));
+            living.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000, 1));
 
             if (living instanceof Player player) {
                 ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);

@@ -46,7 +46,7 @@ public class afterlifeEffect extends MobEffect {
     private static final String PROGRESS_KEY = "testosterone:progress";
 
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
-    public class afterlifeEvent {
+    public static class afterlifeEvent {
         @SubscribeEvent
         public static void onLivingDeathEvent(LivingDeathEvent event) {
             LivingEntity entity = event.getEntity();
