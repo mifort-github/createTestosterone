@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "testosterone:block/aequalis_dark_diamond_cut"
+  }
+}

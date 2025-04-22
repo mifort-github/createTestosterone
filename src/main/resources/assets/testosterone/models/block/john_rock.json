@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "up": "testosterone:block/john_rock/john_ends_active",
+    "down": "testosterone:block/john_rock/john_ends_active",
+    "north": "testosterone:block/john_rock/john_active",
+    "east": "testosterone:block/john_rock/john_active",
+    "south": "testosterone:block/john_rock/john_active",
+    "west": "testosterone:block/john_rock/john_active",
+    "particle": "testosterone:block/john_rock/john_ends_active"
+  }
+}

@@ -9,7 +9,7 @@
   "item.testosterone.beer_pint": "Beer Pint",
   "item.testosterone.beer_pint.tooltip.summary" : "The perfect drink to share with the lads -  _Don't_ drink _Too_ much Though",
 
-  "item.testosterone.afterlife_totem": "Afterlife Totem",
+  "item.testosterone.totem_of_afterlife": "Totem of Afterlife",
 
   "item.testosterone.diluted_zinc_fluid_bucket": "Bucket Of Diluted Zinc",
   "fluid.testosterone.diluted_zinc_fluid": "Diluted Zinc",
@@ -37,6 +37,12 @@
 
   "block.testosterone.testosterone_pill_box": "Testosterone Pill Box",
 
+  "block.testosterone.aequalis_stone": "Aequalis",
+  "block.testosterone.aequalis_stone.tooltip.summary": "A _strange stone_ formed when §kestrogen§r and §ktestosterone§r touch.",
+
+  "block.testosterone.aequalis_cut": "Cut Aequalis",
+  "block.testosterone.aequalis_diamond_cut": "Diamond Cut Aequalis",
+  "block.testosterone.aequalis_dark_diamond_cut": "Dark Diamond Cut Aequalis",
 
   "advancement.testosterone.testosterone.title": "Create: Testosterone",
   "advancement.testosterone.testosterone.description": "An addon for the Estrogen create addon that adds testosterone items.",

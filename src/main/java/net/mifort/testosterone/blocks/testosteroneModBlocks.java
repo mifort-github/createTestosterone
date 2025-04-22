@@ -21,10 +21,11 @@ public class testosteroneModBlocks {
     public static final RegistryObject<Block> TESTOSTERONE_PILL_BLOCK = registerBlock("testosterone_pill_box",
             () -> new testosterone_pill_box(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1f, 1f).sound(EstrogenSoundTypes.PILL_BOX)));
 
+    public static final RegistryObject<Block> JOHN_ROCK = registerBlock("john_rock",
+            () -> new john_rock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
 
 
-    public static final RegistryObject<Block> AEQUALIS_STONE = registerBlock("aequalis_stone",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
 
     public static final RegistryObject<Block> AEQUALIS_STONE_STAIRS = registerBlock("aequalis_stone_stairs",
             () -> new StairBlock(() -> testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
@@ -34,6 +35,19 @@ public class testosteroneModBlocks {
 
     public static final RegistryObject<Block> AEQUALIS_STONE_WALL = registerBlock("aequalis_stone_wall",
             () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
+// Aequalis varients
+    public static final RegistryObject<Block> AEQUALIS_STONE = registerBlock("aequalis_stone",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> AEQUALIS_CUT = registerBlock("aequalis_cut",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> AEQUALIS_DIAMOND_CUT = registerBlock("aequalis_diamond_cut",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+
+    public static final RegistryObject<Block> AEQUALIS_DARK_DIAMOND_CUT = registerBlock("aequalis_dark_diamond_cut",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {

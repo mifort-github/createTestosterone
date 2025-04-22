@@ -46,7 +46,7 @@ public class testosteroneModItems {
                     .register();
 
     public static final ItemEntry<Item> AFTERLIFE_TOTEM =
-            REGISTRATE.item("afterlife_totem", Item::new)
+            REGISTRATE.item("totem_of_afterlife", Item::new)
                     .properties(p -> p.rarity(Rarity.EPIC).stacksTo(1))
                     .register();
 

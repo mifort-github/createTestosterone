@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "testosterone:testosterone_pill_box"
+    "testosterone:testosterone_pill_box",
+    "testosterone:aequalis_stone",
+    "testosterone:aequalis_cut",
+    "testosterone:aequalis_diamond_cut",
+    "testosterone:aequalis_dark_diamond_cut",
+    "testosterone:john_rock"
   ]
 }
