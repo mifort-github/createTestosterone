@@ -58,7 +58,7 @@ public class testosterone {
         testosteroneModEffects.registerEffects();
 
         // Register blocks
-        testosteroneModBlocks.register(modEventBus);
+        testosteroneModBlocks.register();
 
         // Register fluids
         testosteroneFluids.register();

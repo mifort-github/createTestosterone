@@ -1,67 +1,71 @@
 package net.mifort.testosterone.blocks;
 
+import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.mayaqq.estrogen.registry.EstrogenSoundTypes;
-import net.mifort.testosterone.items.testosteroneModItems;
-import net.mifort.testosterone.testosterone;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
+import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 public class testosteroneModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, testosterone.MOD_ID);
+
+    public static final BlockEntry<testosteronePillBox> TESTOSTERONE_PILL_BLOCK = REGISTRATE.block("testosterone_pill_box", testosteronePillBox::new)
+            .initialProperties(() -> Blocks.OAK_PLANKS)
+            .properties(p -> p.strength(1f, 1f)
+                    .sound(EstrogenSoundTypes.PILL_BOX))
+            .simpleItem()
+            .register();
 
 
-    public static final RegistryObject<Block> TESTOSTERONE_PILL_BLOCK = registerBlock("testosterone_pill_box",
-            () -> new testosterone_pill_box(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1f, 1f).sound(EstrogenSoundTypes.PILL_BOX)));
+    // ALL AEQUALIS STONE
+    public static final BlockEntry<Block> AEQUALIS_STONE = REGISTRATE.block("aequalis_stone", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
 
-    public static final RegistryObject<Block> JOHN_ROCK = registerBlock("john_rock",
-            () -> new john_rock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
+    public static final BlockEntry<Block> AEQUALIS_CUT = REGISTRATE.block("aequalis_cut", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> AEQUALIS_DIAMOND_CUT = REGISTRATE.block("aequalis_diamond_cut", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> AEQUALIS_DARK_DIAMOND_CUT = REGISTRATE.block("aequalis_dark_diamond_cut", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<StairBlock> AEQUALIS_STONE_STAIRS = REGISTRATE.block("aequalis_stone_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<SlabBlock> AEQUALIS_STONE_SLAB = REGISTRATE.block("aequalis_stone_slab", SlabBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<WallBlock> AEQUALIS_STONE_WALL = REGISTRATE.block("aequalis_stone_wall", WallBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
 
 
+    // PIZZA TOWER
+    public static final BlockEntry<johnRock> JOHN_ROCK = REGISTRATE.block("john_rock", johnRock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE).noOcclusion())
+            .simpleItem()
+            .register();
 
 
-    public static final RegistryObject<Block> AEQUALIS_STONE_STAIRS = registerBlock("aequalis_stone_stairs",
-            () -> new StairBlock(() -> testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-
-    public static final RegistryObject<Block> AEQUALIS_STONE_SLAB = registerBlock("aequalis_stone_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-
-    public static final RegistryObject<Block> AEQUALIS_STONE_WALL = registerBlock("aequalis_stone_wall",
-            () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-
-// Aequalis varients
-    public static final RegistryObject<Block> AEQUALIS_STONE = registerBlock("aequalis_stone",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-
-    public static final RegistryObject<Block> AEQUALIS_CUT = registerBlock("aequalis_cut",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-
-    public static final RegistryObject<Block> AEQUALIS_DIAMOND_CUT = registerBlock("aequalis_diamond_cut",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-
-    public static final RegistryObject<Block> AEQUALIS_DARK_DIAMOND_CUT = registerBlock("aequalis_dark_diamond_cut",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE)));
-
-
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
-        RegistryObject<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn);
-        return toReturn;
-    }
-
-
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-        return testosteroneModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-    }
-
-    public static void register(IEventBus eventBus) {
-        BLOCKS.register(eventBus);
-    }
+    public static void register() {}
 }

@@ -46,7 +46,7 @@ public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<Abstrac
             VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(beardTexture));
             pPoseStack.pushPose();
             pPoseStack.translate(0, 0, 0); // move the model
-            pPoseStack.scale(1f, 1f, 1f);
+            pPoseStack.scale(0, 0, 0);
             getParentModel().head.translateAndRotate(pPoseStack);
             BeardModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 0f);
             pPoseStack.popPose();

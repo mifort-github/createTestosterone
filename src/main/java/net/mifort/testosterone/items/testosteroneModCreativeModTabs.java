@@ -36,9 +36,9 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE.get());
-//                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_STAIRS.get());
-//                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_SLAB.get());
-//                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_WALL.get());
+                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_STAIRS.get());
+                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_SLAB.get());
+                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_WALL.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_CUT.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_DIAMOND_CUT.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_DARK_DIAMOND_CUT.get());

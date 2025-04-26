@@ -3,16 +3,10 @@ package net.mifort.testosterone.effects;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -38,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-// TODO: sync effect across clients, message
+// TODO: sync effect across clients, message, fix switching dimension, make void bypass totem or tp idk
 
 public class afterlifeEffect extends MobEffect {
     private static final int AFTERLIFE_DURATION = 60 * 20;
@@ -195,7 +189,7 @@ public class afterlifeEffect extends MobEffect {
 
 
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID, value = Dist.CLIENT)
-    public class afterlifePlayerRenderHandler {
+    public static class afterlifePlayerRenderHandler {
 
         @SubscribeEvent
         public static void onRenderPlayerPre(RenderPlayerEvent.Pre event) {

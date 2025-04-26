@@ -6,9 +6,9 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
-public class testosterone_pill_box extends HorizontalDirectionalBlock {
+public class testosteronePillBox extends HorizontalDirectionalBlock {
 
-    public testosterone_pill_box(Properties pProperties) {
+    public testosteronePillBox(Properties pProperties) {
         super(pProperties);
     }
 
