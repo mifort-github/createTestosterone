@@ -22,12 +22,10 @@ public class johnRock extends HorizontalDirectionalBlock {
     public static final BooleanProperty TOGGLED = BooleanProperty.create("toggled");
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
 
-    // Limit on the number of blocks to propagate through to avoid potential lag.
-    private static final int MAX_PROPAGATION_BLOCKS = 1024;
+    private static final int MAX_PROPAGATION_BLOCKS = 4096;
 
     public johnRock(Properties properties) {
         super(properties);
-        // Default: not toggled, not pressed, and facing north.
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(TOGGLED, false)
                 .setValue(PRESSED, false)
@@ -37,6 +35,20 @@ public class johnRock extends HorizontalDirectionalBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TOGGLED, PRESSED, FACING);
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+        if (!level.isClientSide()) {
+            boolean isPowered = level.hasNeighborSignal(pos);
+            if (isPowered && !state.getValue(PRESSED)) {
+                boolean newToggled = !state.getValue(TOGGLED);
+                BlockState newState = state.setValue(PRESSED, true).setValue(TOGGLED, newToggled);
+                level.setBlockAndUpdate(pos, newState);
+                propagateConnectedToggling(level, pos, newToggled);
+            }
+        }
     }
 
     @Override
@@ -89,7 +101,6 @@ public class johnRock extends HorizontalDirectionalBlock {
         }
     }
 
-    // Override the collision shape method so when the block is powered, it has no hitbox.
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (state.getValue(TOGGLED)) {
@@ -101,9 +112,8 @@ public class johnRock extends HorizontalDirectionalBlock {
 
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
-        // If the adjacent block is of the same type, skip rendering the face between them.
         if (adjacentBlockState.getBlock() == this) {
-            return true;
+            return state.getValue(TOGGLED);
         }
         return super.skipRendering(state, adjacentBlockState, side);
     }
