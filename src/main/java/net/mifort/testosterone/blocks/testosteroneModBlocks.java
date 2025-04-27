@@ -41,6 +41,12 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
 
+    public static final BlockEntry<bigBricks> BIG_BRICKS = REGISTRATE.block("big_bricks", bigBricks::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
     public static final BlockEntry<StairBlock> AEQUALIS_STONE_STAIRS = REGISTRATE.block("aequalis_stone_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()

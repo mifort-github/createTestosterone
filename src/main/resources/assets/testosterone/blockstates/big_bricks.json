@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "x=false,y=false": {
+      "model": "testosterone:block/big_bricks_1"
+    },
+    "x=true,y=false": {
+      "model": "testosterone:block/big_bricks_2"
+    },
+    "x=false,y=true": {
+      "model": "testosterone:block/big_bricks_3"
+    },
+    "x=true,y=true": {
+      "model": "testosterone:block/big_bricks_4"
+    }
+  }
+}

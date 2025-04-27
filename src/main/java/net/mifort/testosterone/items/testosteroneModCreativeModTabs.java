@@ -42,6 +42,7 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_CUT.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_DIAMOND_CUT.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_DARK_DIAMOND_CUT.get());
+                        pOutput.accept(testosteroneModBlocks.BIG_BRICKS.get());
 
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
