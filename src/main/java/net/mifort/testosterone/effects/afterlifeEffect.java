@@ -167,7 +167,7 @@ public class afterlifeEffect extends MobEffect {
 
         @SubscribeEvent
         public static void onEffectRemoved(MobEffectEvent.Remove event) {
-            if (event.getEffectInstance().getEffect() == testosteroneModEffects.AFTERLIFE_EFFECT.get()) {
+            if (event.getEffect() == testosteroneModEffects.AFTERLIFE_EFFECT.get()) {
                 if (event.getEntity() instanceof Player player) {
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 1, 1f);
 

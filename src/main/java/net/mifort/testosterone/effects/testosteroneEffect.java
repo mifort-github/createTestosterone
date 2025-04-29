@@ -1,5 +1,6 @@
 package net.mifort.testosterone.effects;
 
+import dev.mayaqq.estrogen.registry.EstrogenEffects;
 import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.network.packet.hudS2CPacket;
@@ -109,9 +110,9 @@ public class testosteroneEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(@NotNull LivingEntity livingEntity, int amplifier) {
-        if (EstrogenEffect.byId(0) != null) {
-            if (livingEntity.hasEffect(EstrogenEffect.byId(0))) {
-                livingEntity.removeEffect(EstrogenEffect.byId(0));
+        if (EstrogenEffects.ESTROGEN_EFFECT != null) {
+            if (livingEntity.hasEffect(EstrogenEffects.ESTROGEN_EFFECT.get())) {
+                livingEntity.removeEffect(EstrogenEffects.ESTROGEN_EFFECT.get());
                 livingEntity.removeEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
             }
         }

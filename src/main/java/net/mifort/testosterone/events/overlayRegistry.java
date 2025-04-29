@@ -13,7 +13,7 @@ public class overlayRegistry {
     public static class ClientModBusEvents {
         @SubscribeEvent
         public static void onRegisterOverlays(RegisterGuiOverlaysEvent event) {
-            event.registerAboveAll("overlay", hudOverlay.HUD_TEMP);
+            event.registerAboveAll("overlay", hudOverlay.OVERLAY);
         }
     }
 }

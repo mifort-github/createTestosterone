@@ -6,6 +6,7 @@ import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
@@ -18,10 +19,10 @@ public class hudOverlay {
     public static final float ALPHA_MULTIPLIER = 0.5f;
     public static final float ALPHA_BASE = 0.3f;
 
-    private static final ResourceLocation TEMP = new ResourceLocation(testosterone.MOD_ID,
+    private static final ResourceLocation OVERLAY_TEXTURE = new ResourceLocation(testosterone.MOD_ID,
             "textures/overlay/overlay.png");
 
-    public static final IGuiOverlay HUD_TEMP = (gui, guiGraphics, partialTick, screenWidth, screenHeight) -> {
+    public static final IGuiOverlay OVERLAY = (gui, guiGraphics, partialTick, screenWidth, screenHeight) -> {
         LocalPlayer player = Minecraft.getInstance().player;
 
         long endOfCooldownTick = player.getPersistentData().getLong(END_OF_COOLDOWN_TICK_KEY);
@@ -47,14 +48,21 @@ public class hudOverlay {
 
         long ticksLeft = endOfCooldownTick - currentTick;
 
+        float value = (ticksLeft / (float) beginTick) * ALPHA_MULTIPLIER + ALPHA_BASE;
+
+        Minecraft.getInstance().player.sendSystemMessage(Component.literal("value: " + value));
+
+
+
         if (currentTick < actualBeginTick + duration && player.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get())) {
             RenderSystem.enableBlend();
             RenderSystem.setShaderColor(1f, 0.82f, 0.467f, ALPHA_MULTIPLIER + ALPHA_BASE);
-            guiGraphics.blit(TEMP, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
+            guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
 
         } else if (ticksLeft > 0) {
-            RenderSystem.setShaderColor(1f, 1f, 0f, (ticksLeft / (float) beginTick) * ALPHA_MULTIPLIER + ALPHA_BASE);
-            guiGraphics.blit(TEMP, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
+            RenderSystem.enableBlend();
+            RenderSystem.setShaderColor(1f, 1f, 0f, value);
+            guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
 
         }
     };
