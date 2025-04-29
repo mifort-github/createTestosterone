@@ -17,25 +17,25 @@ public class testosteroneModBlocks {
 
 
     // ALL AEQUALIS STONE
-    public static final BlockEntry<Block> AEQUALIS_STONE = REGISTRATE.block("aequalis_stone", Block::new)
+    public static final BlockEntry<Block> AEQUALIS = REGISTRATE.block("aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> AEQUALIS_CUT = REGISTRATE.block("aequalis_cut", Block::new)
+    public static final BlockEntry<Block> SMOOTH_AEQUALIS = REGISTRATE.block("smooth_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> AEQUALIS_DIAMOND_CUT = REGISTRATE.block("aequalis_diamond_cut", Block::new)
+    public static final BlockEntry<Block> SMOOTH_DIAMOND_AEQUALIS = REGISTRATE.block("smooth_diamond_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
-    public static final BlockEntry<Block> AEQUALIS_DARK_DIAMOND_CUT = REGISTRATE.block("aequalis_dark_diamond_cut", Block::new)
+    public static final BlockEntry<Block> SMOOTH_DARK_DIAMOND_AEQUALIS = REGISTRATE.block("smooth_dark_diamond_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()

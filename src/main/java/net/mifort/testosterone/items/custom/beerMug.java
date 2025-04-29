@@ -15,12 +15,12 @@ import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-public class beerPint extends Item {
+public class beerMug extends Item {
     public static final int BEER_DURATION = 3600;
     public static final int BEER_AMPLIFIER = 1;
     private static final String BEER_DOWNSIDE = "testosterone:beer_downside_duration";
 
-    public beerPint(Properties pProperties) {
+    public beerMug(Properties pProperties) {
         super(pProperties);
     }
 
@@ -33,9 +33,9 @@ public class beerPint extends Item {
             living.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, BEER_DURATION, BEER_AMPLIFIER));
 
             if (living instanceof Player player) {
-                ItemStack bottle = new ItemStack(Items.GLASS_BOTTLE);
-                if (!player.getInventory().add(bottle)) {
-                    player.drop(bottle, false);
+                ItemStack bowl = new ItemStack(Items.BOWL);
+                if (!player.getInventory().add(bowl)) {
+                    player.drop(bowl, false);
                 }
             }
         }

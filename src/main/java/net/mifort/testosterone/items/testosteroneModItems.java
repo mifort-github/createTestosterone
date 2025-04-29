@@ -10,7 +10,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.mifort.testosterone.items.custom.beerPint;
+import net.mifort.testosterone.items.custom.beerMug;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -35,8 +35,8 @@ public class testosteroneModItems {
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 
-    public static final ItemEntry<beerPint> BEER_PINT =
-            REGISTRATE.item("beer_pint", beerPint::new)
+    public static final ItemEntry<beerMug> BEER_MUG =
+            REGISTRATE.item("beer_mug", beerMug::new)
                     .properties(p -> p.food(testosteroneModFoods.BLANK).stacksTo(16))
                     .register();
 

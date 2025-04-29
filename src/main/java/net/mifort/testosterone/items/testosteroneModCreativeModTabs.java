@@ -29,19 +29,19 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PILL);
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_SHOT);
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PROTEIN_BAR);
-                        pOutput.accept(testosteroneModItems.BEER_PINT);
+                        pOutput.accept(testosteroneModItems.BEER_MUG);
 
 //                        pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
 
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
-                        pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE.get());
+                        pOutput.accept(testosteroneModBlocks.AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_STAIRS.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_SLAB.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_WALL.get());
-                        pOutput.accept(testosteroneModBlocks.AEQUALIS_CUT.get());
-                        pOutput.accept(testosteroneModBlocks.AEQUALIS_DIAMOND_CUT.get());
-                        pOutput.accept(testosteroneModBlocks.AEQUALIS_DARK_DIAMOND_CUT.get());
+                        pOutput.accept(testosteroneModBlocks.SMOOTH_AEQUALIS.get());
+                        pOutput.accept(testosteroneModBlocks.SMOOTH_DIAMOND_AEQUALIS.get());
+                        pOutput.accept(testosteroneModBlocks.SMOOTH_DARK_DIAMOND_AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.BIG_BRICKS.get());
 
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());

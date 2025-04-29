@@ -22,7 +22,7 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "testosterone:textures/block/aequalis_cut.png",
+    "background": "testosterone:textures/block/john_rock/john_active.png",
     "description": {
       "translate": "advancement.testosterone.testosterone.description"
     },

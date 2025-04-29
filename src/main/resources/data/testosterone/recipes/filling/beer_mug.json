@@ -2,7 +2,7 @@
   "type": "create:filling",
   "ingredients": [
     {
-      "item": "minecraft:glass_bottle"
+      "item": "minecraft:bowl"
     },
     {
       "amount": 250,
@@ -12,7 +12,7 @@
   ],
   "results": [
     {
-      "item": "testosterone:beer_pint"
+      "item": "testosterone:beer_mug"
     }
   ]
 }

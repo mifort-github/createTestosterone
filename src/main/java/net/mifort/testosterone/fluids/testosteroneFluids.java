@@ -69,7 +69,7 @@ public class testosteroneFluids {
     }
 
     public static void registerFluidInteractions() {
-        final BlockState BLOCK = testosteroneModBlocks.AEQUALIS_STONE.get().defaultBlockState();
+        final BlockState BLOCK = testosteroneModBlocks.AEQUALIS.get().defaultBlockState();
 
         FluidInteractionRegistry.addInteraction(EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
                 TESTOSTERONE_FLUID.get().getFluidType(),

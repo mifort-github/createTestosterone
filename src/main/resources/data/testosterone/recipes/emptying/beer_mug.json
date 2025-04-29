@@ -2,12 +2,12 @@
   "type": "create:emptying",
   "ingredients": [
     {
-      "item": "testosterone:beer_pint"
+      "item": "testosterone:beer_mug"
     }
   ],
   "results": [
     {
-      "item": "minecraft:glass_bottle"
+      "item": "minecraft:bowl"
     },
     {
       "amount": 250,

@@ -6,8 +6,8 @@
 
   "item.testosterone.testosterone_protein_bar": "Testosterone Protein Bar",
 
-  "item.testosterone.beer_pint": "Beer Pint",
-  "item.testosterone.beer_pint.tooltip.summary" : "The perfect drink to share with the lads -  _Don't_ drink _Too_ much Though",
+  "item.testosterone.beer_mug": "Beer Mug",
+  "item.testosterone.beer_mug.tooltip.summary" : "The perfect drink to share with the lads -  _Don't_ drink _Too_ much Though",
 
   "item.testosterone.totem_of_afterlife": "Totem of Afterlife",
 
@@ -37,12 +37,12 @@
 
   "block.testosterone.testosterone_pill_box": "Testosterone Pill Box",
 
-  "block.testosterone.aequalis_stone": "Aequalis",
-  "block.testosterone.aequalis_stone.tooltip.summary": "A _strange stone_ formed when §kestrogen§r and §ktestosterone§r touch.",
+  "block.testosterone.aequalis": "Aequalis",
+  "block.testosterone.aequalis.tooltip.summary": "A _strange stone_ formed when §kestrogen§r and §ktestosterone§r touch.",
 
-  "block.testosterone.aequalis_cut": "Cut Aequalis",
-  "block.testosterone.aequalis_diamond_cut": "Diamond Cut Aequalis",
-  "block.testosterone.aequalis_dark_diamond_cut": "Dark Diamond Cut Aequalis",
+  "block.testosterone.smooth_aequalis": "Smooth Aequalis",
+  "block.testosterone.smooth_diamond_aequalis": "Smooth Diamond Aequalis",
+  "block.testosterone.smooth_dark_diamond_aequalis": "Smooth Dark Diamond Aequalis",
 
   "block.testosterone.john_rock": "John Rock",
 
