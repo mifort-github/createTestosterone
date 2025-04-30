@@ -50,10 +50,6 @@ public class hudOverlay {
 
         float value = (ticksLeft / (float) beginTick) * ALPHA_MULTIPLIER + ALPHA_BASE;
 
-        Minecraft.getInstance().player.sendSystemMessage(Component.literal("value: " + value));
-
-
-
         if (currentTick < actualBeginTick + duration && player.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get())) {
             RenderSystem.enableBlend();
             RenderSystem.setShaderColor(1f, 0.82f, 0.467f, ALPHA_MULTIPLIER + ALPHA_BASE);

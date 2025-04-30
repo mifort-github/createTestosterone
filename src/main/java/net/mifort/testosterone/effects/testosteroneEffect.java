@@ -81,7 +81,6 @@ public class testosteroneEffect extends MobEffect {
 
                     entity.getPersistentData().putLong(BEGIN_TICK, currentTick);
 
-                    // Update DAMAGE_TAKEN with the current damage amount
                     if (hasTie && event.getAmount() > DAMAGE_LIMIT) {
                         damageTaken = DAMAGE_LIMIT;
                     } else {

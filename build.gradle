@@ -148,6 +148,8 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
     implementation "uwu.serenity.critter:critter-forge:0.1-beta.11"
 
     // Compile against only the API artifact
