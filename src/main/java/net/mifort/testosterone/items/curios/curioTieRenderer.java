@@ -33,7 +33,6 @@ public class curioTieRenderer implements ICurioRenderer {
                                                                           float ageInTicks,
                                                                           float netHeadYaw,
                                                                           float headPitch) {
-        // Render code goes here
 
         VertexConsumer vBuff = renderTypeBuffer.getBuffer(RenderType.entityTranslucent(tieTexture));
         matrixStack.pushPose();

@@ -21,7 +21,6 @@ public class testosteroneModCreativeModTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MOD_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, testosterone.MOD_ID);
 
-    // add items to creative tab
     public static final RegistryObject<CreativeModeTab> TESTOSTERONE_TAB = CREATIVE_MOD_TABS.register("testosterone_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(testosteroneModItems.TESTOSTERONE_PILL.get()))
                     .title(Component.translatable("creativetab.testosterone_tab"))

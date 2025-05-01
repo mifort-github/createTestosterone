@@ -1,5 +1,6 @@
 package net.mifort.testosterone.blocks;
 
+import net.mifort.testosterone.config.ConfigRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -21,8 +22,6 @@ import java.util.Set;
 public class johnRock extends HorizontalDirectionalBlock {
     public static final BooleanProperty TOGGLED = BooleanProperty.create("toggled");
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
-
-    private static final int MAX_PROPAGATION_BLOCKS = 4096;
 
     public johnRock(Properties properties) {
         super(properties);
@@ -73,6 +72,9 @@ public class johnRock extends HorizontalDirectionalBlock {
         Set<BlockPos> visited = new HashSet<>();
         Queue<BlockPos> queue = new ArrayDeque<>();
 
+        int limit = ConfigRegistry.JOHN_ROCK_LIMIT.get();
+        int toggledCount = 0;
+
         for (Direction direction : Direction.values()) {
             BlockPos adjacentPos = origin.relative(direction);
             BlockState adjacentState = level.getBlockState(adjacentPos);
@@ -82,12 +84,14 @@ public class johnRock extends HorizontalDirectionalBlock {
             }
         }
 
-        while (!queue.isEmpty() && visited.size() < MAX_PROPAGATION_BLOCKS) {
+        while (!queue.isEmpty() && toggledCount < limit) {
             BlockPos currentPos = queue.poll();
             BlockState currentState = level.getBlockState(currentPos);
             if (currentState.getValue(johnRock.TOGGLED) != newToggled) {
                 level.setBlockAndUpdate(currentPos, currentState.setValue(johnRock.TOGGLED, newToggled));
             }
+            toggledCount++;
+
             for (Direction direction : Direction.values()) {
                 BlockPos neighborPos = currentPos.relative(direction);
                 if (!visited.contains(neighborPos)) {

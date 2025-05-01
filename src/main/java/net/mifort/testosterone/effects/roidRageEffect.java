@@ -1,5 +1,6 @@
 package net.mifort.testosterone.effects;
 
+import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,7 +25,6 @@ public class roidRageEffect extends MobEffect {
     private static final String SPEED_KEY = "testosterone:speed_key";
     private static final String JUMP_KEY = "testosterone:jump_key";
     private static final String HEIGHT_KEY = "testosterone:height_key";
-    private static final int SPEED_LIMIT = 100;
 
     public roidRageEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xFFFF00);
@@ -39,19 +39,19 @@ public class roidRageEffect extends MobEffect {
 
             int speed = player.getPersistentData().getInt(SPEED_KEY);
 
-            if (player.isCrouching() && speed > 50) {
+            if (player.isCrouching() && speed > ConfigRegistry.ABILITY_SPEED.get()) {
                 player.getPersistentData().putBoolean(JUMP_KEY, true);
 
             } else if (player.getPersistentData().getBoolean(JUMP_KEY)) {
                 player.getPersistentData().putBoolean(JUMP_KEY, false);
 
                 if (player.onGround()) {
-                    player.addDeltaMovement(new Vec3(0f, speed * 0.01, 0f));
+                    player.addDeltaMovement(new Vec3(0f, speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0f));
                     player.getPersistentData().putDouble(HEIGHT_KEY, player.getY());
                 }
 
             } else if (player.isSprinting()) {
-                if (speed < SPEED_LIMIT * amplifier) {
+                if (speed < (ConfigRegistry.MAX_SPEED.get() / 2) * amplifier) {
                     player.getPersistentData().putInt(SPEED_KEY, speed + 1);
                 }
 
@@ -72,10 +72,10 @@ public class roidRageEffect extends MobEffect {
             AttributeInstance speedAttribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
 
             if (speedAttribute != null) {
-                speedAttribute.setBaseValue(0.1 + amplifier * speed * 0.001);
+                speedAttribute.setBaseValue(0.1 + amplifier * speed * ConfigRegistry.SPEED_MULTIPLIER.get());
             }
 
-            if (speed > 50) {
+            if (speed > ConfigRegistry.ABILITY_SPEED.get()) {
                 if (!level.isClientSide()) {
                     ServerLevel serverLevel = (ServerLevel) level;
                     serverLevel.sendParticles(ParticleTypes.SCULK_SOUL,

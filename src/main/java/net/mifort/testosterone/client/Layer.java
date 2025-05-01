@@ -2,6 +2,7 @@ package net.mifort.testosterone.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.network.packet.effectCheckerC2SPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.testosterone;
@@ -33,23 +34,22 @@ public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<Abstrac
 
         int hasEffectInt = pLivingEntity.getPersistentData().getInt(EFFECT_CHECKER_KEY);
 
-        if (hasEffectInt == 1) {
-            VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(beardTexture));
-            pPoseStack.pushPose();
-            pPoseStack.translate(0, 0, 0); // move the model
+        boolean renderBeard = ConfigRegistry.RENDER_BEARD.get();
+
+        VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(beardTexture));
+        pPoseStack.pushPose();
+        pPoseStack.translate(0, 0, 0); // move the model
+
+        if (hasEffectInt == 1 && renderBeard) {
             pPoseStack.scale(1f, 1f, 1f);
             getParentModel().head.translateAndRotate(pPoseStack);
             BeardModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
-            pPoseStack.popPose();
 
         } else {
-            VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(beardTexture));
-            pPoseStack.pushPose();
-            pPoseStack.translate(0, 0, 0); // move the model
             pPoseStack.scale(0, 0, 0);
             getParentModel().head.translateAndRotate(pPoseStack);
             BeardModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 0f);
-            pPoseStack.popPose();
         }
+        pPoseStack.popPose();
     }
 }
