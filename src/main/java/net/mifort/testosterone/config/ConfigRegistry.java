@@ -8,11 +8,23 @@ public class ConfigRegistry {
 
 
     public static final ForgeConfigSpec CLIENT_SPEC;
-
     public static final ForgeConfigSpec.ConfigValue<Boolean> RENDER_BEARD;
+
     public static final ForgeConfigSpec.ConfigValue<Integer> BUTTON_X_OFFSET;
     public static final ForgeConfigSpec.ConfigValue<Integer> BUTTON_Y_OFFSET;
     public static final ForgeConfigSpec.ConfigValue<Boolean> SHOW_BUTTON;
+
+    public static final ForgeConfigSpec.ConfigValue<Boolean> RENDER_TESTOSTERONE_INVINCIBLE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_R_INVINCIBLE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_G_INVINCIBLE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_B_INVINCIBLE;
+
+    public static final ForgeConfigSpec.ConfigValue<Boolean> RENDER_TESTOSTERONE_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_R_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_G_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_B_COOLDOWN;
+
+
 
 
 
@@ -43,6 +55,7 @@ public class ConfigRegistry {
 
         CLIENT_BUILDER.pop();
 
+
         CLIENT_BUILDER.push("Testosterone Button");
 
         BUTTON_X_OFFSET = CLIENT_BUILDER.comment("Move left and right.").define("X Offset", -23);
@@ -50,6 +63,24 @@ public class ConfigRegistry {
         SHOW_BUTTON = CLIENT_BUILDER.comment("Show the button on the create main menu.").define("Show Button", true);
 
         CLIENT_BUILDER.pop();
+
+
+        CLIENT_BUILDER.push("Testosterone Overlay");
+
+        RENDER_TESTOSTERONE_INVINCIBLE = CLIENT_BUILDER.comment("Render the invincibility overlay.").define("Render While Invincible", true);
+        RENDER_TESTOSTERONE_COOLDOWN = CLIENT_BUILDER.comment("Render the overlay while testosterone is on cooldown.").define("Render While On Cooldown", true);
+
+        TESTOSTERONE_R_INVINCIBLE = CLIENT_BUILDER.comment("Red component of the overlay while invincible.").defineInRange("Red Of Invincible", 255, 0, 255);
+        TESTOSTERONE_G_INVINCIBLE = CLIENT_BUILDER.comment("Green component of the overlay while invincible.").defineInRange("Green Of Invincible", 209, 0, 255);
+        TESTOSTERONE_B_INVINCIBLE = CLIENT_BUILDER.comment("Blue component of the overlay while invincible.").defineInRange("Blue Of Invincible", 119, 0, 255);
+
+        TESTOSTERONE_R_COOLDOWN = CLIENT_BUILDER.comment("Red component of the overlay while invincible.").defineInRange("Red Of Cooldown", 255, 0, 255);
+        TESTOSTERONE_G_COOLDOWN = CLIENT_BUILDER.comment("Green component of the overlay while invincible.").defineInRange("Green Of Cooldown", 255, 0, 255);
+        TESTOSTERONE_B_COOLDOWN = CLIENT_BUILDER.comment("Blue component of the overlay while invincible.").defineInRange("Blue Of Cooldown", 0, 0, 255);
+
+        CLIENT_BUILDER.pop();
+
+
         CLIENT_SPEC = CLIENT_BUILDER.build();
 
 

@@ -1,6 +1,7 @@
 package net.mifort.testosterone.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Minecraft;
@@ -51,13 +52,15 @@ public class hudOverlay {
         float value = (ticksLeft / (float) beginTick) * ALPHA_MULTIPLIER + ALPHA_BASE;
 
         if (currentTick < actualBeginTick + duration && player.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get())) {
-            RenderSystem.enableBlend();
-            RenderSystem.setShaderColor(1f, 0.82f, 0.467f, ALPHA_MULTIPLIER + ALPHA_BASE);
-            guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
+            if (ConfigRegistry.RENDER_TESTOSTERONE_INVINCIBLE.get()) {
+                RenderSystem.enableBlend();
+                RenderSystem.setShaderColor((float) ConfigRegistry.TESTOSTERONE_R_INVINCIBLE.get() / 255, (float) ConfigRegistry.TESTOSTERONE_G_INVINCIBLE.get() / 255, (float) ConfigRegistry.TESTOSTERONE_B_INVINCIBLE.get() / 255, ALPHA_MULTIPLIER + ALPHA_BASE);
+                guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
+            }
 
-        } else if (ticksLeft > 0) {
+        } else if (ticksLeft > 0 && ConfigRegistry.RENDER_TESTOSTERONE_COOLDOWN.get()) {
             RenderSystem.enableBlend();
-            RenderSystem.setShaderColor(1f, 1f, 0f, value);
+            RenderSystem.setShaderColor((float) ConfigRegistry.TESTOSTERONE_R_COOLDOWN.get() / 255, (float) ConfigRegistry.TESTOSTERONE_G_COOLDOWN.get() / 255, (float) ConfigRegistry.TESTOSTERONE_B_COOLDOWN.get() / 255, value);
             guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, screenWidth, screenHeight, screenWidth, screenHeight);
 
         }
