@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
+import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.curios.curioTieRenderer;
 import net.mifort.testosterone.items.testosteroneModCreativeModTabs;
@@ -18,7 +19,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -28,7 +31,6 @@ import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 public class testosterone {
     public static final String MOD_ID = "testosterone";
 
-    // add create mod tooltips (hopefully)
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
     static {
@@ -46,7 +48,6 @@ public class testosterone {
         modEventBus.addListener(this::loadComplete);
 
         REGISTRATE.registerEventListeners(modEventBus);
-
 
         // Register items
         testosteroneModItems.register(modEventBus);
@@ -68,6 +69,11 @@ public class testosterone {
 
         // potions
         testosteroneModPotions.register(modEventBus);
+
+        // config
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_SPEC, "testosterone-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigRegistry.SERVER_SPEC, "testosterone-server.toml");
+
 
 
         // Register ourselves for server and other game events we are interested in

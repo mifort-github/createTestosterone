@@ -2,6 +2,7 @@ package net.mifort.testosterone.effects;
 
 import dev.mayaqq.estrogen.registry.EstrogenEffects;
 import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;
+import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.network.packet.hudS2CPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
@@ -25,12 +26,6 @@ public class testosteroneEffect extends MobEffect {
         private static final String BEGIN_TICK = "testosterone:begin_tick";
         private static final String DAMAGE_TAKEN = "testosterone:damage_taken_key";
         private static final String END_OF_BLOCK_TICK = "testosterone:end_of_block_tick";
-
-        public static final int DURATION = 40;
-        public static final int MULTIPLIER = 10;
-
-        private static final int DAMAGE_LIMIT = 100;
-
 
         @SubscribeEvent
         public static void onLivingHurt(LivingHurtEvent event) {
@@ -72,17 +67,17 @@ public class testosteroneEffect extends MobEffect {
                     entity.getPersistentData().putInt(DAMAGE_TAKEN, damageTaken);
                     event.setCanceled(true);
 
-                } else if (currentTick < endOfBlockTick + ((long) damageTaken * MULTIPLIER) / amplifier) {
+                } else if (currentTick < endOfBlockTick + ((long) damageTaken * ConfigRegistry.TESTOSTERONE_MULTIPLIER.get()) / amplifier) {
                     event.setCanceled(false);
 
                 } else {
-                    endOfBlockTick = currentTick + ((long) DURATION * amplifier);
+                    endOfBlockTick = currentTick + ((long) ConfigRegistry.TESTOSTERONE_DURATION.get() * amplifier);
                     entity.getPersistentData().putLong(END_OF_BLOCK_TICK, endOfBlockTick);
 
                     entity.getPersistentData().putLong(BEGIN_TICK, currentTick);
 
-                    if (hasTie && event.getAmount() > DAMAGE_LIMIT) {
-                        damageTaken = DAMAGE_LIMIT;
+                    if (hasTie && event.getAmount() > ConfigRegistry.TESTOSTERONE_MAX_DAMAGE.get()) {
+                        damageTaken = ConfigRegistry.TESTOSTERONE_MAX_DAMAGE.get();
                     } else {
                         damageTaken = (int) event.getAmount();
                     }
@@ -93,9 +88,9 @@ public class testosteroneEffect extends MobEffect {
                 }
 
                 if (entity instanceof Player) {
-                    long endOfCoolDownTick = endOfBlockTick + ((long) damageTaken * MULTIPLIER) / amplifier;
+                    long endOfCoolDownTick = endOfBlockTick + ((long) damageTaken * ConfigRegistry.TESTOSTERONE_MULTIPLIER.get()) / amplifier;
 
-                    long[] toSend = {endOfCoolDownTick, entity.getPersistentData().getLong(BEGIN_TICK), (long) DURATION * amplifier};
+                    long[] toSend = {endOfCoolDownTick, entity.getPersistentData().getLong(BEGIN_TICK), (long) ConfigRegistry.TESTOSTERONE_DURATION.get() * amplifier};
 
                     testosteroneModMessages.sendToPlayer(new hudS2CPacket(toSend), (ServerPlayer) entity);
                 }
