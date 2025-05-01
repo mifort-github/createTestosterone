@@ -3,6 +3,11 @@
   "values": [
     "testosterone:testosterone_pill_box",
     "testosterone:aequalis",
+    "testosterone:cut_aequalis",
+    "testosterone:polished_cut_aequalis",
+    "testosterone:cut_aequalis_bricks",
+    "testosterone:small_aequalis_bricks",
+    "testosterone:big_aequalis_bricks",
     "testosterone:smooth_aequalis",
     "testosterone:smooth_diamond_aequalis",
     "testosterone:smooth_dark_diamond_aequalis",

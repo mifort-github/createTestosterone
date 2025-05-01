@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "x=false,y=false,z=false": {
+      "model": "testosterone:block/big_aequalis_bricks"
+    },
+    "x=true,y=false,z=false": {
+      "model": "testosterone:block/big_aequalis_bricks_x"
+    },
+    "x=false,y=true,z=false": {
+      "model": "testosterone:block/big_aequalis_bricks_y"
+    },
+    "x=true,y=true,z=false": {
+      "model": "testosterone:block/big_aequalis_bricks_xy"
+    },
+    "x=true,y=false,z=true": {
+      "model": "testosterone:block/big_aequalis_bricks_xz"
+    },
+    "x=false,y=true,z=true": {
+      "model": "testosterone:block/big_aequalis_bricks_yz"
+    },
+    "x=false,y=false,z=true": {
+      "model": "testosterone:block/big_aequalis_bricks_z"
+    },
+    "x=true,y=true,z=true": {
+      "model": "testosterone:block/big_aequalis_bricks_xyz"
+    }
+  }
+}

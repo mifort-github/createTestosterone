@@ -22,6 +22,29 @@ public class testosteroneModBlocks {
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
+        
+    public static final BlockEntry<Block> CUT_AEQUALIS = REGISTRATE.block("cut_aequalis", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> POLISHED_CUT_AEQUALIS = REGISTRATE.block("polished_cut_aequalis", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> CUT_AEQUALIS_BRICKS = REGISTRATE.block("cut_aequalis_bricks", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+    public static final BlockEntry<Block> SMALL_AEQUALIS_BRICKS = REGISTRATE.block("small_aequalis_bricks", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();    
 
     public static final BlockEntry<Block> SMOOTH_AEQUALIS = REGISTRATE.block("smooth_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
@@ -41,7 +64,7 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<bigBricks> BIG_BRICKS = REGISTRATE.block("big_bricks", bigBricks::new)
+    public static final BlockEntry<bigBricks> BIG_AEQUALIS_BRICKS = REGISTRATE.block("big_aequalis_bricks", bigBricks::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()

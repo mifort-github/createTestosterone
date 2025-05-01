@@ -40,6 +40,12 @@
   "block.testosterone.aequalis": "Aequalis",
   "block.testosterone.aequalis.tooltip.summary": "A _strange stone_ formed when §kestrogen§r and §ktestosterone§r touch.",
 
+  "block.testosterone.cut_aequalis": "Cut Aequalis",
+  "block.testosterone.polished_cut_aequalis": "Polished Cut Aequalis",
+  "block.testosterone.cut_aequalis_bricks": "Cut Aequalis Bricks",
+  "block.testosterone.small_aequalis_bricks": "Small Aequalis Bricks",
+  "block.testosterone.big_aequalis_bricks": "Big Aequalis Bricks",
+
   "block.testosterone.smooth_aequalis": "Smooth Aequalis",
   "block.testosterone.smooth_diamond_aequalis": "Smooth Diamond Aequalis",
   "block.testosterone.smooth_dark_diamond_aequalis": "Smooth Dark Diamond Aequalis",

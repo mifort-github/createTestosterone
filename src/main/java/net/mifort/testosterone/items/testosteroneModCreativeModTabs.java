@@ -36,13 +36,17 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS.get());
+                        pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS.get());
+                        pOutput.accept(testosteroneModBlocks.POLISHED_CUT_AEQUALIS.get());
+                        pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS_BRICKS.get());
+                        pOutput.accept(testosteroneModBlocks.SMALL_AEQUALIS_BRICKS.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_STAIRS.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_SLAB.get());
                         pOutput.accept(testosteroneModBlocks.AEQUALIS_STONE_WALL.get());
                         pOutput.accept(testosteroneModBlocks.SMOOTH_AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.SMOOTH_DIAMOND_AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.SMOOTH_DARK_DIAMOND_AEQUALIS.get());
-                        pOutput.accept(testosteroneModBlocks.BIG_BRICKS.get());
+                        pOutput.accept(testosteroneModBlocks.BIG_AEQUALIS_BRICKS.get());
 
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
