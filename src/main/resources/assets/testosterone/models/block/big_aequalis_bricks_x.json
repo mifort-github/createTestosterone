@@ -1,6 +1,12 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "testosterone:block/big_aequalis_bricks/2"
+    "up": "testosterone:block/big_aequalis_bricks/2",
+    "down": "testosterone:block/big_aequalis_bricks/1",
+    "north": "testosterone:block/big_aequalis_bricks/1",
+    "east": "testosterone:block/big_aequalis_bricks/2",
+    "south": "testosterone:block/big_aequalis_bricks/2",
+    "west": "testosterone:block/big_aequalis_bricks/1",
+    "particle": "testosterone:block/big_aequalis_bricks/1"
   }
 }
