@@ -10,6 +10,8 @@
   "item.testosterone.beer_mug.tooltip.summary" : "The perfect drink to share with the lads -  _Don't_ drink _Too_ much Though",
 
   "item.testosterone.totem_of_afterlife": "Totem of Afterlife",
+  "item.testosterone.totem_of_afterlife.tooltip.summary": "WORK IN PROGRESS NOT INTENDED FOR USE",
+
 
   "item.testosterone.diluted_zinc_fluid_bucket": "Bucket Of Diluted Zinc",
   "fluid.testosterone.diluted_zinc_fluid": "Diluted Zinc",
@@ -51,6 +53,7 @@
   "block.testosterone.smooth_dark_diamond_aequalis": "Smooth Dark Diamond Aequalis",
 
   "block.testosterone.john_rock": "John Rock",
+  "testosterone.ponder.john_rock.header": "John Rock",
 
   "advancement.testosterone.testosterone.title": "Create: Testosterone",
   "advancement.testosterone.testosterone.description": "An addon for the Estrogen create addon that adds testosterone items.",
