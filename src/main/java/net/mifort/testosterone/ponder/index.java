@@ -9,6 +9,6 @@ public class index {
 
     public static void register() {
         HELPER.forComponents(testosteroneModBlocks.JOHN_ROCK)
-                .addStoryBoard("scenes/john_rock", johnScene::scene);
+                .addStoryBoard("john_active_inactive", johnScene::scene);
     }
 }
