@@ -23,6 +23,9 @@ public class johnRock extends HorizontalDirectionalBlock {
     public static final BooleanProperty TOGGLED = BooleanProperty.create("toggled");
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
 
+    private static long lastUpdateTick = -1;
+    private static final Set<BlockPos> updatedClusterPositions = new HashSet<>();
+
     public johnRock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
@@ -40,11 +43,20 @@ public class johnRock extends HorizontalDirectionalBlock {
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         super.onPlace(state, level, pos, oldState, isMoving);
         if (!level.isClientSide()) {
+            long currentTick = level.getGameTime();
+            if (currentTick != lastUpdateTick) {
+                updatedClusterPositions.clear();
+                lastUpdateTick = currentTick;
+            }
+            if (updatedClusterPositions.contains(pos)) {
+                return;
+            }
             boolean isPowered = level.hasNeighborSignal(pos);
             if (isPowered && !state.getValue(PRESSED)) {
                 boolean newToggled = !state.getValue(TOGGLED);
                 BlockState newState = state.setValue(PRESSED, true).setValue(TOGGLED, newToggled);
                 level.setBlockAndUpdate(pos, newState);
+                updatedClusterPositions.add(pos);
                 propagateConnectedToggling(level, pos, newToggled);
             }
         }
@@ -53,13 +65,22 @@ public class johnRock extends HorizontalDirectionalBlock {
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean isMoving) {
         if (!level.isClientSide()) {
+            long currentTick = level.getGameTime();
+            if (currentTick != lastUpdateTick) {
+                updatedClusterPositions.clear();
+                lastUpdateTick = currentTick;
+            }
+            if (updatedClusterPositions.contains(pos)) {
+                super.neighborChanged(state, level, pos, neighborBlock, fromPos, isMoving);
+                return;
+            }
             boolean isPowered = level.hasNeighborSignal(pos);
             boolean wasPressed = state.getValue(PRESSED);
-
             if (isPowered && !wasPressed) {
                 boolean newToggled = !state.getValue(TOGGLED);
                 BlockState newState = state.setValue(PRESSED, true).setValue(TOGGLED, newToggled);
                 level.setBlockAndUpdate(pos, newState);
+                updatedClusterPositions.add(pos);
                 propagateConnectedToggling(level, pos, newToggled);
             } else if (!isPowered && wasPressed) {
                 level.setBlockAndUpdate(pos, state.setValue(PRESSED, false));
@@ -79,13 +100,16 @@ public class johnRock extends HorizontalDirectionalBlock {
             BlockPos adjacentPos = origin.relative(direction);
             BlockState adjacentState = level.getBlockState(adjacentPos);
             if (adjacentState.getBlock() instanceof johnRock) {
-                queue.add(adjacentPos);
-                visited.add(adjacentPos);
+                if (visited.add(adjacentPos)) {
+                    queue.add(adjacentPos);
+                }
             }
         }
 
         while (!queue.isEmpty() && toggledCount < limit) {
             BlockPos currentPos = queue.poll();
+            updatedClusterPositions.add(currentPos);
+
             BlockState currentState = level.getBlockState(currentPos);
             if (currentState.getValue(johnRock.TOGGLED) != newToggled) {
                 level.setBlockAndUpdate(currentPos, currentState.setValue(johnRock.TOGGLED, newToggled));
@@ -112,7 +136,6 @@ public class johnRock extends HorizontalDirectionalBlock {
         }
         return super.getCollisionShape(state, level, pos, context);
     }
-
 
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
