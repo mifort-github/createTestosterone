@@ -54,6 +54,10 @@
 
   "block.testosterone.john_rock": "John Rock",
   "testosterone.ponder.john_rock.header": "John Rock",
+  "testosterone.ponder.john_rock.text_1": "John Rocks change state when given a redstone signal",
+  "testosterone.ponder.john_rock.text_2": "Multiple John Rocks can be placed next to each other",
+  "testosterone.ponder.john_rock.text_3": "While in the inactive state, any entity can go through the block",
+
 
   "advancement.testosterone.testosterone.title": "Create: Testosterone",
   "advancement.testosterone.testosterone.description": "An addon for the Estrogen create addon that adds testosterone items.",
