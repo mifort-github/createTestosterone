@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/wall_inventory",
   "textures": {
-    "wall": "testosterone:block/aequalis"
+    "wall": "testosterone:block/aequalis_cut_brick"
   }
 }

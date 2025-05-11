@@ -33,7 +33,14 @@ public class testosteroneModBlocks {
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
-            .register();  
+            .register();
+
+    public static final BlockEntry<WallBlock> CUT_AEQUALIS_WALL = REGISTRATE.block("cut_aequalis_wall", WallBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
 
     public static final BlockEntry<Block> POLISHED_CUT_AEQUALIS = REGISTRATE.block("polished_cut_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
@@ -45,6 +52,12 @@ public class testosteroneModBlocks {
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
+    public static final BlockEntry<WallBlock> POLISHED_CUT_AEQUALIS_WALL = REGISTRATE.block("polished_cut_aequalis_wall", WallBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
 
     public static final BlockEntry<Block> CUT_AEQUALIS_BRICKS = REGISTRATE.block("cut_aequalis_bricks", Block::new)
             .initialProperties(() -> Blocks.STONE)
@@ -56,6 +69,11 @@ public class testosteroneModBlocks {
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register(); 
+    public static final BlockEntry<WallBlock> CUT_AEQUALIS_BRICK_WALL = REGISTRATE.block("cut_aequalis_brick_wall", WallBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
 
     public static final BlockEntry<Block> SMALL_AEQUALIS_BRICKS = REGISTRATE.block("small_aequalis_bricks", Block::new)
             .initialProperties(() -> Blocks.STONE)
@@ -67,6 +85,12 @@ public class testosteroneModBlocks {
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register(); 
+    public static final BlockEntry<WallBlock> SMALL_AEQUALIS_BRICK_WALL = REGISTRATE.block("small_aequalis_brick_wall", WallBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.STONE))
+            .simpleItem()
+            .register();
+
 
     public static final BlockEntry<Block> SMOOTH_AEQUALIS = REGISTRATE.block("smooth_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
@@ -92,18 +116,14 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<StairBlock> AEQUALIS_STONE_STAIRS = REGISTRATE.block("aequalis_stone_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
+    public static final BlockEntry<StairBlock> CUT_AEQUALIS_STAIRS = REGISTRATE.block("cut_aequalis_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
             .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
 
 
-    public static final BlockEntry<WallBlock> AEQUALIS_STONE_WALL = REGISTRATE.block("aequalis_stone_wall", WallBlock::new)
-            .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.sound(SoundType.STONE))
-            .simpleItem()
-            .register();
+
 
 
     // PIZZA TOWER

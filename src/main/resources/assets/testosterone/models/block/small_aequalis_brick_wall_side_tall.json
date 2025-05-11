@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side_tall",
+  "textures": {
+    "wall": "testosterone:block/aequalis_cut_small_brick"
+  }
+}
