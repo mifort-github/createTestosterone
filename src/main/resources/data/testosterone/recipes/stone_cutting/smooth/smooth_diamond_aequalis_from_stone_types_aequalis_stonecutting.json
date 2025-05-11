@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "count": 1,
+    "ingredient": {
+        "tag": "testosterone:smooth_aequalis"
+    },
+    "result": "testosterone:smooth_diamond_aequalis"
+}

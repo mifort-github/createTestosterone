@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "testosterone:block/cut_aequalis_slab"
+    },
+    "type=double": {
+      "model": "testosterone:block/cut_aequalis"
+    },
+    "type=top": {
+      "model": "testosterone:block/cut_aequalis_slab_top"
+    }
+  }
+}
