@@ -3,9 +3,17 @@
   "values": [
     "testosterone:aequalis",
     "testosterone:cut_aequalis",
+    "testosterone:cut_aequalis_stairs",
+    "testosterone:cut_aequalis_wall",
     "testosterone:polished_cut_aequalis",
+    "testosterone:polished_cut_aequalis_stairs",
+    "testosterone:polished_cut_aequalis_wall",
     "testosterone:cut_aequalis_bricks",
+    "testosterone:cut_aequalis_brick_stairs",
+    "testosterone:cut_aequalis_brick_wall",
     "testosterone:small_aequalis_bricks",
+    "testosterone:small_aequalis_brick_stairs",
+    "testosterone:small_aequalis_brick_wall",
     "testosterone:big_aequalis_bricks"
   ]
 }

@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "count": 1,
+    "ingredient": {
+        "tag": "testosterone:aequalis"
+    },
+    "result": "testosterone:polished_cut_aequalis_stairs"
+}

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "testosterone:aequalis_stone_wall"
+    "testosterone:cut_aequalis_wall",
+    "testosterone:polished_cut_aequalis_wall",
+    "testosterone:cut_aequalis_brick_wall",
+    "testosterone:small_aequalis_brick_wall"
   ]
 }
