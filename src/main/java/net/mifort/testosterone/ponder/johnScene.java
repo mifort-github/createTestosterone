@@ -1,9 +1,6 @@
 package net.mifort.testosterone.ponder;
 
-import com.simibubi.create.foundation.ponder.ElementLink;
-import com.simibubi.create.foundation.ponder.SceneBuilder;
-import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
-import com.simibubi.create.foundation.ponder.Selection;
+import com.simibubi.create.foundation.ponder.*;
 import com.simibubi.create.foundation.ponder.element.ParrotElement;
 import net.mifort.testosterone.blocks.johnRock;
 import net.minecraft.core.BlockPos;
@@ -123,5 +120,58 @@ public class johnScene {
         scene.special.moveParrot(birb, util.vector.of(0, 0, -300), 1000);
         
 		scene.idle(70);
+    }
+
+
+    public static void scene2(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("bell_conversion", "Bell Conversion");
+        scene.configureBasePlate(0, 0, 9);
+        scene.showBasePlate();
+        scene.idle(10);
+
+        Selection bellsel = util.select.position(4, 1, 4);
+        BlockPos bellpos = util.grid.at(4, 1, 4);
+        Selection obsidis1 = util.select.fromTo(1, 1, 1, 3, 1, 4);
+        Selection obsidis2 = util.select.fromTo(1, 1, 5, 4, 1, 7);
+        Selection obsidis3 = util.select.fromTo(5, 1, 4, 7, 1, 7);
+        Selection obsidis4 = util.select.fromTo(4, 1, 1, 7, 1, 3);
+
+        Selection sele = util.select.fromTo(1, 1, 1, 7, 1, 7);
+
+        scene.world.showSection(bellsel, Direction.SOUTH);
+        scene.idle(15);
+
+        scene.overlay.showText(70)
+                .pointAt(util.vector.blockSurface(bellpos, Direction.WEST))
+                .placeNearTarget()
+                .attachKeyFrame()
+                .text("When a Peculiar Bell is rung...");
+
+        scene.world.showSection(obsidis1, Direction.SOUTH);
+        scene.idle(5);
+        scene.world.showSection(obsidis2, Direction.EAST);
+        scene.idle(5);
+        scene.world.showSection(obsidis3, Direction.NORTH);
+        scene.idle(5);
+        scene.world.showSection(obsidis4, Direction.WEST);
+        scene.idle(5);
+
+        scene.overlay.showText(70)
+                .pointAt(util.vector.blockSurface(bellpos, Direction.WEST))
+                .placeNearTarget()
+                .attachKeyFrame()
+                .text("...the obsidian in the 8x1x8 range of the bell...");
+        scene.overlay.showOutline(PonderPalette.GREEN, bellpos, sele, 40);
+        scene.idle(40);
+
+        scene.overlay.showText(70)
+                .pointAt(util.vector.blockSurface(bellpos, Direction.WEST))
+                .placeNearTarget()
+                .attachKeyFrame()
+                .text("...has a chance to turn into John Rocks");
+
+        scene.idle(90);
+
+        scene.idle(40);
     }
 }
