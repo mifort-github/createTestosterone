@@ -59,6 +59,8 @@
   "block.testosterone.small_aequalis_brick_slab": "Small Aequalis Brick Slab",
   "block.testosterone.small_aequalis_brick_wall": "Small Aequalis Brick Wall",
   "block.testosterone.big_aequalis_bricks": "Big Aequalis Bricks",
+  "block.testosterone.layered_aequalis": "Layered Aequalis",
+  "block.testosterone.aequalis_pillar": "Aequalis Pillar",
 
   "block.testosterone.smooth_aequalis": "Smooth Aequalis",
   "block.testosterone.smooth_diamond_aequalis": "Smooth Diamond Aequalis",
@@ -90,12 +92,15 @@
   "advancement.testosterone.testosterone_liquid.title": "Bro Juice",
   "advancement.testosterone.testosterone_liquid.description": "Collect a bucket of Testosterone.",
 
-  "advancement.testosterone.testosterone_pill.title": "It's not steroids, Mom!",
+  "advancement.testosterone.testosterone_pill.title": "I'm- [TITLE CARD]",
   "advancement.testosterone.testosterone_pill.description": "Make a Testosterone Pill.",
 
   "advancement.testosterone.testosterone_protein_bar.title": "Nutritious Steroids",
   "advancement.testosterone.testosterone_protein_bar.description": "Eat a bar with high protein (and testosterone) content.",
 
   "advancement.testosterone.damage.title": "Dumb Ways To... Live?",
-  "advancement.testosterone.damage.description": "Negate 100 damage with the Man Power effect"
+  "advancement.testosterone.damage.description": "Negate 100 damage with the Man Power effect",
+
+  "advancement.testosterone.runover.title": "A-Train",
+  "advancement.testosterone.runover.description": "Run over an enemy with testosterone powers"
 }

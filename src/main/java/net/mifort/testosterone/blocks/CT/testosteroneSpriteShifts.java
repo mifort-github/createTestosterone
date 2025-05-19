@@ -10,10 +10,10 @@ public class testosteroneSpriteShifts {
     public static final CTSpriteShiftEntry AEQUALIS_CUT_CAP = omni("aequalis_cut_cap");
 
     public static final CTSpriteShiftEntry AEQUALIS_CUT_LAYERED = horizontal("aequalis_cut_layered");
-    public static final CTModelProvider TEST_PROVIDER = new CTModelProvider(new HorizontalCTBehaviour(AEQUALIS_CUT_LAYERED, AEQUALIS_CUT_CAP));
+    public static final CTModelProvider LAYERED_AEQUALIS_PROVIDER = new CTModelProvider(new HorizontalCTBehaviour(AEQUALIS_CUT_LAYERED, AEQUALIS_CUT_CAP));
 
     public static final CTSpriteShiftEntry AEQUALIS_PILLAR_LAYERED = rect("aequalis_cut_pillar");
-    public static final CTModelProvider TEST_PILLAR_PROVIDER = new CTModelProvider(new RotatedPillarCTBehaviour(AEQUALIS_PILLAR_LAYERED, AEQUALIS_CUT_CAP));
+    public static final CTModelProvider AEQUALIS_PILLAR_PROVIDER = new CTModelProvider(new RotatedPillarCTBehaviour(AEQUALIS_PILLAR_LAYERED, AEQUALIS_CUT_CAP));
 
 
     private static CTSpriteShiftEntry omni(String name) {

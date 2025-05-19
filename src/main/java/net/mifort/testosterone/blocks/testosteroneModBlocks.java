@@ -10,17 +10,17 @@ import net.minecraft.world.level.block.*;
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 public class testosteroneModBlocks {
-    public static final BlockEntry<Block> TEST = REGISTRATE.block("test", Block::new)
+    public static final BlockEntry<Block> LAYERED_AEQUALIS = REGISTRATE.block("layered_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
-            .onRegister(CreateRegistrate.blockModel(() -> testosteroneSpriteShifts.TEST_PROVIDER))
+            .onRegister(CreateRegistrate.blockModel(() -> testosteroneSpriteShifts.LAYERED_AEQUALIS_PROVIDER))
             .simpleItem()
             .register();
 
-    public static final BlockEntry<ConnectedPillarBlock> TEST_PILLAR = REGISTRATE.block("test_pillar", ConnectedPillarBlock::new)
+    public static final BlockEntry<ConnectedPillarBlock> AEQUALIS_PILLAR = REGISTRATE.block("aequalis_pillar", ConnectedPillarBlock::new)
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
-            .onRegister(CreateRegistrate.blockModel(() -> testosteroneSpriteShifts.TEST_PILLAR_PROVIDER))
+            .onRegister(CreateRegistrate.blockModel(() -> testosteroneSpriteShifts.AEQUALIS_PILLAR_PROVIDER))
             .simpleItem()
             .register();
 
@@ -47,6 +47,7 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
     public static final BlockEntry<StairBlock> CUT_AEQUALIS_STAIRS = REGISTRATE.block("cut_aequalis_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
+            .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .simpleItem()
             .register();
@@ -67,6 +68,7 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
     public static final BlockEntry<StairBlock> POLISHED_CUT_AEQUALIS_STAIRS = REGISTRATE.block("polished_cut_aequalis_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
+            .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .simpleItem()
             .register();
@@ -87,6 +89,7 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
     public static final BlockEntry<StairBlock> CUT_AEQUALIS_BRICK_STAIRS = REGISTRATE.block("cut_aequalis_brick_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
+            .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .simpleItem()
             .register();
@@ -107,6 +110,7 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
     public static final BlockEntry<StairBlock> SMALL_AEQUALIS_BRICK_STAIRS = REGISTRATE.block("small_aequalis_brick_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
+            .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .simpleItem()
             .register();
