@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "testosterone:block/aequalis_cut_cap",
+    "side": "testosterone:block/aequalis_cut_pillar"
+  }
+}

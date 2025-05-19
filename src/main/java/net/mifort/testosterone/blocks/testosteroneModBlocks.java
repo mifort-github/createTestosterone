@@ -1,12 +1,30 @@
 package net.mifort.testosterone.blocks;
 
+import com.simibubi.create.content.decoration.palettes.ConnectedPillarBlock;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.mayaqq.estrogen.registry.EstrogenSoundTypes;
+import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
 import net.minecraft.world.level.block.*;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 public class testosteroneModBlocks {
+    public static final BlockEntry<Block> TEST = REGISTRATE.block("test", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .onRegister(CreateRegistrate.blockModel(() -> testosteroneSpriteShifts.TEST_PROVIDER))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<ConnectedPillarBlock> TEST_PILLAR = REGISTRATE.block("test_pillar", ConnectedPillarBlock::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .onRegister(CreateRegistrate.blockModel(() -> testosteroneSpriteShifts.TEST_PILLAR_PROVIDER))
+            .simpleItem()
+            .register();
+
+
 
     public static final BlockEntry<testosteronePillBox> TESTOSTERONE_PILL_BLOCK = REGISTRATE.block("testosterone_pill_box", testosteronePillBox::new)
             .initialProperties(() -> Blocks.OAK_PLANKS)
