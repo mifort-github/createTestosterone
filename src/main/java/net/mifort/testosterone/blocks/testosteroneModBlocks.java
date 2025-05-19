@@ -107,19 +107,19 @@ public class testosteroneModBlocks {
 
     public static final BlockEntry<Block> SMOOTH_AEQUALIS = REGISTRATE.block("smooth_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
     public static final BlockEntry<Block> SMOOTH_DIAMOND_AEQUALIS = REGISTRATE.block("smooth_diamond_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
     public static final BlockEntry<Block> SMOOTH_DARK_DIAMOND_AEQUALIS = REGISTRATE.block("smooth_dark_diamond_aequalis", Block::new)
             .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
