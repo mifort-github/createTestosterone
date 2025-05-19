@@ -9,8 +9,8 @@ public class index {
 
     public static void register() {
         HELPER.forComponents(testosteroneModBlocks.JOHN_ROCK)
-                .addStoryBoard("john_active_inactive", johnScene::scene);
+                .addStoryBoard("john_bell", johnScene::john_bell);
         HELPER.forComponents(testosteroneModBlocks.JOHN_ROCK)
-                .addStoryBoard("john_bell", johnScene::scene2);
+                .addStoryBoard("john_active_inactive", johnScene::john_active_inactive);
     }
 }
