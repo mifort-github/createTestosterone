@@ -54,6 +54,8 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModBlocks.SMALL_AEQUALIS_BRICK_STAIRS.get());
                         pOutput.accept(testosteroneModBlocks.SMALL_AEQUALIS_BRICK_SLAB.get());
                         pOutput.accept(testosteroneModBlocks.SMALL_AEQUALIS_BRICK_WALL.get());
+                        pOutput.accept(testosteroneModBlocks.LAYERED_AEQUALIS.get());
+                        pOutput.accept(testosteroneModBlocks.AEQUALIS_PILLAR.get());
 
                         
                         pOutput.accept(testosteroneModBlocks.SMOOTH_AEQUALIS.get());
