@@ -41,6 +41,9 @@ public class ConfigRegistry {
     public static final ForgeConfigSpec.ConfigValue<Double> SPEED_MULTIPLIER;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> JOHN_ROCK_LIMIT;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> JOHN_ROCK_VERTICAL;
+    public static final ForgeConfigSpec.ConfigValue<Integer> JOHN_ROCK_RANGE;
+
 
 
 
@@ -109,6 +112,8 @@ public class ConfigRegistry {
         SERVER_BUILDER.push("John Rock");
 
         JOHN_ROCK_LIMIT = SERVER_BUILDER.comment("How many John rocks can get powered from 1 source.").defineInRange("Powered Amount", 4096, 4, Integer.MAX_VALUE);
+        JOHN_ROCK_VERTICAL = SERVER_BUILDER.comment("Should it also convert vertically").define("Vertical", false);
+        JOHN_ROCK_RANGE = SERVER_BUILDER.comment("Range of conversion of john rocks").defineInRange("Conversion Range", 3, 1, Integer.MAX_VALUE);
 
 
         SERVER_BUILDER.pop();
