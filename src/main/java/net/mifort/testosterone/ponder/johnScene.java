@@ -21,10 +21,10 @@ public class johnScene {
 
         Selection bellsel = util.select.position(4, 1, 4);
         BlockPos bellpos = util.grid.at(4, 1, 4);
-        Selection obsidis1 = util.select.fromTo(1, 1, 1, 3, 1, 4);
-        Selection obsidis2 = util.select.fromTo(1, 1, 5, 4, 1, 7);
-        Selection obsidis3 = util.select.fromTo(5, 1, 4, 7, 1, 7);
-        Selection obsidis4 = util.select.fromTo(4, 1, 1, 7, 1, 3);
+        Selection dream1 = util.select.fromTo(1, 1, 1, 3, 1, 4);
+        Selection dream2 = util.select.fromTo(1, 1, 5, 4, 1, 7);
+        Selection dream3 = util.select.fromTo(5, 1, 4, 7, 1, 7);
+        Selection dream4 = util.select.fromTo(4, 1, 1, 7, 1, 3);
 
         Selection sele = util.select.fromTo(1, 1, 1, 7, 1, 7);
 
@@ -40,20 +40,20 @@ public class johnScene {
                 .placeNearTarget()
                 .text("When a Peculiar Bell is rung...");
         scene.idle(30);
-        scene.world.showSection(obsidis1, Direction.SOUTH);
+        scene.world.showSection(dream1, Direction.SOUTH);
         scene.idle(5);
-        scene.world.showSection(obsidis2, Direction.EAST);
+        scene.world.showSection(dream2, Direction.EAST);
         scene.idle(5);
-        scene.world.showSection(obsidis3, Direction.NORTH);
+        scene.world.showSection(dream3, Direction.NORTH);
         scene.idle(5);
-        scene.world.showSection(obsidis4, Direction.WEST);
+        scene.world.showSection(dream4, Direction.WEST);
         scene.idle(20);
 
         scene.overlay.showText(65)
                 .pointAt(util.vector.blockSurface(bellpos, Direction.WEST))
                 .placeNearTarget()
                 .attachKeyFrame()
-                .text("...any obsidian in an 7x1x7 area of the bell...");
+                .text("...any dormant dream block in an 7x1x7 area of the bell...");
         scene.overlay.showOutline(PonderPalette.GREEN, bellpos, sele, 40);
         scene.idle(75);
 
@@ -71,7 +71,7 @@ public class johnScene {
 
         Selection kinetics = util.select.fromTo(8, 2, 6, 8, 1, 9);
         Selection bottomShaft = util.select.position(8, 0, 9);
-        Selection deleteObsidian = util.select.fromTo(4, 1, 5, 4, 1, 6);
+        Selection deleteDream = util.select.fromTo(4, 1, 5, 4, 1, 6);
         BlockPos deployerPos = util.grid.at(8, 1, 6);
 
         scene.overlay.showText(80)
@@ -79,7 +79,7 @@ public class johnScene {
                 .placeNearTarget()
                 .attachKeyFrame()
                 .text("This process can be automated with redstone/deployers and drills");
-        scene.world.hideSection(deleteObsidian, Direction.DOWN);
+        scene.world.hideSection(deleteDream, Direction.DOWN);
         scene.idle(25);
 
         ElementLink<WorldSectionElement> outputElement = scene.world.showIndependentSection(kinetics, Direction.DOWN);
