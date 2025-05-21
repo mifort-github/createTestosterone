@@ -17,7 +17,7 @@ import java.util.Random;
 public abstract class JohnRockRecipe {
 
     @Inject(method = "playSound", at = @At(value = "HEAD", target = "Lnet/minecraft/client/player/LocalPlayer;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z"))
-    private void injectedTouch(Level world, BlockPos pos, CallbackInfo ci) {
+    private void onPlaySound(Level world, BlockPos pos, CallbackInfo ci) {
         int range = ConfigRegistry.JOHN_ROCK_RANGE.get();
         int vertical = ConfigRegistry.JOHN_ROCK_VERTICAL.get() ? range : 0;
         Random random = new Random();
@@ -28,7 +28,16 @@ public abstract class JohnRockRecipe {
                     BlockPos blockPos = new BlockPos(pos.getX() + i, pos.getY() + k, pos.getZ() + j);
 
                     if (world.getBlockState(blockPos).getBlock() == EstrogenBlocks.DORMANT_DREAM_BLOCK.get()) {
-                        if (random.nextInt(16) == 0) {
+                        int actualRange = 2 * range + 1;
+                        int chance;
+
+                        if (vertical == 0) {
+                            chance = (actualRange * actualRange - 1) / 3;
+                        } else {
+                            chance = (actualRange * actualRange * actualRange - 1) / 3;
+                        }
+
+                        if (random.nextInt(chance) == 0) {
                             world.setBlock(blockPos, testosteroneModBlocks.JOHN_ROCK.getDefaultState(), 3);
                         }
                     }

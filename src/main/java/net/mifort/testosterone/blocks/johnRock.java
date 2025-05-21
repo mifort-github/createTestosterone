@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
-public class johnRock extends HorizontalDirectionalBlock {
+public class johnRock extends Block {
     public static final BooleanProperty TOGGLED = BooleanProperty.create("toggled");
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
 
@@ -30,13 +30,12 @@ public class johnRock extends HorizontalDirectionalBlock {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(TOGGLED, false)
-                .setValue(PRESSED, false)
-                .setValue(FACING, Direction.NORTH));
+                .setValue(PRESSED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TOGGLED, PRESSED, FACING);
+        builder.add(TOGGLED, PRESSED);
     }
 
     @Override
@@ -137,6 +136,16 @@ public class johnRock extends HorizontalDirectionalBlock {
         return super.getCollisionShape(state, level, pos, context);
     }
 
+
+    @Override
+    public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        if (pState.getValue(TOGGLED)) {
+            return Shapes.empty();
+        }
+
+        return super.getOcclusionShape(pState, pLevel, pPos);
+    }
+
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
         if (adjacentBlockState.getBlock() == this) {
@@ -146,7 +155,12 @@ public class johnRock extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
-        return true;
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(TOGGLED) || super.propagatesSkylightDown(state, level, pos);
+    }
+
+    @Override
+    public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(TOGGLED) ? 0 : super.getLightBlock(state, level, pos);
     }
 }

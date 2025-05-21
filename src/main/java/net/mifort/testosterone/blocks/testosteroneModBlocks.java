@@ -161,7 +161,7 @@ public class testosteroneModBlocks {
     // PIZZA TOWER
     public static final BlockEntry<johnRock> JOHN_ROCK = REGISTRATE.block("john_rock", johnRock::new)
             .initialProperties(() -> Blocks.OBSIDIAN)
-            .properties(p -> p.sound(SoundType.STONE).noOcclusion())
+            .properties(p -> p.sound(SoundType.STONE))
             .simpleItem()
             .register();
 
