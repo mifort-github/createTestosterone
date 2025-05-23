@@ -1,6 +1,8 @@
 package net.mifort.testosterone.items.custom;
 
+import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,7 +60,7 @@ public class beerMug extends Item {
     public static class downside {
         @SubscribeEvent
         public static void onTick(LivingEvent.LivingTickEvent event) {
-            if (event.getEntity() instanceof Player player) {
+            if (event.getEntity() instanceof ServerPlayer player) {
                 int current = player.getPersistentData().getInt(BEER_DOWNSIDE);
 
                 if (current > BEER_DURATION) {
@@ -79,6 +81,7 @@ public class beerMug extends Item {
 
                 if (current > 5 * BEER_DURATION) {
                     player.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, true, true));
+                    testosteroneAdvancementUtils.INEBRIATE.trigger(player);
                 }
 
                 if (current > 0) {

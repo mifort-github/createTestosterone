@@ -2,6 +2,7 @@ package net.mifort.testosterone.effects;
 
 import dev.mayaqq.estrogen.registry.EstrogenEffects;
 import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;
+import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.network.packet.hudS2CPacket;
@@ -67,6 +68,12 @@ public class testosteroneEffect extends MobEffect {
                     entity.getPersistentData().putInt(DAMAGE_TAKEN, damageTaken);
                     event.setCanceled(true);
 
+                    if (entity instanceof ServerPlayer player) {
+                        if (event.getAmount() >= 100) {
+                            testosteroneAdvancementUtils.DAMAGE_TAKEN.trigger(player);
+                        }
+                    }
+
                 } else if (currentTick < endOfBlockTick + ((long) damageTaken * ConfigRegistry.TESTOSTERONE_MULTIPLIER.get()) / amplifier) {
                     event.setCanceled(false);
 
@@ -85,6 +92,12 @@ public class testosteroneEffect extends MobEffect {
                     entity.getPersistentData().putInt(DAMAGE_TAKEN, damageTaken);
 
                     event.setCanceled(true);
+
+                    if (entity instanceof ServerPlayer player) {
+                        if (event.getAmount() >= 100) {
+                            testosteroneAdvancementUtils.DAMAGE_TAKEN.trigger(player);
+                        }
+                    }
                 }
 
                 if (entity instanceof Player) {

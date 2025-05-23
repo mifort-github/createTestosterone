@@ -1,0 +1,38 @@
+{
+  "parent": "testosterone:testosterone",
+  "criteria": {
+    "beer_mug": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "testosterone:beer_mug"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.beer_mug.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:beer_mug"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.beer_mug.title"
+    }
+  },
+  "requirements": [
+    [
+      "beer_mug"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

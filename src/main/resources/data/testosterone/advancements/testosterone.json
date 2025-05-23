@@ -12,7 +12,9 @@
               "testosterone:testosterone_pill",
               "testosterone:testosterone_protein_bar",
               "testosterone:testosterone_shot",
-              "testosterone:tie"
+              "testosterone:tie",
+              "testosterone:beer_pint",
+              "testosterone:john_rock"
             ]
           }
         ]

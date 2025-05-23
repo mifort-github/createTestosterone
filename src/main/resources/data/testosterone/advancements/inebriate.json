@@ -1,0 +1,29 @@
+{
+  "parent": "testosterone:beer",
+  "criteria": {
+    "inebriate": {
+      "trigger": "testosterone:inebriate_trigger"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.inebriate.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "testosterone:beer_mug"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.inebriate.title"
+    }
+  },
+  "requirements": [
+    [
+      "inebriate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

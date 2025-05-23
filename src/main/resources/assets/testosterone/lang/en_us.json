@@ -102,5 +102,11 @@
   "advancement.testosterone.damage.description": "Negate 100 damage with the Man Power effect",
 
   "advancement.testosterone.runover.title": "A-Train",
-  "advancement.testosterone.runover.description": "Run over an enemy with testosterone powers"
+  "advancement.testosterone.runover.description": "Run over an enemy with testosterone powers.",
+
+  "advancement.testosterone.beer_mug.title": "Rock And Stone!",
+  "advancement.testosterone.beer_mug.description": "Brew a mug of beer.",
+
+  "advancement.testosterone.inebriate.title": "Why Would You Do That",
+  "advancement.testosterone.inebriate.description": "Get poisoned from drinking too much beer."
 }

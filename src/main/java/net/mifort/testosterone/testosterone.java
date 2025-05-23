@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
+import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.fluids.testosteroneFluids;
@@ -76,7 +77,7 @@ public class testosterone {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_SPEC, "testosterone-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigRegistry.SERVER_SPEC, "testosterone-server.toml");
 
-
+        testosteroneAdvancementUtils.register();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

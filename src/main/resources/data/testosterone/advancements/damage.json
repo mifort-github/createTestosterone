@@ -1,0 +1,29 @@
+{
+  "parent": "testosterone:testosterone_pill",
+  "criteria": {
+    "damage": {
+      "trigger": "testosterone:damage_taken_trigger"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.damage.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.damage.title"
+    }
+  },
+  "requirements": [
+    [
+      "damage"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

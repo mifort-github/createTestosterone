@@ -5,6 +5,8 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.mayaqq.estrogen.registry.EstrogenSoundTypes;
 import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
@@ -162,8 +164,10 @@ public class testosteroneModBlocks {
     public static final BlockEntry<johnRock> JOHN_ROCK = REGISTRATE.block("john_rock", johnRock::new)
             .initialProperties(() -> Blocks.OBSIDIAN)
             .properties(p -> p.sound(SoundType.STONE))
-            .simpleItem()
+            .item((block, properties) -> new BlockItem(block, properties.rarity(Rarity.EPIC)))
+            .build()
             .register();
+
 
 
     public static void register() {}
