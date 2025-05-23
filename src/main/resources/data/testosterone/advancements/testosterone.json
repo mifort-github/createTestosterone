@@ -13,7 +13,8 @@
               "testosterone:testosterone_protein_bar",
               "testosterone:testosterone_shot",
               "testosterone:tie",
-              "testosterone:beer_pint",
+              "testosterone:beer_mug",
+              "testosterone:beer_fluid_bucket",
               "testosterone:john_rock"
             ]
           }
