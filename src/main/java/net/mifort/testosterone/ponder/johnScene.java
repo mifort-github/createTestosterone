@@ -32,6 +32,10 @@ public class johnScene {
         BlockPos obToJohn2 = util.grid.at(rand.nextInt(3-1) + 1, 1, 4);
         BlockPos obToJohn3 = util.grid.at(rand.nextInt(7-4) + 3, 1, 6);
 
+        BlockPos obToJohn4 = util.grid.at(rand.nextInt(6-2) + 4, 1, 3);
+        BlockPos obToJohn5 = util.grid.at(rand.nextInt(3-1) + 1, 1, 2);
+        BlockPos obToJohn6 = util.grid.at(rand.nextInt(3-1) + 1, 1, 7);
+
         scene.world.showSection(bellsel, Direction.SOUTH);
         scene.idle(15);
 
@@ -92,6 +96,9 @@ public class johnScene {
         scene.idle(20);
         scene.world.moveDeployer(deployerPos, 1, 25);
         scene.idle(26);
+        scene.world.modifyBlock(obToJohn4, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
+        scene.world.modifyBlock(obToJohn5, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
+        scene.world.modifyBlock(obToJohn6, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
         scene.world.moveDeployer(deployerPos, -1, 25);
 
         scene.idle(40);
