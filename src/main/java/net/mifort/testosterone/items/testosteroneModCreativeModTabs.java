@@ -70,11 +70,13 @@ public class testosteroneModCreativeModTabs {
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
+                        pOutput.accept(addBooleanNbt(testosteroneModItems.CHEESE_ON_A_STICK.get().getDefaultInstance(), "Boost", false));
+
                         pOutput.accept(testosteroneModItems.TIE.get());
-                        pOutput.accept(tie(DyeColor.byId(7).name().toLowerCase()));
+                        pOutput.accept(getTieByColor(DyeColor.byId(7).name().toLowerCase()));
 
                         for (int pId = 0; pId < 16; pId++) {
-                            pOutput.accept(tie(DyeColor.byId(pId).name().toLowerCase()));
+                            pOutput.accept(getTieByColor(DyeColor.byId(pId).name().toLowerCase()));
                         }
                     })
                     .build());
@@ -85,12 +87,19 @@ public class testosteroneModCreativeModTabs {
         return stack;
     }
 
-    public static ItemStack tie(String color) {
+    public static ItemStack getTieByColor(String color) {
         ItemStack stack = new ItemStack(testosteroneModItems.TIE);
         CompoundTag nbtData = new CompoundTag();
         nbtData.putString("color", color);
         stack.setTag(nbtData);
         return stack;
+    }
+
+    public static ItemStack addBooleanNbt(ItemStack itemStack, String key, boolean bool) {
+        CompoundTag nbtData = new CompoundTag();
+        nbtData.putBoolean(key, bool);
+        itemStack.setTag(nbtData);
+        return itemStack;
     }
 
     public static void register(IEventBus eventBus) {

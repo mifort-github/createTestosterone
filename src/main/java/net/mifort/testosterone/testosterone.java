@@ -3,10 +3,14 @@ package net.mifort.testosterone;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
-import com.simibubi.create.foundation.ponder.PonderRegistry;
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.entities.rat.ratEntity;
+import net.mifort.testosterone.entities.rat.ratModel;
+import net.mifort.testosterone.entities.rat.ratRenderer;
+import net.mifort.testosterone.entities.testosteroneEntities;
+import net.mifort.testosterone.entities.testosteroneModelLayers;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.curios.curioTieRenderer;
 import net.mifort.testosterone.items.testosteroneModCreativeModTabs;
@@ -17,9 +21,12 @@ import net.mifort.testosterone.ponder.index;
 import net.mifort.testosterone.potions.testosteroneModPotions;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -73,6 +80,9 @@ public class testosterone {
         // potions
         testosteroneModPotions.register(modEventBus);
 
+        // entities
+        testosteroneEntities.register(modEventBus);
+
         // config
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_SPEC, "testosterone-client.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigRegistry.SERVER_SPEC, "testosterone-server.toml");
@@ -108,6 +118,24 @@ public class testosterone {
             CuriosRendererRegistry.register(testosteroneModItems.TIE.get(), () -> new curioTieRenderer());
 
             index.register();
+
+            EntityRenderers.register(testosteroneEntities.RAT.get(), ratRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(
+                    testosteroneModelLayers.RAT_MODEL_LAYER,
+                    ratModel::createBodyLayer
+            );
+        }
+    }
+
+    @Mod.EventBusSubscriber(modid = testosterone.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ModEventBusEvents  {
+        @SubscribeEvent
+        public static void registerAttributes(EntityAttributeCreationEvent event) {
+            event.put(testosteroneEntities.RAT.get(), ratEntity.createAttributes().build());
         }
     }
 }

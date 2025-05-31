@@ -2,6 +2,7 @@ package net.mifort.testosterone.items;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.items.curios.tie;
+import net.mifort.testosterone.items.custom.CheeseOnAStick;
 import net.mifort.testosterone.items.custom.testosterone_shot;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -48,6 +49,11 @@ public class testosteroneModItems {
     public static final ItemEntry<Item> AFTERLIFE_TOTEM =
             REGISTRATE.item("totem_of_afterlife", Item::new)
                     .properties(p -> p.rarity(Rarity.EPIC).stacksTo(1))
+                    .register();
+
+    public static final ItemEntry<CheeseOnAStick> CHEESE_ON_A_STICK =
+            REGISTRATE.item("cheese_on_a_stick", CheeseOnAStick::new)
+                    .properties(p -> p.stacksTo(1).defaultDurability(256))
                     .register();
 
 
