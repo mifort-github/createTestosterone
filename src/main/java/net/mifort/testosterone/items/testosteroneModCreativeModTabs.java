@@ -2,6 +2,7 @@ package net.mifort.testosterone.items;
 
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.fluids.testosteroneFluids;
+import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.potions.testosteroneModPotions;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.registries.Registries;
@@ -74,10 +75,10 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(addBooleanNbt(testosteroneModItems.CHEESE_ON_A_STICK.get().getDefaultInstance(), "Boost", false));
 
                         pOutput.accept(testosteroneModItems.TIE.get());
-                        pOutput.accept(getTieByColor(DyeColor.byId(7).name().toLowerCase()));
+                        pOutput.accept(tie.getTieByColor(DyeColor.byId(7).name().toLowerCase()));
 
                         for (int pId = 0; pId < 16; pId++) {
-                            pOutput.accept(getTieByColor(DyeColor.byId(pId).name().toLowerCase()));
+                            pOutput.accept(tie.getTieByColor(DyeColor.byId(pId).name().toLowerCase()));
                         }
                     })
                     .build());
@@ -88,13 +89,6 @@ public class testosteroneModCreativeModTabs {
         return stack;
     }
 
-    public static ItemStack getTieByColor(String color) {
-        ItemStack stack = new ItemStack(testosteroneModItems.TIE);
-        CompoundTag nbtData = new CompoundTag();
-        nbtData.putString("color", color);
-        stack.setTag(nbtData);
-        return stack;
-    }
 
     public static ItemStack addBooleanNbt(ItemStack itemStack, String key, boolean bool) {
         CompoundTag nbtData = new CompoundTag();

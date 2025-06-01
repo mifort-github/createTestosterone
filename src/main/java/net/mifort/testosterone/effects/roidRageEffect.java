@@ -1,5 +1,6 @@
 package net.mifort.testosterone.effects;
 
+import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
@@ -7,12 +8,14 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.ForgeMod;
@@ -20,6 +23,8 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class roidRageEffect extends MobEffect {
     private static final String SPEED_KEY = "testosterone:speed_key";
@@ -88,6 +93,18 @@ public class roidRageEffect extends MobEffect {
                             0,
                             0.1
                     );
+                }
+
+                AABB playerBB = player.getBoundingBox();
+
+                List<Entity> collidingEntities = level.getEntities(
+                        player,
+                        playerBB,
+                        each -> each != player && entity.getBoundingBox().intersects(playerBB)
+                );
+
+                for (Entity other : collidingEntities) {
+                    other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
                 }
 
                 BlockPos blockAtFeet = new BlockPos(

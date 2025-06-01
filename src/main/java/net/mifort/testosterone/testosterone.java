@@ -1,10 +1,12 @@
 package net.mifort.testosterone;
 
+import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipHelper;
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
+import net.mifort.testosterone.chestLoot.testosteroneModLootModifiers;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.entities.rat.ratEntity;
 import net.mifort.testosterone.entities.rat.ratModel;
@@ -35,11 +37,14 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 @Mod(testosterone.MOD_ID)
 public class testosterone {
     public static final String MOD_ID = "testosterone";
+
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MOD_ID);
 
@@ -88,6 +93,8 @@ public class testosterone {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigRegistry.SERVER_SPEC, "testosterone-server.toml");
 
         testosteroneAdvancementUtils.register();
+
+        testosteroneModLootModifiers.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

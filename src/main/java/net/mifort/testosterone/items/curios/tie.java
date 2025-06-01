@@ -3,6 +3,7 @@ package net.mifort.testosterone.items.curios;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +35,14 @@ public class tie extends Item implements ICurioItem {
                 }
             }
         }
+    }
+
+    public static ItemStack getTieByColor(String color) {
+        ItemStack stack = new ItemStack(testosteroneModItems.TIE);
+        CompoundTag nbtData = new CompoundTag();
+        nbtData.putString("color", color);
+        stack.setTag(nbtData);
+        return stack;
     }
 
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
