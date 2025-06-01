@@ -70,6 +70,7 @@ public class testosteroneModCreativeModTabs {
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
+                        pOutput.accept(testosteroneModBlocks.CHEESE_BLOCK.get());
                         pOutput.accept(addBooleanNbt(testosteroneModItems.CHEESE_ON_A_STICK.get().getDefaultInstance(), "Boost", false));
 
                         pOutput.accept(testosteroneModItems.TIE.get());

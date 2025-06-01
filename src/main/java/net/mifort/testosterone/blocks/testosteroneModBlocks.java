@@ -167,6 +167,11 @@ public class testosteroneModBlocks {
             .item((block, properties) -> new BlockItem(block, properties.rarity(Rarity.EPIC)))
             .build()
             .register();
+    public static final BlockEntry<Block> CHEESE_BLOCK = REGISTRATE.block("cheese_block", Block::new)
+            .initialProperties(() -> Blocks.HONEYCOMB_BLOCK)
+            .simpleItem()
+            .register();
+
 
 
 

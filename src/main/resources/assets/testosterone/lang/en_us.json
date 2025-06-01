@@ -35,9 +35,12 @@
   "item.minecraft.splash_potion.effect.testosterone_potion": "Splash Potion of Man Power",
   "item.minecraft.lingering_potion.effect.testosterone_potion": "Lingering Potion of Man Power",
 
+  "item.testosterone.cheese_on_a_stick": "Cheese on a Stick",
+
   "creativetab.testosterone_tab": "Testosterone",
 
   "block.testosterone.testosterone_pill_box": "Testosterone Pill Box",
+  "block.testosterone.cheese_block": "Cheese Block",
 
   "block.testosterone.aequalis": "Aequalis",
   "block.testosterone.aequalis.tooltip.summary": "A _strange stone_ formed when §kestrogen§r and §ktestosterone§r touch.",
