@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.mayaqq.estrogen.registry.EstrogenSoundTypes;
 import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
+import net.mifort.testosterone.items.testosteroneModFoods;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
@@ -167,9 +168,11 @@ public class testosteroneModBlocks {
             .item((block, properties) -> new BlockItem(block, properties.rarity(Rarity.EPIC)))
             .build()
             .register();
+
     public static final BlockEntry<Block> CHEESE_BLOCK = REGISTRATE.block("cheese_block", Block::new)
             .initialProperties(() -> Blocks.HONEYCOMB_BLOCK)
-            .simpleItem()
+            .item((block, properties) -> new BlockItem(block, properties.food(testosteroneModFoods.CHEESE_BLOCK)))
+            .build()
             .register();
 
 

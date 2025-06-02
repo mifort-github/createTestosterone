@@ -1,5 +1,6 @@
 package net.mifort.testosterone.entities.rat;
 
+import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.testosteroneModItems;
@@ -9,14 +10,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.BreedGoal;
-import net.minecraft.world.entity.ai.goal.FollowParentGoal;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,13 +32,15 @@ public class ratEntity extends Animal {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.15D));
-        this.goalSelector.addGoal(2, new net.minecraft.world.entity.ai.goal.TemptGoal(this, 1.2D, Ingredient.of(testosteroneModItems.CHEESE_ON_A_STICK.get()), false));
-        this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.1D));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 3f));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Ocelot.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Cat.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.15D));
+        this.goalSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.TemptGoal(this, 1.2D, Ingredient.of(testosteroneModItems.CHEESE_ON_A_STICK.get(), testosteroneModBlocks.CHEESE_BLOCK), false));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.1D));
+        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 3f));
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
@@ -54,7 +54,7 @@ public class ratEntity extends Animal {
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(Items.COOKED_BEEF);
+        return pStack.is(testosteroneModBlocks.CHEESE_BLOCK.asItem());
     }
 
     @Override
