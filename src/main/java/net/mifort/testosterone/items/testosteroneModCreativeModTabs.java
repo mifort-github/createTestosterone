@@ -32,6 +32,7 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.BEER_MUG);
 
 //                        pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
+                        pOutput.accept(testosteroneModItems.RAT_SPANW_EGG.get());
 
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
