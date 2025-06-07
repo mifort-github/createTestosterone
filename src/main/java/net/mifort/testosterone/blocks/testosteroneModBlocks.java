@@ -164,7 +164,7 @@ public class testosteroneModBlocks {
     // PIZZA TOWER
     public static final BlockEntry<johnRock> JOHN_ROCK = REGISTRATE.block("john_rock", johnRock::new)
             .initialProperties(() -> Blocks.OBSIDIAN)
-            .properties(p -> p.sound(SoundType.STONE))
+            .properties(p -> p.sound(SoundType.STONE).isSuffocating((pState, pLevel, pPos) -> !pState.getValue(johnRock.TOGGLED)).isViewBlocking((pState, pLevel, pPos) -> !pState.getValue(johnRock.TOGGLED)))
             .item((block, properties) -> new BlockItem(block, properties.rarity(Rarity.EPIC)))
             .build()
             .register();

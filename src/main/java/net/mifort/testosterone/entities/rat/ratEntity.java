@@ -4,6 +4,8 @@ import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.testosteroneModItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,12 +22,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class ratEntity extends Animal {
+public class ratEntity extends Animal implements PlayerRideableJumping {
     public ratEntity(EntityType<? extends Animal> type, Level level) {
         super(type, level);
     }
@@ -65,7 +68,7 @@ public class ratEntity extends Animal {
     @Override
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
         if (this.getPassengers().isEmpty()
-                && player.isHolding(testosteroneModItems.CHEESE_ON_A_STICK.get())
+                && isHoldingStick(player)
                 && !this.isBaby()) {
             player.startRiding(this);
             return InteractionResult.SUCCESS;
@@ -85,10 +88,31 @@ public class ratEntity extends Animal {
         return null;
     }
 
+    public final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if(this.level().isClientSide()) {
+            setupAnimationStates();
+        }
+    }
+
+    private void setupAnimationStates() {
+        if(this.idleAnimationTimeout <= 0) {
+            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationState.start(this.tickCount);
+        } else {
+            --this.idleAnimationTimeout;
+        }
+    }
+
     protected void tickRidden(@NotNull Player pPlayer, @NotNull Vec3 pTravelVector) {
         super.tickRidden(pPlayer, pTravelVector);
 
-        if (pPlayer.isHolding(testosteroneModItems.CHEESE_ON_A_STICK.get())) {
+        if (isHoldingStick(pPlayer)) {
             this.setRot(pPlayer.getYRot(), pPlayer.getXRot() * 0.5F);
             this.yRotO = this.yBodyRot = this.yHeadRot = this.getYRot();
 
@@ -104,8 +128,12 @@ public class ratEntity extends Animal {
         }
     }
 
+    public boolean isHoldingStick(Player player) {
+        return player.isHolding(testosteroneModItems.CHEESE_ON_A_STICK.get());
+    }
+
     protected float getRiddenSpeed(Player pPlayer) {
-        if (pPlayer.isHolding(testosteroneModItems.CHEESE_ON_A_STICK.get())) {
+        if (isHoldingStick(pPlayer)) {
             if (isBoosting()) {
                 return (float) (this.getAttributeValue(Attributes.MOVEMENT_SPEED) * ConfigRegistry.RAT_BOOST_MULTIPLIER.get());
 
@@ -143,5 +171,41 @@ public class ratEntity extends Animal {
         ItemStack mainHandItem = player.getMainHandItem();
 
         return mainHandItem.getItem().equals(testosteroneModItems.CHEESE_ON_A_STICK.get()) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+    }
+
+    @Override
+    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+        super.checkFallDamage(pY, pOnGround, pState, pPos);
+
+        if (pOnGround) {
+            this.fallDistance = this.fallDistance - 24;
+        }
+    }
+
+    @Override
+    public void onPlayerJump(int pJumpPower) {
+        this.extraJump = this.onGround();
+        this.addDeltaMovement(new Vec3(0, (double) pJumpPower / 50, 0));
+    }
+
+    private boolean extraJump = true;
+
+    @Override
+    public boolean canJump() {
+        if (this.getControllingPassenger() != null) {
+            return (this.onGround() || this.extraJump) && isHoldingStick(this.getControllingPassenger());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void handleStartJump(int pJumpPower) {
+
+    }
+
+    @Override
+    public void handleStopJump() {
+
     }
 }

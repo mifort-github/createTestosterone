@@ -1,7 +1,6 @@
 package net.mifort.testosterone.effects;
 
 import dev.mayaqq.estrogen.registry.EstrogenEffects;
-import dev.mayaqq.estrogen.registry.effects.EstrogenEffect;
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.items.testosteroneModItems;

@@ -122,7 +122,7 @@ public class ConfigRegistry {
 
         SERVER_BUILDER.push("Rat");
 
-        RAT_BOOST_MULTIPLIER = SERVER_BUILDER.comment("How much faster the rat goes when ridden and boosted using cheese on a stick.").defineInRange("Speed Multiplier", 2D, 1D, Double.MAX_VALUE);
+        RAT_BOOST_MULTIPLIER = SERVER_BUILDER.comment("How much faster the rat goes when ridden and boosted using cheese on a stick.").defineInRange("Speed Multiplier", 5D, 1D, Double.MAX_VALUE);
 
         SERVER_BUILDER.pop();
         SERVER_SPEC = SERVER_BUILDER.build();

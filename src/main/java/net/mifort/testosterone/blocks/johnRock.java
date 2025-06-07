@@ -1,10 +1,17 @@
 package net.mifort.testosterone.blocks;
 
+import dev.mayaqq.estrogen.features.dash.CommonDash;
 import net.mifort.testosterone.config.ConfigRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -12,9 +19,14 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
@@ -143,10 +155,14 @@ public class johnRock extends Block {
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (state.getValue(TOGGLED)) {
-            return Shapes.empty();
+        if (context instanceof EntityCollisionContext entityCollisionContext) {
+            Entity entity = entityCollisionContext.getEntity();
+            if (entity != null && state.getValue(TOGGLED)) {
+                return Shapes.empty();
+            }
         }
-        return super.getCollisionShape(state, level, pos, context);
+
+        return Shapes.block();
     }
 
 
@@ -168,12 +184,12 @@ public class johnRock extends Block {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.getValue(TOGGLED) || super.propagatesSkylightDown(state, level, pos);
+    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+        return state.getValue(TOGGLED) ? 0 : super.getLightBlock(state, worldIn, pos);
     }
 
     @Override
-    public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.getValue(TOGGLED) ? 0 : super.getLightBlock(state, level, pos);
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+        return state.getValue(TOGGLED);
     }
 }
