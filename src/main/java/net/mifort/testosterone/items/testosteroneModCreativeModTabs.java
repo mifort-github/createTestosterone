@@ -34,6 +34,8 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
 
+                        pOutput.accept(testosteroneModItems.RAT_SPANW_EGG.get());
+
                         pOutput.accept(testosteroneModBlocks.AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS_STAIRS.get());

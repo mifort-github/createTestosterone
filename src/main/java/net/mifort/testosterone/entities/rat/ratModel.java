@@ -67,7 +67,12 @@ public class ratModel<T extends Entity> extends HierarchicalModel<T> {
 	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		this.animateWalk(ratAnimations.WALK, limbSwing, limbSwingAmount, 1, 1);
+//		if (((ratEntity) entity).isBoosting()) {
+//
+//		}
+
+		this.animateWalk(ratAnimations.WALK, limbSwing, limbSwingAmount, 2, 1);
+
 	}
 
 	@Override
