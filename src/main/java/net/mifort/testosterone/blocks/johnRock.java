@@ -3,6 +3,8 @@ package net.mifort.testosterone.blocks;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -89,6 +91,17 @@ public class johnRock extends Block {
     }
 
     private void propagateConnectedToggling(Level level, BlockPos origin, boolean newToggled) {
+        level.playSound(
+                null,
+                origin.getX(),
+                origin.getY(),
+                origin.getZ(),
+                SoundEvents.BEACON_ACTIVATE,
+                SoundSource.BLOCKS,
+                1.0F,
+                1.0F
+        );
+
         Set<BlockPos> visited = new HashSet<>();
         Queue<BlockPos> queue = new ArrayDeque<>();
 

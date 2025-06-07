@@ -4,7 +4,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.items.custom.CheeseOnAStick;
-import net.mifort.testosterone.items.custom.testosterone_shot;
+import net.mifort.testosterone.items.custom.testosteroneShot;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -34,8 +34,8 @@ public class testosteroneModItems {
                     .register();
 
 
-    public static final ItemEntry<testosterone_shot> TESTOSTERONE_SHOT =
-            REGISTRATE.item("testosterone_shot", testosterone_shot::new)
+    public static final ItemEntry<testosteroneShot> TESTOSTERONE_SHOT =
+            REGISTRATE.item("testosterone_shot", testosteroneShot::new)
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 
