@@ -1,7 +1,6 @@
 package net.mifort.testosterone.items;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.items.custom.CheeseOnAStick;
 import net.mifort.testosterone.items.custom.testosteroneShot;
@@ -9,12 +8,10 @@ import net.mifort.testosterone.testosterone;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.mifort.testosterone.items.custom.beerMug;
-import net.minecraftforge.registries.RegistryObject;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -59,9 +56,15 @@ public class testosteroneModItems {
                     .properties(p -> p.stacksTo(1).defaultDurability(256))
                     .register();
 
-    public static final RegistryObject<Item> RAT_SPANW_EGG = ITEMS.register("rat_spawn_egg",
-            () -> new ForgeSpawnEggItem(testosteroneEntities.RAT, 0xA0C4DD, 0xE994C2, new Item.Properties()));
+    public static final ItemEntry<Item> CHEESE_CURDS =
+            REGISTRATE.item("cheese_curds", Item::new)
+                    .properties(p -> p.stacksTo(64))
+                    .register();
 
+    public static final ItemEntry<Item> WHEY_PROTEIN =
+            REGISTRATE.item("whey_protein", Item::new)
+                    .properties(p -> p.stacksTo(64))
+                    .register();
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

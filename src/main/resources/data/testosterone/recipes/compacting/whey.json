@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "amount": 125,
+      "fluid": "testosterone:whey_fluid"
+    }
+  ],
+  "results": [
+    {
+      "item": "testosterone:whey_protein"
+    }
+  ]
+}

@@ -30,12 +30,10 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_SHOT);
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PROTEIN_BAR);
                         pOutput.accept(testosteroneModItems.BEER_MUG);
-
-//                        pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
-                        pOutput.accept(testosteroneModItems.RAT_SPANW_EGG.get());
-
+//                      pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
+
                         pOutput.accept(testosteroneModBlocks.AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS_STAIRS.get());
@@ -65,15 +63,21 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModBlocks.SMOOTH_DARK_DIAMOND_AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.BIG_AEQUALIS_BRICKS.get());
 
-                        pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
-                        pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
-                        pOutput.accept(testosteroneFluids.TESTOSTERONE_FLUID.getBucket().get());
-                        pOutput.accept(testosteroneFluids.BEER_FLUID.getBucket().get());
-
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
 
                         pOutput.accept(testosteroneModBlocks.CHEESE_BLOCK.get());
                         pOutput.accept(addBooleanNbt(testosteroneModItems.CHEESE_ON_A_STICK.get().getDefaultInstance(), "Boost", false));
+                        pOutput.accept(testosteroneModItems.WHEY_PROTEIN);
+                        pOutput.accept(testosteroneModItems.CHEESE_CURDS);
+
+                        pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.TESTOSTERONE_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.BEER_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.WHEY_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.CHEESE_FLUID.getBucket().get());
+
+
 
                         pOutput.accept(testosteroneModItems.TIE.get());
                         pOutput.accept(tie.getTieByColor(DyeColor.byId(7).name().toLowerCase()));

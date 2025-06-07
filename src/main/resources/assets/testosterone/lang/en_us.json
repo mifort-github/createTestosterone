@@ -25,6 +25,13 @@
   "item.testosterone.beer_fluid_bucket": "Bucket Of Beer",
   "fluid.testosterone.beer_fluid": "Beer",
 
+  "item.testosterone.whey_fluid_bucket": "Bucket Of Liquid Whey",
+  "fluid.testosterone.whey_fluid": "Liquid Whey",
+
+  "item.testosterone.cheese_fluid_bucket": "Bucket Of Liquid Cheese",
+  "fluid.testosterone.cheese_fluid": "Liquid Cheese",
+
+
   "item.testosterone.tie": "Tie",
   "item.testosterone.tie.tooltip.summary" : "A Tie that gives you _Knockback Resistance_. Useful with the _Man Power_ effect.",
 
@@ -36,6 +43,9 @@
   "item.minecraft.lingering_potion.effect.testosterone_potion": "Lingering Potion of Man Power",
 
   "item.testosterone.cheese_on_a_stick": "Cheese on a Stick",
+
+  "item.testosterone.cheese_curds": "Cheese Curds",
+  "item.testosterone.whey_protein": "Whey Protein",
 
   "creativetab.testosterone_tab": "Testosterone",
 

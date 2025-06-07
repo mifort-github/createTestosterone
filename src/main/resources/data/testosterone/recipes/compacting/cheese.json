@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "amount": 50,
+      "fluid": "testosterone:cheese_fluid"
+    }
+  ],
+  "results": [
+    {
+      "item": "testosterone:cheese_block"
+    }
+  ]
+}
