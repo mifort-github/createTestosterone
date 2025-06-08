@@ -102,7 +102,7 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
 
     private void setupAnimationStates() {
         if(this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = this.random.nextInt(40) + 80;
+            this.idleAnimationTimeout = 120;
             this.idleAnimationState.start(this.tickCount);
         } else {
             --this.idleAnimationTimeout;

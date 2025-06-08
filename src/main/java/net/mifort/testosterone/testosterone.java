@@ -21,6 +21,7 @@ import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.ponder.index;
 import net.mifort.testosterone.potions.testosteroneModPotions;
+import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -95,6 +96,8 @@ public class testosterone {
         testosteroneAdvancementUtils.register();
 
         testosteroneModLootModifiers.register(modEventBus);
+
+        testosteroneModSounds.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

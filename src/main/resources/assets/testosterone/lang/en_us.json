@@ -121,5 +121,7 @@
   "advancement.testosterone.beer_mug.description": "Brew a mug of beer.",
 
   "advancement.testosterone.inebriate.title": "Why Would You Do That",
-  "advancement.testosterone.inebriate.description": "Get poisoned from drinking too much beer."
+  "advancement.testosterone.inebriate.description": "Get poisoned from drinking too much beer.",
+
+  "sounds.testosterone.john_rock_activation": "John Rock Activated"
 }
