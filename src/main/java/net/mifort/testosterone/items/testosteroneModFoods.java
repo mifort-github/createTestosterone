@@ -22,6 +22,11 @@ public class testosteroneModFoods {
             .effect(() -> new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(), 6000, 0, false, false, true), 1f)
             .build();
 
+    public static final FoodProperties CHEESE_CURDS = new FoodProperties.Builder()
+            .nutrition(2)
+            .saturationMod(1f)
+            .build();
+
     public static final FoodProperties CHEESE_BLOCK = new FoodProperties.Builder()
             .nutrition(1)
             .saturationMod(1f)

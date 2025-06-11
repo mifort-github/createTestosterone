@@ -5,6 +5,7 @@ import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.items.custom.CheeseOnAStick;
 import net.mifort.testosterone.items.custom.testosteroneShot;
+import net.mifort.testosterone.items.custom.trenboloneShot;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -30,12 +31,16 @@ public class testosteroneModItems {
     public static final ItemEntry<Item> TESTOSTERONE_PROTEIN_BAR =
             REGISTRATE.item("testosterone_protein_bar", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_PROTEIN_BAR).rarity(Rarity.RARE))
-                    .tab(CreativeModeTabs.FOOD_AND_DRINKS)
                     .register();
 
 
     public static final ItemEntry<testosteroneShot> TESTOSTERONE_SHOT =
             REGISTRATE.item("testosterone_shot", testosteroneShot::new)
+                    .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
+                    .register();
+    //for mifart (hec chillaxx)
+    public static final ItemEntry<trenboloneShot> TRENBOLONE_SHOT =
+            REGISTRATE.item("trenbolone_shot", trenboloneShot::new)
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 
@@ -61,7 +66,7 @@ public class testosteroneModItems {
 
     public static final ItemEntry<Item> CHEESE_CURDS =
             REGISTRATE.item("cheese_curds", Item::new)
-                    .properties(p -> p.stacksTo(64))
+                    .properties(p -> p.stacksTo(64).food(testosteroneModFoods.CHEESE_CURDS))
                     .register();
 
     public static final ItemEntry<Item> WHEY_PROTEIN =
@@ -69,8 +74,9 @@ public class testosteroneModItems {
                     .properties(p -> p.stacksTo(64))
                     .register();
 
-    public static final RegistryObject<Item> RAT_SPANW_EGG = ITEMS.register("rat_spawn_egg",
-            () -> new ForgeSpawnEggItem(testosteroneEntities.RAT, 0xA0C4DD, 0xE994C2, new Item.Properties()));
+
+    public static final RegistryObject<Item> STUPID_RAT_SPAWN_EGG = ITEMS.register("stupid_rat_spawn_egg",
+            () -> new ForgeSpawnEggItem(testosteroneEntities.RAT, 0xA0C4DD, 0xFF83C0, new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

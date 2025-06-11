@@ -32,7 +32,7 @@ public class roidRageEffect extends MobEffect {
     private static final String HEIGHT_KEY = "testosterone:height_key";
 
     public roidRageEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0xFFFF00);
+        super(MobEffectCategory.BENEFICIAL, 0xCC0000);
     }
 
     @Override

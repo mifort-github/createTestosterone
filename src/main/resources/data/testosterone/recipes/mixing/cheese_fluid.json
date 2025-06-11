@@ -7,17 +7,11 @@
     },
     {
       "item": "testosterone:cheese_curds"
-    },
-    {
-      "item": "testosterone:cheese_curds"
-    },
-    {
-      "item": "testosterone:cheese_curds"
     }
   ],
   "results": [
     {
-      "amount": 250,
+      "amount": 200,
       "fluid": "testosterone:cheese_fluid"
     }
   ]

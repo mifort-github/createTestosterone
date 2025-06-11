@@ -3,7 +3,8 @@
   "item.testosterone.testosterone_pill.tooltip.summary" : "Temporary Source Of _Man Power_.",
   "item.testosterone.testosterone_shot": "Testosterone Shot",
   "item.testosterone.testosterone_shot.tooltip.summary" : "Temporary Source Of _Man Power_.",
-
+  "item.testosterone.trenbolone_shot": "Trenbolone Shot",
+  "item.testosterone.trenbolone_shot.tooltip.summary" : "Temporary Source Of _Roid Rage_.",
   "item.testosterone.testosterone_protein_bar": "Testosterone Protein Bar",
 
   "item.testosterone.beer_mug": "Beer Mug",
@@ -22,6 +23,9 @@
   "item.testosterone.testosterone_fluid_bucket": "Bucket Of Testosterone",
   "fluid.testosterone.testosterone_fluid": "Testosterone",
 
+  "item.testosterone.trenbolone_fluid_bucket": "Bucket Of Trenbolone",
+  "fluid.testosterone.trenbolone_fluid": "Trenbolone",
+
   "item.testosterone.beer_fluid_bucket": "Bucket Of Beer",
   "fluid.testosterone.beer_fluid": "Beer",
 
@@ -36,16 +40,24 @@
   "item.testosterone.tie.tooltip.summary" : "A Tie that gives you _Knockback Resistance_. Useful with the _Man Power_ effect.",
 
   "effect.testosterone.testosterone": "Man Power",
+  "effect.testosterone.roid_rage": "Roid Rage",
 
   "item.minecraft.tipped_arrow.effect.testosterone_potion": "Arrow of Man Power",
   "item.minecraft.potion.effect.testosterone_potion": "Potion of Man Power",
   "item.minecraft.splash_potion.effect.testosterone_potion": "Splash Potion of Man Power",
   "item.minecraft.lingering_potion.effect.testosterone_potion": "Lingering Potion of Man Power",
 
+  "item.minecraft.tipped_arrow.effect.trenbolone_potion": "Arrow of Roid Rage",
+  "item.minecraft.potion.effect.trenbolone_potion": "Potion of Roid Rage",
+  "item.minecraft.splash_potion.effect.trenbolone_potion": "Splash Potion of Roid Rage",
+  "item.minecraft.lingering_potion.effect.trenbolone_potion": "Lingering Potion of Roid Rage",
+
   "item.testosterone.cheese_on_a_stick": "Cheese on a Stick",
 
   "item.testosterone.cheese_curds": "Cheese Curds",
   "item.testosterone.whey_protein": "Whey Protein",
+
+  "item.testosterone.stupid_rat_spawn_egg": "Stupid Rat Spawn Egg",
 
   "creativetab.testosterone_tab": "Testosterone",
 
@@ -86,7 +98,6 @@
   "testosterone.ponder.bell_conversion.text_4": "This process can be automated with redstone/deployers and drills",
 
   "block.testosterone.john_rock": "John Rock",
-  "block.testosterone.john_rock.tooltip.summary": "Uh don't ask why it's here right now...",
   "testosterone.ponder.john_rock.header": "John Rock",
   "testosterone.ponder.john_rock.text_1": "John Rocks change state when given a redstone signal",
   "testosterone.ponder.john_rock.text_2": "Multiple John Rocks can be placed next to each other",
