@@ -3,6 +3,8 @@ package net.mifort.testosterone.fluids;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import dev.mayaqq.estrogen.registry.EstrogenFluids;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -48,6 +50,12 @@ public class testosteroneFluids {
                             .tickRate(5)
                             .slopeFindDistance(3)
                             .explosionResistance(100f))
+                    .source(ForgeFlowingFluid.Source::new)
+                    .block(LiquidBlock::new)
+                    .build()
+                    .bucket()
+                    .properties(properties -> properties.rarity(Rarity.RARE))
+                    .build()
                     .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> TRENBOLONE_FLUID =
@@ -60,6 +68,11 @@ public class testosteroneFluids {
                             .tickRate(5)
                             .slopeFindDistance(3)
                             .explosionResistance(100f))
+                    .block(LiquidBlock::new)
+                    .build()
+                    .bucket()
+                    .properties(properties -> properties.rarity(Rarity.RARE))
+                    .build()
                     .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> BEER_FLUID =

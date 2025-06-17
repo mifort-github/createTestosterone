@@ -2,12 +2,13 @@ package net.mifort.testosterone.items;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.entities.testosteroneEntities;
+import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.items.custom.CheeseOnAStick;
 import net.mifort.testosterone.items.custom.testosteroneShot;
 import net.mifort.testosterone.items.custom.trenboloneShot;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.ForgeSpawnEggItem;
