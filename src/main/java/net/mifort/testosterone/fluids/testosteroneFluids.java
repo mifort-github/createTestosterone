@@ -68,6 +68,7 @@ public class testosteroneFluids {
                             .tickRate(5)
                             .slopeFindDistance(3)
                             .explosionResistance(100f))
+                    .source(ForgeFlowingFluid.Source::new)
                     .block(LiquidBlock::new)
                     .build()
                     .bucket()

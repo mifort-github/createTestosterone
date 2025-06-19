@@ -46,6 +46,9 @@ public class ConfigRegistry {
 
     public static final ForgeConfigSpec.ConfigValue<Double> RAT_BOOST_MULTIPLIER;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> DISPLAY_SPEED;
+
+    public static final ForgeConfigSpec.ConfigValue<Double> TREN_IN_AIR_MUL;
 
 
 
@@ -86,6 +89,13 @@ public class ConfigRegistry {
         CLIENT_BUILDER.pop();
 
 
+        CLIENT_BUILDER.push("Roid Rage Effect");
+
+        DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", true);
+
+        CLIENT_BUILDER.pop();
+
+
         CLIENT_SPEC = CLIENT_BUILDER.build();
 
 
@@ -108,6 +118,8 @@ public class ConfigRegistry {
         ABILITY_SPEED = SERVER_BUILDER.comment("The speed that needs to be achieved to get abilities. (running on fluids, high jumping)").defineInRange("Ability Speed", 50, 0, Integer.MAX_VALUE);
         JUMP_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect jump height.").defineInRange("Jump Height", 0.01, 0, Double.MAX_VALUE);
         SPEED_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect speed.").defineInRange("Speed Multiplier", 0.001, 0, Double.MAX_VALUE);
+
+        TREN_IN_AIR_MUL = SERVER_BUILDER.comment("FKUAUG").defineInRange("In Air Multiplier", 0.002, 0, 1);
 
         SERVER_BUILDER.pop();
 

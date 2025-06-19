@@ -5,6 +5,7 @@ import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -30,6 +31,8 @@ public class roidRageEffect extends MobEffect {
     private static final String SPEED_KEY = "testosterone:speed_key";
     private static final String JUMP_KEY = "testosterone:jump_key";
     private static final String HEIGHT_KEY = "testosterone:height_key";
+    private static final String JUMPING_KEY = "testosterone:jumping_key";
+
 
     public roidRageEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xCC0000);
@@ -44,6 +47,14 @@ public class roidRageEffect extends MobEffect {
 
             int speed = player.getPersistentData().getInt(SPEED_KEY);
 
+            if (ConfigRegistry.DISPLAY_SPEED.get()) {
+                player.displayClientMessage(Component.literal(String.valueOf(speed)), true);
+            }
+
+            if (player.onGround()) {
+                player.getPersistentData().putBoolean(JUMPING_KEY, false);
+            }
+
             if (player.isCrouching() && speed > ConfigRegistry.ABILITY_SPEED.get()) {
                 player.getPersistentData().putBoolean(JUMP_KEY, true);
 
@@ -53,6 +64,7 @@ public class roidRageEffect extends MobEffect {
                 if (player.onGround()) {
                     player.addDeltaMovement(new Vec3(0f, speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0f));
                     player.getPersistentData().putDouble(HEIGHT_KEY, player.getY());
+                    player.getPersistentData().putBoolean(JUMPING_KEY, true);
                 }
 
             } else if (player.isSprinting()) {
@@ -67,6 +79,9 @@ public class roidRageEffect extends MobEffect {
             }
 
             AttributeInstance stepHeightAttribute = player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
+
+            player.sendSystemMessage(Component.literal(String.valueOf(player.getPersistentData().getBoolean(JUMPING_KEY))));
+
 
             if (stepHeightAttribute != null) {
                 if (stepHeightAttribute.getBaseValue() < amplifier - 1) {
@@ -103,8 +118,20 @@ public class roidRageEffect extends MobEffect {
                         each -> each != player && entity.getBoundingBox().intersects(playerBB)
                 );
 
+                float rot = player.getYRot();
+                double rotRad = Math.toRadians(rot);
+
+                if (!player.getPersistentData().getBoolean(JUMPING_KEY) && !player.onGround()) {
+                    double mul = ConfigRegistry.TREN_IN_AIR_MUL.get();
+                    player.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * mul, 0, Math.cos(rotRad) * speed * mul));
+                }
+
+
                 for (Entity other : collidingEntities) {
                     other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
+
+
+                    other.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * 0.01, speed * 0.002, Math.cos(rotRad) * speed * 0.01));
                 }
 
                 BlockPos blockAtFeet = new BlockPos(
