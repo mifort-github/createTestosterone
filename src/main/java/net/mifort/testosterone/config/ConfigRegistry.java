@@ -119,7 +119,7 @@ public class ConfigRegistry {
         JUMP_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect jump height.").defineInRange("Jump Height", 0.01, 0, Double.MAX_VALUE);
         SPEED_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect speed.").defineInRange("Speed Multiplier", 0.001, 0, Double.MAX_VALUE);
 
-        TREN_IN_AIR_MUL = SERVER_BUILDER.comment("FKUAUG").defineInRange("In Air Multiplier", 0.002, 0, 1);
+        TREN_IN_AIR_MUL = SERVER_BUILDER.comment("How far you jump with the roid rage effect.").defineInRange("In Air Multiplier", 0.5, 0, 10);
 
         SERVER_BUILDER.pop();
 
