@@ -119,6 +119,9 @@ public class testosterone {
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TESTOSTERONE_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TESTOSTERONE_FLUID.getSource(), RenderType.translucent());
 
+            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TRENBOLONE_FLUID.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.TRENBOLONE_FLUID.getSource(), RenderType.translucent());
+
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.CHOLESTEROL_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.CHOLESTEROL_FLUID.getSource(), RenderType.translucent());
 

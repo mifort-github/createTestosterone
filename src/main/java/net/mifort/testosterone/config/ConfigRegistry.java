@@ -24,9 +24,6 @@ public class ConfigRegistry {
     public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_G_COOLDOWN;
     public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_B_COOLDOWN;
 
-    public static final ForgeConfigSpec.ConfigValue<Boolean> DISPLAY_SPEED;
-    public static final ForgeConfigSpec.ConfigValue<Boolean> RENDER_TRAIL;
-
 
 
 
@@ -49,9 +46,9 @@ public class ConfigRegistry {
 
     public static final ForgeConfigSpec.ConfigValue<Double> RAT_BOOST_MULTIPLIER;
 
-    public static final ForgeConfigSpec.ConfigValue<Double> TREN_IN_AIR_MUL;
-    public static final ForgeConfigSpec.ConfigValue<Integer> TRAIL_DURATION;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> DISPLAY_SPEED;
 
+    public static final ForgeConfigSpec.ConfigValue<Double> TREN_IN_AIR_MUL;
 
 
 
@@ -95,7 +92,6 @@ public class ConfigRegistry {
         CLIENT_BUILDER.push("Roid Rage Effect");
 
         DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", true);
-        RENDER_TRAIL = CLIENT_BUILDER.comment("Render the trail from roid rage effect.").define("Render Trail", true);
 
         CLIENT_BUILDER.pop();
 
@@ -123,8 +119,7 @@ public class ConfigRegistry {
         JUMP_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect jump height.").defineInRange("Jump Height", 0.01, 0, Double.MAX_VALUE);
         SPEED_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect speed.").defineInRange("Speed Multiplier", 0.001, 0, Double.MAX_VALUE);
 
-        TREN_IN_AIR_MUL = SERVER_BUILDER.comment("FKUAUG").defineInRange("In Air Multiplier", 0.002, 0, 1);
-        TRAIL_DURATION = SERVER_BUILDER.comment("The duration of the trail being rendered in ticks.").defineInRange("Trail Duration", 5, 0, Integer.MAX_VALUE);
+        TREN_IN_AIR_MUL = SERVER_BUILDER.comment("How far you jump with the roid rage effect.").defineInRange("In Air Multiplier", 0.5, 0, 10);
 
         SERVER_BUILDER.pop();
 

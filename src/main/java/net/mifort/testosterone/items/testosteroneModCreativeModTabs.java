@@ -47,7 +47,10 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.WHEY_PROTEIN);
                         pOutput.accept(testosteroneModItems.CHEESE_CURDS);
 
+                        pOutput.accept(testosteroneModItems.RAT_FUR.get());
                         pOutput.accept(testosteroneModItems.STUPID_RAT_SPAWN_EGG.get());
+
+                        //pOutput.accept(testosteroneModItems.STRONGMAN_PATCH.get());
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
                         pOutput.accept(tippedArrow(testosteroneModPotions.TRENBOLONE_POTION.get()));

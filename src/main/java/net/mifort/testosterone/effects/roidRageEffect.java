@@ -119,7 +119,7 @@ public class roidRageEffect extends MobEffect {
                 double rotRad = Math.toRadians(rot);
 
                 if (!player.getPersistentData().getBoolean(JUMPING_KEY) && !player.onGround()) {
-                    double mul = ConfigRegistry.TREN_IN_AIR_MUL.get();
+                    double mul = ConfigRegistry.TREN_IN_AIR_MUL.get()*0.001;
                     player.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * mul, 0, Math.cos(rotRad) * speed * mul));
                 }
 

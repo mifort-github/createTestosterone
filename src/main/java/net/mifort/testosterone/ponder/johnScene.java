@@ -1,14 +1,17 @@
 package net.mifort.testosterone.ponder;
 
 import com.simibubi.create.foundation.ponder.*;
+import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.ponder.element.ParrotElement;
 import com.simibubi.create.foundation.ponder.element.WorldSectionElement;
+import com.simibubi.create.foundation.utility.Pointing;
 import net.mifort.testosterone.blocks.johnRock;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import com.simibubi.create.foundation.ponder.element.ParrotElement.FlappyPose;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 
@@ -61,17 +64,27 @@ public class johnScene {
         scene.overlay.showOutline(PonderPalette.GREEN, bellpos, sele, 40);
         scene.idle(75);
 
+
+        // Right Click
+        BlockPos topBell = util.grid.at(4, 1, 4);
+        Vec3 topCenter = util.vector.centerOf(topBell);
+        InputWindowElement control = new InputWindowElement(topCenter, Pointing.DOWN).rightClick();
+        scene.overlay.showControls(control, 70);
+
+        scene.idle(5);
+
         scene.world.modifyBlock(obToJohn1, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
         scene.world.modifyBlock(obToJohn2, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
         scene.world.modifyBlock(obToJohn3, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
         //scene.world.modifyBlock(util.grid.at(x, 3, z), s -> s.setValue(testosteroneModBlocks.JOHN_ROCK, johnRock.TOGGLED));
 
+        scene.idle(75);
         scene.overlay.showText(70)
                 .pointAt(util.vector.blockSurface(bellpos, Direction.WEST))
                 .placeNearTarget()
                 .text("...has a chance to turn into John Rocks");
 
-        scene.idle(75);
+        scene.idle(85);
 
         Selection kinetics = util.select.fromTo(8, 2, 6, 8, 1, 9);
         Selection bottomShaft = util.select.position(8, 0, 9);

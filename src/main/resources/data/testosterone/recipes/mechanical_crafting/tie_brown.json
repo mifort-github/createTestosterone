@@ -3,10 +3,10 @@
   "acceptMirrored": false,
   "key": {
     "W": {
-      "item": "minecraft:brown_wool"
+      "item": "testosterone:rat_fur"
     },
     "I": {
-      "tag": "forge:nuggets/iron"
+      "tag": "forge:dyes/brown"
     }
   },
   "pattern": [

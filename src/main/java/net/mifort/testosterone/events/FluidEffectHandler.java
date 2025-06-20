@@ -21,5 +21,8 @@ public class FluidEffectHandler {
         if (entity.isInFluidType(testosteroneFluids.TESTOSTERONE_FLUID.getType())) {
             entity.addEffect(new MobEffectInstance(testosteroneModEffects.TESTOSTERONE_EFFECT.get(), 20, 0));
         }
+        if (entity.isInFluidType(testosteroneFluids.TRENBOLONE_FLUID.getType())) {
+            entity.addEffect(new MobEffectInstance(testosteroneModEffects.ROID_RAGE_EFFECT.get(), 20, 0));
+        }
     }
 }
