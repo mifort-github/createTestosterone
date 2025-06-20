@@ -2,9 +2,9 @@ package net.mifort.testosterone.effects;
 
 import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.particles.runParticleData;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
@@ -80,7 +80,6 @@ public class roidRageEffect extends MobEffect {
 
             AttributeInstance stepHeightAttribute = player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
 
-            player.sendSystemMessage(Component.literal(String.valueOf(player.getPersistentData().getBoolean(JUMPING_KEY))));
 
 
             if (stepHeightAttribute != null) {
@@ -96,17 +95,15 @@ public class roidRageEffect extends MobEffect {
             }
 
             if (speed > ConfigRegistry.ABILITY_SPEED.get()) {
-                if (!level.isClientSide()) {
+                if (!level.isClientSide() && !player.isCrouching()) {
                     ServerLevel serverLevel = (ServerLevel) level;
-                    serverLevel.sendParticles(ParticleTypes.SCULK_SOUL,
+                    serverLevel.sendParticles(new runParticleData(player.getUUID(), ConfigRegistry.TRAIL_DURATION.get(), serverLevel.getGameTime()),
                             player.getX(),
                             player.getY(),
                             player.getZ(),
-                            8,
                             0,
-                            0,
-                            0,
-                            0.1
+                            0, 0, 0,
+                            0
                     );
                 }
 
