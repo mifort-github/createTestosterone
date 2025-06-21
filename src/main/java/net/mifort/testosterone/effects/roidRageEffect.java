@@ -80,11 +80,11 @@ public class roidRageEffect extends MobEffect {
 
             AttributeInstance stepHeightAttribute = player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
 
-
+            Double stepHeight = ConfigRegistry.STEP_HEIGHT.get();
 
             if (stepHeightAttribute != null) {
-                if (stepHeightAttribute.getBaseValue() < amplifier - 1) {
-                    stepHeightAttribute.setBaseValue(amplifier - 1);
+                if (stepHeightAttribute.getBaseValue() < amplifier - stepHeight) {
+                    stepHeightAttribute.setBaseValue(amplifier - stepHeight);
                 }
             }
 

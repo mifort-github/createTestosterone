@@ -53,6 +53,7 @@ public class ConfigRegistry {
 
     public static final ForgeConfigSpec.ConfigValue<Double> TREN_IN_AIR_MUL;
     public static final ForgeConfigSpec.ConfigValue<Integer> TRAIL_DURATION;
+    public static final ForgeConfigSpec.ConfigValue<Double> STEP_HEIGHT;
 
 
 
@@ -126,6 +127,7 @@ public class ConfigRegistry {
 
         TREN_IN_AIR_MUL = SERVER_BUILDER.comment("How far you jump with the roid rage effect.").defineInRange("In Air Multiplier", 0.5, 0, 10);
         TRAIL_DURATION = SERVER_BUILDER.comment("@jon do smth.").defineInRange("Trail Duration", 5, 0, Integer.MAX_VALUE);
+        STEP_HEIGHT = SERVER_BUILDER.comment("@jon do smth.").defineInRange("Step Height", 1, 0, Double.MAX_VALUE);
 
         SERVER_BUILDER.pop();
 
