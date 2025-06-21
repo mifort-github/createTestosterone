@@ -1,5 +1,6 @@
 package net.mifort.testosterone;
 
+import com.ibm.icu.impl.number.AffixPatternProvider;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
@@ -23,24 +24,36 @@ import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.ponder.index;
 import net.mifort.testosterone.potions.testosteroneModPotions;
 import net.mifort.testosterone.sounds.testosteroneModSounds;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.FilePackResources;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.resource.PathPackResources;
 import org.slf4j.Logger;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
+import java.nio.file.Path;
 
 @Mod(testosterone.MOD_ID)
 public class testosterone {
@@ -144,6 +157,28 @@ public class testosterone {
                     testosteroneModelLayers.RAT_MODEL_LAYER,
                     ratModel::createBodyLayer
             );
+        }
+
+        @SubscribeEvent
+        public static void onAddPackFinders(AddPackFindersEvent event) {
+            if (event.getPackType() == PackType.CLIENT_RESOURCES) {
+                Path resourcePath = ModList.get().getModFileById(testosterone.MOD_ID).getFile().findResource("programmer_art");
+                PathPackResources pack = new PathPackResources(ModList.get().getModFileById(testosterone.MOD_ID).getFile().getFileName() + ":" + resourcePath, true, resourcePath);
+                PackMetadataSection metadata = new PackMetadataSection(Component.translatable("pack.testosterone.programmer_art.description"), SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES));
+                event.addRepositorySource((source) ->
+                        source.accept(Pack.create(
+                                "testosterone_programmer_art",
+                                Component.translatable("pack.testosterone.programmer_art.title"),
+                                false,
+                                (string) -> pack,
+                                new Pack.Info(metadata.getDescription(), metadata.getPackFormat(PackType.SERVER_DATA), metadata.getPackFormat(PackType.CLIENT_RESOURCES), FeatureFlagSet.of(), pack.isHidden()),
+                                PackType.CLIENT_RESOURCES,
+                                Pack.Position.TOP,
+                                false,
+                                PackSource.BUILT_IN)
+                        )
+                );
+            }
         }
     }
 
