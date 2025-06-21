@@ -143,6 +143,9 @@ public class testosterone {
 
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.BEER_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.BEER_FLUID.getSource(), RenderType.translucent());
+            //yo
+            ItemBlockRenderTypes.setRenderLayer(testosteroneModBlocks.FRAGILE_COPYCAT_BLOCK.get(), RenderType.translucent());
+
 
             CuriosRendererRegistry.register(testosteroneModItems.TIE.get(), () -> new curioTieRenderer());
 

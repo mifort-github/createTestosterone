@@ -89,7 +89,7 @@ public class testosteroneFluids {
                     .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> WHEY_FLUID =
-            REGISTRATE.fluid("whey_fluid", testosterone.rl("block/whey_fluid_flow"), testosterone.rl("block/whey_fluid_flow"))
+            REGISTRATE.fluid("whey_fluid", testosterone.rl("block/whey_fluid_still"), testosterone.rl("block/whey_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canExtinguish(true)
                             .canHydrate(true)
@@ -101,7 +101,7 @@ public class testosteroneFluids {
                     .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> CHEESE_FLUID =
-            REGISTRATE.fluid("cheese_fluid", testosterone.rl("block/cheese_fluid_flow"), testosterone.rl("block/cheese_fluid_flow"))
+            REGISTRATE.fluid("cheese_fluid", testosterone.rl("block/cheese_fluid_still"), testosterone.rl("block/cheese_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canExtinguish(true)
                             .canHydrate(true)

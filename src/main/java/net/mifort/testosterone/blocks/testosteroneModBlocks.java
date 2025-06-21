@@ -175,7 +175,10 @@ public class testosteroneModBlocks {
             .build()
             .register();
 
-
+    public static final BlockEntry<Block> FRAGILE_COPYCAT_BLOCK = REGISTRATE.block("fragile_copycat_block", Block::new)
+            .properties(p -> p.sound(SoundType.METAL))
+            .simpleItem()
+            .register();
 
 
     public static void register() {}
