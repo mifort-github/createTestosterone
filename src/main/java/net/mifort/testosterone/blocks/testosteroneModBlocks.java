@@ -1,11 +1,14 @@
 package net.mifort.testosterone.blocks;
 
 import com.simibubi.create.content.decoration.palettes.ConnectedPillarBlock;
+import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.mayaqq.estrogen.registry.EstrogenSoundTypes;
 import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
+import net.mifort.testosterone.blocks.blockModels.fragileCopycatModel;
 import net.mifort.testosterone.items.testosteroneModFoods;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
@@ -175,11 +178,20 @@ public class testosteroneModBlocks {
             .build()
             .register();
 
-    public static final BlockEntry<Block> FRAGILE_COPYCAT_BLOCK = REGISTRATE.block("fragile_copycat_block", Block::new)
+    public static final BlockEntry<Block> FRAGILE_COPYCAT_BASE = REGISTRATE.block("fragile_copycat_base", Block::new)
             .properties(p -> p.sound(SoundType.METAL))
             .simpleItem()
             .register();
 
+    public static final BlockEntry<fragileCopycatBlock> FRAGILE_COPYCAT_BLOCK = REGISTRATE.block("fragile_copycat_block", fragileCopycatBlock::new)
+            .transform(BuilderTransformers.copycat())
+            .properties(p -> p.sound(SoundType.METAL))
+            .onRegister(CreateRegistrate.blockModel(() -> fragileCopycatModel::new))
+            .simpleItem()
+            .register();
 
-    public static void register() {}
+
+    public static void register() {
+
+    }
 }

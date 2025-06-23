@@ -38,6 +38,10 @@ public class roidRageEffect extends MobEffect {
         super(MobEffectCategory.BENEFICIAL, 0xCC0000);
     }
 
+    public static int getSpeed(Player player) {
+        return player.getPersistentData().getInt(SPEED_KEY);
+    }
+
     @Override
     public void applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
