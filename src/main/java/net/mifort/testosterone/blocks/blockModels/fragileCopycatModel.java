@@ -2,6 +2,7 @@ package net.mifort.testosterone.blocks.blockModels;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.copycat.CopycatModel;
+import net.mifort.testosterone.blocks.fragileCopycatBase;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -23,7 +24,7 @@ public class fragileCopycatModel extends CopycatModel {
         BakedModel originalModel = getModelOf(material);
 
         if (material == AllBlocks.COPYCAT_BASE.getDefaultState()) {
-            material = testosteroneModBlocks.FRAGILE_COPYCAT_BASE.getDefaultState();
+            material = testosteroneModBlocks.FRAGILE_COPYCAT_BASE.getDefaultState().setValue(fragileCopycatBase.STATE, randomSource.nextInt(5));
             originalModel = getModelOf(material);
         }
         return originalModel.getQuads(material, direction, randomSource, modelData, renderType);

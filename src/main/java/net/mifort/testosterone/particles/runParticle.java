@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.effects.roidRageEffect;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -99,10 +100,10 @@ public class runParticle extends Particle {
         float limbSwingAmount = player.walkAnimation.speed();
 
         model.attackTime = player.getAttackAnim(pt);
-        model.young      = player.isBaby();
-        model.crouching  = player.isCrouching();
+        model.young = player.isBaby();
+        model.crouching = player.isCrouching();
 
-        this.swimming = (player.getPose() == Pose.SWIMMING);
+        this.swimming = (player.getPose() == Pose.SWIMMING || player.getPersistentData().getBoolean(roidRageEffect.SWIMMING_KEY));
         model.swimAmount = this.swimming ? 1.0F : player.getSwimAmount(pt);
 
         float headYaw   = player.getYHeadRot() - player.getYRot();

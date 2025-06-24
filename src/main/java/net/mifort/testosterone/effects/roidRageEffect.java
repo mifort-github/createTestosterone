@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -32,6 +33,7 @@ public class roidRageEffect extends MobEffect {
     private static final String JUMP_KEY = "testosterone:jump_key";
     private static final String HEIGHT_KEY = "testosterone:height_key";
     private static final String JUMPING_KEY = "testosterone:jumping_key";
+    public static final String SWIMMING_KEY = "testosterone:swimming_key";
 
 
     public roidRageEffect() {
@@ -51,12 +53,17 @@ public class roidRageEffect extends MobEffect {
 
             int speed = player.getPersistentData().getInt(SPEED_KEY);
 
+            if (player.isFallFlying()) {
+                player.setSprinting(false);
+            }
+
             if (ConfigRegistry.DISPLAY_SPEED.get()) {
                 player.displayClientMessage(Component.literal(String.valueOf(speed)), true);
             }
 
             if (player.onGround()) {
                 player.getPersistentData().putBoolean(JUMPING_KEY, false);
+                player.getPersistentData().putBoolean(SWIMMING_KEY, false);
             }
 
             if (player.isCrouching() && speed > ConfigRegistry.ABILITY_SPEED.get()) {
@@ -69,6 +76,9 @@ public class roidRageEffect extends MobEffect {
                     player.addDeltaMovement(new Vec3(0f, speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0f));
                     player.getPersistentData().putDouble(HEIGHT_KEY, player.getY());
                     player.getPersistentData().putBoolean(JUMPING_KEY, true);
+                } else {
+                    player.addDeltaMovement(new Vec3(0f, -1 * speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0f));
+                    player.getPersistentData().putBoolean(SWIMMING_KEY, true);
                 }
 
             } else if (player.isSprinting()) {
@@ -98,6 +108,10 @@ public class roidRageEffect extends MobEffect {
                 speedAttribute.setBaseValue(0.1 + amplifier * speed * ConfigRegistry.SPEED_MULTIPLIER.get());
             }
 
+            if (player.getPersistentData().getBoolean(SWIMMING_KEY)) {
+                player.setPose(Pose.SWIMMING);
+            }
+
             if (speed > ConfigRegistry.ABILITY_SPEED.get()) {
                 if (!level.isClientSide() && !player.isCrouching()) {
                     ServerLevel serverLevel = (ServerLevel) level;
@@ -123,7 +137,7 @@ public class roidRageEffect extends MobEffect {
                 double rotRad = Math.toRadians(rot);
 
                 if (!player.getPersistentData().getBoolean(JUMPING_KEY) && !player.onGround()) {
-                    double mul = ConfigRegistry.TREN_IN_AIR_MUL.get()*0.001;
+                    double mul = ConfigRegistry.TREN_IN_AIR_MUL.get() * 0.001;
                     player.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * mul, 0, Math.cos(rotRad) * speed * mul));
                 }
 
@@ -184,6 +198,10 @@ public class roidRageEffect extends MobEffect {
             }
 
             player.getPersistentData().putBoolean(JUMP_KEY, false);
+            player.getPersistentData().putInt(SPEED_KEY, 0);
+            player.getPersistentData().putBoolean(JUMPING_KEY, false);
+            player.getPersistentData().remove(HEIGHT_KEY);
+            player.getPersistentData().putBoolean(SWIMMING_KEY, false);
         }
     }
 

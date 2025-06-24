@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "testosterone:block/fragile_copycat_base"
+    "state=0": {
+      "model": "testosterone:block/fragile_copycat/0"
+    },
+    "state=1": {
+      "model": "testosterone:block/fragile_copycat/1"
+    },
+    "state=2": {
+      "model": "testosterone:block/fragile_copycat/2"
+    },
+    "state=3": {
+      "model": "testosterone:block/fragile_copycat/3"
+    },
+    "state=4": {
+      "model": "testosterone:block/fragile_copycat/4"
     }
   }
 }
