@@ -81,7 +81,7 @@ public class testosteroneModItems {
                     .register();
 
     public static final RegistryObject<Item> STUPID_RAT_SPAWN_EGG = ITEMS.register("stupid_rat_spawn_egg",
-            () -> new ForgeSpawnEggItem(testosteroneEntities.RAT, 0xA0C4DD, 0xFF83C0, new Item.Properties()));
+            () -> new ForgeSpawnEggItem(testosteroneEntities.RAT, 0xFFFFFF, 0xFFFFFF, new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

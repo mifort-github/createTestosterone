@@ -11,6 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class testosteroneModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, testosterone.MOD_ID);
 
+    public static final RegistryObject<SoundEvent> JOHN_ROCK_DEACTIVATION = registerSoundEvents("john_rock_deactivation");
     public static final RegistryObject<SoundEvent> JOHN_ROCK_ACTIVATION = registerSoundEvents("john_rock_activation");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

@@ -98,7 +98,7 @@ public class johnRock extends Block {
                 origin.getX(),
                 origin.getY(),
                 origin.getZ(),
-                newToggled ? testosteroneModSounds.JOHN_ROCK_ACTIVATION.get() : SoundEvents.BEACON_DEACTIVATE,
+                newToggled ? testosteroneModSounds.JOHN_ROCK_DEACTIVATION.get() : testosteroneModSounds.JOHN_ROCK_ACTIVATION.get(),
                 SoundSource.BLOCKS,
                 1.0F,
                 1.0F

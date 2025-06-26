@@ -7,22 +7,57 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "testosterone:cheese_block",
+          "name": "testosterone:rat_fur",
           "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 2
-              }
-            }
-          ]
+          {
+            "add": false,
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 0.0
+            },
+            "function": "minecraft:set_count"
+          },
+          {
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 1.0,
+              "min": 0.0
+            },
+            "function": "minecraft:looting_enchant"
+          }
+        ]
         }
       ],
       "conditions": [
         {
           "condition": "minecraft:killed_by_player",
           "inverse": false
+        }
+      ]
+    },
+    {
+      "name": "side",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "testosterone:cheese_block"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player",
+          "inverse": false
+        },
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.75
+        },
+        {
+          "condition": "minecraft:random_chance_with_looting",
+          "chance": 0.05,
+          "looting_multiplier": 2
         }
       ]
     },

@@ -1,4 +1,10 @@
 {
+  "john_rock_deactivation": {
+    "subtitle": "sounds.testosterone.john_rock_deactivation",
+    "sounds": [
+      "testosterone:john_rock_deactivation"
+    ]
+  },
   "john_rock_activation": {
     "subtitle": "sounds.testosterone.john_rock_activation",
     "sounds": [
