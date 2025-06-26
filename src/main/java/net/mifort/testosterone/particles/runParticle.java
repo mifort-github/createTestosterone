@@ -15,6 +15,7 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
@@ -137,9 +138,12 @@ public class runParticle extends Particle {
 
     @Override
     public void render(VertexConsumer out, Camera cam, float pt) {
-        if (vertCount == 0 || !ConfigRegistry.RENDER_TRAIL.get()) return;
+        if (!ConfigRegistry.RENDER_TRAIL.get() || vertCount == 0) return;
 
         Vec3 cp = cam.getPosition();
+
+        if (cp.closerThan(new Vec3(x, y, z), ConfigRegistry.TRAIL_MIN_RENDER_DISTANCE.get())) return;
+
         float px = (float)(Mth.lerp(pt, xo, x) - cp.x);
         float py = (float)(Mth.lerp(pt, yo, y) - cp.y);
         float pz = (float)(Mth.lerp(pt, zo, z) - cp.z);
