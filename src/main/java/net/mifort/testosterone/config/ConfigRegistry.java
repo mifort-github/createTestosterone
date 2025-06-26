@@ -25,7 +25,7 @@ public class ConfigRegistry {
     public static final ForgeConfigSpec.ConfigValue<Integer> TESTOSTERONE_B_COOLDOWN;
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> RENDER_TRAIL;
-    public static final ForgeConfigSpec.ConfigValue<Integer> TRAIL_MIN_RENDER_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> TRAIL_MIN_RENDER_DISTANCE;
 
 
 
@@ -99,7 +99,7 @@ public class ConfigRegistry {
 
         DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", true);
         RENDER_TRAIL = CLIENT_BUILDER.comment("write smtgh @jon.").define("Render Trail", true);
-        TRAIL_MIN_RENDER_DISTANCE = CLIENT_BUILDER.comment("write smtgh @jon.").defineInRange("Render Distance", 10, 0, Integer.MAX_VALUE);
+        TRAIL_MIN_RENDER_DISTANCE = CLIENT_BUILDER.comment("write smtgh @jon.").defineInRange("Render Distance", 10, 0, Double.MAX_VALUE);
 
         CLIENT_BUILDER.pop();
 
