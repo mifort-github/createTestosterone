@@ -3,6 +3,7 @@ package net.mifort.testosterone.particles;
 import com.mojang.serialization.Codec;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -18,4 +19,7 @@ public final class testosteroneModParticles {
                     return null;
                 }
             });
+
+    public static final RegistryObject<SimpleParticleType> AIR_PASSING =
+            PARTICLES.register("air_passing", () -> new SimpleParticleType(false));
 }

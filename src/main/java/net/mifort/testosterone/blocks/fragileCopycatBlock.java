@@ -5,10 +5,8 @@ import com.simibubi.create.content.decoration.copycat.CopycatBlock;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.effects.roidRageEffect;
 import net.mifort.testosterone.effects.testosteroneModEffects;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -20,17 +18,10 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.ArrayList;
-
 public class fragileCopycatBlock extends CopycatBlock {
-    private ArrayList<BlockState> states = new ArrayList<>();
 
     public fragileCopycatBlock(Properties pProperties) {
         super(pProperties);
-
-        for (int i = 0; i < 5; i++) {
-            this.states.add(testosteroneModBlocks.FRAGILE_COPYCAT_BASE.getDefaultState().setValue(fragileCopycatBase.STATE, i));
-        }
     }
 
     @Override
