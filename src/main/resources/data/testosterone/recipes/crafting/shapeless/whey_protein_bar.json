@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "testosterone:whey_protein"
+    },
+    {
+      "item": "create:bar_of_chocolate"
+    }
+
+  ],
+  "result": {
+    "count": 1,
+    "item": "testosterone:testosterone_protein_bar"
+  }
+}

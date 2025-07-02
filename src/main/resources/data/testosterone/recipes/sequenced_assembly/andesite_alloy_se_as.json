@@ -1,0 +1,57 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:andesite"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "chance": 20,
+      "item": "create:andesite_alloy"
+    },
+    {
+      "chance": 10,
+      "item": "create:zinc_nugget"
+    },
+    {
+      "chance": 70,
+      "item": "minecraft:andesite"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "testosterone:incomplete_andesite_alloy"
+        }
+      ],
+      "results": [
+        {
+          "item": "testosterone:incomplete_andesite_alloy"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "testosterone:incomplete_andesite_alloy"
+        },
+        {
+          "amount": 50,
+          "fluid": "testosterone:diluted_zinc_fluid",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "testosterone:incomplete_andesite_alloy"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "testosterone:incomplete_andesite_alloy"
+  }
+}

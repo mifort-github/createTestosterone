@@ -1,5 +1,6 @@
 package net.mifort.testosterone.items;
 
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.fluids.testosteroneFluids;
@@ -23,6 +24,17 @@ import static net.mifort.testosterone.testosterone.REGISTRATE;
 public class testosteroneModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, testosterone.MOD_ID);
 
+
+    public static final ItemEntry<SequencedAssemblyItem>
+            INCOMPLETE_ANDESITE_ALLOY = sequencedIngredient("incomplete_andesite_alloy");
+            //INCOMPLETE_STRONGMAN_PATCH = sequencedIngredient("incomplete_strongman_patch") // kao
+
+
+    //like a thingy it for more then 1 ig
+    private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
+        return REGISTRATE.item(name, SequencedAssemblyItem::new)
+                .register();
+    }
 
     public static final ItemEntry<Item> TESTOSTERONE_PILL =
             REGISTRATE.item("testosterone_pill", Item::new)

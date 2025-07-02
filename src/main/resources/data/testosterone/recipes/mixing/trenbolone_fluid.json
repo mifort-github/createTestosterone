@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "superheated",
+  "ingredients": [
+    {
+      "amount": 250,
+      "fluid": "testosterone:testosterone_fluid"
+    },
+    {
+      "item": "testosterone:whey_protein"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "testosterone:trenbolone_fluid"
+    }
+  ]
+}
