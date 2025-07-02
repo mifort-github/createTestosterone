@@ -3,10 +3,10 @@ package net.mifort.testosterone.particles;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -15,16 +15,44 @@ import org.joml.Vector3f;
 
 public class airPassingParticle extends SingleQuadParticle {
     SpriteSet spriteSet;
+    float yRot;
+    double xRotMul;
+    float zMul;
+    float xMul;
 
     protected airPassingParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ);
         this.spriteSet = spriteSet;
 
-        if (ConfigRegistry.DURATION.get() == 0) {
-            this.lifetime = random.nextInt(10, 30);
+        yRot = Minecraft.getInstance().player.yBodyRot;
+
+        yRot = -(yRot + 90) % 360;
+        if (yRot < 0) yRot += 360;
+
+        if (yRot < 90) {
+            zMul = 1;
+            xMul = 1;
+        } else if (yRot < 180) {
+            zMul = -1;
+            xMul = 1;
+        } else if (yRot < 270) {
+            zMul = -1;
+            xMul = -1;
         } else {
-            this.lifetime = ConfigRegistry.DURATION.get();
+            zMul = 1;
+            xMul = -1;
         }
+
+        yRot = (float) Math.toRadians(yRot);
+
+        xRotMul = (Math.asin(Math.sin(yRot - (Math.PI / 2)))) / Math.PI + 0.5;
+
+
+        this.lifetime = 5;
+
+        xo = x = x + random.nextFloat() - 0.5;
+        yo = y = y + 2 * random.nextFloat();
+        zo = z = z + random.nextFloat() - 0.5;
     }
 
     @Override
@@ -34,40 +62,28 @@ public class airPassingParticle extends SingleQuadParticle {
         float pY = (float) (Mth.lerp(pPartialTicks, this.yo, this.y) - playerPos.y());
         float pZ = (float) (Mth.lerp(pPartialTicks, this.zo, this.z) - playerPos.z());
 
+        double xRot = -Math.atan2(pY, pZ * zMul);
+        double xRot2 = -Math.atan2(pY, pX * xMul);
+
+        xRot = xRot * (1 - xRotMul);
+        xRot2 = xRot2 * xRotMul;
+
         float a = (float) (this.lifetime - this.age) / this.lifetime;
 
         this.alpha = a;
 
-
-        double xRot = -Math.atan2(pY, pZ);
-        double xRot2 = -Math.atan2(pY, pX);
-
-        double yRot;
-        if (ConfigRegistry.Y.get().floatValue() % 180 == 0) {
-            yRot = Math.toRadians(0);
-        } else if (ConfigRegistry.Y.get().floatValue() % 90 == 0) {
-            yRot = Math.toRadians(90);
-        } else {
-            yRot = Math.toRadians(ConfigRegistry.Y.get().floatValue()) % (Math.PI / 2);
-        }
-
-
-
         Vector3f[] corners = new Vector3f[]{
-                new Vector3f(-1.0F, -1.0F, 0.0F),
-                new Vector3f(-1.0F, 1.0F, 0.0F),
-                new Vector3f(1.0F, 1.0F, 0.0F),
-                new Vector3f(1.0F, -1.0F, 0.0F)};
-
-        xRot = xRot * (1 - yRot / (Math.PI / 2));
-        xRot2 = xRot2 * (yRot / (Math.PI / 2));
+                new Vector3f(-0.5F, -1.0F, 0.0F),
+                new Vector3f(-0.5F, 1.0F, 0.0F),
+                new Vector3f(0.5F, 1.0F, 0.0F),
+                new Vector3f(0.5F, -1.0F, 0.0F)};
 
         for(int i = 0; i < 4; ++i) {
             Vector3f vector3f = corners[i];
-            vector3f.mul(1f, a / 10, 0.1f);
+            vector3f.mul(1f, a / 30, 0.1f);
 
             vector3f.rotateX((float) (xRot + xRot2));
-            vector3f.rotateY((float) yRot);
+            vector3f.rotateY(yRot);
 
             vector3f.add(pX, pY, pZ);
         }

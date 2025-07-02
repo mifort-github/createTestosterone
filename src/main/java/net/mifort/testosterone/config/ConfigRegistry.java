@@ -58,21 +58,11 @@ public class ConfigRegistry {
 
 
 
-    public static final ForgeConfigSpec.ConfigValue<Double> Y;
-    public static final ForgeConfigSpec.ConfigValue<Integer> DURATION;
 
 
 
 
     static {
-        CLIENT_BUILDER.push("DEBUG");
-
-        Y = CLIENT_BUILDER.define("Y", 0D);
-        DURATION = CLIENT_BUILDER.define("DURATION", 0);
-
-        CLIENT_BUILDER.pop();
-
-
         CLIENT_BUILDER.push("Beard");
 
         RENDER_BEARD = CLIENT_BUILDER.comment("Whether the beard should render on yourself and others.").define("Beard", true);

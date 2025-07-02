@@ -3,6 +3,7 @@ package net.mifort.testosterone.effects;
 import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.particles.runParticleData;
+import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Random;
 
 public class roidRageEffect extends MobEffect {
     private static final String SPEED_KEY = "testosterone:speed_key";
@@ -123,6 +125,18 @@ public class roidRageEffect extends MobEffect {
                             0, 0, 0,
                             0
                     );
+
+
+                    if (new Random().nextInt(ConfigRegistry.MAX_SPEED.get()) < speed) {
+                        serverLevel.sendParticles(testosteroneModParticles.AIR_PASSING.get(),
+                                player.getX(),
+                                player.getY(),
+                                player.getZ(),
+                                0,
+                                0, 0, 0,
+                                0
+                        );
+                    }
                 }
 
                 AABB playerBB = player.getBoundingBox();
