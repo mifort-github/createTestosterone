@@ -57,6 +57,8 @@ public class airPassingParticle extends SingleQuadParticle {
 
     @Override
     public void render(@NotNull VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
+        if (!ConfigRegistry.RENDER_TRAIL.get()) return;
+
         Vec3 playerPos = pRenderInfo.getPosition();
         float pX = (float) (Mth.lerp(pPartialTicks, this.xo, this.x) - playerPos.x());
         float pY = (float) (Mth.lerp(pPartialTicks, this.yo, this.y) - playerPos.y());

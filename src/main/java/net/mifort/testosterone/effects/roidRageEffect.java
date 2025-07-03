@@ -6,6 +6,8 @@ import net.mifort.testosterone.particles.runParticleData;
 import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
@@ -99,8 +101,8 @@ public class roidRageEffect extends MobEffect {
             Double stepHeight = ConfigRegistry.STEP_HEIGHT.get();
 
             if (stepHeightAttribute != null) {
-                if (stepHeightAttribute.getBaseValue() < amplifier - stepHeight) {
-                    stepHeightAttribute.setBaseValue(amplifier - stepHeight);
+                if (stepHeightAttribute.getBaseValue() < amplifier + stepHeight) {
+                    stepHeightAttribute.setBaseValue(amplifier + stepHeight);
                 }
             }
 
@@ -198,7 +200,7 @@ public class roidRageEffect extends MobEffect {
     }
 
     @Override
-    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+    public void removeAttributeModifiers(@NotNull LivingEntity entity, @NotNull AttributeMap attributeMap, int amplifier) {
         super.removeAttributeModifiers(entity, attributeMap, amplifier);
         if (entity instanceof Player player) {
             AttributeInstance stepHeightAttribute = player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
@@ -231,6 +233,26 @@ public class roidRageEffect extends MobEffect {
         public static void onFallDamage(LivingFallEvent event) {
             if (event.getEntity() instanceof Player player) {
                 if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()) && player.getPersistentData().contains(HEIGHT_KEY)) {
+                    if (player.getPersistentData().getBoolean(SWIMMING_KEY)) {
+                        if (player.level() instanceof ServerLevel level) {
+                            level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, level.getBlockState(player.getOnPos())),
+                                    player.getX(), player.getY(), player.getZ(),
+                                    ((int) event.getDistance() * 10),
+                                    event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(), 0, event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(),
+                                    1);
+
+                            level.getEntities().getAll().forEach(entity -> {
+                                if (entity instanceof LivingEntity livingEntity) {
+                                    if (livingEntity == player) return;
+
+                                    if (player.distanceTo(livingEntity) < event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()) {
+                                        livingEntity.hurt(CreateDamageSources.runOver(level, player), (float) (event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()));
+                                    }
+                                }
+                            });
+                        }
+                    }
+
                     double jump_height = player.getPersistentData().getDouble(HEIGHT_KEY);
 
                     if (jump_height <= player.getY()) {
