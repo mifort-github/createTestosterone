@@ -2,12 +2,11 @@ package net.mifort.testosterone.items;
 
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.curios.tie;
-import net.mifort.testosterone.items.custom.CheeseOnAStick;
-import net.mifort.testosterone.items.custom.testosteroneShot;
-import net.mifort.testosterone.items.custom.trenboloneShot;
+import net.mifort.testosterone.items.custom.*;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -16,7 +15,6 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.mifort.testosterone.items.custom.beerMug;
 import net.minecraftforge.registries.RegistryObject;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
@@ -47,13 +45,18 @@ public class testosteroneModItems {
                     .register();
 
 
-    public static final ItemEntry<testosteroneShot> TESTOSTERONE_SHOT =
-            REGISTRATE.item("testosterone_shot", testosteroneShot::new)
+    public static final ItemEntry<shotItem> TESTOSTERONE_SHOT =
+            REGISTRATE.item("testosterone_shot", properties -> new shotItem(properties, testosteroneModEffects.TESTOSTERONE_EFFECT.get()))
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
-    //for mifart (hec chillaxx)
-    public static final ItemEntry<trenboloneShot> TRENBOLONE_SHOT =
-            REGISTRATE.item("trenbolone_shot", trenboloneShot::new)
+
+    public static final ItemEntry<shotItem> TRENBOLONE_SHOT =
+            REGISTRATE.item("trenbolone_shot", properties -> new shotItem(properties, testosteroneModEffects.ROID_RAGE_EFFECT.get()))
+                    .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
+                    .register();
+
+    public static final ItemEntry<shotItem> BETTER_TRENBOLONE_SHOT =
+            REGISTRATE.item("better_trenbolone_shot", properties -> new shotItem(properties, testosteroneModEffects.ROID_RAGE_EFFECT.get(), 1, true))
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 
