@@ -5,6 +5,8 @@
   "item.testosterone.testosterone_shot.tooltip.summary" : "Temporary Source Of _Man Power_.",
   "item.testosterone.trenbolone_shot": "Trenbolone Shot",
   "item.testosterone.trenbolone_shot.tooltip.summary" : "Temporary Source Of _Roid Rage_. Run on _Water_, hit enemies to _Damage_ them, release shift for a _Super Jump_, shift in air to _Ground Slam_",
+  "item.testosterone.better_trenbolone_shot": "Trenbolone Shot",
+  "item.testosterone.better_trenbolone_shot.tooltip.summary" : "Temporary Source Of _Roid Rage_ II. Run on _Water_, hit enemies to _Damage_ them, release shift for a _Super Jump_, shift in air to _Ground Slam_",
 
 
   "item.testosterone.testosterone_protein_bar": "Testosterone Protein Bar",
