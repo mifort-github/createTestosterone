@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar_cane"
+    },
+    {
+      "amount": 250,
+      "fluid": "testosterone:trenbolone_fluid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "testosterone:trenbolone_shot"
+    }
+  ]
+}
