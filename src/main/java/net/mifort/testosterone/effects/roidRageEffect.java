@@ -2,6 +2,7 @@ package net.mifort.testosterone.effects;
 
 import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.particles.airPassingParticleData;
 import net.mifort.testosterone.particles.runParticleData;
 import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.testosterone;
@@ -130,7 +131,7 @@ public class roidRageEffect extends MobEffect {
 
 
                     if (new Random().nextInt(ConfigRegistry.MAX_SPEED.get()) < speed) {
-                        serverLevel.sendParticles(testosteroneModParticles.AIR_PASSING.get(),
+                        serverLevel.sendParticles(new airPassingParticleData(player.getUUID()),
                                 player.getX(),
                                 player.getY(),
                                 player.getZ(),
@@ -247,6 +248,7 @@ public class roidRageEffect extends MobEffect {
 
                                     if (player.distanceTo(livingEntity) < event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()) {
                                         livingEntity.hurt(CreateDamageSources.runOver(level, player), (float) (event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()));
+                                        livingEntity.addDeltaMovement(new Vec3(0, event.getDistance() / 24, 0));
                                     }
                                 }
                             });

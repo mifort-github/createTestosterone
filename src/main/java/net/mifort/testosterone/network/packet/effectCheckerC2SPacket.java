@@ -32,17 +32,30 @@ public class effectCheckerC2SPacket {
 
             if (player != null) {
                 LivingEntity livingEntity = (LivingEntity) player.level().getEntity(livingEntityID);
-                boolean hasEffect = livingEntity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
+                int effectInt;
 
-                int hasEffectInt;
+                boolean hasTestosterone = livingEntity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
+                boolean hasRoidRage = livingEntity.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get());
 
-                if (hasEffect) {
-                    hasEffectInt = 1;
+                if (hasTestosterone && hasRoidRage) {
+                    int testosteroneScore = (livingEntity.getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()).getAmplifier() + 1) * livingEntity.getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()).getDuration();
+                    int roidRageScore = (livingEntity.getEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()).getAmplifier() + 1) * livingEntity.getEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()).getDuration();
+
+                    if (testosteroneScore > roidRageScore) {
+                        effectInt = 1;
+                    } else {
+                        effectInt = 2;
+                    }
+
+                } else if (hasTestosterone) {
+                    effectInt = 1;
+                } else if (hasRoidRage) {
+                    effectInt = 2;
                 } else {
-                    hasEffectInt = 0;
+                    effectInt = 0;
                 }
 
-                int[] nums = {livingEntityID, hasEffectInt};
+                int[] nums = {livingEntityID, effectInt};
 
                 testosteroneModMessages.sendToPlayer(new effectCheckerS2CPacket(nums), player);
             }

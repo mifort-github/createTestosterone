@@ -1,4 +1,4 @@
-package net.mifort.testosterone.util;
+package net.mifort.testosterone.tags;
 
 import net.mifort.testosterone.testosterone;
 import net.minecraft.resources.ResourceLocation;

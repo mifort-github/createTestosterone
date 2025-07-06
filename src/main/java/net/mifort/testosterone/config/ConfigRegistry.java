@@ -64,9 +64,9 @@ public class ConfigRegistry {
 
 
     static {
-        CLIENT_BUILDER.push("Beard");
+        CLIENT_BUILDER.push("Beard / Mustache");
 
-        RENDER_BEARD = CLIENT_BUILDER.comment("Whether the beard should render on yourself and others.").define("Beard", true);
+        RENDER_BEARD = CLIENT_BUILDER.comment("Whether the beard / mustache should render on yourself and others.").define("Beard / Mustache", true);
 
         CLIENT_BUILDER.pop();
 

@@ -20,12 +20,17 @@ import net.minecraft.resources.ResourceLocation;
 public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     public static final String EFFECT_CHECKER_KEY = "testosterone:effect_checker_key";
 
-    public static final ResourceLocation beardTexture = new ResourceLocation(testosterone.MOD_ID, "textures/models/beard_texture.png");
+    public static final ResourceLocation BEARD_TEXTURE = new ResourceLocation(testosterone.MOD_ID, "textures/models/beard_texture.png");
+
+    public static final ResourceLocation MUSTACHE_TEXTURE = new ResourceLocation(testosterone.MOD_ID, "textures/models/italianman_texture.png");
+
     beardModel BeardModel;
+    mustacheModel MustacheModel;
 
     public Layer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> pRenderer) {
         super(pRenderer);
         BeardModel = new beardModel(Minecraft.getInstance().getEntityModels().bakeLayer(beardModel.LAYER_LOCATION));
+        MustacheModel = new mustacheModel(Minecraft.getInstance().getEntityModels().bakeLayer(mustacheModel.LAYER_LOCATION));
     }
 
     @Override
@@ -34,18 +39,27 @@ public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<Abstrac
 
         int hasEffectInt = pLivingEntity.getPersistentData().getInt(EFFECT_CHECKER_KEY);
 
-        boolean renderBeard = ConfigRegistry.RENDER_BEARD.get();
+        if (!ConfigRegistry.RENDER_BEARD.get()) {
+            return;
+        }
 
-        VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(beardTexture));
         pPoseStack.pushPose();
         pPoseStack.translate(0, 0, 0); // move the model
 
-        if (hasEffectInt == 1 && renderBeard) {
+        if (hasEffectInt == 1) {
+            VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(BEARD_TEXTURE));
             pPoseStack.scale(1f, 1f, 1f);
             getParentModel().head.translateAndRotate(pPoseStack);
             BeardModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
 
+        } else if (hasEffectInt == 2) {
+            VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(MUSTACHE_TEXTURE));
+            pPoseStack.scale(1f, 1f, 1f);
+            getParentModel().head.translateAndRotate(pPoseStack);
+            MustacheModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f);
+
         } else {
+            VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(BEARD_TEXTURE));
             pPoseStack.scale(0, 0, 0);
             getParentModel().head.translateAndRotate(pPoseStack);
             BeardModel.renderToBuffer(pPoseStack, vBuff, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 0f);

@@ -27,5 +27,6 @@ public class layerRegister {
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(beardModel.LAYER_LOCATION, beardModel::createBodyLayer);
         event.registerLayerDefinition(tieModel.LAYER_LOCATION, tieModel::createBodyLayer);
+        event.registerLayerDefinition(mustacheModel.LAYER_LOCATION, mustacheModel::createBodyLayer);
     }
 }

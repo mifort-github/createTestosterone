@@ -20,6 +20,11 @@ public final class testosteroneModParticles {
                 }
             });
 
-    public static final RegistryObject<SimpleParticleType> AIR_PASSING =
-            PARTICLES.register("air_passing", () -> new SimpleParticleType(false));
+    public static final RegistryObject<ParticleType<airPassingParticleData>> AIR_PASSING =
+            PARTICLES.register("air_passing", () -> new ParticleType<>(false, airPassingParticleData.DESERIALIZER) {
+                @Override
+                public Codec<airPassingParticleData> codec() {
+                    return null;
+                }
+            });
 }

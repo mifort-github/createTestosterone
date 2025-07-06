@@ -6,11 +6,13 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
+
+import java.util.UUID;
 
 
 public class airPassingParticle extends SingleQuadParticle {
@@ -19,12 +21,19 @@ public class airPassingParticle extends SingleQuadParticle {
     double xRotMul;
     float zMul;
     float xMul;
+    Player player;
 
-    protected airPassingParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet spriteSet) {
+    protected airPassingParticle(ClientLevel pLevel, UUID playerUUID, double pX, double pY, double pZ, SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ);
         this.spriteSet = spriteSet;
 
-        yRot = Minecraft.getInstance().player.yBodyRot;
+        this.player = pLevel.getPlayerByUUID(playerUUID);
+
+        if (player == null) {
+            player = Minecraft.getInstance().player;
+        }
+
+        yRot = player.yBodyRot;
 
         yRot = -(yRot + 90) % 360;
         if (yRot < 0) yRot += 360;
@@ -126,7 +135,7 @@ public class airPassingParticle extends SingleQuadParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    public static class Factory implements ParticleProvider<SimpleParticleType> {
+    public static class Factory implements ParticleProvider<airPassingParticleData> {
 
 
         public final SpriteSet spriteset;
@@ -136,10 +145,10 @@ public class airPassingParticle extends SingleQuadParticle {
         }
 
         @Override
-        public Particle createParticle(@NotNull SimpleParticleType type, @NotNull ClientLevel world,
+        public Particle createParticle(@NotNull airPassingParticleData type, @NotNull ClientLevel world,
                                        double x, double y, double z,
                                        double xSpeed, double ySpeed, double zSpeed) {
-            return new airPassingParticle(world, x, y, z, spriteset);
+            return new airPassingParticle(world, type.playerUUID(), x, y, z, spriteset);
         }
     }
 }
