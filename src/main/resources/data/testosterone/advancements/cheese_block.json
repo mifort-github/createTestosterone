@@ -1,0 +1,38 @@
+{
+  "parent": "testosterone:beer",
+  "criteria": {
+    "cheese_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "testosterone:cheese_block"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.cheese_block.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:cheese_block"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.cheese_block.title"
+    }
+  },
+  "requirements": [
+    [
+      "cheese_block"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

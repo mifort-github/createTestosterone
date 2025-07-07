@@ -15,7 +15,11 @@
               "testosterone:tie",
               "testosterone:beer_mug",
               "testosterone:beer_fluid_bucket",
-              "testosterone:john_rock"
+              "testosterone:john_rock",
+              "testosterone:cheese_block",
+              "testosterone:cheese_on_a_stick",
+              "testosterone:trenbolone_fluid_bucket",
+              "testosterone:trenbolone_shot"
             ]
           }
         ]
@@ -25,7 +29,7 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "testosterone:textures/block/john_rock/john_front.png",
+    "background": "testosterone:textures/block/aequalis.png",
     "description": {
       "translate": "advancement.testosterone.testosterone.description"
     },

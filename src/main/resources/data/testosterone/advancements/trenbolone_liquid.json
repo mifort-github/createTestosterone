@@ -1,0 +1,38 @@
+{
+  "parent": "testosterone:testosterone_liquid",
+  "criteria": {
+    "trenbolone_liquid": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "testosterone:trenbolone_fluid_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.trenbolone_liquid.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:trenbolone_fluid_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.trenbolone_liquid.title"
+    }
+  },
+  "requirements": [
+    [
+      "trenbolone_liquid"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

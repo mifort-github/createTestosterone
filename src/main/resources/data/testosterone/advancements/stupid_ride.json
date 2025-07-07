@@ -1,0 +1,29 @@
+{
+  "parent": "testosterone:cheese_block",
+  "criteria": {
+    "ride": {
+      "trigger": "testosterone:inebriate_trigger"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.ride.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "testosterone:cheese_on_a_stick"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.ride.title"
+    }
+  },
+  "requirements": [
+    [
+      "ride"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

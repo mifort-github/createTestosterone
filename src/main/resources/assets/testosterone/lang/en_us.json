@@ -135,6 +135,9 @@
   "advancement.testosterone.testosterone_liquid.title": "Bro Juice",
   "advancement.testosterone.testosterone_liquid.description": "Collect a bucket of Testosterone.",
 
+  "advancement.testosterone.trenbolone_liquid.title": "Not a Gear that spins...",
+  "advancement.testosterone.trenbolone_liquid.description": "Collect a bucket of Trenbolone.",
+
   "advancement.testosterone.testosterone_pill.title": "I'm- [TITLE CARD]",
   "advancement.testosterone.testosterone_pill.description": "Make a Testosterone Pill.",
 
@@ -144,14 +147,20 @@
   "advancement.testosterone.damage.title": "Dumb Ways To... Live?",
   "advancement.testosterone.damage.description": "Negate 100 damage with the Man Power effect",
 
-  "advancement.testosterone.runover.title": "A-Train",
-  "advancement.testosterone.runover.description": "Run over an enemy with testosterone powers.",
+  "advancement.testosterone.roadkill.title": "Can't stop the A-Train, baby!",
+  "advancement.testosterone.roadkill.description": "Run over an enemy with roid rage.",
 
   "advancement.testosterone.beer_mug.title": "Rock And Stone!",
   "advancement.testosterone.beer_mug.description": "Brew a mug of beer.",
 
   "advancement.testosterone.inebriate.title": "Why Would You Do That",
   "advancement.testosterone.inebriate.description": "Get poisoned from drinking too much beer.",
+
+  "advancement.testosterone.cheese_block.title": "The Big Cheese",
+  "advancement.testosterone.cheese_block.description": "Make a cheese block.",
+
+  "advancement.testosterone.ride.title": "The Gustavo & Brick Hour",
+  "advancement.testosterone.ride.description": "Ride a Stupid Rat.",
 
   "sounds.testosterone.john_rock_deactivation": "John Rock Deactivated",
   "sounds.testosterone.john_rock_activation": "John Rock Activated",

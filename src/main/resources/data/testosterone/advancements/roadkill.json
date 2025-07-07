@@ -1,0 +1,29 @@
+{
+  "parent": "testosterone:trenbolone_liquid",
+  "criteria": {
+    "roadkill": {
+      "trigger": "testosterone:inebriate_trigger"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.testosterone.roadkill.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "testosterone:better_trenbolone_shot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.testosterone.roadkill.title"
+    }
+  },
+  "requirements": [
+    [
+      "roadkill"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

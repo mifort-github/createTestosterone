@@ -99,8 +99,8 @@ public class ConfigRegistry {
         CLIENT_BUILDER.push("Roid Rage Effect");
 
         DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", true);
-        RENDER_TRAIL = CLIENT_BUILDER.comment("write smtgh @jon.").define("Render Trail", true);
-        TRAIL_MIN_RENDER_DISTANCE = CLIENT_BUILDER.comment("write smtgh @jon.").defineInRange("Minimum Render Distance", 2, 0, Double.MAX_VALUE);
+        RENDER_TRAIL = CLIENT_BUILDER.comment("Render the trenbolone trail.").define("Render Trail", true);
+        TRAIL_MIN_RENDER_DISTANCE = CLIENT_BUILDER.comment("How close to the player the trail should render.").defineInRange("Minimum Render Distance", 2, 0, Double.MAX_VALUE);
 
         CLIENT_BUILDER.pop();
 
@@ -129,9 +129,9 @@ public class ConfigRegistry {
         SPEED_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect speed.").defineInRange("Speed Multiplier", 0.001, 0, Double.MAX_VALUE);
 
         TREN_IN_AIR_MUL = SERVER_BUILDER.comment("How far you jump with the roid rage effect.").defineInRange("In Air Multiplier", 0.5, 0, 10);
-        TRAIL_DURATION = SERVER_BUILDER.comment("@jon do smth.").defineInRange("Trail Duration", 5, 0, Integer.MAX_VALUE);
-        STEP_HEIGHT = SERVER_BUILDER.comment("@jon do smth.").define("Step Height", -1D);
-        FALL_DAMAGE_RADIUS = SERVER_BUILDER.comment("@jon do smth.").defineInRange("Fall Damage Radius", 4, 0, Double.MAX_VALUE);
+        TRAIL_DURATION = SERVER_BUILDER.comment("Duration of the trenbolone trail").defineInRange("Trail Duration", 5, 0, Integer.MAX_VALUE);
+        STEP_HEIGHT = SERVER_BUILDER.comment("How many blocks you can step up with the effect.").define("Step Height", -1D);
+        FALL_DAMAGE_RADIUS = SERVER_BUILDER.comment("Radius of the ground slam.").defineInRange("Ground Slam Radius", 4, 0, Double.MAX_VALUE);
 
         SERVER_BUILDER.pop();
 
@@ -139,7 +139,7 @@ public class ConfigRegistry {
 
         JOHN_ROCK_LIMIT = SERVER_BUILDER.comment("How many John rocks can get powered from 1 source.").defineInRange("Powered Amount", 4096, 4, Integer.MAX_VALUE);
         JOHN_ROCK_VERTICAL = SERVER_BUILDER.comment("Should it also convert vertically").define("Vertical", false);
-        JOHN_ROCK_RANGE = SERVER_BUILDER.comment("Range of conversion of john rocks").defineInRange("Conversion Range", 3, 1, Integer.MAX_VALUE);
+        JOHN_ROCK_RANGE = SERVER_BUILDER.comment("Range of conversion of John rocks").defineInRange("Conversion Range", 3, 1, Integer.MAX_VALUE);
 
 
         SERVER_BUILDER.pop();

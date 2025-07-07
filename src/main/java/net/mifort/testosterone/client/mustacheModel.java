@@ -28,12 +28,12 @@ public class mustacheModel extends Model {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 38).mirror().addBox(0.5F, -27.0F, -5.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false)
-		.texOffs(0, 38).addBox(-2.5F, -27.0F, -5.0F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 40).mirror().addBox(1.5F, -26.0F, -5.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false)
-		.texOffs(0, 40).addBox(-3.5F, -26.0F, -5.0F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 52).addBox(-4.0F, -36.0F, -5.0F, 8.0F, 4.0F, 8.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 38).addBox(-5.0F, -40.0F, -6.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 38).mirror().addBox(0.5F, -27.0F, -4.75F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false)
+				.texOffs(0, 38).addBox(-2.5F, -27.0F, -4.75F, 2.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 40).mirror().addBox(1.5F, -26.0F, -4.75F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false)
+				.texOffs(0, 40).addBox(-3.5F, -26.0F, -4.75F, 2.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 52).addBox(-4.0F, -36.0F, -4.0F, 8.0F, 4.0F, 8.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 38).addBox(-5.0F, -39.0F, -5.0F, 10.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
