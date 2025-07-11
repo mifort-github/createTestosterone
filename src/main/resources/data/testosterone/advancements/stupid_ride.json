@@ -2,7 +2,12 @@
   "parent": "testosterone:cheese_block",
   "criteria": {
     "ride": {
-      "trigger": "testosterone:inebriate_trigger"
+      "trigger": "minecraft:started_riding",
+      "conditions": {
+        "entity": {
+          "type": "testosterone:rat"
+        }
+      }
     }
   },
   "display": {
