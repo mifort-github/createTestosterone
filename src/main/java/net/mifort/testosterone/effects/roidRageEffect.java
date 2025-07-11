@@ -1,16 +1,18 @@
 package net.mifort.testosterone.effects;
 
 import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
+import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.particles.airPassingParticleData;
 import net.mifort.testosterone.particles.runParticleData;
-import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -25,6 +27,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -39,6 +42,8 @@ public class roidRageEffect extends MobEffect {
     private static final String HEIGHT_KEY = "testosterone:height_key";
     private static final String JUMPING_KEY = "testosterone:jumping_key";
     public static final String SWIMMING_KEY = "testosterone:swimming_key";
+    public static final String MARKED_KEY = "testosterone:marked_key";
+    public static final String MARKED_BY_KEY = "testosterone:marked_by_key";
 
 
     public roidRageEffect() {
@@ -160,8 +165,11 @@ public class roidRageEffect extends MobEffect {
 
 
                 for (Entity other : collidingEntities) {
-                    other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
 
+                    other.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
+                    other.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
+
+                    other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
 
                     other.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * 0.01, speed * 0.002, Math.cos(rotRad) * speed * 0.01));
                 }
@@ -247,7 +255,13 @@ public class roidRageEffect extends MobEffect {
                                     if (livingEntity == player) return;
 
                                     if (player.distanceTo(livingEntity) < event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()) {
+                                        livingEntity.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
+                                        livingEntity.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
+
                                         livingEntity.hurt(CreateDamageSources.runOver(level, player), (float) (event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()));
+
+
+
                                         livingEntity.addDeltaMovement(new Vec3(0, event.getDistance() / 24, 0));
                                     }
                                 }
@@ -266,6 +280,29 @@ public class roidRageEffect extends MobEffect {
 
 
                     player.getPersistentData().remove(HEIGHT_KEY);
+                }
+            }
+        }
+
+
+        @SubscribeEvent
+        public static void onLivingDeathEvent(LivingDeathEvent livingDeathEvent) {
+
+            LivingEntity entity = livingDeathEvent.getEntity();
+            Level level = entity.level();
+
+
+
+            if (!level.isClientSide) {
+
+                Minecraft.getInstance().player.sendSystemMessage(Component.literal(String.valueOf(level.getGameTime() - entity.getPersistentData().getLong(MARKED_KEY))));
+
+                if (level.getGameTime() - entity.getPersistentData().getLong(MARKED_KEY) < 40) {
+                    Player player = level.getPlayerByUUID(entity.getPersistentData().getUUID(MARKED_BY_KEY));
+
+                    if (player != null) {
+                        testosteroneAdvancementUtils.ROADKILL.trigger((ServerPlayer) player);
+                    }
                 }
             }
         }

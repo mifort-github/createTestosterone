@@ -2,7 +2,7 @@
   "parent": "testosterone:trenbolone_liquid",
   "criteria": {
     "roadkill": {
-      "trigger": "testosterone:inebriate_trigger"
+      "trigger": "testosterone:roadkill_trigger"
     }
   },
   "display": {
