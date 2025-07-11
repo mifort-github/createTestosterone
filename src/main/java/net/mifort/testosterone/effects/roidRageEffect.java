@@ -294,10 +294,7 @@ public class roidRageEffect extends MobEffect {
 
 
             if (!level.isClientSide) {
-
-                Minecraft.getInstance().player.sendSystemMessage(Component.literal(String.valueOf(level.getGameTime() - entity.getPersistentData().getLong(MARKED_KEY))));
-
-                if (level.getGameTime() - entity.getPersistentData().getLong(MARKED_KEY) < 40) {
+                if (level.getGameTime() - entity.getPersistentData().getLong(MARKED_KEY) < 20) {
                     Player player = level.getPlayerByUUID(entity.getPersistentData().getUUID(MARKED_BY_KEY));
 
                     if (player != null) {
