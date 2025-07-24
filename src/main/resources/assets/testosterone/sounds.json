@@ -10,5 +10,29 @@
     "sounds": [
       "testosterone:john_rock_activation"
     ]
+  },
+  "mach_1_sfx": {
+    "subtitle": "sounds.testosterone.mach_1_sfx",
+    "sounds": [
+      "testosterone:mach_1_sfx"
+    ]
+  },
+  "mach_2_sfx": {
+    "subtitle": "sounds.testosterone.mach_2_sfx",
+    "sounds": [
+      "testosterone:mach_2_sfx"
+    ]
+  },
+  "ground_slam_sfx": {
+    "subtitle": "sounds.testosterone.ground_slam_sfx",
+    "sounds": [
+      "testosterone:ground_slam_sfx"
+    ]
+  },
+  "enemy_hit_sfx": {
+    "subtitle": "sounds.testosterone.enemy_hit_sfx",
+    "sounds": [
+      "testosterone:enemy_hit_sfx"
+    ]
   }
 }
