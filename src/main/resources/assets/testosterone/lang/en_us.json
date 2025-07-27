@@ -166,8 +166,11 @@
   "sounds.testosterone.john_rock_activation": "John Rock Activated",
   "sounds.testosterone.mach_1_sfx": "Mach I Run",
   "sounds.testosterone.mach_2_sfx": "Mach II Run",
-  "sounds.testosterone.ground_slam_sfx": "Ground Pound",
-  "sounds.testosterone.enemy_hit_sfx": "Run Hit",
+  "sounds.testosterone.ground_slam_sfx": "Ground pound",
+  "sounds.testosterone.enemy_hit_sfx": "Run hit",
+  "sounds.testosterone.rat_sounds": "Rat sounds",
+  "sounds.testosterone.rat_run": "Ratty spins",
+  "sounds.testosterone.rat_hurts": "Rat hurts",
 
   "pack.testosterone.programmer_art.title": "Testosterone Programmer Art",
   "pack.testosterone.programmer_art.description": "§fProgrammer Art for the Testosterone mod."
