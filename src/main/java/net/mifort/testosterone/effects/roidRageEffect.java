@@ -5,21 +5,22 @@ import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.particles.airPassingParticleData;
 import net.mifort.testosterone.particles.runParticleData;
+import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -35,91 +36,122 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 public class roidRageEffect extends MobEffect {
-    private static final String SPEED_KEY = "testosterone:speed_key";
-    private static final String JUMP_KEY = "testosterone:jump_key";
-    private static final String HEIGHT_KEY = "testosterone:height_key";
-    private static final String JUMPING_KEY = "testosterone:jumping_key";
-    public static final String SWIMMING_KEY = "testosterone:swimming_key";
     public static final String MARKED_KEY = "testosterone:marked_key";
     public static final String MARKED_BY_KEY = "testosterone:marked_by_key";
 
+    private static final String SPEED_KEY = "testosterone:speed_key";
+    private static final String JUMPED_TICK_KEY = "testosterone:jumped_tick_key";
+    private static final String READY_TO_JUMP_KEY = "testosterone:ready_to_jump_key";
+    private static final String IN_JUMP_KEY = "testosterone:in_jump_key";
+    private static final String SWIMMING_KEY = "testosterone:swimming_key";
 
-    public roidRageEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0xCC0000);
-    }
+    private final UUID speedAttributeUUID;
 
     public static int getSpeed(Player player) {
         return player.getPersistentData().getInt(SPEED_KEY);
+    }
+
+    public static boolean isSwimming(Player player) {
+        return player.getPersistentData().getBoolean(SWIMMING_KEY);
+    }
+
+    public roidRageEffect() {
+        super(MobEffectCategory.BENEFICIAL, 0xCC0000);
+
+        speedAttributeUUID = UUID.fromString("a3c377ee-6949-4a9c-a49f-c87a8420200a");
+        UUID stepAttreibuteUUID = UUID.fromString("4bbd2586-1548-4f78-b79f-682e42d1679a");
+
+        addAttributeModifier(
+                ForgeMod.STEP_HEIGHT_ADDITION.get(),
+                stepAttreibuteUUID.toString(),
+                1,
+                AttributeModifier.Operation.ADDITION
+        );
+
+        addAttributeModifier(Attributes.MOVEMENT_SPEED,
+                speedAttributeUUID.toString(),
+                0,
+                AttributeModifier.Operation.ADDITION
+        );
+    }
+
+    private static void applyForce(Player player, double x, double y, double z) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            player.push(x, y, z);
+            serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(player));
+        }
     }
 
     @Override
     public void applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
             Level level = player.level();
-
-            amplifier += 2;
-
             int speed = player.getPersistentData().getInt(SPEED_KEY);
+            boolean swimming = player.getPersistentData().getBoolean(SWIMMING_KEY);
 
-            if (player.isFallFlying()) {
-                player.setSprinting(false);
-            }
-
-            if (ConfigRegistry.DISPLAY_SPEED.get()) {
+            if (level.isClientSide() && ConfigRegistry.DISPLAY_SPEED.get()) {
                 player.displayClientMessage(Component.literal(String.valueOf(speed)), true);
             }
 
-            if (player.onGround()) {
-                player.getPersistentData().putBoolean(JUMPING_KEY, false);
-                player.getPersistentData().putBoolean(SWIMMING_KEY, false);
+            if (player.isFallFlying() && !ConfigRegistry.ALLOW_ELYTRA.get()) {
+                player.setSprinting(false);
             }
 
-            if (player.isCrouching() && speed > ConfigRegistry.ABILITY_SPEED.get()) {
-                player.getPersistentData().putBoolean(JUMP_KEY, true);
-
-            } else if (player.getPersistentData().getBoolean(JUMP_KEY)) {
-                player.getPersistentData().putBoolean(JUMP_KEY, false);
-
-                if (player.onGround()) {
-                    player.addDeltaMovement(new Vec3(0f, speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0f));
-                    player.getPersistentData().putDouble(HEIGHT_KEY, player.getY());
-                    player.getPersistentData().putBoolean(JUMPING_KEY, true);
-                } else {
-                    player.addDeltaMovement(new Vec3(0f, -1 * speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0f));
-                    player.getPersistentData().putBoolean(SWIMMING_KEY, true);
-                }
-
-            } else if (player.isSprinting()) {
-                if (speed < (ConfigRegistry.MAX_SPEED.get() / 2) * amplifier) {
-                    player.getPersistentData().putInt(SPEED_KEY, speed + 1);
-                }
-
-            } else {
-                if (speed > 0) {
-                    player.getPersistentData().putInt(SPEED_KEY, 0);
-                }
-            }
-
-            AttributeInstance stepHeightAttribute = player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
-
-            Double stepHeight = ConfigRegistry.STEP_HEIGHT.get();
-
-            if (stepHeightAttribute != null) {
-                if (stepHeightAttribute.getBaseValue() < amplifier + stepHeight) {
-                    stepHeightAttribute.setBaseValue(amplifier + stepHeight);
-                }
-            }
-
-            AttributeInstance speedAttribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
-
-            if (speedAttribute != null) {
-                speedAttribute.setBaseValue(0.1 + amplifier * speed * ConfigRegistry.SPEED_MULTIPLIER.get());
-            }
-
-            if (player.getPersistentData().getBoolean(SWIMMING_KEY)) {
+            if (swimming) {
                 player.setPose(Pose.SWIMMING);
+            }
+
+            long jumpedTick = player.getPersistentData().getLong(JUMPED_TICK_KEY);
+            boolean readyToJump = player.getPersistentData().getBoolean(READY_TO_JUMP_KEY);
+            boolean inJump = player.getPersistentData().getBoolean(IN_JUMP_KEY);
+
+            AttributeInstance attributeInstance = player.getAttribute(Attributes.MOVEMENT_SPEED);
+
+            if (attributeInstance != null) {
+                attributeInstance.removeModifier(speedAttributeUUID);
+
+                AttributeModifier newModifier = new AttributeModifier(speedAttributeUUID, "trenspeed", speed * ConfigRegistry.SPEED_MULTIPLIER.get(), AttributeModifier.Operation.ADDITION);
+
+                attributeInstance.addTransientModifier(newModifier);
+            }
+
+            if (player.onGround()) {
+                if (inJump && level.getGameTime() - jumpedTick > 5) {
+                    inJump = false;
+                }
+
+                swimming = false;
+            }
+
+            if (player.isSprinting()) {
+                if (speed < ConfigRegistry.MAX_SPEED.get() * (amplifier + 1)) {
+                    speed++;
+                }
+
+
+            } else if (!player.isCrouching()) {
+                speed = 0;
+            }
+
+
+            if (player.isCrouching()) {
+                if (inJump) {
+                    applyForce(player, 0, -1 * speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0);
+                    swimming = true;
+
+                } else {
+                    readyToJump = true;
+                }
+
+            } else if (readyToJump && player.onGround()) {
+                applyForce(player, 0, speed * ConfigRegistry.JUMP_MULTIPLIER.get(), 0);
+
+                readyToJump = false;
+                inJump = true;
+                jumpedTick = level.getGameTime();
             }
 
             if (speed > ConfigRegistry.ABILITY_SPEED.get()) {
@@ -158,7 +190,7 @@ public class roidRageEffect extends MobEffect {
                 float rot = player.getYRot();
                 double rotRad = Math.toRadians(rot);
 
-                if (!player.getPersistentData().getBoolean(JUMPING_KEY) && !player.onGround()) {
+                if (!inJump && !player.onGround()) {
                     double mul = ConfigRegistry.TREN_IN_AIR_MUL.get() * 0.001;
                     player.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * mul, 0, Math.cos(rotRad) * speed * mul));
                 }
@@ -170,6 +202,7 @@ public class roidRageEffect extends MobEffect {
                     other.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
 
                     other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
+                    level.playSound(null, player.blockPosition(), testosteroneModSounds.ENEMY_HIT_SFX.get(), SoundSource.PLAYERS);
 
                     other.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * 0.01, speed * 0.002, Math.cos(rotRad) * speed * 0.01));
                 }
@@ -190,7 +223,7 @@ public class roidRageEffect extends MobEffect {
 
                     if (!level.getFluidState(blockBelow).isEmpty()) {
                         if (player.isCrouching()) {
-                            player.getPersistentData().putInt(SPEED_KEY, 0);
+                            speed = 0;
                         } else {
 
                             Vec3 motion = player.getDeltaMovement();
@@ -205,28 +238,12 @@ public class roidRageEffect extends MobEffect {
                     }
                 }
             }
-        }
-    }
 
-    @Override
-    public void removeAttributeModifiers(@NotNull LivingEntity entity, @NotNull AttributeMap attributeMap, int amplifier) {
-        super.removeAttributeModifiers(entity, attributeMap, amplifier);
-        if (entity instanceof Player player) {
-            AttributeInstance stepHeightAttribute = player.getAttribute(ForgeMod.STEP_HEIGHT_ADDITION.get());
-            if (stepHeightAttribute != null) {
-                stepHeightAttribute.setBaseValue(0);
-            }
-
-            AttributeInstance speedAttribute = player.getAttribute(Attributes.MOVEMENT_SPEED);
-            if (speedAttribute != null) {
-                speedAttribute.setBaseValue(0.1);
-            }
-
-            player.getPersistentData().putBoolean(JUMP_KEY, false);
-            player.getPersistentData().putInt(SPEED_KEY, 0);
-            player.getPersistentData().putBoolean(JUMPING_KEY, false);
-            player.getPersistentData().remove(HEIGHT_KEY);
-            player.getPersistentData().putBoolean(SWIMMING_KEY, false);
+            player.getPersistentData().putInt(SPEED_KEY, speed);
+            player.getPersistentData().putLong(JUMPED_TICK_KEY, jumpedTick);
+            player.getPersistentData().putBoolean(READY_TO_JUMP_KEY, readyToJump);
+            player.getPersistentData().putBoolean(IN_JUMP_KEY, inJump);
+            player.getPersistentData().putBoolean(SWIMMING_KEY, swimming);
         }
     }
 
@@ -235,51 +252,39 @@ public class roidRageEffect extends MobEffect {
         return true;
     }
 
-
     @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
     public static class events {
         @SubscribeEvent
         public static void onFallDamage(LivingFallEvent event) {
             if (event.getEntity() instanceof Player player) {
-                if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()) && player.getPersistentData().contains(HEIGHT_KEY)) {
-                    if (player.getPersistentData().getBoolean(SWIMMING_KEY)) {
-                        if (player.level() instanceof ServerLevel level) {
-                            level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, level.getBlockState(player.getOnPos())),
-                                    player.getX(), player.getY(), player.getZ(),
-                                    ((int) event.getDistance() * 10),
-                                    event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(), 0, event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(),
-                                    1);
+                if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get())) {
+                        if (roidRageEffect.isSwimming(player)) {
+                            if (player.level() instanceof ServerLevel level) {
+                                level.playSound(null, player.blockPosition(), testosteroneModSounds.GROUND_SLAM_SFX.get(), SoundSource.PLAYERS);
+                                level.sendParticles(ParticleTypes.SPIT,
+                                        player.getX(), player.getY(), player.getZ(),
+                                        ((int) event.getDistance() * 10),
+                                        event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(), 0, event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(),
+                                        1);
 
-                            level.getEntities().getAll().forEach(entity -> {
-                                if (entity instanceof LivingEntity livingEntity) {
-                                    if (livingEntity == player) return;
+                                level.getEntities().getAll().forEach(entity -> {
+                                    if (entity instanceof LivingEntity livingEntity) {
+                                        if (livingEntity == player) return;
 
-                                    if (player.distanceTo(livingEntity) < event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()) {
-                                        livingEntity.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
-                                        livingEntity.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
+                                        if (player.distanceTo(livingEntity) < event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()) {
+                                            livingEntity.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
+                                            livingEntity.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
 
-                                        livingEntity.hurt(CreateDamageSources.runOver(level, player), (float) (event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()));
+                                            livingEntity.hurt(CreateDamageSources.runOver(level, player), (float) (event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()));
 
 
-
-                                        livingEntity.addDeltaMovement(new Vec3(0, event.getDistance() / 24, 0));
+                                            livingEntity.addDeltaMovement(new Vec3(0, event.getDistance() / 24, 0));
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
-                    }
-
-                    double jump_height = player.getPersistentData().getDouble(HEIGHT_KEY);
-
-                    if (jump_height <= player.getY()) {
-                        event.setCanceled(true);
-
-                    } else {
-                        event.setDistance((float) (jump_height - player.getY()));
-                    }
-
-
-                    player.getPersistentData().remove(HEIGHT_KEY);
+                    event.setCanceled(true);
                 }
             }
         }

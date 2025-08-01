@@ -54,8 +54,8 @@ public class ConfigRegistry {
 
     public static final ForgeConfigSpec.ConfigValue<Double> TREN_IN_AIR_MUL;
     public static final ForgeConfigSpec.ConfigValue<Integer> TRAIL_DURATION;
-    public static final ForgeConfigSpec.ConfigValue<Double> STEP_HEIGHT;
     public static final ForgeConfigSpec.ConfigValue<Double> FALL_DAMAGE_RADIUS;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ALLOW_ELYTRA;
 
 
 
@@ -125,13 +125,13 @@ public class ConfigRegistry {
 
         MAX_SPEED = SERVER_BUILDER.comment("Maximum speed achieved per level of roid rage.").defineInRange("Max Speed", 200, 0, Integer.MAX_VALUE);
         ABILITY_SPEED = SERVER_BUILDER.comment("The speed that needs to be achieved to get abilities. (running on fluids, high jumping)").defineInRange("Ability Speed", 50, 0, Integer.MAX_VALUE);
-        JUMP_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect jump height.").defineInRange("Jump Height", 0.01, 0, Double.MAX_VALUE);
+        JUMP_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect jump height.").defineInRange("Jump Height", 0.005, 0, Double.MAX_VALUE);
         SPEED_MULTIPLIER = SERVER_BUILDER.comment("How much does the speed counter affect speed.").defineInRange("Speed Multiplier", 0.001, 0, Double.MAX_VALUE);
 
-        TREN_IN_AIR_MUL = SERVER_BUILDER.comment("How far you jump with the roid rage effect.").defineInRange("In Air Multiplier", 0.5, 0, 10);
+        TREN_IN_AIR_MUL = SERVER_BUILDER.comment("How far you jump with the roid rage effect.").defineInRange("In Air Multiplier", 0.36, 0, 10);
         TRAIL_DURATION = SERVER_BUILDER.comment("Duration of the trenbolone trail").defineInRange("Trail Duration", 5, 0, Integer.MAX_VALUE);
-        STEP_HEIGHT = SERVER_BUILDER.comment("How many blocks you can step up with the effect.").define("Step Height", -1D);
         FALL_DAMAGE_RADIUS = SERVER_BUILDER.comment("Radius of the ground slam.").defineInRange("Ground Slam Radius", 4, 0, Double.MAX_VALUE);
+        ALLOW_ELYTRA = SERVER_BUILDER.comment("Radius of the ground slam.").define("Allow Elytra", false);
 
         SERVER_BUILDER.pop();
 

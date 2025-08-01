@@ -15,7 +15,6 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
@@ -104,7 +103,7 @@ public class runParticle extends Particle {
         model.young = player.isBaby();
         model.crouching = player.isCrouching();
 
-        this.swimming = (player.getPose() == Pose.SWIMMING || player.getPersistentData().getBoolean(roidRageEffect.SWIMMING_KEY));
+        this.swimming = (player.getPose() == Pose.SWIMMING || roidRageEffect.isSwimming(player));
         model.swimAmount = this.swimming ? 1.0F : player.getSwimAmount(pt);
 
         float headYaw   = player.getYHeadRot() - player.getYRot();
