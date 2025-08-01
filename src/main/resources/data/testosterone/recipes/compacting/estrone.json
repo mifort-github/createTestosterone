@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "amount": 250,
+      "fluid": "estrogen:liquid_estrogen"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "fluid": "testosterone:estrone_fluid"
+    }
+  ]
+}

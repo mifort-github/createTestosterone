@@ -4,13 +4,16 @@ import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.testosteroneModItems;
-import net.mifort.testosterone.testosterone;
+import net.mifort.testosterone.sounds.ratRollingSound;
+import net.mifort.testosterone.sounds.testosteroneModSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -29,10 +32,31 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class ratEntity extends Animal implements PlayerRideableJumping {
+    public static final SoundEvent[] ambientSounds = {
+            testosteroneModSounds.RAT_SNIFF1.get(),
+            testosteroneModSounds.RAT_SNIFF2.get(),
+            testosteroneModSounds.RAT_SQUEAK1.get(),
+            testosteroneModSounds.RAT_SQUEAK2.get()
+    };
+
+    public static final SoundEvent[] hurtSounds = {
+            testosteroneModSounds.RAT_HURT1.get(),
+            testosteroneModSounds.RAT_HURT2.get()
+    };
+
+    private final ratRollingSound rollingSound;
+
     public ratEntity(EntityType<? extends Animal> type, Level level) {
         super(type, level);
+
+        if (level.isClientSide) {
+            this.rollingSound = new ratRollingSound(this);
+        } else {
+            this.rollingSound = null;
+        }
     }
 
     @Override
@@ -113,6 +137,20 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
 
     protected void tickRidden(@NotNull Player pPlayer, @NotNull Vec3 pTravelVector) {
         super.tickRidden(pPlayer, pTravelVector);
+
+        if (pPlayer.level().isClientSide) {
+            SoundManager soundManager = Minecraft.getInstance().getSoundManager();
+
+            if (this.isBoosting()) {
+                if (!soundManager.isActive(rollingSound)) {
+                    soundManager.play(rollingSound);
+                }
+            } else {
+                if (soundManager.isActive(rollingSound)) {
+                    soundManager.stop(rollingSound);
+                }
+            }
+        }
 
         if (isHoldingStick(pPlayer)) {
             this.setRot(pPlayer.getYRot(), pPlayer.getXRot() * 0.5F);
@@ -209,5 +247,19 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
     @Override
     public void handleStopJump() {
 
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getAmbientSound() {
+        Random random = new Random();
+        int index = random.nextInt(4);
+        return ambientSounds[index];
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getHurtSound(DamageSource pDamageSource) {
+        Random random = new Random();
+        int index = random.nextInt(2);
+        return hurtSounds[index];
     }
 }

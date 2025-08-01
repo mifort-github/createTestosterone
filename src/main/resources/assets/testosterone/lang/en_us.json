@@ -20,25 +20,35 @@
 
   "item.testosterone.diluted_zinc_fluid_bucket": "Bucket Of Diluted Zinc",
   "fluid.testosterone.diluted_zinc_fluid": "Diluted Zinc",
+  "block.testosterone.diluted_zinc_fluid": "Diluted Zinc",
 
   "item.testosterone.cholesterol_fluid_bucket": "Bucket Of Cholesterol",
   "fluid.testosterone.cholesterol_fluid": "Cholesterol",
+  "block.testosterone.cholesterol_fluid": "Cholesterol",
 
   "item.testosterone.testosterone_fluid_bucket": "Bucket Of Testosterone",
   "fluid.testosterone.testosterone_fluid": "Testosterone",
+  "block.testosterone.testosterone_fluid": "Testosterone",
 
   "item.testosterone.trenbolone_fluid_bucket": "Bucket Of Trenbolone",
   "fluid.testosterone.trenbolone_fluid": "Trenbolone",
+  "block.testosterone.trenbolone_fluid": "Trenbolone",
 
   "item.testosterone.beer_fluid_bucket": "Bucket Of Beer",
   "fluid.testosterone.beer_fluid": "Beer",
+  "block.testosterone.beer_fluid": "Beer",
 
   "item.testosterone.whey_fluid_bucket": "Bucket Of Liquid Whey",
   "fluid.testosterone.whey_fluid": "Liquid Whey",
+  "block.testosterone.whey_fluid": "Liquid Whey",
 
   "item.testosterone.cheese_fluid_bucket": "Bucket Of Liquid Cheese",
   "fluid.testosterone.cheese_fluid": "Liquid Cheese",
+  "block.testosterone.cheese_fluid": "Liquid Cheese",
 
+  "item.testosterone.estrone_fluid_bucket": "Bucket Of Estrone",
+  "fluid.testosterone.estrone_fluid": "Estrone",
+  "block.testosterone.estrone_fluid": "Estrone",
 
   "fluid_type.testosterone.testosterone": "Testosterone",
 
@@ -84,7 +94,7 @@
 
 
   "block.testosterone.aequalis": "Aequalis",
-  "block.testosterone.aequalis.tooltip.summary": "A _strange stone_ formed when §kestrogen§r and §ktestosterone§r touch.",
+  "block.testosterone.aequalis.tooltip.summary": "A _strange stone_ formed when §kestrone§r and §ktestosterone§r touch.",
 
   "block.testosterone.cut_aequalis": "Cut Aequalis",
   "block.testosterone.cut_aequalis_stairs": "Cut Aequalis Stairs",

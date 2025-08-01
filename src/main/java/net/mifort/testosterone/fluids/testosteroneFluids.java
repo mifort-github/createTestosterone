@@ -58,6 +58,24 @@ public class testosteroneFluids {
                     .build()
                     .register();
 
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> ESTRONE_FLUID =
+            REGISTRATE.fluid("estrone_fluid", testosterone.rl("block/estrone_fluid_still"), testosterone.rl("block/estrone_fluid_flow"))
+                    .properties(b -> b.viscosity(1500)
+                            .canHydrate(true)
+                            .canExtinguish(true)
+                            .density(1500))
+                    .fluidProperties(p -> p.levelDecreasePerBlock(1)
+                            .tickRate(5)
+                            .slopeFindDistance(3)
+                            .explosionResistance(100f))
+                    .source(ForgeFlowingFluid.Source::new)
+                    .block(LiquidBlock::new)
+                    .build()
+                    .bucket()
+                    .properties(properties -> properties.rarity(Rarity.RARE))
+                    .build()
+                    .register();
+
     public static final FluidEntry<ForgeFlowingFluid.Flowing> TRENBOLONE_FLUID =
             REGISTRATE.fluid("trenbolone_fluid", testosterone.rl("block/trenbolone_fluid_still"), testosterone.rl("block/trenbolone_fluid_flow"))
                     .properties(b -> b.viscosity(1500)

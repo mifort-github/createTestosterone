@@ -57,6 +57,7 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneFluids.BEER_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.WHEY_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.CHEESE_FLUID.getBucket().get());
+                        pOutput.accept(testosteroneFluids.ESTRONE_FLUID.getBucket().get());
 
 
 
