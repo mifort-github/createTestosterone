@@ -13,12 +13,14 @@
   },
   "mach_1_sfx": {
     "subtitle": "sounds.testosterone.mach_1_sfx",
+    "preload": true,
     "sounds": [
       "testosterone:mach_1_sfx"
     ]
   },
   "mach_2_sfx": {
     "subtitle": "sounds.testosterone.mach_2_sfx",
+    "preload": true,
     "sounds": [
       "testosterone:mach_2_sfx"
     ]
