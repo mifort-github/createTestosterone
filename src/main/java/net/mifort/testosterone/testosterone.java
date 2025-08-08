@@ -1,10 +1,13 @@
 package net.mifort.testosterone;
 
-import com.ibm.icu.impl.number.AffixPatternProvider;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
+import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipHelper;
+import com.simibubi.create.foundation.item.TooltipModifier;
+import net.createmod.catnip.lang.FontHelper;
+import net.createmod.ponder.foundation.PonderIndex;
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.chestLoot.testosteroneModLootModifiers;
@@ -21,7 +24,7 @@ import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.particles.testosteroneModParticles;
-import net.mifort.testosterone.ponder.index;
+import net.mifort.testosterone.ponder.testosteronePonder;
 import net.mifort.testosterone.potions.testosteroneModPotions;
 import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.minecraft.SharedConstants;
@@ -30,7 +33,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.FilePackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
@@ -65,7 +67,9 @@ public class testosterone {
 
     static {
         REGISTRATE.setTooltipModifierFactory(item ->
-                new ItemDescription.Modifier(item, TooltipHelper.Palette.STANDARD_CREATE));
+                new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
+                        .andThen(TooltipModifier.mapNull(KineticStats.create(item)))
+        );
     }
 
     public static ResourceLocation rl(String path) {
@@ -147,7 +151,7 @@ public class testosterone {
 
             CuriosRendererRegistry.register(testosteroneModItems.TIE.get(), () -> new curioTieRenderer());
 
-            index.register();
+            PonderIndex.addPlugin(new testosteronePonder());
 
             EntityRenderers.register(testosteroneEntities.RAT.get(), ratRenderer::new);
         }

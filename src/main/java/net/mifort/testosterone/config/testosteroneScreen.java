@@ -1,6 +1,6 @@
 package net.mifort.testosterone.config;
 
-import com.simibubi.create.foundation.config.ui.BaseConfigScreen;
+import net.createmod.catnip.config.ui.BaseConfigScreen;
 import net.minecraft.client.gui.screens.Screen;
 import org.jetbrains.annotations.NotNull;
 

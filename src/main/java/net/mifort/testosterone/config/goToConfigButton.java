@@ -1,6 +1,6 @@
 package net.mifort.testosterone.config;
 
-import com.simibubi.create.foundation.gui.ScreenOpener;
+import net.createmod.catnip.gui.ScreenOpener;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Minecraft;

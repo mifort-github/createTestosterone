@@ -1,13 +1,15 @@
 package net.mifort.testosterone.ponder;
 
-import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
+import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import com.tterrag.registrate.util.entry.RegistryEntry;
+import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
-import net.mifort.testosterone.testosterone;
+import net.minecraft.resources.ResourceLocation;
 
 public class index {
-    static final PonderRegistrationHelper HELPER = new PonderRegistrationHelper(testosterone.MOD_ID);
+    public static void register(PonderSceneRegistrationHelper<ResourceLocation> helper) {
+        PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
-    public static void register() {
         HELPER.forComponents(testosteroneModBlocks.JOHN_ROCK)
                 .addStoryBoard("john_bell", johnScene::john_bell);
         HELPER.forComponents(testosteroneModBlocks.JOHN_ROCK)

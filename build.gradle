@@ -114,25 +114,17 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven {
-        name = 'tterrag maven'
-        url = 'https://maven.tterrag.com/'
-    }
-
-    maven {
-        url "https://cursemaven.com"
-    }
+//    maven {
+//        url "https://cursemaven.com"
+//    }
 
     maven {
         name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
     }
 
-    maven {
-        name = "Sappho Company"
-        description = "Critter"
-        url = "https://maven.is-immensely.gay/nightly"
-    }
+    maven {url="https://maven.createmod.net"} // Create, Ponder, Flywheel
+    maven {url="https://maven.tterrag.com"} // Registrate
 }
 
 dependencies {
@@ -148,9 +140,10 @@ dependencies {
 
 
 
-    implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive=false }
+//    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
 
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
