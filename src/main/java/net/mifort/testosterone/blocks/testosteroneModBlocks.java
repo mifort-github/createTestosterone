@@ -4,14 +4,14 @@ import com.simibubi.create.content.decoration.palettes.ConnectedPillarBlock;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import dev.mayaqq.estrogen.registry.EstrogenSoundTypes;
 import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
 import net.mifort.testosterone.blocks.blockModels.fragileCopycatModel;
 import net.mifort.testosterone.items.testosteroneModFoods;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -30,14 +30,19 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
 
+    private static SoundType resolvePillSound() {
+        Block b = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("estrogen", "estrogen_pill_block"));
+        return b != null ? b.defaultBlockState().getSoundType() : SoundType.BONE_BLOCK;
+    }
 
+    public static final BlockEntry<testosteronePillBox> TESTOSTERONE_PILL_BLOCK =
+            REGISTRATE.block("testosterone_pill_box", testosteronePillBox::new)
+                    .initialProperties(() -> Blocks.OAK_PLANKS)
+                    .properties(p -> p.strength(1f, 1f)
+                            .sound(resolvePillSound()))
+                    .simpleItem()
+                    .register();
 
-    public static final BlockEntry<testosteronePillBox> TESTOSTERONE_PILL_BLOCK = REGISTRATE.block("testosterone_pill_box", testosteronePillBox::new)
-            .initialProperties(() -> Blocks.OAK_PLANKS)
-            .properties(p -> p.strength(1f, 1f)
-                    .sound(EstrogenSoundTypes.PILL_BOX))
-            .simpleItem()
-            .register();
 
 
     // ALL AEQUALIS STONE

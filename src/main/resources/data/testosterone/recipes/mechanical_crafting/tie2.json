@@ -1,0 +1,22 @@
+{
+  "type": "create:mechanical_crafting",
+  "acceptMirrored": false,
+  "key": {
+    "W": {
+      "item": "minecraft:echo_shard"
+    },
+    "I": {
+      "item": "testosterone:rat_fur"
+    }
+  },
+  "pattern": [
+    "WIW",
+    " W ",
+    " W ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "item": "testosterone:tie"
+  }
+}

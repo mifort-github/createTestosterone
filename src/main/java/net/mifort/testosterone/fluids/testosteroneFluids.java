@@ -1,17 +1,23 @@
 package net.mifort.testosterone.fluids;
 
 import com.tterrag.registrate.util.entry.FluidEntry;
-import dev.mayaqq.estrogen.registry.EstrogenFluids;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.EmptyFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.mifort.testosterone.testosterone;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
+import static net.mifort.testosterone.testosterone.LOGGER;
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 @EventBusSubscriber(modid = testosterone.MOD_ID, bus = Bus.MOD)
@@ -137,15 +143,33 @@ public class testosteroneFluids {
     public static void registerFluidInteractions() {
         final BlockState BLOCK = testosteroneModBlocks.AEQUALIS.get().defaultBlockState();
 
-        FluidInteractionRegistry.addInteraction(EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+        final ResourceLocation estrogenFluidId = new ResourceLocation("estrogen", "liquid_estrogen");
+
+        final @Nullable Fluid estrogenFluid = ForgeRegistries.FLUIDS.getValue(estrogenFluidId);
+
+        if (estrogenFluid != Fluids.EMPTY) {
+            FluidInteractionRegistry.addInteraction(estrogenFluid.getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+                    TESTOSTERONE_FLUID.get().getFluidType(),
+                    fluidState -> BLOCK
+            ));
+
+            FluidInteractionRegistry.addInteraction(TESTOSTERONE_FLUID.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
+                    estrogenFluid.getFluidType(),
+                    fluidState -> BLOCK
+            ));
+        }
+
+
+        FluidInteractionRegistry.addInteraction(testosteroneFluids.ESTRONE_FLUID.getType(), new FluidInteractionRegistry.InteractionInformation(
                 TESTOSTERONE_FLUID.get().getFluidType(),
                 fluidState -> BLOCK
         ));
 
         FluidInteractionRegistry.addInteraction(TESTOSTERONE_FLUID.get().getFluidType(), new FluidInteractionRegistry.InteractionInformation(
-                EstrogenFluids.LIQUID_ESTROGEN.get().getFluidType(),
+                testosteroneFluids.ESTRONE_FLUID.getType(),
                 fluidState -> BLOCK
         ));
+
     }
 
 }

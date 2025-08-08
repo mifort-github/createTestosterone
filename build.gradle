@@ -136,15 +136,15 @@ repositories {
 }
 
 dependencies {
-    implementation "uwu.serenity.critter:critter-forge:0.1-beta.11"
 
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 
 
-    implementation fg.deobf("curse.maven:estrogen-850410:6052639")
-    implementation fg.deobf("curse.maven:botarium-704113:5118353")
-    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
+//    implementation "uwu.serenity.critter:critter-forge:0.1-beta.11"
+//    implementation fg.deobf("curse.maven:estrogen-850410:6052639")
+//    implementation fg.deobf("curse.maven:botarium-704113:5118353")
+//    implementation fg.deobf("curse.maven:resourceful-lib-570073:5659871")
 
 
 

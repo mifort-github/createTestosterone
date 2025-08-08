@@ -1,12 +1,12 @@
 package net.mifort.testosterone.effects;
 
-import dev.mayaqq.estrogen.registry.EstrogenEffects;
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.network.packet.hudS2CPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -116,13 +117,15 @@ public class testosteroneEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(@NotNull LivingEntity livingEntity, int amplifier) {
-        if (EstrogenEffects.ESTROGEN_EFFECT != null) {
-            if (livingEntity.hasEffect(EstrogenEffects.ESTROGEN_EFFECT.get())) {
-                livingEntity.removeEffect(EstrogenEffects.ESTROGEN_EFFECT.get());
-                livingEntity.removeEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
-            }
+        ResourceLocation estrogenEffectId = new ResourceLocation("estrogen", "estrogen");
+        MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(estrogenEffectId);
+
+        if (effect != null && livingEntity.hasEffect(effect)) {
+            livingEntity.removeEffect(effect);
+            livingEntity.removeEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
         }
     }
+
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
