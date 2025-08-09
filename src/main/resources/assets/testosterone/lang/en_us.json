@@ -47,6 +47,7 @@
   "block.testosterone.cheese_fluid": "Liquid Cheese",
 
   "item.testosterone.estrone_fluid_bucket": "Bucket Of Estrone",
+  "item.testosterone.estrone_fluid_bucket.tooltip.summary" : "W.I.P.",
   "fluid.testosterone.estrone_fluid": "Estrone",
   "block.testosterone.estrone_fluid": "Estrone",
 
