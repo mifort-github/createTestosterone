@@ -122,7 +122,7 @@
 
   "testosterone.ponder.bell_conversion.header": "Bell Conversion",
   "testosterone.ponder.bell_conversion.text_1": "When a Peculiar Bell is rung...",
-  "testosterone.ponder.bell_conversion.text_2": "...any dormant dream block in an 7x1x7 area of the bell...",
+  "testosterone.ponder.bell_conversion.text_2": "...any obsidian in an 7x1x7 area of the bell...",
   "testosterone.ponder.bell_conversion.text_3": "...has a chance to turn into John Rocks",
   "testosterone.ponder.bell_conversion.text_4": "This process can be automated with redstone/deployers and drills",
 

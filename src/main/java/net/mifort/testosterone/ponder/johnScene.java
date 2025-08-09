@@ -18,7 +18,7 @@ import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
 
 import java.util.Random;
 
-// TODO: make independent from estrogen
+// TODO: make independent from estrogen (translatable)
 
 public class johnScene {
     public static void john_bell(SceneBuilder builder, SceneBuildingUtil util) {
