@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
+import net.mifort.testosterone.blocks.testosteroneBlockEntities;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.chestLoot.testosteroneModLootModifiers;
 import net.mifort.testosterone.config.ConfigRegistry;
@@ -26,6 +27,7 @@ import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.ponder.testosteronePonder;
 import net.mifort.testosterone.potions.testosteroneModPotions;
+import net.mifort.testosterone.recipes.testosteroneModRecipes;
 import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -94,6 +96,7 @@ public class testosterone {
 
         // Register blocks
         testosteroneModBlocks.register();
+        testosteroneBlockEntities.register();
 
         // Register fluids
         testosteroneFluids.register();
@@ -118,6 +121,8 @@ public class testosterone {
         testosteroneModSounds.register(modEventBus);
 
         testosteroneModParticles.PARTICLES.register(modEventBus);
+
+        testosteroneModRecipes.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
