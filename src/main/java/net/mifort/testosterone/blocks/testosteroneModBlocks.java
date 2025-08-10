@@ -171,6 +171,12 @@ public class testosteroneModBlocks {
 
 
     // PIZZA TOWER
+    public static final BlockEntry<Block> CRACKED_PILLAR = REGISTRATE.block("cracked_pillar", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .simpleItem()
+            .register();
+
     public static final BlockEntry<johnRock> JOHN_ROCK = REGISTRATE.block("john_rock", johnRock::new)
             .initialProperties(() -> Blocks.OBSIDIAN)
             .properties(p -> p.sound(SoundType.STONE).isSuffocating((pState, pLevel, pPos) -> !pState.getValue(johnRock.TOGGLED)).lightLevel(s -> 12).isViewBlocking((pState, pLevel, pPos) -> !pState.getValue(johnRock.TOGGLED)))

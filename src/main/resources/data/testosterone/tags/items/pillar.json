@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "create:granite_pillar",
+    "create:diorite_pillar",
+    "create:andesite_pillar",
+    "create:calcite_pillar",
+    "create:dripstone_pillar",
+    "create:deepslate_pillar",
+    "create:tuff_pillar",
+    "create:asurine_pillar",
+    "create:crimsite_pillar",
+    "create:limestone_pillar",
+    "create:ochrum_pillar",
+    "create:scoria_pillar",
+    "create:scorchia_pillar",
+    "create:veridium_pillar",
+    "testosterone:aequalis_pillar"
+  ]
+}

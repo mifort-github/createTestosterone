@@ -37,7 +37,7 @@ public abstract class JohnRockRecipe {
                 for (int k = -vertical; k <= vertical; k++) {
                     BlockPos blockPos = new BlockPos(pos.getX() + i, pos.getY() + k, pos.getZ() + j);
 
-                    if ((world.getBlockState(blockPos).getBlock() == dormantDreamBlock && !dormantDreamBlock.defaultBlockState().isAir()) || world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) {
+                    if ((world.getBlockState(blockPos).getBlock() == dormantDreamBlock && !dormantDreamBlock.defaultBlockState().isAir()) || world.getBlockState(blockPos).is(testosteroneModBlocks.CRACKED_PILLAR.get())) {
                         int actualRange = 2 * range + 1;
                         int chance;
 

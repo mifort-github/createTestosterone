@@ -66,7 +66,7 @@ public class johnScene {
                 .pointAt(util.vector().blockSurface(bellpos, Direction.WEST))
                 .placeNearTarget()
                 .attachKeyFrame()
-                .text("...any dormant dream block in an 7x1x7 area of the bell...");
+                .text("...any cracked pillar block in an 7x1x7 area of the bell...");
         scene.overlay().showOutline(PonderPalette.GREEN, bellpos, sele, 40);
         scene.idle(75);
 
