@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 public enum testosteroneModRecipes implements IRecipeTypeInfo {
-    CENTRIFUGING(centrifugingRecipe::new);
+    DECANTATION(decantation::new);
 
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;

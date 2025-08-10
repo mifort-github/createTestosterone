@@ -4,7 +4,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.mifort.testosterone.recipes.centrifugingRecipe;
+import net.mifort.testosterone.recipes.decantation;
 import net.mifort.testosterone.recipes.testosteroneModRecipes;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Minecraft;
@@ -24,14 +24,14 @@ public class jeiPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new centrifugingCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new decantationCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
-        List<centrifugingRecipe> polishingRecipes = recipeManager.getAllRecipesFor(testosteroneModRecipes.CENTRIFUGING.getType());
-        registration.addRecipes(centrifugingCategory.CENTRIFUGING_RECIPE_TYPE, polishingRecipes);
+        List<decantation> polishingRecipes = recipeManager.getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType());
+        registration.addRecipes(decantationCategory.DECANTATION_RECIPE_TYPE, polishingRecipes);
     }
 }

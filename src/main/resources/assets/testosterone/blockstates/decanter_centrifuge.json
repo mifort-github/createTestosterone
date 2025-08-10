@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "testosterone:block/decanter_centrifuge/block",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "testosterone:block/decanter_centrifuge/block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "testosterone:block/decanter_centrifuge/block",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "testosterone:block/decanter_centrifuge/block",
+      "y": 0
+    }
+  }
+}

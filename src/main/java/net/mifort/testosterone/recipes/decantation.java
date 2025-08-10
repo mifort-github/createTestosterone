@@ -1,9 +1,13 @@
 package net.mifort.testosterone.recipes;
 
+import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
-import net.mifort.testosterone.blocks.centrifuge.CentrifugeBlockEntity;
+import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlockEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,9 +18,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class centrifugingRecipe extends ProcessingRecipe<Inventory> {
-    public centrifugingRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
-        super(testosteroneModRecipes.CENTRIFUGING, params);
+public class decantation extends ProcessingRecipe<Inventory> {
+    public decantation(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
+        super(testosteroneModRecipes.DECANTATION, params);
     }
 
     @Override
@@ -39,30 +43,33 @@ public class centrifugingRecipe extends ProcessingRecipe<Inventory> {
         return 1;
     }
 
-    public boolean match(@NotNull CentrifugeBlockEntity centrifugeBlockEntity) {
+    public boolean match(@NotNull decanterCentrifugeBlockEntity decanterCentrifugeBlockEntity) {
         if (fluidIngredients.isEmpty() || fluidResults.isEmpty()) return false;
 
-        BlockPos below = centrifugeBlockEntity.getBlockPos().below();
-        BlockPos above = centrifugeBlockEntity.getBlockPos().above();
 
-        BlockEntity belowBlockEntity;
-        BlockEntity aboveBlockEntity;
+        Direction facing = decanterCentrifugeBlockEntity.getBlockState().getValue(HorizontalKineticBlock.HORIZONTAL_FACING);
 
-        if (centrifugeBlockEntity.getLevel() != null) {
-            belowBlockEntity = centrifugeBlockEntity.getLevel().getBlockEntity(below);
-            aboveBlockEntity = centrifugeBlockEntity.getLevel().getBlockEntity(above);
+        BlockPos input = decanterCentrifugeBlockEntity.getBlockPos().relative(facing);
+        BlockPos output = decanterCentrifugeBlockEntity.getBlockPos().relative(facing.getOpposite());
+
+        BlockEntity inputBlockEntity;
+        BlockEntity outputBlockEntity;
+
+        if (decanterCentrifugeBlockEntity.getLevel() != null) {
+            inputBlockEntity = decanterCentrifugeBlockEntity.getLevel().getBlockEntity(input);
+            outputBlockEntity = decanterCentrifugeBlockEntity.getLevel().getBlockEntity(output);
         } else {
-            belowBlockEntity = null;
-            aboveBlockEntity = null;
+            inputBlockEntity = null;
+            outputBlockEntity = null;
         }
 
 
-        if (belowBlockEntity == null || aboveBlockEntity == null) return false;
+        if (inputBlockEntity == null || outputBlockEntity == null) return false;
 
         AtomicBoolean success = new AtomicBoolean(false);
 
-        belowBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(belowHandler -> {
-            aboveBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(aboveHandler -> {
+        inputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(belowHandler -> {
+            outputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(aboveHandler -> {
                 if (belowHandler.getTanks() == 0 || aboveHandler.getTanks() == 0) return;
 
                 int belowIdx = 0;

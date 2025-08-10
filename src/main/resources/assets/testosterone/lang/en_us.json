@@ -186,5 +186,6 @@
   "sounds.testosterone.rat_hurts": "Rat hurts",
 
   "pack.testosterone.programmer_art.title": "Testosterone Programmer Art",
-  "pack.testosterone.programmer_art.description": "§fProgrammer Art for the Testosterone mod."
+  "pack.testosterone.programmer_art.description": "§fProgrammer Art for the Testosterone mod.",
+  "block.testosterone.decanter_centrifuge": "Decantar Centrifuge"
 }
