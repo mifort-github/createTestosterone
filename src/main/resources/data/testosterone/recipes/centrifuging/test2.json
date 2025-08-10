@@ -1,0 +1,16 @@
+{
+  "type": "testosterone:centrifuging",
+  "ingredients": [
+    {
+      "amount": 1,
+      "fluid": "testosterone:cholesterol_fluid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 10,
+      "fluid": "testosterone:testosterone_fluid"
+    }
+  ]
+}

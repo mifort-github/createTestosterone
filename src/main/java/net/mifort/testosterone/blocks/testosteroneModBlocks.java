@@ -6,6 +6,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
 import net.mifort.testosterone.blocks.blockModels.fragileCopycatModel;
+import net.mifort.testosterone.blocks.centrifuge.CentrifugeBlock;
 import net.mifort.testosterone.items.testosteroneModFoods;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -192,6 +193,13 @@ public class testosteroneModBlocks {
             .transform(BuilderTransformers.copycat())
             .properties(p -> p.sound(SoundType.METAL))
             .onRegister(CreateRegistrate.blockModel(() -> fragileCopycatModel::new))
+            .simpleItem()
+            .register();
+
+
+
+    public static final BlockEntry<CentrifugeBlock> TEST = REGISTRATE.block("test", CentrifugeBlock::new)
+            .properties(p -> p.sound(SoundType.METAL))
             .simpleItem()
             .register();
 
