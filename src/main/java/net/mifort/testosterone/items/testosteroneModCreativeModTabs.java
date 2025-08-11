@@ -33,8 +33,8 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.TRENBOLONE_SHOT);
 //                      pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
                         pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
+                        pOutput.accept(testosteroneModBlocks.TEST.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
-                        pOutput.accept(testosteroneModBlocks.CRACKED_PILLAR.get());
                         pOutput.accept(testosteroneModBlocks.FRAGILE_COPYCAT_BLOCK.get());
 
 
@@ -68,6 +68,9 @@ public class testosteroneModCreativeModTabs {
                         for (int pId = 0; pId < 16; pId++) {
                             pOutput.accept(tie.getTieByColor(DyeColor.byId(pId).name().toLowerCase()));
                         }
+
+                        pOutput.accept(testosteroneModBlocks.CRACKED_PILLAR.get());
+
                         pOutput.accept(testosteroneModBlocks.AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS.get());
                         pOutput.accept(testosteroneModBlocks.CUT_AEQUALIS_STAIRS.get());

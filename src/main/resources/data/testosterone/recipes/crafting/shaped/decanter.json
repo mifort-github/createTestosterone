@@ -1,0 +1,32 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "BSB",
+        "RMR",
+        "PTP"
+    ],
+    "key": {
+        "B": {
+            "item": "create:brass_sheet"
+        },
+        "S": {
+            "item": "create:shaft"
+        },
+        "R": {
+            "item": "create:propeller"
+        },
+        "M": {
+            "item": "create:precision_mechanism"
+        },
+        "P": {
+            "item": "create:fluid_pipe"
+        },
+        "T": {
+            "item": "create:fluid_tank"
+        }
+    },
+    "result": {
+        "item": "testosterone:decanter_centrifuge",
+        "count": 1
+    }
+}
