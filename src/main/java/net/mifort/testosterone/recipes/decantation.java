@@ -4,10 +4,8 @@ import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlockEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -49,8 +47,8 @@ public class decantation extends ProcessingRecipe<Inventory> {
 
         Direction facing = decanterCentrifugeBlockEntity.getBlockState().getValue(HorizontalKineticBlock.HORIZONTAL_FACING);
 
-        BlockPos input = decanterCentrifugeBlockEntity.getBlockPos().relative(facing);
-        BlockPos output = decanterCentrifugeBlockEntity.getBlockPos().relative(facing.getOpposite());
+        BlockPos input = decanterCentrifugeBlockEntity.getBlockPos().relative(facing.getOpposite());
+        BlockPos output = decanterCentrifugeBlockEntity.getBlockPos().relative(facing);
 
         BlockEntity inputBlockEntity;
         BlockEntity outputBlockEntity;
@@ -68,15 +66,15 @@ public class decantation extends ProcessingRecipe<Inventory> {
 
         AtomicBoolean success = new AtomicBoolean(false);
 
-        inputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(belowHandler -> {
-            outputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(aboveHandler -> {
-                if (belowHandler.getTanks() == 0 || aboveHandler.getTanks() == 0) return;
+        inputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(inputHandler -> {
+            outputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(outputHandler -> {
+                if (inputHandler.getTanks() == 0 || outputHandler.getTanks() == 0) return;
 
                 int belowIdx = 0;
                 int aboveIdx = 0;
 
-                FluidStack tankBelow = belowHandler.getFluidInTank(belowIdx);
-                FluidStack tankAbove = aboveHandler.getFluidInTank(aboveIdx);
+                FluidStack tankBelow = inputHandler.getFluidInTank(belowIdx);
+                FluidStack tankAbove = outputHandler.getFluidInTank(aboveIdx);
 
                 var ingredient = getFluidIngredients().get(0);
                 FluidStack result = getFluidResults().get(0).copy();
@@ -87,18 +85,18 @@ public class decantation extends ProcessingRecipe<Inventory> {
 
                 if (!tankAbove.isEmpty() && !tankAbove.isFluidEqual(result)) return;
 
-                int capacity = aboveHandler.getTankCapacity(aboveIdx);
+                int capacity = outputHandler.getTankCapacity(aboveIdx);
                 int freeSpace = capacity - tankAbove.getAmount();
                 if (freeSpace < result.getAmount()) return;
 
-                FluidStack simDrain = belowHandler.drain(new FluidStack(tankBelow, required), IFluidHandler.FluidAction.SIMULATE);
+                FluidStack simDrain = inputHandler.drain(new FluidStack(tankBelow, required), IFluidHandler.FluidAction.SIMULATE);
                 if (simDrain.getAmount() != required) return;
 
-                int simFill = aboveHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
+                int simFill = outputHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
                 if (simFill != result.getAmount()) return;
 
-                belowHandler.drain(required, IFluidHandler.FluidAction.EXECUTE);
-                aboveHandler.fill(result, IFluidHandler.FluidAction.EXECUTE);
+                inputHandler.drain(required, IFluidHandler.FluidAction.EXECUTE);
+                outputHandler.fill(result, IFluidHandler.FluidAction.EXECUTE);
 
                 success.set(true);
             });

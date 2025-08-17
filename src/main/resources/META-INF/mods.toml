@@ -83,7 +83,14 @@ logoFile="icon.png"
 [[dependencies.${mod_id}]]
 modId = "create"
 mandatory = true
-versionRange="[6.0.0,)"
+versionRange="[6.0.0,6.1.0)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "curios"
+mandatory = true
+versionRange="[5.3.1,)"
 ordering = "NONE"
 side = "BOTH"
 

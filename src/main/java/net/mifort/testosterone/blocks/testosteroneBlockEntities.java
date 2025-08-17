@@ -9,9 +9,9 @@ import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeRende
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 public class testosteroneBlockEntities {
-    public static final BlockEntityEntry<decanterCentrifugeBlockEntity> TEST = REGISTRATE.blockEntity("test", decanterCentrifugeBlockEntity::new)
+    public static final BlockEntityEntry<decanterCentrifugeBlockEntity> DECANTER_CENTRIFUGE = REGISTRATE.blockEntity("decanter_centrifuge", decanterCentrifugeBlockEntity::new)
             .visual(() -> SingleAxisRotatingVisual.of(AllPartialModels.SHAFT), false)
-            .validBlock(testosteroneModBlocks.TEST)
+            .validBlock(testosteroneModBlocks.DECANTER_CENTRIFUGE)
             .renderer(() -> decanterCentrifugeRenderer::new)
             .register();
 

@@ -205,7 +205,7 @@ public class testosteroneModBlocks {
 
 
 
-    public static final BlockEntry<decanterCentrifugeBlock> TEST = REGISTRATE.block("decanter_centrifuge", decanterCentrifugeBlock::new)
+    public static final BlockEntry<decanterCentrifugeBlock> DECANTER_CENTRIFUGE = REGISTRATE.block("decanter_centrifuge", decanterCentrifugeBlock::new)
             .properties(p -> p.sound(SoundType.METAL).noOcclusion())
             .onRegister(b -> BlockStressValues.IMPACTS.register(b, () -> 4))
             .simpleItem()
