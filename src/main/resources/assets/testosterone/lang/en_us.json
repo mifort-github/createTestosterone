@@ -7,7 +7,7 @@
   "item.testosterone.trenbolone_shot.tooltip.summary" : "Temporary Source Of _Roid Rage_. Run on _Water_, hit enemies to _Damage_ them, release shift for a _Super Jump_, shift in air to _Ground Slam_",
   "item.testosterone.better_trenbolone_shot": "Trenbolone Shot",
   "item.testosterone.better_trenbolone_shot.tooltip.summary" : "Temporary Source Of _Roid Rage_ II. Run on _Water_, hit enemies to _Damage_ them, release shift for a _Super Jump_, shift in air to _Ground Slam_",
-
+  "block.testosterone.trenbolone_vial": "Trenbolone Vial",
 
   "item.testosterone.testosterone_protein_bar": "Testosterone Protein Bar",
 
@@ -124,7 +124,7 @@
   "testosterone.ponder.bell_conversion.header": "Bell Conversion",
   "testosterone.ponder.bell_conversion.text_1": "When a Peculiar Bell is rung...",
   "testosterone.ponder.bell_conversion.text_2": "...any cracked pillar in an 7x1x7 area of the bell...",
-  "testosterone.ponder.bell_conversion.text_3": "...has a chance to turn into John Rocks",
+  "testosterone.ponder.bell_conversion.text_3": "...has a chance to turn into John Rock",
   "testosterone.ponder.bell_conversion.text_4": "This process can be automated with redstone/deployers and drills",
 
   "block.testosterone.cracked_pillar": "Cracked Pillar",
@@ -134,6 +134,15 @@
   "testosterone.ponder.john_rock.text_1": "John Rocks change state when given a redstone signal",
   "testosterone.ponder.john_rock.text_2": "Multiple John Rocks can be placed next to each other",
   "testosterone.ponder.john_rock.text_3": "While in the inactive state, any entity can go through the block",
+
+
+
+
+  "testosterone.ponder.decanter_main.header": "Converting Fluids in The Decanter Centrifuge",
+  "testosterone.ponder.decanter_main.text_1": "The Decanter Centrifuge converts liquids into other liquids between Tanks",
+  "testosterone.ponder.decanter_main.text_2": "The centrifuge requires at least 100 RPM to work, connected at either the top or the bottom...",
+  "testosterone.ponder.decanter_main.text_3": "...with the sides used for fluid conversion.",
+  "testosterone.ponder.decanter_main.text_4": "Centrifuges can also be stacked on top of each other.",
 
 
   "advancement.testosterone.testosterone.title": "Create: Testosterone",

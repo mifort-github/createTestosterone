@@ -1,5 +1,6 @@
 package net.mifort.testosterone.blocks;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.api.stress.BlockStressValues;
 import com.simibubi.create.content.decoration.palettes.ConnectedPillarBlock;
 import com.simibubi.create.foundation.data.BuilderTransformers;
@@ -206,7 +207,14 @@ public class testosteroneModBlocks {
 
 
     public static final BlockEntry<decanterCentrifugeBlock> DECANTER_CENTRIFUGE = REGISTRATE.block("decanter_centrifuge", decanterCentrifugeBlock::new)
+            .initialProperties(AllBlocks.MECHANICAL_PUMP)
             .properties(p -> p.sound(SoundType.METAL).noOcclusion())
+            .onRegister(b -> BlockStressValues.IMPACTS.register(b, () -> 4))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<Block> TRENBOLONE_VIAL = REGISTRATE.block("trenbolone_vial", Block::new)
+            .properties(p -> p.sound(SoundType.GLASS).noOcclusion())
             .onRegister(b -> BlockStressValues.IMPACTS.register(b, () -> 4))
             .simpleItem()
             .register();

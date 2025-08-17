@@ -26,5 +26,7 @@ public class index {
                 .addStoryBoard(schematic, johnScene::john_bell);
         HELPER.forComponents(testosteroneModBlocks.JOHN_ROCK)
                 .addStoryBoard("john_active_inactive", johnScene::john_active_inactive);
+        HELPER.forComponents(testosteroneModBlocks.DECANTER_CENTRIFUGE)
+                .addStoryBoard("decanter_main", decanterScene::decanter_main);
     }
 }

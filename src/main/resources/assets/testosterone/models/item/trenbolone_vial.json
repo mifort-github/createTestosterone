@@ -1,5 +1,5 @@
 {
-	"parent": "testosterone:block/decanter_centrifuge/item",
+	"parent": "testosterone:block/trenbolone_vial",
 	"display": {
 		"gui": { "rotation": [30, 135, 0], "translation": [0, 0, 0], "scale": [0.625, 0.625, 0.625] },
 		"ground": { "rotation": [0, 0, 0], "translation": [0, 3, 0], "scale": [0.5, 0.5, 0.5] },

@@ -87,7 +87,7 @@ public class johnScene {
         scene.overlay().showText(70)
                 .pointAt(util.vector().blockSurface(bellpos, Direction.WEST))
                 .placeNearTarget()
-                .text("...has a chance to turn into John Rocks");
+                .text("...has a chance to turn into John Rock");
 
         scene.idle(85);
 
