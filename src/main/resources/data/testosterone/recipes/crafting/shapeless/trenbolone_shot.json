@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "testosterone:trenbolone_vial"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "testosterone:trenbolone_shot"
+  }
+}

@@ -32,10 +32,10 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.BEER_MUG);
                         pOutput.accept(testosteroneModItems.TRENBOLONE_SHOT);
 //                      pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
-                        pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
                         pOutput.accept(testosteroneModBlocks.DECANTER_CENTRIFUGE.get());
-                        pOutput.accept(testosteroneModBlocks.TRENBOLONE_VIAL.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
+                        pOutput.accept(testosteroneModBlocks.TESTOSTERONE_PILL_BLOCK.get());
+                        pOutput.accept(testosteroneModBlocks.TRENBOLONE_VIAL.get());
                         pOutput.accept(testosteroneModBlocks.FRAGILE_COPYCAT_BLOCK.get());
 
 
