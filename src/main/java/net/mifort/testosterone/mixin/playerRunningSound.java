@@ -4,49 +4,54 @@ import net.mifort.testosterone.effects.roidRageEffect;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.sounds.playerMach1Sound;
 import net.mifort.testosterone.sounds.playerMach2Sound;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.world.entity.player.Player;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-// TODO: try to remove the gap in sound
-
-@Mixin(Player.class)
+@Mixin(AbstractClientPlayer.class)
 public abstract class playerRunningSound {
-    @Unique
-    playerMach1Sound createTestosterone$playerMach1Sound = new playerMach1Sound((Player) (Object) this);
-    @Unique
-    playerMach2Sound createTestosterone$playerMach2Sound = new playerMach2Sound((Player) (Object) this);
 
-    @Inject(method = "tick", at = @At(value = "HEAD"))
-    public void tick(CallbackInfo ci) {
+    @Unique private playerMach1Sound testosterone$mach1;
+    @Unique private playerMach2Sound testosterone$mach2;
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void testosterone$tick(CallbackInfo ci) {
         Player player = (Player) (Object) this;
 
-        if (!player.level().isClientSide()) {
-            SoundManager soundManager = Minecraft.getInstance().getSoundManager();
+        if (!player.level().isClientSide()) return;
 
-            if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()) && player.isSprinting()) {
-                if (!soundManager.isActive(createTestosterone$playerMach1Sound)) {
-                    if (roidRageEffect.getSpeed(player) == 0) {
-                        soundManager.play(createTestosterone$playerMach1Sound);
+        Minecraft mc = Minecraft.getInstance();
+        if (mc == null || mc.player == null) return;
 
-                    } else if (!soundManager.isActive(createTestosterone$playerMach2Sound)) {
-                        soundManager.play(createTestosterone$playerMach2Sound);
-                    }
+        if (player != mc.player) return;
+
+        SoundManager soundManager = mc.getSoundManager();
+
+        if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()) && player.isSprinting()) {
+            if (testosterone$mach1 == null) testosterone$mach1 = new playerMach1Sound(player);
+            if (testosterone$mach2 == null) testosterone$mach2 = new playerMach2Sound(player);
+
+            if (!soundManager.isActive(testosterone$mach1)) {
+                if (roidRageEffect.getSpeed(player) == 0) {
+                    soundManager.play(testosterone$mach1);
+                } else if (!soundManager.isActive(testosterone$mach2)) {
+                    soundManager.play(testosterone$mach2);
                 }
-
-            } else {
-                if (soundManager.isActive(createTestosterone$playerMach1Sound)) {
-                    soundManager.stop(createTestosterone$playerMach1Sound);
-                }
-
-                if (soundManager.isActive(createTestosterone$playerMach2Sound)) {
-                    soundManager.stop(createTestosterone$playerMach2Sound);
-                }
+            }
+        } else {
+            if (testosterone$mach1 != null && soundManager.isActive(testosterone$mach1)) {
+                soundManager.stop(testosterone$mach1);
+            }
+            if (testosterone$mach2 != null && soundManager.isActive(testosterone$mach2)) {
+                soundManager.stop(testosterone$mach2);
             }
         }
     }

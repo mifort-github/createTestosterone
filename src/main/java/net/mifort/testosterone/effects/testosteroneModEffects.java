@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class testosteroneModEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, testosterone.MOD_ID);
 
-    public static final RegistryObject<MobEffect> TESTOSTERONE_EFFECT = EFFECTS.register("testosterone", testosteroneEffect::new);
+    public static final RegistryObject<MobEffect> TESTOSTERONE_EFFECT = EFFECTS.register("man_power", testosteroneEffect::new);
 
     public static final RegistryObject<MobEffect> AFTERLIFE_EFFECT = EFFECTS.register("afterlife", afterlifeEffect::new);
 

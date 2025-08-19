@@ -24,7 +24,7 @@ public class testosteroneModCreativeModTabs {
 
     public static final RegistryObject<CreativeModeTab> TESTOSTERONE_TAB = CREATIVE_MOD_TABS.register("testosterone_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(testosteroneModItems.TESTOSTERONE_PILL.get()))
-                    .title(Component.translatable("creativetab.testosterone_tab"))
+                    .title(Component.literal("Testosterone"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PILL);
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_SHOT);
@@ -50,7 +50,7 @@ public class testosteroneModCreativeModTabs {
                         //pOutput.accept(testosteroneModItems.STRONGMAN_PATCH.get());
 
                         pOutput.accept(tippedArrow(testosteroneModPotions.TESTOSTERONE_POTION.get()));
-                        pOutput.accept(tippedArrow(testosteroneModPotions.TRENBOLONE_POTION.get()));
+                        pOutput.accept(tippedArrow(testosteroneModPotions.ROID_RAGE_POTION.get()));
 
                         pOutput.accept(testosteroneFluids.CHOLESTEROL_FLUID.getBucket().get());
                         pOutput.accept(testosteroneFluids.DILUTED_ZINC_FLUID.getBucket().get());

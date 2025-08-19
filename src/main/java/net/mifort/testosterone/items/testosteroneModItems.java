@@ -1,14 +1,15 @@
 package net.mifort.testosterone.items;
 
+import com.simibubi.create.Create;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.entities.testosteroneEntities;
-import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.items.custom.*;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.world.item.BucketItem;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -42,6 +43,7 @@ public class testosteroneModItems {
     public static final ItemEntry<Item> TESTOSTERONE_PROTEIN_BAR =
             REGISTRATE.item("testosterone_protein_bar", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_PROTEIN_BAR).rarity(Rarity.RARE))
+                    .tag(ItemTags.create(new ResourceLocation("c", "cookies")))
                     .register();
 
 
@@ -68,6 +70,7 @@ public class testosteroneModItems {
 
     public static final ItemEntry<tie> TIE =
             REGISTRATE.item("tie", tie::new)
+                    .tag(ItemTags.create(new ResourceLocation("curios", "necklace")))
                     .register();
 
     public static final ItemEntry<Item> AFTERLIFE_TOTEM =
@@ -78,6 +81,10 @@ public class testosteroneModItems {
     public static final ItemEntry<CheeseOnAStick> CHEESE_ON_A_STICK =
             REGISTRATE.item("cheese_on_a_stick", CheeseOnAStick::new)
                     .properties(p -> p.stacksTo(1).defaultDurability(256))
+                    .model((ctx, prov) ->
+                            prov.withExistingParent(ctx.getName(), prov.mcLoc("item/handheld_rod"))
+                                    .texture("layer0", prov.modLoc("item/" + ctx.getName()))
+                    )
                     .register();
 
     public static final ItemEntry<Item> CHEESE_CURDS =
@@ -88,6 +95,7 @@ public class testosteroneModItems {
     public static final ItemEntry<Item> WHEY_PROTEIN =
             REGISTRATE.item("whey_protein", Item::new)
                     .properties(p -> p.stacksTo(64))
+                    .tag(ItemTags.create(new ResourceLocation(Create.ID, "blaze_burner_fuel/regular")))
                     .register();
 
     public static final ItemEntry<Item> RAT_FUR =

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "testosterone:block/aequalis_cut_small_brick",
-    "side": "testosterone:block/aequalis_cut_small_brick",
-    "top": "testosterone:block/aequalis_cut_small_brick"
-  }
-}

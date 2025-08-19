@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "testosterone:block/cut_aequalis",
-    "side": "testosterone:block/cut_aequalis",
-    "top": "testosterone:block/cut_aequalis"
-  }
-}

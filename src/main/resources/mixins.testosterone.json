@@ -9,7 +9,9 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "JohnRockRecipe",
+    "JohnRockRecipe"
+  ],
+  "client": [
     "playerRunningSound"
   ]
 }

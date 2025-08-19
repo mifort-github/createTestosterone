@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "testosterone:item/big_aequelis_bricks"
-  }
-}

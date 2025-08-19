@@ -199,14 +199,15 @@ public class roidRageEffect extends MobEffect {
 
 
                 for (Entity other : collidingEntities) {
+                    if (other instanceof LivingEntity) {
+                        other.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
+                        other.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
 
-                    other.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
-                    other.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
+                        other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
+                        level.playSound(null, player.blockPosition(), testosteroneModSounds.ENEMY_HIT_SFX.get(), SoundSource.PLAYERS);
 
-                    other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
-                    level.playSound(null, player.blockPosition(), testosteroneModSounds.ENEMY_HIT_SFX.get(), SoundSource.PLAYERS);
-
-                    other.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * 0.01, speed * 0.002, Math.cos(rotRad) * speed * 0.01));
+                        other.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * 0.01, speed * 0.002, Math.cos(rotRad) * speed * 0.01));
+                    }
                 }
 
                 BlockPos blockAtFeet = new BlockPos(

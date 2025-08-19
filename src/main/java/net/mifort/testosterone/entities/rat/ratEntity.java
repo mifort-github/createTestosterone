@@ -29,6 +29,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -135,22 +138,28 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         }
     }
 
-    protected void tickRidden(@NotNull Player pPlayer, @NotNull Vec3 pTravelVector) {
-        super.tickRidden(pPlayer, pTravelVector);
-
-        if (pPlayer.level().isClientSide) {
+    @OnlyIn(Dist.CLIENT)
+    static class clientOnly {
+        static void playRollingSound(ratEntity rat, ratRollingSound rollingSound) {
             SoundManager soundManager = Minecraft.getInstance().getSoundManager();
 
-            if (this.isBoosting()) {
+            if (rollingSound != null && rat.isBoosting()) {
                 if (!soundManager.isActive(rollingSound)) {
                     soundManager.play(rollingSound);
                 }
             } else {
-                if (soundManager.isActive(rollingSound)) {
+                if (rollingSound != null && soundManager.isActive(rollingSound)) {
                     soundManager.stop(rollingSound);
                 }
             }
         }
+    }
+
+    protected void tickRidden(@NotNull Player pPlayer, @NotNull Vec3 pTravelVector) {
+        super.tickRidden(pPlayer, pTravelVector);
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> clientOnly.playRollingSound(this, rollingSound));
+
 
         if (isHoldingStick(pPlayer)) {
             this.setRot(pPlayer.getYRot(), pPlayer.getXRot() * 0.5F);

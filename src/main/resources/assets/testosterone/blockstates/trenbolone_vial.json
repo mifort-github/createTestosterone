@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "testosterone:block/trenbolone_vial",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "testosterone:block/trenbolone_vial",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "testosterone:block/trenbolone_vial",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "testosterone:block/trenbolone_vial",
+      "y": 270
+    }
+  }
+}
