@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
@@ -54,18 +55,19 @@ public class testosteroneModBlocks {
                     .properties(p -> p.strength(1f, 1f)
                             .sound(resolvePillSound()))
                     .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                    .blockstate((ctx, prov) -> prov.simpleBlock(
-                            ctx.get(),
-                            prov.models().cube(
-                                    ctx.getName(),
-                                    prov.modLoc("block/testosterone_pill_box/bottom"),
-                                    prov.modLoc("block/testosterone_pill_box/top"),
-                                    prov.modLoc("block/testosterone_pill_box/north"),
-                                    prov.modLoc("block/testosterone_pill_box/south"),
-                                    prov.modLoc("block/testosterone_pill_box/west"),
-                                    prov.modLoc("block/testosterone_pill_box/east")
-                            )
-                    ))
+                    .blockstate((ctx, prov) -> {
+                        ModelFile model = prov.models().cube(
+                                ctx.getName(),
+                                prov.modLoc("block/testosterone_pill_box/bottom"),
+                                prov.modLoc("block/testosterone_pill_box/top"),
+                                prov.modLoc("block/testosterone_pill_box/north"),
+                                prov.modLoc("block/testosterone_pill_box/south"),
+                                prov.modLoc("block/testosterone_pill_box/west"),
+                                prov.modLoc("block/testosterone_pill_box/east")
+                        ).texture("particle", prov.modLoc("block/testosterone_pill_box/top"));
+
+                        prov.horizontalBlock(ctx.get(), model);
+                    })
                     .simpleItem()
                     .register();
 
@@ -305,7 +307,7 @@ public class testosteroneModBlocks {
             .onRegister(b -> BlockStressValues.IMPACTS.register(b, () -> 4))
             .blockstate((ctx, prov) -> {})
             .item()
-            .model((ctx, prov) -> blockItemWithStandardTransforms(prov.withExistingParent(ctx.getName(), prov.modLoc("block/decanter_centrifuge/item"))))
+            .model((ctx, prov) -> rotatedBlock(prov.withExistingParent(ctx.getName(), prov.modLoc("block/decanter_centrifuge/item")), 0, 90, 0))
             .build()
             .register();
 
@@ -323,7 +325,7 @@ public class testosteroneModBlocks {
 
     }
 
-    public static void blockItemWithStandardTransforms(ItemModelBuilder b) {
+    public static ItemModelBuilder blockItemWithStandardTransforms(ItemModelBuilder b) {
         b.transforms()
                 .transform(ItemDisplayContext.GUI).rotation(30, 225, 0).scale(0.625F).end()
                 .transform(ItemDisplayContext.GROUND).translation(0, 3, 0).scale(0.25F).end()
@@ -333,6 +335,21 @@ public class testosteroneModBlocks {
                 .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(75, 45, 0).scale(0.4F).end()
                 .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(75, -45, 0).scale(0.4F).end()
                 .end();
+
+        return b;
+    }
+
+    public static void rotatedBlock(ItemModelBuilder b, int xRot, int yRot, int zRot) {
+        b.transforms()
+                .transform(ItemDisplayContext.GUI).rotation(30 + xRot, 225 + yRot, zRot).scale(0.625F).end()
+                .transform(ItemDisplayContext.GROUND).translation(xRot, 3 + yRot, zRot).scale(0.25F).end()
+                .transform(ItemDisplayContext.FIXED).rotation(xRot, 180 + yRot, zRot).scale(0.5F).end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(xRot, 45 + yRot, zRot).scale(0.4F).end()
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(xRot, -45 + yRot, zRot).scale(0.4F).end()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(75 + xRot, 45 + yRot, zRot).scale(0.4F).end()
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(75 + xRot, -45 + yRot, zRot).scale(0.4F).end()
+                .end();
+
     }
 
 } // tags, ponder

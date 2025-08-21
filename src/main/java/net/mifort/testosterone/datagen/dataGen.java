@@ -39,6 +39,16 @@ public class dataGen {
 //                            event.getExistingFileHelper(), List.of(new advancementGenerator()))
 //            );
 
+        addSoundTranslatable("john_rock_deactivation", "John Rock Deactivated");
+        addSoundTranslatable("john_rock_activation", "John Rock Activated");
+        addSoundTranslatable("mach_1_sfx", "Mach I Run");
+        addSoundTranslatable("mach_2_sfx", "Mach II Run");
+        addSoundTranslatable("ground_slam_sfx", "Ground pound");
+        addSoundTranslatable("enemy_hit_sfx", "Run hit");
+        addSoundTranslatable("rat_sounds", "Rat sounds");
+        addSoundTranslatable("rat_run", "Ratty spins");
+        addSoundTranslatable("rat_hurts", "Rat hurts");
+
 
         addAdvancementTranslatable("beer_mug", "Rock And Stone!", "Brew a mug of beer.");
         addAdvancementTranslatable("cheese_block", "The Big Cheese", "Make a cheese block.");
@@ -110,5 +120,9 @@ public class dataGen {
     private static void addResourcePackTranslatable(String packId, String title, String description) {
         REGISTRATE.addLang("pack", new ResourceLocation(testosterone.MOD_ID, packId + ".title"), title);
         REGISTRATE.addLang("pack", new ResourceLocation(testosterone.MOD_ID, packId + ".description"), description);
+    }
+
+    private static void addSoundTranslatable(String id, String subtitle) {
+        REGISTRATE.addLang("sounds", new ResourceLocation(testosterone.MOD_ID, id), subtitle);
     }
 }
