@@ -63,6 +63,8 @@ public class dataGen {
         addAdvancementTranslatable("testosterone_protein_bar", "Nutritious Steroids", "Eat a bar with high protein (and testosterone) content.");
         addAdvancementTranslatable("tie", "Nanomachines, son!", "Craft a stylish Tie.");
         addAdvancementTranslatable("trenbolone_liquid", "Not a Gear that spins...", "Collect a bucket of Trenbolone.");
+
+        addCategoryTranslatable("decantation","Decantation");
     }
 
     private static void addItemToLang(RegistryObject<Item> item) {
@@ -124,5 +126,8 @@ public class dataGen {
 
     private static void addSoundTranslatable(String id, String subtitle) {
         REGISTRATE.addLang("sounds", new ResourceLocation(testosterone.MOD_ID, id), subtitle);
+    }
+    private static void addCategoryTranslatable(String categoryId, String title) {
+        REGISTRATE.addLang("category", new ResourceLocation(testosterone.MOD_ID, categoryId), title);
     }
 }

@@ -3,14 +3,14 @@
   "ingredients": [
     {
       "amount": 1,
-      "fluid": "testosterone:cholesterol_fluid",
+      "fluid": "estrogen:estrogen_liquid",
       "nbt": {}
     }
   ],
   "results": [
     {
-      "amount": 10,
-      "fluid": "testosterone:testosterone_fluid"
+      "amount": 5,
+      "fluid": "testosterone:estrone_fluid"
     }
   ]
 }

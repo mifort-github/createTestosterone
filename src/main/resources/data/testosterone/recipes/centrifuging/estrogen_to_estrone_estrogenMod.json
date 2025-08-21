@@ -1,0 +1,16 @@
+{
+  "type": "estrogen:centrifuging",
+  "ingredients": [
+    {
+      "amount": 1,
+      "fluid": "estrogen:estrogen_liquid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 5,
+      "fluid": "testosterone:estrone_fluid"
+    }
+  ]
+}

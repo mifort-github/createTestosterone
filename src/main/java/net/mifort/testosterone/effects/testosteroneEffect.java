@@ -112,7 +112,7 @@ public class testosteroneEffect extends MobEffect {
     }
 
     public testosteroneEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0xD69E8C);
+        super(MobEffectCategory.BENEFICIAL, 0xFF8C0A);
     }
 
     @Override

@@ -1,6 +1,7 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"ambientocclusion": true,
 	"textures": {
 		"2": "testosterone:block/trenbolone_fluid_still",
 		"8": "testosterone:block/trenbolone_vial",

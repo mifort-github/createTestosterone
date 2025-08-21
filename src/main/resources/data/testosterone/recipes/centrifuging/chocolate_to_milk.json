@@ -2,15 +2,15 @@
   "type": "testosterone:decantation",
   "ingredients": [
     {
-      "amount": 3,
-      "fluid": "testosterone:testosterone_fluid",
+      "amount": 5,
+      "fluid": "create:chocolate",
       "nbt": {}
     }
   ],
   "results": [
     {
       "amount": 10,
-      "fluid": "testosterone:testosterone_fluid"
+      "fluid": "minecraft:milk"
     }
   ]
 }

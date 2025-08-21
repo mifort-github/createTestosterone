@@ -1,0 +1,16 @@
+{
+  "type": "testosterone:decantation",
+  "ingredients": [
+    {
+      "amount": 1,
+      "fluid": "testosterone:cholesterol_fluid",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 1,
+      "fluid": "testosterone:testosterone_fluid"
+    }
+  ]
+}

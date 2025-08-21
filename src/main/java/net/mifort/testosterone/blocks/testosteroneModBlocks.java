@@ -312,6 +312,7 @@ public class testosteroneModBlocks {
             .register();
 
     public static final BlockEntry<trenboloneVial> TRENBOLONE_VIAL = REGISTRATE.block("trenbolone_vial", trenboloneVial::new)
+            .initialProperties(() -> Blocks.GLASS)
             .properties(p -> p.sound(SoundType.GLASS).noOcclusion())
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .blockstate((ctx, prov) -> {})
