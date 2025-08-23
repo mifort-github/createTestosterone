@@ -2,6 +2,7 @@ package net.mifort.testosterone.compat;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.mifort.testosterone.recipes.decantation;
@@ -32,7 +33,14 @@ public class jeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
-        List<decantation> polishingRecipes = recipeManager.getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType());
-        registration.addRecipes(decantationCategory.DECANTATION_RECIPE_TYPE, polishingRecipes);
+        List<decantation> decantations = recipeManager.getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType());
+        registration.addRecipes(decantationCategory.DECANTATION_RECIPE_TYPE, decantations);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        IModPlugin.super.registerRecipeCatalysts(registration);
+
+        registration.addRecipeCatalyst(testosteroneModBlocks.DECANTER_CENTRIFUGE.asStack(), decantationCategory.DECANTATION_RECIPE_TYPE);
     }
 }
