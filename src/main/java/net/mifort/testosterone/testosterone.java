@@ -1,6 +1,8 @@
 package net.mifort.testosterone;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.compat.jei.ConversionRecipe;
+import com.simibubi.create.compat.jei.category.MysteriousItemConversionCategory;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
@@ -153,14 +155,14 @@ public class testosterone {
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.BEER_FLUID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(testosteroneFluids.BEER_FLUID.getSource(), RenderType.translucent());
 
-            ItemBlockRenderTypes.setRenderLayer(testosteroneModBlocks.TRENBOLONE_VIAL.get(), RenderType.translucent());
 
-
-            CuriosRendererRegistry.register(testosteroneModItems.TIE.get(), () -> new curioTieRenderer());
+            CuriosRendererRegistry.register(testosteroneModItems.TIE.get(), curioTieRenderer::new);
 
             PonderIndex.addPlugin(new testosteronePonder());
 
             EntityRenderers.register(testosteroneEntities.RAT.get(), ratRenderer::new);
+
+            MysteriousItemConversionCategory.RECIPES.add(ConversionRecipe.create(testosteroneModBlocks.CRACKED_PILLAR.asStack(), testosteroneModBlocks.JOHN_ROCK.asStack()));
         }
 
         @SubscribeEvent
