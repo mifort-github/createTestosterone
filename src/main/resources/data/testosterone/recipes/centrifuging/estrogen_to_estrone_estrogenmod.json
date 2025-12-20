@@ -1,0 +1,15 @@
+{
+  "type": "createestrogen:centrifuging",
+  "ingredients": [
+    {
+      "amount_per_tick": 1,
+      "fluid": "estrogen:liquid_estrogen",
+      "nbt": {}
+    }
+  ],
+  "result":
+  {
+    "amount_per_tick": 5,
+    "fluid": "testosterone:estrone_fluid"
+  }
+}

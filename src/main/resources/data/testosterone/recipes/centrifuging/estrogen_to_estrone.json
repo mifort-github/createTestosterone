@@ -3,7 +3,7 @@
   "ingredients": [
     {
       "amount": 1,
-      "fluid": "estrogen:estrogen_liquid",
+      "fluid": "estrogen:liquid_estrogen",
       "nbt": {}
     }
   ],
