@@ -12,6 +12,7 @@
     "JohnRockRecipe"
   ],
   "client": [
-    "playerRunningSound"
+    "playerRunningSound",
+    "SplashMixin"
   ]
 }

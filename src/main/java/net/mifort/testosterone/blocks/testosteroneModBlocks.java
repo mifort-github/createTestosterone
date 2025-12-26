@@ -108,6 +108,7 @@ public class testosteroneModBlocks {
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .tag(BlockTags.WALLS)
             .blockstate((ctx, prov) -> prov.wallBlock(ctx.get(), prov.modLoc("block/cut_aequalis")))
             .item()
             .tag(ItemTags.WALLS)
@@ -142,10 +143,11 @@ public class testosteroneModBlocks {
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .tag(BlockTags.WALLS)
             .blockstate((ctx, prov) -> prov.wallBlock(ctx.get(), prov.modLoc("block/polished_cut_aequalis")))
             .item()
             .tag(ItemTags.WALLS)
-            .model((ctx, prov) -> prov.wallInventory(ctx.getName(), prov.modLoc("block/cut_aequalis")))
+            .model((ctx, prov) -> prov.wallInventory(ctx.getName(), prov.modLoc("block/polished_cut_aequalis")))
             .build()
             .register();
 ///
@@ -176,10 +178,11 @@ public class testosteroneModBlocks {
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .tag(BlockTags.WALLS)
             .blockstate((ctx, prov) -> prov.wallBlock(ctx.get(), prov.modLoc("block/cut_aequalis_bricks")))
             .item()
             .tag(ItemTags.WALLS)
-            .model((ctx, prov) -> prov.wallInventory(ctx.getName(), prov.modLoc("block/cut_aequalis")))
+            .model((ctx, prov) -> prov.wallInventory(ctx.getName(), prov.modLoc("block/cut_aequalis_bricks")))
             .build()
             .register();
 ///
@@ -210,10 +213,11 @@ public class testosteroneModBlocks {
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .tag(BlockTags.WALLS)
             .blockstate((ctx, prov) -> prov.wallBlock(ctx.get(), prov.modLoc("block/small_aequalis_bricks")))
             .item()
             .tag(ItemTags.WALLS)
-            .model((ctx, prov) -> prov.wallInventory(ctx.getName(), prov.modLoc("block/cut_aequalis")))
+            .model((ctx, prov) -> prov.wallInventory(ctx.getName(), prov.modLoc("block/small_aequalis_bricks")))
             .build()
             .register();
 /////////

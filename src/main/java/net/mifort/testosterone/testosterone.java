@@ -1,12 +1,11 @@
 package net.mifort.testosterone;
 
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.compat.jei.ConversionRecipe;
-import com.simibubi.create.compat.jei.category.MysteriousItemConversionCategory;
+//import com.simibubi.create.compat.jei.ConversionRecipe;
+//import com.simibubi.create.compat.jei.category.MysteriousItemConversionCategory;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
-import com.simibubi.create.foundation.item.TooltipHelper;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
 import net.createmod.ponder.foundation.PonderIndex;
@@ -14,6 +13,7 @@ import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.blocks.testosteroneBlockEntities;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.chestLoot.testosteroneModLootModifiers;
+import net.mifort.testosterone.compat.CreateJeiCompat;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.entities.rat.ratEntity;
 import net.mifort.testosterone.entities.rat.ratModel;
@@ -162,7 +162,9 @@ public class testosterone {
 
             EntityRenderers.register(testosteroneEntities.RAT.get(), ratRenderer::new);
 
-            MysteriousItemConversionCategory.RECIPES.add(ConversionRecipe.create(testosteroneModBlocks.CRACKED_PILLAR.asStack(), testosteroneModBlocks.JOHN_ROCK.asStack()));
+            if (ModList.get().isLoaded("jei")) {
+                CreateJeiCompat.register();
+            }
         }
 
         @SubscribeEvent
