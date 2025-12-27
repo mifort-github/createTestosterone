@@ -65,6 +65,12 @@ public class dataGen {
         addAdvancementTranslatable("trenbolone_liquid", "Not a Gear that spins...", "Collect a bucket of Trenbolone.");
 
         addCategoryTranslatable("decantation","Decantation");
+
+        addPackagesToLang();
+    }
+
+    private static void addPackagesToLang() {
+        REGISTRATE.addLang("item", new ResourceLocation(testosterone.MOD_ID, "package"), "Testosterone Pill Package");
     }
 
     private static void addItemToLang(RegistryObject<Item> item) {

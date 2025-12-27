@@ -1,12 +1,15 @@
 package net.mifort.testosterone.items;
 
 import com.simibubi.create.Create;
+import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
+import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.items.custom.*;
+import net.mifort.testosterone.packages.TestosteronePackageStyles;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -18,11 +21,23 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 public class testosteroneModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, testosterone.MOD_ID);
 
+    public static final List<ItemEntry<PackageItem>> ALL_TESTOSTERONE_PILL_BOXES =
+            TestosteronePackageStyles.TESTOSTERONE_PILL_STYLES.stream()
+                    .map(style ->
+                            REGISTRATE.item(style.getItemId().getPath(), props -> new PackageItem(props, style))
+                                    .properties(p -> p.stacksTo(1))
+                                    .model((ctx, prov) -> {})
+                                    .setData(ProviderType.LANG, (prov, entry) -> {})
+                                    .register()
+                    )
+                    .toList();
 
     public static final ItemEntry<SequencedAssemblyItem>
             INCOMPLETE_ANDESITE_ALLOY = sequencedIngredient("incomplete_andesite_alloy");

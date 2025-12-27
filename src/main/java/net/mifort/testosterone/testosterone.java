@@ -3,10 +3,12 @@ package net.mifort.testosterone;
 import com.mojang.logging.LogUtils;
 //import com.simibubi.create.compat.jei.ConversionRecipe;
 //import com.simibubi.create.compat.jei.category.MysteriousItemConversionCategory;
+import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.createmod.catnip.lang.FontHelper;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
@@ -26,6 +28,7 @@ import net.mifort.testosterone.items.testosteroneModCreativeModTabs;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.network.testosteroneModMessages;
+import net.mifort.testosterone.packages.TestosteronePackageStyles;
 import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.ponder.testosteronePonder;
 import net.mifort.testosterone.potions.testosteroneModPotions;
@@ -165,6 +168,19 @@ public class testosterone {
             if (ModList.get().isLoaded("jei")) {
                 CreateJeiCompat.register();
             }
+
+            TestosteronePackageStyles.TESTOSTERONE_PILL_STYLES.forEach(style -> {
+                AllPartialModels.PACKAGES.put(
+                        style.getItemId(),
+                        PartialModel.of(new ResourceLocation(MOD_ID, "item/" + style.getItemId().getPath()))
+                );
+
+                AllPartialModels.PACKAGE_RIGGING.put(
+                        style.getItemId(),
+                        PartialModel.of(style.getRiggingModel())
+                );
+            });
+
         }
 
         @SubscribeEvent

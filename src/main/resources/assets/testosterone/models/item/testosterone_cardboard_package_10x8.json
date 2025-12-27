@@ -1,0 +1,7 @@
+{
+  "parent": "create:item/package/cardboard_10x8",
+  "textures": {
+    "0": "testosterone:item/package/testosterone_cardboard",
+    "particle": "testosterone:item/package/testosterone_cardboard_particle"
+  }
+}

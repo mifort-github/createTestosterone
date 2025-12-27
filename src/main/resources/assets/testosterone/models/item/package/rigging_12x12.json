@@ -1,0 +1,8 @@
+{
+  "parent": "create:item/package/rigging_12x12",
+  "render_type": "cutout",
+  "textures": {
+    "0": "testosterone:item/package/testosterone_cardboard",
+    "particle": "testosterone:item/package/testosterone_cardboard_particle"
+  }
+}
