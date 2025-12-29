@@ -19,6 +19,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
+
 @SuppressWarnings({"deprecation", "NullableProblems"})
 public class decanterCentrifugeBlock extends HorizontalKineticBlock implements IBE<decanterCentrifugeBlockEntity>, IWrenchable {
 
@@ -91,5 +93,10 @@ public class decanterCentrifugeBlock extends HorizontalKineticBlock implements I
         }
 
         return  preferredSide;
+    }
+    @Nullable
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState)
+    {
+        return new decanterCentrifugeBlockEntity(testosteroneBlockEntities.DECANTER_CENTRIFUGE.get(), pPos, pState);
     }
 }

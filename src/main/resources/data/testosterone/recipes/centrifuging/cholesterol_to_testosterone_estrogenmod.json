@@ -1,0 +1,15 @@
+{
+  "type": "createestrogen:centrifuging",
+  "ingredients": [
+    {
+      "amount_per_tick": 1,
+      "fluid": "testosterone:cholesterol_fluid",
+      "nbt": {}
+    }
+  ],
+  "result":
+  {
+    "amount_per_tick": 1,
+    "fluid": "testosterone:testosterone_fluid"
+  }
+}

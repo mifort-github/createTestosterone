@@ -2,6 +2,7 @@ package net.mifort.testosterone.blocks;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
+import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlockEntity;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.effects.roidRageEffect;
 import net.mifort.testosterone.effects.testosteroneModEffects;
@@ -12,11 +13,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import javax.annotation.Nullable;
 
 public class fragileCopycatBlock extends CopycatBlock {
 
@@ -59,5 +63,11 @@ public class fragileCopycatBlock extends CopycatBlock {
     @Override
     public boolean canFaceBeOccluded(BlockState state, Direction face) {
         return true;
+    }
+
+    @Nullable
+    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState)
+    {
+        return null;
     }
 }

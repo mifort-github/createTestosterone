@@ -6,7 +6,12 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -109,4 +114,30 @@ public class decantation extends ProcessingRecipe<Inventory> {
     public boolean matches(@NotNull Inventory pContainer, @NotNull Level pLevel) {
         return false;
     }
+
+
+    public RecipeSerializer<?> getSerializer() {
+        return getTypeInfo().getSerializer();
+    }
+
+    public RecipeType<?> getType() {
+        return getTypeInfo().getType();
+    }
+    public ItemStack assemble(Inventory container, RegistryAccess registryAccess) {
+        return getResultItem(registryAccess);
+    }
+
+    public boolean canCraftInDimensions(int i, int j) {
+        return true;
+    }
+
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return getRollableResults().isEmpty() ? ItemStack.EMPTY
+                : getRollableResults().get(0)
+                .getStack();
+    }
+    public ResourceLocation getId() {
+        return id;
+    }
+
 }
