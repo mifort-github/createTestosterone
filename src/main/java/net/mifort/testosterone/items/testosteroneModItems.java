@@ -74,7 +74,7 @@ public class testosteroneModItems {
 
 
     public static final ItemEntry<shotItem> TESTOSTERONE_SHOT =
-            REGISTRATE.item("testosterone_shot", properties -> new shotItem(properties, testosteroneModEffects.TESTOSTERONE_EFFECT.get()))
+            REGISTRATE.item("testosterone_shot", properties -> new shotItem(properties, testosteroneModEffects.TESTOSTERONE_EFFECT.get(), 1))
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 

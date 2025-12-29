@@ -2,7 +2,9 @@ package net.mifort.testosterone.datagen;
 
 import com.tterrag.registrate.providers.ProviderType;
 import net.createmod.ponder.foundation.PonderIndex;
+import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.effects.testosteroneModEffects;
+import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.packages.TestosteronePackageStyles;
 import net.mifort.testosterone.ponder.testosteronePonder;
@@ -69,6 +71,30 @@ public class dataGen {
 
         addPackagesToLang(TestosteronePackageStyles.TESTOSTERONE_TYPE, "Testosterone Pill Package");
         addPackagesToLang(TestosteronePackageStyles.TRENBOLONE_TYPE, "Trenbolone Package");
+
+        addItemDescription(testosteroneModItems.TESTOSTERONE_PILL.get(), "Temporary Source Of _Man Power_.");
+        addItemDescription(testosteroneModItems.TESTOSTERONE_SHOT.get(), "Temporary Source Of _Man Power_ II.");
+
+        addItemDescription(testosteroneModItems.TRENBOLONE_SHOT.get(), "Temporary Source Of _Roid Rage_. Run on _Water_, hit enemies to _Damage_ them, release shift for a _Super Jump_, shift in air to _Ground Slam_");
+        addItemDescription(testosteroneModItems.BETTER_TRENBOLONE_SHOT.get(), "Temporary Source Of _Roid Rage_ II. Run on _Water_, hit enemies to _Damage_ them, release shift for a _Super Jump_, shift in air to _Ground Slam_");
+
+        addItemDescription(testosteroneModItems.BEER_MUG.get(), "The perfect drink to share with the lads - _Don't_ drink _Too_ much Though");
+
+        addItemDescription(testosteroneModItems.AFTERLIFE_TOTEM.get(), "WORK IN PROGRESS NOT INTENDED FOR USE");
+
+        addItemDescription(testosteroneFluids.ESTRONE_FLUID.getBucket().get(), "W.I.P.");
+
+        addItemDescription(testosteroneModItems.TIE.get(), "A Tie that gives you _Knockback Resistance_. Useful with the _Man Power_ effect.");
+
+        addItemDescription(testosteroneModItems.WHEY_PROTEIN.get(), "Blaze burner _Fuel_.");
+
+        addItemDescription(testosteroneModBlocks.FRAGILE_COPYCAT_BLOCK.asItem(), "Only true Italians can _Run Through_ these");
+
+        addItemDescription(testosteroneModBlocks.AEQUALIS.asItem(), "A _strange stone_ formed when §kestrone§r and §ktestosterone§r touch.");
+    }
+
+    private static void addItemDescription(Item item, String translation) {
+        REGISTRATE.addLang(item.getDescriptionId(), new ResourceLocation("tooltip", "summary"), translation);
     }
 
     private static void addPackagesToLang(ResourceLocation id, String translation) {
@@ -88,8 +114,8 @@ public class dataGen {
             String s = effect.getId().toString().replaceFirst("testosterone.", "");
 
             REGISTRATE.addLang("item", new ResourceLocation("potion.effect." + s + "_potion"), "Potion of " + toTitleCase(effect.getId()));
-            REGISTRATE.addLang("item", new ResourceLocation("splash_potion.effect." + s + "_potion"), "Arrow of " + toTitleCase(effect.getId()));
-            REGISTRATE.addLang("item", new ResourceLocation("lingering_potion.effect." + s + "_potion"), "Arrow of " + toTitleCase(effect.getId()));
+            REGISTRATE.addLang("item", new ResourceLocation("splash_potion.effect." + s + "_potion"), "Splash Potion of " + toTitleCase(effect.getId()));
+            REGISTRATE.addLang("item", new ResourceLocation("lingering_potion.effect." + s + "_potion"), "Lingering Potion of " + toTitleCase(effect.getId()));
             REGISTRATE.addLang("item", new ResourceLocation("tipped_arrow.effect." + s + "_potion"), "Arrow of " + toTitleCase(effect.getId()));
         }
     }

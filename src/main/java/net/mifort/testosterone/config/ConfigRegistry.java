@@ -97,7 +97,7 @@ public class ConfigRegistry {
         CLIENT_BUILDER.pop();
 
 
-        CLIENT_BUILDER.push("Roid Rage Effect");
+        CLIENT_BUILDER.push("Roid Rage Visuals");
 
         DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", true);
         RENDER_TRAIL = CLIENT_BUILDER.comment("Render the trenbolone trail.").define("Render Trail", true);
@@ -124,7 +124,7 @@ public class ConfigRegistry {
         SERVER_BUILDER.pop();
 
 
-        SERVER_BUILDER.push("Roid Rage Effect");
+        SERVER_BUILDER.push("Roid Rage Mechanics");
 
         MAX_SPEED = SERVER_BUILDER.comment("Maximum speed achieved per level of roid rage.").defineInRange("Max Speed", 200, 0, Integer.MAX_VALUE);
         ABILITY_SPEED = SERVER_BUILDER.comment("The speed that needs to be achieved to get abilities. (running on fluids, high jumping)").defineInRange("Ability Speed", 50, 0, Integer.MAX_VALUE);

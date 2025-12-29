@@ -31,6 +31,7 @@ public class testosteroneModCreativeModTabs {
                         pOutput.accept(testosteroneModItems.TESTOSTERONE_PROTEIN_BAR);
                         pOutput.accept(testosteroneModItems.BEER_MUG);
                         pOutput.accept(testosteroneModItems.TRENBOLONE_SHOT);
+                        pOutput.accept(testosteroneModItems.BETTER_TRENBOLONE_SHOT);
 //                      pOutput.accept(testosteroneModItems.AFTERLIFE_TOTEM);
                         pOutput.accept(testosteroneModBlocks.DECANTER_CENTRIFUGE.get());
                         pOutput.accept(testosteroneModBlocks.JOHN_ROCK.get());
