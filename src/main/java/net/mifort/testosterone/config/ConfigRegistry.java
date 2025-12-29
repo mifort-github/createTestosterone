@@ -26,6 +26,7 @@ public class ConfigRegistry {
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> RENDER_TRAIL;
     public static final ForgeConfigSpec.ConfigValue<Double> TRAIL_MIN_RENDER_DISTANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> TRAIL_OFFSET;
 
 
 
@@ -101,6 +102,8 @@ public class ConfigRegistry {
         DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", true);
         RENDER_TRAIL = CLIENT_BUILDER.comment("Render the trenbolone trail.").define("Render Trail", true);
         TRAIL_MIN_RENDER_DISTANCE = CLIENT_BUILDER.comment("How close to the player the trail should render.").defineInRange("Minimum Render Distance", 2, 0, Double.MAX_VALUE);
+        TRAIL_OFFSET = CLIENT_BUILDER.comment("The offset of the trail").defineInRange("Trail Offset", 0, -2048D, 2048D);
+
 
         CLIENT_BUILDER.pop();
 

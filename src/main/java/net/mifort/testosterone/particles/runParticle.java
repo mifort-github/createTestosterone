@@ -217,8 +217,22 @@ public class runParticle extends Particle {
         public Factory(SpriteSet spriteSet) {}
 
         @Override
-        public @Nullable Particle createParticle(runParticleData pType, ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
-            return new runParticle(pLevel, pType.playerUUID(), pType.duration(), pType.tick(), pX, pY, pZ);
+        public @Nullable Particle createParticle(runParticleData data, ClientLevel level,
+                                                 double x, double y, double z,
+                                                 double xSpeed, double ySpeed, double zSpeed) {
+
+            Player player = level.getPlayerByUUID(data.playerUUID());
+            if (player != null) {
+                Vec3 vel = player.getDeltaMovement();
+                double mul = ConfigRegistry.TRAIL_OFFSET.get();
+
+                x += vel.x * mul;
+                y += vel.y * mul;
+                z += vel.z * mul;
+            }
+
+            return new runParticle(level, data.playerUUID(), data.duration(), data.tick(), x, y, z);
         }
+
     }
 }
