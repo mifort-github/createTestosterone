@@ -39,6 +39,17 @@ public class testosteroneModItems {
                     )
                     .toList();
 
+    public static final List<ItemEntry<PackageItem>> ALL_TRENBOLONE_BOXES =
+            TestosteronePackageStyles.TRENBOLONE_VIAL_STYLES.stream()
+                    .map(style ->
+                            REGISTRATE.item(style.getItemId().getPath(), props -> new PackageItem(props, style))
+                                    .properties(p -> p.stacksTo(1))
+                                    .model((ctx, prov) -> {})
+                                    .setData(ProviderType.LANG, (prov, entry) -> {})
+                                    .register()
+                    )
+                    .toList();
+
     public static final ItemEntry<SequencedAssemblyItem>
             INCOMPLETE_ANDESITE_ALLOY = sequencedIngredient("incomplete_andesite_alloy");
             //INCOMPLETE_STRONGMAN_PATCH = sequencedIngredient("incomplete_strongman_patch") // kao

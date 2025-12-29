@@ -25,7 +25,6 @@ public class TestosteroneItemHandlerWrapper implements TestosteroneItemHandler {
 
     @Override
     public CompoundTag serializeNBT() {
-        // Most IItemHandler implementations also implement INBTSerializable
         if (handler instanceof net.minecraftforge.common.util.INBTSerializable<?> serializable) {
             Object tag = serializable.serializeNBT();
             if (tag instanceof CompoundTag compoundTag) {

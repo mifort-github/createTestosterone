@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,14 +35,19 @@ public class PackageItemMixin {
     private void constructor(Item.Properties properties, PackageStyles.PackageStyle style, CallbackInfo ci) {
         if (TestosteronePackageStyles.TESTOSTERONE_PILL_STYLES.contains(style))
             (style.rare() ? PackageStyles.RARE_BOXES : PackageStyles.STANDARD_BOXES).remove((PackageItem) (Object) this);
+
+        if (TestosteronePackageStyles.TRENBOLONE_VIAL_STYLES.contains(style))
+            (style.rare() ? PackageStyles.RARE_BOXES : PackageStyles.STANDARD_BOXES).remove((PackageItem) (Object) this);
     }
 
     /**
      * @author mifort
      * @reason create testosterone's custom translations
      */
-    @Overwrite
-    public String getDescriptionId() {
-        return "item." + style.getItemId().getNamespace() + (style.rare() ? ".rare_package" : ".package");
+    @Inject(method = "getDescriptionId", at = @At("HEAD"), cancellable = true)
+    public void getDescriptionId(CallbackInfoReturnable<String> cir) {
+        if (style.getItemId().getNamespace().equals("testosterone")) {
+            cir.setReturnValue("item." + style.type().replaceFirst(":", ".") + "_package");
+        }
     }
 }

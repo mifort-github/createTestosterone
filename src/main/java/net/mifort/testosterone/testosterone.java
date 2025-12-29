@@ -181,6 +181,18 @@ public class testosterone {
                 );
             });
 
+            TestosteronePackageStyles.TRENBOLONE_VIAL_STYLES.forEach(style -> {
+                AllPartialModels.PACKAGES.put(
+                        style.getItemId(),
+                        PartialModel.of(new ResourceLocation(MOD_ID, "item/" + style.getItemId().getPath()))
+                );
+
+                AllPartialModels.PACKAGE_RIGGING.put(
+                        style.getItemId(),
+                        PartialModel.of(style.getRiggingModel())
+                );
+            });
+
         }
 
         @SubscribeEvent

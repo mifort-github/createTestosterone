@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.ProviderType;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.items.testosteroneModItems;
+import net.mifort.testosterone.packages.TestosteronePackageStyles;
 import net.mifort.testosterone.ponder.testosteronePonder;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.resources.ResourceLocation;
@@ -66,11 +67,12 @@ public class dataGen {
 
         addCategoryTranslatable("decantation","Decantation");
 
-        addPackagesToLang();
+        addPackagesToLang(TestosteronePackageStyles.TESTOSTERONE_TYPE, "Testosterone Pill Package");
+        addPackagesToLang(TestosteronePackageStyles.TRENBOLONE_TYPE, "Trenbolone Package");
     }
 
-    private static void addPackagesToLang() {
-        REGISTRATE.addLang("item", new ResourceLocation(testosterone.MOD_ID, "package"), "Testosterone Pill Package");
+    private static void addPackagesToLang(ResourceLocation id, String translation) {
+        REGISTRATE.addLang("item", id.withSuffix("_package"), translation);
     }
 
     private static void addItemToLang(RegistryObject<Item> item) {
