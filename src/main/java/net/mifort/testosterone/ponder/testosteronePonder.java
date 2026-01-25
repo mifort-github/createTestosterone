@@ -18,7 +18,7 @@ public class testosteronePonder implements PonderPlugin {
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
-        ResourceLocation dreamBlockId = new ResourceLocation("estrogen", "dormant_dream_block");
+        ResourceLocation dreamBlockId = new ResourceLocation("estrogen", "dream_block");
         Block dormantDreamBlock = ForgeRegistries.BLOCKS.getValue(dreamBlockId);
 
         String schematic = dormantDreamBlock != Blocks.AIR ? "john_bell_estrogen" : "john_bell";

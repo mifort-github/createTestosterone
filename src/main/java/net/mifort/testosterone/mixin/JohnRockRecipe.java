@@ -24,7 +24,7 @@ public abstract class JohnRockRecipe {
 
     @Inject(method = "playSound", at = @At(value = "HEAD", target = "Lnet/minecraft/client/player/LocalPlayer;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z"))
     private void onPlaySound(Level world, BlockPos pos, CallbackInfo ci) {
-        final ResourceLocation dreamBlockId = new ResourceLocation("estrogen", "dormant_dream_block");
+        final ResourceLocation dreamBlockId = new ResourceLocation("estrogen", "dream_block");
         final Block dormantDreamBlock = ForgeRegistries.BLOCKS.getValue(dreamBlockId);
 
 
