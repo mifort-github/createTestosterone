@@ -99,7 +99,7 @@ public class ConfigRegistry {
 
         CLIENT_BUILDER.push("Roid Rage Visuals");
 
-        DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", true);
+        DISPLAY_SPEED = CLIENT_BUILDER.comment("Display the speed on the action bar.").define("Display Speed", false);
         RENDER_TRAIL = CLIENT_BUILDER.comment("Render the trenbolone trail.").define("Render Trail", true);
         TRAIL_MIN_RENDER_DISTANCE = CLIENT_BUILDER.comment("How close to the player the trail should render.").defineInRange("Minimum Render Distance", 2, 0, Double.MAX_VALUE);
         TRAIL_OFFSET = CLIENT_BUILDER.comment("The offset of the trail").defineInRange("Trail Offset", 0, -2048D, 2048D);
