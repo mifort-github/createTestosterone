@@ -1,4 +1,4 @@
-<p><img src="https://cdn.modrinth.com/data/pIwmV2xi/images/80e04ee356bd6dfad73d6e347d66f6a34183398d.png" alt="banner"></p>
+<p><img src="https://cdn.modrinth.com/data/cached_images/f98e9f0b3a31bf91e5835aa6c8daa764380bf4b4.png" alt="banner"></p>
 
 <div align="center">
 <a href="https://modrinth.com/mod/testosterone/versions">
@@ -21,11 +21,10 @@
 > [!TIP]
 > This is a <b>FORGE ONLY</b> addon, we recommend using <strong><a href="https://modrinth.com/mod/emi">EMI</a>/<a href="https://modrinth.com/mod/jei">JEI</a>/<a href="https://modrinth.com/mod/rei">REI</a></strong>
 
-An Addon for Create: Estrogen that adds usable testosterone, along with new items and more!
 
 <h3><code>Features</code></h3>
 
-The mod utilizes some features from Create: Estrogen for the making of testosterone items.
+
 With the addition of the Testosterone Pill so comes a new process line and the new Man Power effect!
 
 The Man Power Effect gives you the ability to <b>Negate Damage</b> for a few hits, before starting a cooldown. This is useful if your friends can't keep their hands off firearms...
