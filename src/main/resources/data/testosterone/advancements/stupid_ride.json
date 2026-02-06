@@ -4,8 +4,10 @@
     "ride": {
       "trigger": "minecraft:started_riding",
       "conditions": {
-        "entity": {
-          "type": "testosterone:rat"
+        "player": {
+          "vehicle": {
+            "type": "testosterone:rat"
+          }
         }
       }
     }
