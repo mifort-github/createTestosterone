@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.ProviderType;
 import net.createmod.ponder.foundation.PonderIndex;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.effects.testosteroneModEffects;
+import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.packages.TestosteronePackageStyles;
@@ -91,6 +92,12 @@ public class dataGen {
         addItemDescription(testosteroneModBlocks.FRAGILE_COPYCAT_BLOCK.asItem(), "Only true Italians can _Run Through_ these");
 
         addItemDescription(testosteroneModBlocks.AEQUALIS.asItem(), "A _strange stone_ formed when §kestrone§r and §ktestosterone§r touch.");
+
+        addEntityName(testosteroneEntities.RAT.getId(), "Stupid Rat");
+    }
+
+    private static void addEntityName(ResourceLocation entity, String translation) {
+        REGISTRATE.addLang("entity", entity, "Stupid Rat");
     }
 
     private static void addItemDescription(Item item, String translation) {
