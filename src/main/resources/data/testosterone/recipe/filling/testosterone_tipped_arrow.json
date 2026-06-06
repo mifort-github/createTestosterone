@@ -1,0 +1,29 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:arrow"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 250,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "testosterone:man_power_potion"
+        }
+      },
+      "fluids": "testosterone:testosterone_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:tipped_arrow",
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "testosterone:man_power_potion"
+        }
+      }
+    }
+  ]
+}

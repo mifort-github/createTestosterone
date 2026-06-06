@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "testosterone:trenbolone_shot"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "testosterone:diluted_zinc_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "testosterone:better_trenbolone_shot"
+    }
+  ]
+}

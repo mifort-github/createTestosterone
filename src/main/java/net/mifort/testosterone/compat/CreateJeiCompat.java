@@ -3,7 +3,7 @@ package net.mifort.testosterone.compat;
 import com.simibubi.create.compat.jei.ConversionRecipe;
 import com.simibubi.create.compat.jei.category.MysteriousItemConversionCategory;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 public class CreateJeiCompat {
     public static void register() {

@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 125,
+      "fluid": "testosterone:whey_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "testosterone:whey_protein"
+    }
+  ]
+}

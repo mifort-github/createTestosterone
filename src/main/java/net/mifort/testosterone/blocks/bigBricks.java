@@ -1,5 +1,6 @@
 package net.mifort.testosterone.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -31,6 +32,11 @@ public class bigBricks extends HorizontalDirectionalBlock {
                 .setValue(X, false)
                 .setValue(Y, false)
                 .setValue(Z, false));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return null;
     }
 
 

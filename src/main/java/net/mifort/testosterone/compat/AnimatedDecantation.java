@@ -9,8 +9,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;
 
 public class AnimatedDecantation extends AnimatedKinetics {
-
-    @Override
     public void draw(GuiGraphics graphics, int xOffset, int yOffset) {
         PoseStack matrixStack = graphics.pose();
         matrixStack.pushPose();

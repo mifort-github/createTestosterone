@@ -15,7 +15,7 @@ import net.minecraft.world.entity.Entity;
 
 public class ratModel<T extends Entity> extends HierarchicalModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "rat"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("modid", "rat"), "main");
 	private final ModelPart root;
 	private final ModelPart body;
 	private final ModelPart WhiskersL;
@@ -97,12 +97,12 @@ public class ratModel<T extends Entity> extends HierarchicalModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		frontLleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		frontRleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		backLleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		backRleg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack p_170625_, VertexConsumer p_170626_, int p_170627_, int p_170628_, int p_350603_) {
+		body.render(p_170625_, p_170626_, p_170627_, p_170628_);
+		frontLleg.render(p_170625_, p_170626_, p_170627_, p_170628_);
+		frontRleg.render(p_170625_, p_170626_, p_170627_, p_170628_);
+		backLleg.render(p_170625_, p_170626_, p_170627_, p_170628_);
+		backRleg.render(p_170625_, p_170626_, p_170627_, p_170628_);
 	}
 
 	@Override

@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:ingots/zinc"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "id": "testosterone:diluted_zinc_fluid"
+    },
+    {
+      "id": "create:zinc_ingot"
+    }
+  ]
+}

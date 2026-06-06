@@ -1,40 +1,32 @@
 package net.mifort.testosterone.particles;
 
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
 public record airPassingParticleData(UUID playerUUID) implements ParticleOptions {
-    public static final Deserializer<airPassingParticleData> DESERIALIZER = new Deserializer<>() {
 
-        @Override
-        public @NotNull airPassingParticleData fromCommand(@NotNull ParticleType<airPassingParticleData> pParticleType, StringReader pReader) throws CommandSyntaxException {
-            return new airPassingParticleData(UUID.fromString(pReader.getString()));
-        }
+    public static final MapCodec<airPassingParticleData> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(
+                    UUIDUtil.CODEC.fieldOf("playerUUID").forGetter(airPassingParticleData::playerUUID)
+            ).apply(instance, airPassingParticleData::new)
+    );
 
-        @Override
-        public @NotNull airPassingParticleData fromNetwork(@NotNull ParticleType<airPassingParticleData> pParticleType, FriendlyByteBuf pBuffer) {
-            return new airPassingParticleData(pBuffer.readUUID());
-        }
-    };
-    
+    public static final StreamCodec<RegistryFriendlyByteBuf, airPassingParticleData> STREAM_CODEC =
+            StreamCodec.composite(
+                    UUIDUtil.STREAM_CODEC, airPassingParticleData::playerUUID,
+                    airPassingParticleData::new
+            );
+
     @Override
-    public @NotNull ParticleType<?> getType() {
+    public @NotNull ParticleType<airPassingParticleData> getType() {
         return testosteroneModParticles.AIR_PASSING.get();
-    }
-
-    @Override
-    public void writeToNetwork(@NotNull FriendlyByteBuf pBuffer) {
-        pBuffer.writeUUID(playerUUID);
-    }
-
-    @Override
-    public @NotNull String writeToString() {
-        return playerUUID.toString();
     }
 }

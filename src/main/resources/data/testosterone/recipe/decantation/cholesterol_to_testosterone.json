@@ -1,0 +1,17 @@
+{
+  "type": "testosterone:decantation",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1,
+      "fluid": "testosterone:cholesterol_fluid"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1,
+      "id": "testosterone:testosterone_fluid"
+    }
+  ]
+}
+

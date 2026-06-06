@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "tag": "c:milk",
+      "amount": 250
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 25,
+      "fluid": "testosterone:beer_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "testosterone:cheese_curds"
+    },
+    {
+      "chance": 0.75,
+      "id": "testosterone:cheese_curds"
+    },
+    {
+      "id": "testosterone:whey_fluid",
+      "amount": 250
+    }
+  ]
+}

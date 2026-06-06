@@ -1,0 +1,16 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "tag": "c:eggs"
+    },
+    {
+      "item": "testosterone:whey_protein"
+    }
+  ],
+  "results": [
+    {
+      "id": "create:blaze_cake_base"
+    }
+  ]
+}

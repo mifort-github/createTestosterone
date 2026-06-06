@@ -1,7 +1,6 @@
 package net.mifort.testosterone.items.custom;
 
-import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
-import net.mifort.testosterone.items.testosteroneModItems;
+import net.mifort.testosterone.advancements.testosteroneModTriggers;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,12 +12,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+//import top.theillusivec4.curios.api.CuriosApi;
+//import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 public class beerMug extends Item {
     public static final int BEER_DURATION = 3600;
@@ -59,23 +58,23 @@ public class beerMug extends Item {
         return UseAnim.DRINK;
     }
 
-    @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
+    @EventBusSubscriber(modid = testosterone.MOD_ID)
     public static class downside {
         @SubscribeEvent
-        public static void onTick(LivingEvent.LivingTickEvent event) {
+        public static void onTick(EntityTickEvent.Post event) {
             if (event.getEntity() instanceof ServerPlayer player) {
                 int current = player.getPersistentData().getInt(BEER_DOWNSIDE);
 
                 boolean matej = false;
 
-                if (CuriosApi.getCuriosInventory(event.getEntity()).resolve().isPresent()) {
-                    ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(event.getEntity()).resolve().get();
-
-
-                    if (curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).isPresent()) {
-                        matej = curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).get().stack().getDisplayName().getString().equals("[matej]");
-                    }
-                }
+//                if (CuriosApi.getCuriosInventory(event.getEntity()).resolve().isPresent()) {
+//                    ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(event.getEntity()).resolve().get();
+//
+//
+//                    if (curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).isPresent()) {
+//                        matej = curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).get().stack().getDisplayName().getString().equals("[matej]");
+//                    }
+//                }
 
                 if (!matej) {
                     if (current > BEER_DURATION) {
@@ -96,7 +95,7 @@ public class beerMug extends Item {
 
                     if (current > 5 * BEER_DURATION) {
                         player.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, true, true));
-                        testosteroneAdvancementUtils.INEBRIATE.trigger(player);
+                        testosteroneModTriggers.INEBRIATE.get().trigger(player);
                     }
 
                     if (current > 0) {

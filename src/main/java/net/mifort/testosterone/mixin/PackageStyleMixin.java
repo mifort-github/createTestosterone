@@ -3,6 +3,8 @@ package net.mifort.testosterone.mixin;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import net.minecraft.resources.ResourceLocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,14 +23,16 @@ class PackageStyleMixin {
     @Final
     private String type;
 
+    @Unique
+
     /**
      * @author mifort
      * @reason create doesn't normally support package textures from other namespaces
      */
     @Inject(method = "getItemId()Lnet/minecraft/resources/ResourceLocation;", at = @At(value = "RETURN", shift = At.Shift.BEFORE), cancellable = true, remap = false)
     void getItemId(CallbackInfoReturnable<ResourceLocation> cir, @Local(name = "id") String id) {
-        // if it has a namespace then there is no reason to convert it
-        if (testosterone$IdRegex.asMatchPredicate().test(id)) cir.setReturnValue(new ResourceLocation(id));
+        if (testosterone$IdRegex.asMatchPredicate().test(id))
+            cir.setReturnValue(ResourceLocation.parse(id)); // was: withDefaultNamespace(id)
     }
 
     /**
@@ -37,9 +41,14 @@ class PackageStyleMixin {
      */
     @Inject(method = "getRiggingModel()Lnet/minecraft/resources/ResourceLocation;", at = @At(value = "RETURN", shift = At.Shift.BEFORE), cancellable = true, remap = false)
     void getRiggingModel(CallbackInfoReturnable<ResourceLocation> cir, @Local(name = "size") String size) {
-        if (testosterone$IdRegex.asMatchPredicate().test(type)) {
-            var namespace = new ResourceLocation(type).getNamespace();
-            cir.setReturnValue(new ResourceLocation(namespace, "item/package/rigging_" + size));
+        boolean hasNamespace = testosterone$IdRegex.asMatchPredicate().test(type);
+        ResourceLocation resolved;
+        if (hasNamespace) {
+            var namespace = ResourceLocation.parse(type).getNamespace();
+            resolved = ResourceLocation.fromNamespaceAndPath(namespace, "item/package/rigging_" + size);
+        } else {
+            resolved = cir.getReturnValue();
         }
+        if (hasNamespace) cir.setReturnValue(resolved);
     }
 }

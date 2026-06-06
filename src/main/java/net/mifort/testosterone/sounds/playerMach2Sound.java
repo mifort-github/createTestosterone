@@ -32,7 +32,7 @@ public class playerMach2Sound extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        if (this.player.isRemoved() || !this.player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get())) {
+        if (this.player.isRemoved() || !this.player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT)) {
             this.stop();
         } else {
             this.x = player.getX();

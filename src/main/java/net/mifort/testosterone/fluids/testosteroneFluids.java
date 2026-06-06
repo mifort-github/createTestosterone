@@ -2,25 +2,23 @@ package net.mifort.testosterone.fluids;
 
 import com.tterrag.registrate.util.entry.FluidEntry;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
+import net.mifort.testosterone.testosterone;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.fluids.FluidInteractionRegistry;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.mifort.testosterone.testosterone;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.fluids.BaseFlowingFluid;
+import net.neoforged.neoforge.fluids.FluidInteractionRegistry;
 import org.jetbrains.annotations.Nullable;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
-@EventBusSubscriber(modid = testosterone.MOD_ID, bus = Bus.MOD)
 public class testosteroneFluids {
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> CHOLESTEROL_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> CHOLESTEROL_FLUID =
             REGISTRATE.fluid("cholesterol_fluid", testosterone.rl("block/cholesterol_fluid_still"), testosterone.rl("block/cholesterol_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canExtinguish(true)
@@ -32,7 +30,7 @@ public class testosteroneFluids {
                             .explosionResistance(100f))
                     .register();
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> DILUTED_ZINC_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> DILUTED_ZINC_FLUID =
             REGISTRATE.fluid("diluted_zinc_fluid", testosterone.rl("block/diluted_zinc_fluid_still"), testosterone.rl("block/diluted_zinc_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canExtinguish(true)
@@ -44,7 +42,7 @@ public class testosteroneFluids {
                             .explosionResistance(100f))
                     .register();
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> TESTOSTERONE_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> TESTOSTERONE_FLUID =
             REGISTRATE.fluid("testosterone_fluid", testosterone.rl("block/testosterone_fluid_still"), testosterone.rl("block/testosterone_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canHydrate(true)
@@ -54,7 +52,7 @@ public class testosteroneFluids {
                             .tickRate(5)
                             .slopeFindDistance(3)
                             .explosionResistance(100f))
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BaseFlowingFluid.Flowing.Source::new)
                     .block(LiquidBlock::new)
                     .build()
                     .bucket()
@@ -62,7 +60,7 @@ public class testosteroneFluids {
                     .build()
                     .register();
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> ESTRONE_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> ESTRONE_FLUID =
             REGISTRATE.fluid("estrone_fluid", testosterone.rl("block/estrone_fluid_still"), testosterone.rl("block/estrone_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canHydrate(true)
@@ -72,7 +70,7 @@ public class testosteroneFluids {
                             .tickRate(5)
                             .slopeFindDistance(3)
                             .explosionResistance(100f))
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BaseFlowingFluid.Flowing.Source::new)
                     .block(LiquidBlock::new)
                     .build()
                     .bucket()
@@ -80,7 +78,7 @@ public class testosteroneFluids {
                     .build()
                     .register();
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> TRENBOLONE_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> TRENBOLONE_FLUID =
             REGISTRATE.fluid("trenbolone_fluid", testosterone.rl("block/trenbolone_fluid_still"), testosterone.rl("block/trenbolone_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canHydrate(true)
@@ -90,7 +88,7 @@ public class testosteroneFluids {
                             .tickRate(5)
                             .slopeFindDistance(3)
                             .explosionResistance(100f))
-                    .source(ForgeFlowingFluid.Source::new)
+                    .source(BaseFlowingFluid.Flowing.Source::new)
                     .block(LiquidBlock::new)
                     .build()
                     .bucket()
@@ -98,7 +96,7 @@ public class testosteroneFluids {
                     .build()
                     .register();
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> BEER_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> BEER_FLUID =
             REGISTRATE.fluid("beer_fluid", testosterone.rl("block/beer_fluid_still"), testosterone.rl("block/beer_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canExtinguish(true)
@@ -110,7 +108,7 @@ public class testosteroneFluids {
                             .explosionResistance(100f))
                     .register();
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> WHEY_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> WHEY_FLUID =
             REGISTRATE.fluid("whey_fluid", testosterone.rl("block/whey_fluid_still"), testosterone.rl("block/whey_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canExtinguish(true)
@@ -122,7 +120,7 @@ public class testosteroneFluids {
                             .explosionResistance(100f))
                     .register();
 
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> CHEESE_FLUID =
+    public static final FluidEntry<BaseFlowingFluid.Flowing> CHEESE_FLUID =
             REGISTRATE.fluid("cheese_fluid", testosterone.rl("block/cheese_fluid_still"), testosterone.rl("block/cheese_fluid_flow"))
                     .properties(b -> b.viscosity(1500)
                             .canExtinguish(true)
@@ -141,9 +139,9 @@ public class testosteroneFluids {
     public static void registerFluidInteractions() {
         final BlockState BLOCK = testosteroneModBlocks.AEQUALIS.get().defaultBlockState();
 
-        final ResourceLocation estrogenFluidId = new ResourceLocation("estrogen", "liquid_estrogen");
+        final ResourceLocation estrogenFluidId = ResourceLocation.fromNamespaceAndPath("estrogen", "liquid_estrogen");
 
-        final @Nullable Fluid estrogenFluid = ForgeRegistries.FLUIDS.getValue(estrogenFluidId);
+        final @Nullable Fluid estrogenFluid = BuiltInRegistries.FLUID.get(estrogenFluidId);
 
         if (estrogenFluid != Fluids.EMPTY) {
             FluidInteractionRegistry.addInteraction(estrogenFluid.getFluidType(), new FluidInteractionRegistry.InteractionInformation(

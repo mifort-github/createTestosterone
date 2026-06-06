@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "testosterone:beer_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "testosterone:beer_mug"
+    }
+  ]
+}

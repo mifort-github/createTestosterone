@@ -1,41 +1,36 @@
 package net.mifort.testosterone.particles;
 
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.codec.ByteBufCodecs;
 
 import java.util.UUID;
 
 public record runParticleData(UUID playerUUID, int duration, long tick) implements ParticleOptions {
-    public static final Deserializer<runParticleData> DESERIALIZER = new Deserializer<>() {
 
-        @Override
-        public runParticleData fromCommand(ParticleType<runParticleData> pParticleType, StringReader pReader) throws CommandSyntaxException {
-            return new runParticleData(UUID.fromString(pReader.readString()), pReader.readInt(), pReader.readLong());
-        }
+    public static final MapCodec<runParticleData> CODEC = RecordCodecBuilder.mapCodec(instance ->
+            instance.group(
+                    UUIDUtil.CODEC.fieldOf("playerUUID").forGetter(runParticleData::playerUUID),
+                    com.mojang.serialization.Codec.INT.fieldOf("duration").forGetter(runParticleData::duration),
+                    com.mojang.serialization.Codec.LONG.fieldOf("tick").forGetter(runParticleData::tick)
+            ).apply(instance, runParticleData::new)
+    );
 
-        @Override
-        public runParticleData fromNetwork(ParticleType<runParticleData> pParticleType, FriendlyByteBuf pBuffer) {
-            return new runParticleData(pBuffer.readUUID(), pBuffer.readInt(), pBuffer.readLong());
-        }
-    };
+    public static final StreamCodec<RegistryFriendlyByteBuf, runParticleData> STREAM_CODEC =
+            StreamCodec.composite(
+                    UUIDUtil.STREAM_CODEC, runParticleData::playerUUID,
+                    ByteBufCodecs.INT, runParticleData::duration,
+                    ByteBufCodecs.VAR_LONG, runParticleData::tick,
+                    runParticleData::new
+            );
 
     @Override
-    public ParticleType<?> getType() {
+    public ParticleType<runParticleData> getType() {
         return testosteroneModParticles.TESTOSTERONE_RUN.get();
-    }
-
-    @Override
-    public void writeToNetwork(FriendlyByteBuf pBuffer) {
-        pBuffer.writeUUID(playerUUID);
-        pBuffer.writeInt(duration);
-        pBuffer.writeLong(tick);
-    }
-
-    @Override
-    public String writeToString() {
-        return playerUUID.toString() + ", " + duration + ", " + tick;
     }
 }

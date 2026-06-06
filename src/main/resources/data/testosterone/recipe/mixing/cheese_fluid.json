@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "testosterone:cheese_curds"
+    },
+    {
+      "item": "testosterone:cheese_curds"
+    }
+  ],
+  "results": [
+    {
+      "amount": 200,
+      "id": "testosterone:cheese_fluid"
+    }
+  ]
+}

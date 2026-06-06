@@ -1,7 +1,7 @@
 package net.mifort.testosterone.particles;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.config.testosteroneConfigs;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.*;
@@ -26,6 +26,7 @@ public class airPassingParticle extends SingleQuadParticle {
     protected airPassingParticle(ClientLevel pLevel, UUID playerUUID, double pX, double pY, double pZ, SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ);
         this.spriteSet = spriteSet;
+        this.rCol = this.gCol = this.bCol = 1;
 
         this.player = pLevel.getPlayerByUUID(playerUUID);
 
@@ -66,7 +67,7 @@ public class airPassingParticle extends SingleQuadParticle {
 
     @Override
     public void render(@NotNull VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
-        if (!ConfigRegistry.RENDER_TRAIL.get()) return;
+        if (!testosteroneConfigs.client().renderTrail.get()) return;
 
         Vec3 playerPos = pRenderInfo.getPosition();
         float pX = (float) (Mth.lerp(pPartialTicks, this.xo, this.x) - playerPos.x());
@@ -104,10 +105,10 @@ public class airPassingParticle extends SingleQuadParticle {
         float v0 = this.getV0();
         float v1 = this.getV1();
         int lightColor = this.getLightColor(pPartialTicks);
-        pBuffer.vertex(corners[0].x(), corners[0].y(), corners[0].z()).uv(u1, v1).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(lightColor).endVertex();
-        pBuffer.vertex(corners[1].x(), corners[1].y(), corners[1].z()).uv(u1, v0).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(lightColor).endVertex();
-        pBuffer.vertex(corners[2].x(), corners[2].y(), corners[2].z()).uv(u0, v0).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(lightColor).endVertex();
-        pBuffer.vertex(corners[3].x(), corners[3].y(), corners[3].z()).uv(u0, v1).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(lightColor).endVertex();
+        pBuffer.addVertex(corners[0].x(), corners[0].y(), corners[0].z()).setUv(u1, v1).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setUv2(lightColor & 0xFFFF, lightColor >> 16);
+        pBuffer.addVertex(corners[1].x(), corners[1].y(), corners[1].z()).setUv(u1, v0).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setUv2(lightColor & 0xFFFF, lightColor >> 16);
+        pBuffer.addVertex(corners[2].x(), corners[2].y(), corners[2].z()).setUv(u0, v0).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setUv2(lightColor & 0xFFFF, lightColor >> 16);
+        pBuffer.addVertex(corners[3].x(), corners[3].y(), corners[3].z()).setUv(u0, v1).setColor(this.rCol, this.gCol, this.bCol, this.alpha).setUv2(lightColor & 0xFFFF, lightColor >> 16);
     }
 
     @Override

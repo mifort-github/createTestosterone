@@ -1,0 +1,27 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "key": {
+    "W": {
+      "item": "testosterone:rat_fur"
+    },
+    "I": {
+      "tag": "c:dyes/light_gray"
+    }
+  },
+  "pattern": [
+    "WIW",
+    " W ",
+    " W ",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "testosterone:tie",
+    "components": {
+      "minecraft:custom_data": {
+        "color": "light_gray"
+      }
+    }
+  }
+}

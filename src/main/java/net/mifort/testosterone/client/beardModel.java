@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class beardModel extends Model {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(testosterone.MOD_ID, "beardmodel2"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "beardmodel2"), "main");
 	private final ModelPart bb_main;
 
 	public beardModel(ModelPart root) {
@@ -47,7 +47,7 @@ public class beardModel extends Model {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		bb_main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack p_103111_, VertexConsumer p_103112_, int p_103113_, int p_103114_, int p_350308_) {
+		bb_main.render(p_103111_, p_103112_, p_103113_, p_103114_, p_350308_);
 	}
 }

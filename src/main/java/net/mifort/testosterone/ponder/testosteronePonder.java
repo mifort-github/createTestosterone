@@ -6,20 +6,20 @@ import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 public class testosteronePonder implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        PonderSceneRegistrationHelper<ItemProviderEntry<?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
+        PonderSceneRegistrationHelper<ItemProviderEntry<?, ?>> HELPER = helper.withKeyFunction(RegistryEntry::getId);
 
-        ResourceLocation dreamBlockId = new ResourceLocation("estrogen", "dream_block");
-        Block dormantDreamBlock = ForgeRegistries.BLOCKS.getValue(dreamBlockId);
+        ResourceLocation dreamBlockId = ResourceLocation.fromNamespaceAndPath("estrogen", "dream_block");
+        Block dormantDreamBlock = BuiltInRegistries.BLOCK.get(dreamBlockId);
 
         String schematic = dormantDreamBlock != Blocks.AIR ? "john_bell_estrogen" : "john_bell";
 

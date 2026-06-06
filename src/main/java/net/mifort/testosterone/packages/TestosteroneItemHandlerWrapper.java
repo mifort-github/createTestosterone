@@ -1,8 +1,10 @@
 package net.mifort.testosterone.packages;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
+import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 public class TestosteroneItemHandlerWrapper implements TestosteroneItemHandler {
@@ -25,8 +27,8 @@ public class TestosteroneItemHandlerWrapper implements TestosteroneItemHandler {
 
     @Override
     public CompoundTag serializeNBT() {
-        if (handler instanceof net.minecraftforge.common.util.INBTSerializable<?> serializable) {
-            Object tag = serializable.serializeNBT();
+        if (handler instanceof INBTSerializable<?> serializable) {
+            Object tag = serializable.serializeNBT(Minecraft.getInstance().level.registryAccess());
             if (tag instanceof CompoundTag compoundTag) {
                 return compoundTag;
             }

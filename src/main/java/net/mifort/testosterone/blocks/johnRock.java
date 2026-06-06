@@ -1,10 +1,9 @@
 package net.mifort.testosterone.blocks;
 
-import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.config.testosteroneConfigs;
 import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
@@ -107,7 +106,7 @@ public class johnRock extends Block {
         Set<BlockPos> visited = new HashSet<>();
         Queue<BlockPos> queue = new ArrayDeque<>();
 
-        int limit = ConfigRegistry.JOHN_ROCK_LIMIT.get();
+        int limit = testosteroneConfigs.server().johnRockLimit.get();
         int toggledCount = 0;
 
         for (Direction direction : Direction.values()) {

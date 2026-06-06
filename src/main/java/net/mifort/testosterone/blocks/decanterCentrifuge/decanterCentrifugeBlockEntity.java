@@ -6,12 +6,14 @@ import net.mifort.testosterone.recipes.testosteroneModRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class decanterCentrifugeBlockEntity extends KineticBlockEntity {
 
@@ -59,7 +61,7 @@ public class decanterCentrifugeBlockEntity extends KineticBlockEntity {
             return level.getRecipeManager()
                     .getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType())
                     .stream()
-                    .filter(decantation.class::isInstance)
+                    .map(RecipeHolder::value)
                     .map(decantation.class::cast)
                     .filter(r -> r.match(this))
                     .toList();
@@ -67,4 +69,5 @@ public class decanterCentrifugeBlockEntity extends KineticBlockEntity {
             return new ArrayList<>();
         }
     }
+
 }

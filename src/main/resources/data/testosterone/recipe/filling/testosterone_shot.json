@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "testosterone:testosterone_pill"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "testosterone:diluted_zinc_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "testosterone:testosterone_shot"
+    }
+  ]
+}

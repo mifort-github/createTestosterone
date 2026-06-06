@@ -1,13 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8.5",
-  "compatibilityLevel": "JAVA_17",
   "package": "net.mifort.testosterone.mixin",
-  "refmap": "testosterone.refmap.json",
-  "priority": 1101,
-  "injectors": {
-    "defaultRequire": 1
-  },
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "mixins.testosterone.refmap.json",
   "mixins": [
     "JohnRockRecipe",
     "PackageItemMixin",

@@ -17,15 +17,15 @@ public class testosteroneSpriteShifts {
 
 
     private static CTSpriteShiftEntry omni(String name) {
-        return CTSpriteShifter.getCT(AllCTTypes.OMNIDIRECTIONAL, new ResourceLocation(testosterone.MOD_ID, "block/" + name), new ResourceLocation(testosterone.MOD_ID, "block/" + name + "_connected"));
+        return CTSpriteShifter.getCT(AllCTTypes.OMNIDIRECTIONAL, ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "block/" + name), ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "block/" + name + "_connected"));
     }
 
     private static CTSpriteShiftEntry horizontal(String name) {
-        return CTSpriteShifter.getCT(AllCTTypes.HORIZONTAL_KRYPPERS, new ResourceLocation(testosterone.MOD_ID, "block/" + name), new ResourceLocation(testosterone.MOD_ID, "block/" + name + "_connected"));
+        return CTSpriteShifter.getCT(AllCTTypes.HORIZONTAL_KRYPPERS, ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "block/" + name), ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "block/" + name + "_connected"));
     }
 
     private static CTSpriteShiftEntry rect(String name) {
-        return CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, new ResourceLocation(testosterone.MOD_ID, "block/" + name), new ResourceLocation(testosterone.MOD_ID, "block/" + name + "_connected"));
+        return CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "block/" + name), ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "block/" + name + "_connected"));
     }
 
 

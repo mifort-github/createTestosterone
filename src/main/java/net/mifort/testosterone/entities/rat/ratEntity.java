@@ -1,7 +1,7 @@
 package net.mifort.testosterone.entities.rat;
 
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
-import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.config.testosteroneConfigs;
 import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.sounds.ratRollingSound;
@@ -9,6 +9,11 @@ import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
@@ -25,19 +30,25 @@ import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ratEntity extends Animal implements PlayerRideableJumping {
+
+    public static void build(EntityType.Builder<?> builder) {
+        builder.sized(1f, 1f);
+    }
+
     public static final SoundEvent[] ambientSounds = {
             testosteroneModSounds.RAT_SNIFF1.get(),
             testosteroneModSounds.RAT_SNIFF2.get(),
@@ -68,7 +79,7 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Cat.class, 6.0F, 1.0D, 1.2D));
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.15D));
-        this.goalSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.TemptGoal(this, 1.2D, Ingredient.of(testosteroneModItems.CHEESE_ON_A_STICK.get(), testosteroneModBlocks.CHEESE_BLOCK), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(testosteroneModItems.CHEESE_ON_A_STICK.get(), testosteroneModBlocks.CHEESE_BLOCK), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.1D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 3f));
@@ -95,6 +106,20 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
     }
 
     @Override
+    protected void removePassenger(Entity passenger) {
+        if (passenger instanceof Player player && isHoldingStick(player)) {
+            ItemStack stick = getStick(player);
+            CustomData customData = stick.get(DataComponents.CUSTOM_DATA);
+            if (customData != null) {
+                CompoundTag tag = customData.copyTag();
+                tag.remove("Boost");
+                stick.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
+            }
+        }
+        super.removePassenger(passenger);
+    }
+
+    @Override
     public @NotNull InteractionResult mobInteract(@NotNull Player player, @NotNull InteractionHand hand) {
         if (this.getPassengers().isEmpty()
                 && isHoldingStick(player)
@@ -104,8 +129,6 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         }
         return super.mobInteract(player, hand);
     }
-
-
 
     @Nullable
     public Player getControllingPassenger() {
@@ -117,6 +140,16 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         return null;
     }
 
+    @Override
+    protected Vec3 getRiddenInput(Player player, Vec3 travelVector) {
+        if (!isHoldingStick(player)) {
+            return Vec3.ZERO;
+        }
+        float forward = isBoosting() ? Math.max(player.zza, 1.0f) : player.zza;
+        float strafe  = player.xxa * 0.5f;
+        return new Vec3(strafe, 0.0, forward);
+    }
+
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
@@ -124,13 +157,14 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
     public void tick() {
         super.tick();
 
-        if(this.level().isClientSide()) {
+        if (this.level().isClientSide()) {
             setupAnimationStates();
+            clientOnly.playRollingSound(this, rollingSound);
         }
     }
 
     private void setupAnimationStates() {
-        if(this.idleAnimationTimeout <= 0) {
+        if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = 120;
             this.idleAnimationState.start(this.tickCount);
         } else {
@@ -142,8 +176,11 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
     static class clientOnly {
         static void playRollingSound(ratEntity rat, ratRollingSound rollingSound) {
             SoundManager soundManager = Minecraft.getInstance().getSoundManager();
+            boolean shouldPlay = rollingSound != null
+                    && rat.isBoosting()
+                    && rat.getControllingPassenger() != null;
 
-            if (rollingSound != null && rat.isBoosting()) {
+            if (shouldPlay) {
                 if (!soundManager.isActive(rollingSound)) {
                     soundManager.play(rollingSound);
                 }
@@ -155,11 +192,15 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         }
     }
 
+    @Override
     protected void tickRidden(@NotNull Player pPlayer, @NotNull Vec3 pTravelVector) {
         super.tickRidden(pPlayer, pTravelVector);
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> clientOnly.playRollingSound(this, rollingSound));
+        this.navigation.stop();
 
+        if (this.level().isClientSide()) {
+            clientOnly.playRollingSound(this, rollingSound);
+        }
 
         if (isHoldingStick(pPlayer)) {
             this.setRot(pPlayer.getYRot(), pPlayer.getXRot() * 0.5F);
@@ -167,12 +208,12 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
 
             if (isBoosting()) {
                 ItemStack stick = getStick(pPlayer);
-
-                stick.hurtAndBreak(1, pPlayer, entity -> {
-                    EquipmentSlot slot = getStickHand(pPlayer);
-                    entity.setItemSlot(slot, Items.FISHING_ROD.getDefaultInstance());
-                    entity.broadcastBreakEvent(slot);
-                });
+                EquipmentSlot slot = getStickHand(pPlayer);
+                if (this.level() instanceof ServerLevel serverLevel) {
+                    stick.hurtAndBreak(1, serverLevel, pPlayer, item -> {
+                        pPlayer.setItemSlot(slot, Items.FISHING_ROD.getDefaultInstance());
+                    });
+                }
             }
         }
     }
@@ -181,15 +222,15 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         return player.isHolding(testosteroneModItems.CHEESE_ON_A_STICK.get());
     }
 
+    @Override
     protected float getRiddenSpeed(Player pPlayer) {
         if (isHoldingStick(pPlayer)) {
             if (isBoosting()) {
-                return (float) (this.getAttributeValue(Attributes.MOVEMENT_SPEED) * ConfigRegistry.RAT_BOOST_MULTIPLIER.get());
-
+                return (float) (this.getAttributeValue(Attributes.MOVEMENT_SPEED)
+                        * testosteroneConfigs.server().ratBoostMultiplier.get());
             } else {
                 return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
             }
-
         } else {
             return 0;
         }
@@ -197,35 +238,36 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
 
     public boolean isBoosting() {
         Player rider = getControllingPassenger();
-
         if (rider != null) {
             ItemStack stick = getStick(rider);
 
-            if (stick.hasTag()) {
-                return stick.getTag().getBoolean("Boost");
+            CustomData customData = stick.get(DataComponents.CUSTOM_DATA);
+            if (customData != null) {
+                CompoundTag tag = customData.copyTag();
+                if (tag.contains("Boost")) {
+                    return tag.getBoolean("Boost");
+                }
             }
         }
-
         return false;
     }
 
     public ItemStack getStick(Player player) {
         ItemStack mainHandItem = player.getMainHandItem();
-        ItemStack offHandItem = player.getOffhandItem();
-
-        return mainHandItem.getItem().equals(testosteroneModItems.CHEESE_ON_A_STICK.get()) ? mainHandItem : offHandItem;
+        ItemStack offHandItem  = player.getOffhandItem();
+        return mainHandItem.getItem().equals(testosteroneModItems.CHEESE_ON_A_STICK.get())
+                ? mainHandItem : offHandItem;
     }
 
     public EquipmentSlot getStickHand(Player player) {
         ItemStack mainHandItem = player.getMainHandItem();
-
-        return mainHandItem.getItem().equals(testosteroneModItems.CHEESE_ON_A_STICK.get()) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+        return mainHandItem.getItem().equals(testosteroneModItems.CHEESE_ON_A_STICK.get())
+                ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
     }
 
     @Override
     protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
         super.checkFallDamage(pY, pOnGround, pState, pPos);
-
         if (pOnGround) {
             this.fallDistance = this.fallDistance - 24;
         }
@@ -242,33 +284,31 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
     @Override
     public boolean canJump() {
         if (this.getControllingPassenger() != null) {
-            return (this.onGround() || this.extraJump) && isHoldingStick(this.getControllingPassenger());
+            return (this.onGround() || this.extraJump)
+                    && isHoldingStick(this.getControllingPassenger());
         } else {
             return false;
         }
     }
 
     @Override
-    public void handleStartJump(int pJumpPower) {
+    public void handleStartJump(int pJumpPower) {}
 
+    @Override
+    public void handleStopJump() {}
+
+    @Override
+    protected @Nullable SoundEvent getAmbientSound() {
+        return ambientSounds[new Random().nextInt(ambientSounds.length)];
     }
 
     @Override
-    public void handleStopJump() {
-
+    protected @Nullable SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return hurtSounds[new Random().nextInt(hurtSounds.length)];
     }
 
     @Override
-    protected @org.jetbrains.annotations.Nullable SoundEvent getAmbientSound() {
-        Random random = new Random();
-        int index = random.nextInt(4);
-        return ambientSounds[index];
-    }
-
-    @Override
-    protected @org.jetbrains.annotations.Nullable SoundEvent getHurtSound(DamageSource pDamageSource) {
-        Random random = new Random();
-        int index = random.nextInt(2);
-        return hurtSounds[index];
+    protected @NotNull ResourceKey<LootTable> getDefaultLootTable() {
+        return ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.fromNamespaceAndPath("testosterone", "entities/rat"));
     }
 }

@@ -3,7 +3,7 @@ package net.mifort.testosterone.particles;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
-import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.config.testosteroneConfigs;
 import net.mifort.testosterone.effects.roidRageEffect;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Camera;
@@ -28,21 +28,22 @@ import java.util.UUID;
 public class runParticle extends Particle {
 
     private static final ResourceLocation WHITE =
-            new ResourceLocation(testosterone.MOD_ID, "textures/particle/white.png");
+            ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "textures/particle/white.png");
 
     private static final ParticleRenderType TYPE = new ParticleRenderType() {
         @Override
-        public void begin(BufferBuilder bb, TextureManager tm) {
-            RenderSystem.depthMask(true);
+        public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
             RenderSystem.setShaderTexture(0, WHITE);
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
-            bb.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+            RenderSystem.depthMask(true);
+            return tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
         }
+
         @Override
-        public void end(Tesselator t) { t.end(); }
-        @Override
-        public String toString() { return "playerRunParticle"; }
+        public String toString() {
+            return "playerRunParticle";
+        }
     };
 
     private final float[] verts;
@@ -54,8 +55,6 @@ public class runParticle extends Particle {
     private float green;
     private float blue;
 
-
-
     private final PoseStack scratch = new PoseStack();
 
     public runParticle(ClientLevel lvl, UUID playerUUID, int duration, long time, double x, double y, double z) {
@@ -66,55 +65,49 @@ public class runParticle extends Particle {
 
         Player player = lvl.getPlayerByUUID(playerUUID);
         if (player == null) {
-            this.verts = new float[0];
+            this.verts    = new float[0];
             this.vertCount = 0;
-            this.yaw = 0;
+            this.yaw      = 0;
             this.swimming = false;
             return;
         }
 
         if (time % 2 == 0) {
-            this.red = 246f / 255f;
+            this.red   = 246f / 255f;
             this.green = 0f;
-            this.blue = 0f;
-
+            this.blue  = 0f;
         } else {
-            this.red = 117f / 255f;
+            this.red   = 117f / 255f;
             this.green = 245f / 255f;
-            this.blue = 80f / 255f;
+            this.blue  = 80f / 255f;
         }
 
         PlayerModel<Player> model = new PlayerModel<>(
                 Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER),
                 false);
 
-        model.hat.visible = false;
-        model.jacket.visible = false;
-        model.leftSleeve.visible = false;
+        model.hat.visible        = false;
+        model.jacket.visible     = false;
+        model.leftSleeve.visible  = false;
         model.rightSleeve.visible = false;
-        model.leftPants.visible = false;
-        model.rightPants.visible = false;
+        model.leftPants.visible   = false;
+        model.rightPants.visible  = false;
 
-        float pt = Minecraft.getInstance().getFrameTime();
-        float limbSwing = player.walkAnimation.position();
+        float pt              = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true); // getFrameTime() -> getTimer().getGameTimeDeltaPartialTick() in 1.21.1
+        float limbSwing       = player.walkAnimation.position();
         float limbSwingAmount = player.walkAnimation.speed();
 
-        model.attackTime = player.getAttackAnim(pt);
-        model.young = player.isBaby();
-        model.crouching = player.isCrouching();
+        model.attackTime  = player.getAttackAnim(pt);
+        model.young       = player.isBaby();
+        model.crouching   = player.isCrouching();
 
-        this.swimming = (player.getPose() == Pose.SWIMMING || roidRageEffect.isSwimming(player));
+        this.swimming    = (player.getPose() == Pose.SWIMMING || roidRageEffect.isSwimming(player));
         model.swimAmount = this.swimming ? 1.0F : player.getSwimAmount(pt);
 
         float headYaw   = player.getYHeadRot() - player.getYRot();
         float headPitch = player.getXRot();
 
-        model.setupAnim(player,
-                limbSwing,
-                limbSwingAmount,
-                player.tickCount + pt,
-                headYaw,
-                headPitch);
+        model.setupAnim(player, limbSwing, limbSwingAmount, player.tickCount + pt, headYaw, headPitch);
 
         ModelGrabber grab = new ModelGrabber();
         scratch.pushPose();
@@ -122,57 +115,49 @@ public class runParticle extends Particle {
             scratch.mulPose(Axis.XP.rotationDegrees(90));
         }
 
-
-
         model.renderToBuffer(scratch, grab,
                 LightTexture.FULL_BRIGHT,
                 OverlayTexture.NO_OVERLAY,
-                0xFF, 0xFF, 0xFF, 0xFF);
+                0xFFFFFFFF);
         scratch.popPose();
 
-        this.verts = grab.data;
+        this.verts     = grab.data;
         this.vertCount = grab.vertexCount;
-        this.yaw = player.yBodyRot + 180F;
+        this.yaw       = player.yBodyRot + 180F;
     }
 
     @Override
     public void render(VertexConsumer out, Camera cam, float pt) {
-        if (!ConfigRegistry.RENDER_TRAIL.get() || vertCount == 0) return;
+        if (!testosteroneConfigs.client().renderTrail.get() || vertCount == 0) return;
 
         Vec3 cp = cam.getPosition();
 
-        if (cp.closerThan(new Vec3(x, y, z), ConfigRegistry.TRAIL_MIN_RENDER_DISTANCE.get())) return;
+        if (cp.closerThan(new Vec3(x, y, z), testosteroneConfigs.client().trailMinRenderDistance.get())) return;
 
         float px = (float)(Mth.lerp(pt, xo, x) - cp.x);
         float py = (float)(Mth.lerp(pt, yo, y) - cp.y);
         float pz = (float)(Mth.lerp(pt, zo, z) - cp.z);
 
         scratch.pushPose();
-        float scale = 0.96f;
+        float scale          = 0.96f;
         float verticalOffset = swimming ? 0.8F * scale : 1.5F * scale;
         scratch.translate(px, py + verticalOffset, pz);
         scratch.scale(-scale, -scale, scale);
         scratch.mulPose(Axis.YP.rotationDegrees(yaw));
 
-        float alpha = 1F - (age + pt) / (lifetime);
+        float alpha = 1F - (age + pt) / lifetime;
+        if (alpha < 0) alpha = 0;
 
-        if (alpha < 0) {
-            alpha = 0;
-        }
-
-
-
-        int skyLight = level.getBrightness(LightLayer.SKY, cam.getBlockPosition());
+        int skyLight   = level.getBrightness(LightLayer.SKY,   cam.getBlockPosition());
         int blockLight = level.getBrightness(LightLayer.BLOCK, cam.getBlockPosition());
 
         for (int i = 0; i < vertCount; ++i) {
             int v = i * ModelGrabber.STRIDE;
-            out.vertex(scratch.last().pose(),
+            out.addVertex(scratch.last().pose(),
                             verts[v], verts[v + 1], verts[v + 2])
-                    .uv(i == 1 || i == 2 ? 1 : 0, (i & 1) == 0 ? 1 : 0)
-                    .color(red, green, blue, alpha * 0.5f)
-                    .uv2(LightTexture.pack(skyLight, blockLight))
-                    .endVertex();
+                    .setUv(i == 1 || i == 2 ? 1 : 0, (i & 1) == 0 ? 1 : 0)
+                    .setColor(red, green, blue, alpha * 0.5f)
+                    .setLight(LightTexture.pack(skyLight, blockLight));
         }
         scratch.popPose();
     }
@@ -186,31 +171,28 @@ public class runParticle extends Particle {
         static final int STRIDE = 3;
         float[] data = new float[12];
         int pos, vertexCount;
+
         @Override
-        public VertexConsumer vertex(double x, double y, double z) {
-            data[pos]   = (float) x;
-            data[pos+1] = (float) y;
-            data[pos+2] = (float) z;
-            return this;
-        }
-        @Override
-        public void endVertex() {
-            pos += STRIDE;
-            vertexCount++;
-            if (pos >= data.length) {
+        public VertexConsumer addVertex(float x, float y, float z) {
+            // Grow buffer if needed
+            if (pos + STRIDE > data.length) {
                 float[] n = new float[data.length + 12];
                 System.arraycopy(data, 0, n, 0, data.length);
                 data = n;
             }
+            data[pos]     = x;
+            data[pos + 1] = y;
+            data[pos + 2] = z;
+            pos += STRIDE;
+            vertexCount++;
+            return this;
         }
 
-        @Override public VertexConsumer color(int r, int g, int b, int a) { return this; }
-        @Override public VertexConsumer uv(float u, float v) { return this; }
-        @Override public VertexConsumer overlayCoords(int u, int v) { return this; }
-        @Override public VertexConsumer uv2(int u, int v) { return this; }
-        @Override public VertexConsumer normal(float x, float y, float z) { return this; }
-        @Override public void defaultColor(int r, int g, int b, int a) {}
-        @Override public void unsetDefaultColor() {}
+        @Override public VertexConsumer setColor(int r, int g, int b, int a)    { return this; }
+        @Override public VertexConsumer setUv(float u, float v)                 { return this; }
+        @Override public VertexConsumer setUv1(int u, int v)                    { return this; }
+        @Override public VertexConsumer setUv2(int u, int v)                    { return this; }
+        @Override public VertexConsumer setNormal(float x, float y, float z)    { return this; }
     }
 
     public static class Factory implements ParticleProvider<runParticleData> {
@@ -220,19 +202,15 @@ public class runParticle extends Particle {
         public @Nullable Particle createParticle(runParticleData data, ClientLevel level,
                                                  double x, double y, double z,
                                                  double xSpeed, double ySpeed, double zSpeed) {
-
             Player player = level.getPlayerByUUID(data.playerUUID());
             if (player != null) {
                 Vec3 vel = player.getDeltaMovement();
-                double mul = ConfigRegistry.TRAIL_OFFSET.get();
-
+                double mul = testosteroneConfigs.client().trailOffset.get();
                 x += vel.x * mul;
                 y += vel.y * mul;
                 z += vel.z * mul;
             }
-
             return new runParticle(level, data.playerUUID(), data.duration(), data.tick(), x, y, z);
         }
-
     }
 }

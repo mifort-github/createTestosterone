@@ -15,7 +15,7 @@ public class ratRenderer extends MobRenderer<ratEntity, ratModel<ratEntity>> {
 
     @Override
     public ResourceLocation getTextureLocation(ratEntity pEntity) {
-        return new ResourceLocation(testosterone.MOD_ID, "textures/entity/rat.png");
+        return ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "textures/entity/rat.png");
     }
 
     @Override

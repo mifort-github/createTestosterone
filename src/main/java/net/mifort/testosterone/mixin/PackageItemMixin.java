@@ -1,12 +1,13 @@
 package net.mifort.testosterone.mixin;
 
+import com.mojang.logging.LogUtils;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import net.mifort.testosterone.packages.TestosteroneItemHandlerWrapper;
 import net.mifort.testosterone.packages.TestosteronePackageStyles;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,12 +15,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(PackageItem.class)
+@Mixin(value = PackageItem.class, remap = false)
 public class PackageItemMixin {
     @Shadow
     public PackageStyles.PackageStyle style;
-
-    @Inject(method = "containing(Lnet/minecraftforge/items/ItemStackHandler;)Lnet/minecraft/world/item/ItemStack;", at = @At(value = "HEAD"), remap = false, cancellable = true)
+    @Inject(method = "containing(Lnet/neoforged/neoforge/items/ItemStackHandler;)Lnet/minecraft/world/item/ItemStack;", at = @At(value = "HEAD"), remap = false, cancellable = true)
     private static void containing(ItemStackHandler stacks, CallbackInfoReturnable<ItemStack> cir) {
         var contained = TestosteronePackageStyles.containing(new TestosteroneItemHandlerWrapper(stacks));
         if (contained != null) {
@@ -44,7 +44,7 @@ public class PackageItemMixin {
      * @author mifort
      * @reason create testosterone's custom translations
      */
-    @Inject(method = "getDescriptionId", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getDescriptionId", at = @At("HEAD"), cancellable = true, remap = false)
     public void getDescriptionId(CallbackInfoReturnable<String> cir) {
         if (style.getItemId().getNamespace().equals("testosterone")) {
             cir.setReturnValue("item." + style.type().replaceFirst(":", ".") + "_package");

@@ -37,7 +37,7 @@ public class SplashMixin {
 
     @Shadow @Final private List<String> splashes;
 
-    @Inject(method = "apply(Ljava/util/List;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At(value = "TAIL"))
+    @Inject(method = "apply(Ljava/util/List;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At(value = "TAIL"), remap = false)
     protected void apply(List<String> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler, CallbackInfo ci) {
         splashes.addAll(createTestosterone$testosteroneSplashes);
     }

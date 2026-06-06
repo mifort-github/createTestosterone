@@ -9,16 +9,20 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
-
+//import top.theillusivec4.curios.api.SlotContext;
+//import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 public class curioTieRenderer implements ICurioRenderer {
-    public static final ResourceLocation tieTexture = new ResourceLocation(testosterone.MOD_ID, "textures/models/tie_texture.png");
+    public static final ResourceLocation tieTexture = ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "textures/models/tie_texture.png");
     tieModel TieModel = new tieModel(Minecraft.getInstance().getEntityModels().bakeLayer(tieModel.LAYER_LOCATION));
 
     @Override
@@ -48,21 +52,23 @@ public class curioTieRenderer implements ICurioRenderer {
 
         short colorId = (short) ((currentTick / 12) % 16);
 
-        float[] color = DyeColor.byId(colorId).getTextureDiffuseColors();
+        int color = DyeColor.byId(colorId).getTextureDiffuseColor();
 
-        if (stack.getTag() != null) {
-            String nbtColor = stack.getTag().getString("color");
+        CustomData nbtData = stack.get(DataComponents.CUSTOM_DATA);
+
+        if (nbtData != null) {
+            String nbtColor = nbtData.copyTag().getString("color");
 
             for (int pId = 0; pId < 16; pId++) {
                 if (DyeColor.byId(pId).name().toLowerCase().equals(nbtColor)) {
-                    color = DyeColor.byId(pId).getTextureDiffuseColors();
+                    color = DyeColor.byId(pId).getTextureDiffuseColor();
                     break;
                 }
             }
         }
 
 
-        TieModel.renderToBuffer(matrixStack, vBuff, light, OverlayTexture.NO_OVERLAY, color[0], color[1], color[2], 1f);
+        TieModel.renderToBuffer(matrixStack, vBuff, light, OverlayTexture.NO_OVERLAY, color);
         matrixStack.popPose();
     }
 }

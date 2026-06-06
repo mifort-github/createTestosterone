@@ -5,17 +5,22 @@ import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.*;
 
+import static net.createmod.ponder.Ponder.RANDOM;
+
 public class TestosteronePackageStyles {
-    public static final ResourceLocation TESTOSTERONE_TYPE = new ResourceLocation(testosterone.MOD_ID, "testosterone_cardboard");
-    public static final ResourceLocation TRENBOLONE_TYPE = new ResourceLocation(testosterone.MOD_ID, "trenbolone_cardboard");
+    public static final ResourceLocation TESTOSTERONE_TYPE = ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "testosterone_cardboard");
+    public static final ResourceLocation TRENBOLONE_TYPE = ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "trenbolone_cardboard");
     private static final Random RANDOM = new Random();
 
 
@@ -64,22 +69,22 @@ public class TestosteronePackageStyles {
     public static ItemStack containing(TestosteroneItemHandler stacks) {
         if (isMajorityOfItemsTestosteroneItems(stacks)) {
             ItemStack box = new ItemStack(
-                    testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.size()))
+                    (ItemLike) testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.size()))
             );
 
             CompoundTag compound = new CompoundTag();
             compound.put("Items", stacks.serializeNBT());
-            box.setTag(compound);
+            box.set(DataComponents.CUSTOM_DATA, CustomData.of(compound));
 
             return box;
         } else if (isMajorityOfItemsTrenboloneItems(stacks)) {
             ItemStack box = new ItemStack(
-                    testosteroneModItems.ALL_TRENBOLONE_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TRENBOLONE_BOXES.size()))
+                    (ItemLike) testosteroneModItems.ALL_TRENBOLONE_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TRENBOLONE_BOXES.size()))
             );
 
             CompoundTag compound = new CompoundTag();
             compound.put("Items", stacks.serializeNBT());
-            box.setTag(compound);
+            box.set(DataComponents.CUSTOM_DATA, CustomData.of(compound));
 
             return box;
         }
@@ -142,8 +147,6 @@ public class TestosteronePackageStyles {
                 .filter(e -> !getAllowedTrenboloneItemsToBeCounted().contains(e.getKey()))
                 .mapToInt(Map.Entry::getValue)
                 .sum();
-
-        System.out.println((trenboloneCount > otherCount) + "QWERTY");
 
         return trenboloneCount > otherCount;
     }

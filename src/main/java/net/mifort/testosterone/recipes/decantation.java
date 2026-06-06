@@ -1,24 +1,27 @@
 package net.mifort.testosterone.recipes;
 
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeParams;
+import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
-public class decantation extends ProcessingRecipe<Inventory> {
-    public decantation(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
+public class decantation extends StandardProcessingRecipe<SingleRecipeInput> {
+    public decantation(ProcessingRecipeParams params) {
         super(testosteroneModRecipes.DECANTATION, params);
+    }
+
+    @Override
+    public boolean matches(SingleRecipeInput inv, Level worldIn) {
+        return true;
     }
 
     @Override
@@ -44,69 +47,66 @@ public class decantation extends ProcessingRecipe<Inventory> {
     public boolean match(@NotNull decanterCentrifugeBlockEntity decanterCentrifugeBlockEntity) {
         if (fluidIngredients.isEmpty() || fluidResults.isEmpty()) return false;
 
+        Level level = decanterCentrifugeBlockEntity.getLevel();
+        if (level == null) return false;
 
         Direction facing = decanterCentrifugeBlockEntity.getBlockState().getValue(HorizontalKineticBlock.HORIZONTAL_FACING);
 
-        BlockPos input = decanterCentrifugeBlockEntity.getBlockPos().relative(facing.getOpposite());
-        BlockPos output = decanterCentrifugeBlockEntity.getBlockPos().relative(facing);
+        BlockPos inputPos = decanterCentrifugeBlockEntity.getBlockPos().relative(facing.getOpposite());
+        BlockPos outputPos = decanterCentrifugeBlockEntity.getBlockPos().relative(facing);
 
-        BlockEntity inputBlockEntity;
-        BlockEntity outputBlockEntity;
-
-        if (decanterCentrifugeBlockEntity.getLevel() != null) {
-            inputBlockEntity = decanterCentrifugeBlockEntity.getLevel().getBlockEntity(input);
-            outputBlockEntity = decanterCentrifugeBlockEntity.getLevel().getBlockEntity(output);
-        } else {
-            inputBlockEntity = null;
-            outputBlockEntity = null;
-        }
-
+        BlockEntity inputBlockEntity = level.getBlockEntity(inputPos);
+        BlockEntity outputBlockEntity = level.getBlockEntity(outputPos);
 
         if (inputBlockEntity == null || outputBlockEntity == null) return false;
 
-        AtomicBoolean success = new AtomicBoolean(false);
+        IFluidHandler inputHandler = level.getCapability(
+                Capabilities.FluidHandler.BLOCK,
+                inputPos,
+                inputBlockEntity.getBlockState(),
+                inputBlockEntity,
+                null
+        );
 
-        inputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(inputHandler -> {
-            outputBlockEntity.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent(outputHandler -> {
-                if (inputHandler.getTanks() == 0 || outputHandler.getTanks() == 0) return;
+        IFluidHandler outputHandler = level.getCapability(
+                Capabilities.FluidHandler.BLOCK,
+                outputPos,
+                outputBlockEntity.getBlockState(),
+                outputBlockEntity,
+                null
+        );
 
-                int belowIdx = 0;
-                int aboveIdx = 0;
+        if (inputHandler == null || outputHandler == null) return false;
+        if (inputHandler.getTanks() == 0 || outputHandler.getTanks() == 0) return false;
 
-                FluidStack tankBelow = inputHandler.getFluidInTank(belowIdx);
-                FluidStack tankAbove = outputHandler.getFluidInTank(aboveIdx);
+        int belowIdx = 0;
+        int aboveIdx = 0;
 
-                var ingredient = getFluidIngredients().get(0);
-                FluidStack result = getFluidResults().get(0).copy();
+        FluidStack tankBelow = inputHandler.getFluidInTank(belowIdx);
+        FluidStack tankAbove = outputHandler.getFluidInTank(aboveIdx);
 
-                int required = ingredient.getRequiredAmount();
-                if (!ingredient.test(tankBelow)) return;
-                if (tankBelow.getAmount() < required) return;
+        var ingredient = getFluidIngredients().get(0);
+        FluidStack result = getFluidResults().get(0).copy();
 
-                if (!tankAbove.isEmpty() && !tankAbove.isFluidEqual(result)) return;
+        int required = ingredient.amount();
+        if (!ingredient.test(tankBelow)) return false;
+        if (tankBelow.getAmount() < required) return false;
 
-                int capacity = outputHandler.getTankCapacity(aboveIdx);
-                int freeSpace = capacity - tankAbove.getAmount();
-                if (freeSpace < result.getAmount()) return;
+        if (!tankAbove.isEmpty() && !tankAbove.isFluidEqual(result)) return false;
 
-                FluidStack simDrain = inputHandler.drain(new FluidStack(tankBelow, required), IFluidHandler.FluidAction.SIMULATE);
-                if (simDrain.getAmount() != required) return;
+        int capacity = outputHandler.getTankCapacity(aboveIdx);
+        int freeSpace = capacity - tankAbove.getAmount();
+        if (freeSpace < result.getAmount()) return false;
 
-                int simFill = outputHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
-                if (simFill != result.getAmount()) return;
+        FluidStack simDrain = inputHandler.drain(new FluidStack(tankBelow.getFluidHolder(), required), IFluidHandler.FluidAction.SIMULATE);
+        if (simDrain.getAmount() != required) return false;
 
-                inputHandler.drain(required, IFluidHandler.FluidAction.EXECUTE);
-                outputHandler.fill(result, IFluidHandler.FluidAction.EXECUTE);
+        int simFill = outputHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
+        if (simFill != result.getAmount()) return false;
 
-                success.set(true);
-            });
-        });
+        inputHandler.drain(required, IFluidHandler.FluidAction.EXECUTE);
+        outputHandler.fill(result, IFluidHandler.FluidAction.EXECUTE);
 
-        return success.get();
-    }
-
-    @Override
-    public boolean matches(@NotNull Inventory pContainer, @NotNull Level pLevel) {
-        return false;
+        return true;
     }
 }

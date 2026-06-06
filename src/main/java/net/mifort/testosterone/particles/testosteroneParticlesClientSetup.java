@@ -2,12 +2,12 @@ package net.mifort.testosterone.particles;
 
 
 import net.mifort.testosterone.testosterone;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
-@Mod.EventBusSubscriber(modid = testosterone.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = testosterone.MOD_ID, value = Dist.CLIENT)
 public final class testosteroneParticlesClientSetup {
     @SubscribeEvent
     public static void onRegisterParticles(RegisterParticleProvidersEvent event) {

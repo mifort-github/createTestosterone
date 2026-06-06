@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "tag": "c:eggs"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "testosterone:testosterone_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "testosterone:testosterone_pill"
+    }
+  ]
+}

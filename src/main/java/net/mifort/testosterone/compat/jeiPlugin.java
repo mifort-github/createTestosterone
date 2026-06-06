@@ -10,18 +10,20 @@ import net.mifort.testosterone.recipes.testosteroneModRecipes;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @JeiPlugin
 public class jeiPlugin implements IModPlugin {
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return new ResourceLocation(testosterone.MOD_ID, "jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "jei_plugin");
     }
 
     @Override
@@ -33,7 +35,12 @@ public class jeiPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 
-        List<decantation> decantations = recipeManager.getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType());
+        List<decantation> decantations = recipeManager
+                .getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType())
+                .stream()
+                .map(RecipeHolder::value)
+                .map(r -> (decantation)(Object) r)
+                .collect(Collectors.toList());
         registration.addRecipes(decantationCategory.DECANTATION_RECIPE_TYPE, decantations);
     }
 

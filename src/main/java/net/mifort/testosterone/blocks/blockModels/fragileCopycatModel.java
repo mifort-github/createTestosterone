@@ -10,7 +10,8 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelData; // Use NeoForge package
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -20,13 +21,16 @@ public class fragileCopycatModel extends CopycatModel {
     }
 
     @Override
-    protected List<BakedQuad> getCroppedQuads(BlockState blockState, Direction direction, RandomSource randomSource, BlockState material, ModelData modelData, RenderType renderType) {
+    protected List<BakedQuad> getCroppedQuads(BlockState blockState, @Nullable Direction direction, RandomSource randomSource, BlockState material, ModelData modelData, RenderType renderType) {
         BakedModel originalModel = getModelOf(material);
 
-        if (material == AllBlocks.COPYCAT_BASE.getDefaultState()) {
-            material = testosteroneModBlocks.FRAGILE_COPYCAT_BASE.getDefaultState().setValue(fragileCopycatBase.STATE, randomSource.nextInt(5));
+        if (material.is(AllBlocks.COPYCAT_BASE.get())) {
+            material = testosteroneModBlocks.FRAGILE_COPYCAT_BASE.get()
+                    .defaultBlockState()
+                    .setValue(fragileCopycatBase.STATE, randomSource.nextInt(5));
             originalModel = getModelOf(material);
         }
+
         return originalModel.getQuads(material, direction, randomSource, modelData, renderType);
     }
 }

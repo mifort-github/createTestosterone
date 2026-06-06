@@ -1,38 +1,41 @@
 package net.mifort.testosterone.network.packet;
 
+import net.mifort.testosterone.testosterone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraftforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import static net.mifort.testosterone.client.Layer.EFFECT_CHECKER_KEY;
 
-public class effectCheckerS2CPacket {
+public class effectCheckerS2CPacket implements CustomPacketPayload {
+
+    public static final CustomPacketPayload.Type<effectCheckerS2CPacket> TYPE =
+            new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "effect_checker_s2c"));
+
+    public static final StreamCodec<FriendlyByteBuf, effectCheckerS2CPacket> STREAM_CODEC = StreamCodec.of(
+            (buf, packet) -> buf.writeVarIntArray(packet.data),
+            buf -> new effectCheckerS2CPacket(buf.readVarIntArray())
+    );
+
     private final int[] data;
 
-    public effectCheckerS2CPacket(int[] hasEffect) {
-        this.data = hasEffect;
+    public effectCheckerS2CPacket(int[] data) {
+        this.data = data;
     }
 
-    public effectCheckerS2CPacket(FriendlyByteBuf buf) {
-        this.data = buf.readVarIntArray();
+    @Override
+    public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 
-    public void toBytes(FriendlyByteBuf buf) {
-        buf.writeVarIntArray(data);
-    }
-
-    public boolean handle(Supplier<NetworkEvent.Context> supplier) {
-        NetworkEvent.Context context = supplier.get();
+    public static void handle(effectCheckerS2CPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             // HERE WE ARE ON THE CLIENT!
-
-            Minecraft.getInstance().level.getEntity(data[0]).getPersistentData().putInt(EFFECT_CHECKER_KEY, data[1]);
+            Minecraft.getInstance().level.getEntity(packet.data[0])
+                    .getPersistentData().putInt(EFFECT_CHECKER_KEY, packet.data[1]);
         });
-        return true;
     }
-
-
 }

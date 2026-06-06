@@ -1,5 +1,6 @@
 package net.mifort.testosterone.items.custom;
 
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -13,25 +14,25 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class shotItem extends Item {
-    MobEffect mobEffect;
+    Holder<MobEffect> mobEffect;
     int amplifier;
     boolean glint;
 
-    public shotItem(Properties pProperties, MobEffect mobEffect, int amplifier, boolean glint) {
+    public shotItem(Properties pProperties, Holder<MobEffect> mobEffect, int amplifier, boolean glint) {
         super(pProperties);
         this.mobEffect = mobEffect;
         this.amplifier = amplifier;
         this.glint = glint;
     }
 
-    public shotItem(Properties pProperties, MobEffect mobEffect, int amplifier) {
+    public shotItem(Properties pProperties, Holder<MobEffect> mobEffect, int amplifier) {
         super(pProperties);
         this.mobEffect = mobEffect;
         this.amplifier = amplifier;
         this.glint = false;
     }
 
-    public shotItem(Properties pProperties, MobEffect mobEffect) {
+    public shotItem(Properties pProperties, Holder<MobEffect> mobEffect) {
         super(pProperties);
         this.mobEffect = mobEffect;
         this.amplifier = 0;

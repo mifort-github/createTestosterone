@@ -17,8 +17,8 @@ public class goToConfigButton extends Button {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        super.render(graphics, mouseX, mouseY, partialTicks);
+    protected void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        super.renderWidget(graphics, mouseX, mouseY, partialTicks);
         graphics.renderItem(ICON, this.getX() + 2, this.getY() + 2);
     }
 

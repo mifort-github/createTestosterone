@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "testosterone:cheese_fluid"
+    }
+  ],
+  "results": [
+    {
+      "id": "testosterone:cheese_block"
+    }
+  ]
+}

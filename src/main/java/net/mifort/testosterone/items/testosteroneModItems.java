@@ -11,22 +11,23 @@ import net.mifort.testosterone.items.curios.tie;
 import net.mifort.testosterone.items.custom.*;
 import net.mifort.testosterone.packages.TestosteronePackageStyles;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.item.SpawnEggItem;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 public class testosteroneModItems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, testosterone.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, testosterone.MOD_ID);
 
     public static final List<ItemEntry<PackageItem>> ALL_TESTOSTERONE_PILL_BOXES =
             TestosteronePackageStyles.TESTOSTERONE_PILL_STYLES.stream()
@@ -58,33 +59,35 @@ public class testosteroneModItems {
     //like a thingy it for more then 1 ig
     private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
         return REGISTRATE.item(name, SequencedAssemblyItem::new)
+                .removeTab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                 .register();
     }
 
     public static final ItemEntry<Item> TESTOSTERONE_PILL =
             REGISTRATE.item("testosterone_pill", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_PILL).rarity(Rarity.RARE).stacksTo(16))
+                    .tab(testosteroneModCreativeModTabs.TESTOSTERONE_TAB.getKey())
                     .register();
 
     public static final ItemEntry<Item> TESTOSTERONE_PROTEIN_BAR =
             REGISTRATE.item("testosterone_protein_bar", Item::new)
                     .properties(p -> p.food(testosteroneModFoods.TESTOSTERONE_PROTEIN_BAR).rarity(Rarity.RARE))
-                    .tag(ItemTags.create(new ResourceLocation("c", "cookies")))
+                    .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "cookies")))
                     .register();
 
 
     public static final ItemEntry<shotItem> TESTOSTERONE_SHOT =
-            REGISTRATE.item("testosterone_shot", properties -> new shotItem(properties, testosteroneModEffects.TESTOSTERONE_EFFECT.get(), 1))
+            REGISTRATE.item("testosterone_shot", properties -> new shotItem(properties, testosteroneModEffects.TESTOSTERONE_EFFECT, 1))
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 
     public static final ItemEntry<shotItem> TRENBOLONE_SHOT =
-            REGISTRATE.item("trenbolone_shot", properties -> new shotItem(properties, testosteroneModEffects.ROID_RAGE_EFFECT.get()))
+            REGISTRATE.item("trenbolone_shot", properties -> new shotItem(properties, testosteroneModEffects.ROID_RAGE_EFFECT))
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 
     public static final ItemEntry<shotItem> BETTER_TRENBOLONE_SHOT =
-            REGISTRATE.item("better_trenbolone_shot", properties -> new shotItem(properties, testosteroneModEffects.ROID_RAGE_EFFECT.get(), 1, true))
+            REGISTRATE.item("better_trenbolone_shot", properties -> new shotItem(properties, testosteroneModEffects.ROID_RAGE_EFFECT, 1, true))
                     .properties(p -> p.food(testosteroneModFoods.BLANK).rarity(Rarity.EPIC).stacksTo(16))
                     .register();
 
@@ -93,20 +96,19 @@ public class testosteroneModItems {
                     .properties(p -> p.food(testosteroneModFoods.BLANK).stacksTo(16))
                     .register();
 
-
     public static final ItemEntry<tie> TIE =
             REGISTRATE.item("tie", tie::new)
-                    .tag(ItemTags.create(new ResourceLocation("curios", "necklace")))
+                    .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "necklace")))
                     .register();
 
-    public static final ItemEntry<Item> AFTERLIFE_TOTEM =
-            REGISTRATE.item("totem_of_afterlife", Item::new)
-                    .properties(p -> p.rarity(Rarity.EPIC).stacksTo(1))
-                    .register();
+//    public static final ItemEntry<Item> AFTERLIFE_TOTEM =
+//            REGISTRATE.item("totem_of_afterlife", Item::new)
+//                    .properties(p -> p.rarity(Rarity.EPIC).stacksTo(1))
+//                    .register();
 
     public static final ItemEntry<CheeseOnAStick> CHEESE_ON_A_STICK =
             REGISTRATE.item("cheese_on_a_stick", CheeseOnAStick::new)
-                    .properties(p -> p.stacksTo(1).defaultDurability(256))
+                    .properties(p -> p.stacksTo(1).durability(256))
                     .model((ctx, prov) ->
                             prov.withExistingParent(ctx.getName(), prov.mcLoc("item/handheld_rod"))
                                     .texture("layer0", prov.modLoc("item/" + ctx.getName()))
@@ -121,7 +123,7 @@ public class testosteroneModItems {
     public static final ItemEntry<Item> WHEY_PROTEIN =
             REGISTRATE.item("whey_protein", Item::new)
                     .properties(p -> p.stacksTo(64))
-                    .tag(ItemTags.create(new ResourceLocation(Create.ID, "blaze_burner_fuel/regular")))
+                    .tag(ItemTags.create(ResourceLocation.fromNamespaceAndPath(Create.ID, "blaze_burner_fuel/regular")))
                     .register();
 
     public static final ItemEntry<Item> RAT_FUR =
@@ -129,8 +131,10 @@ public class testosteroneModItems {
                     .properties(p -> p.stacksTo(64))
                     .register();
 
-    public static final RegistryObject<Item> STUPID_RAT_SPAWN_EGG = ITEMS.register("stupid_rat_spawn_egg",
-            () -> new ForgeSpawnEggItem(testosteroneEntities.RAT, 0xFFFFFF, 0xFFFFFF, new Item.Properties()));
+    public static final ItemEntry<DeferredSpawnEggItem> STUPID_RAT_SPAWN_EGG =
+            REGISTRATE.item("stupid_rat_spawn_egg", properties -> new DeferredSpawnEggItem(testosteroneEntities.RAT, 0xFFFFFF, 0xFFFFFF, new Item.Properties()))
+                    .properties(p -> p.stacksTo(64))
+                    .register();
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

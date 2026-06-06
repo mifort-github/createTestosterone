@@ -1,39 +1,39 @@
 package net.mifort.testosterone.advancements;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 public class roadkillAdvancementCriteria extends SimpleCriterionTrigger<roadkillAdvancementCriteria.TriggerInstance> {
-    private static final ResourceLocation ID = new ResourceLocation(testosterone.MOD_ID, "roadkill_trigger");
+
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "roadkill_trigger");
 
     @Override
-    public @NotNull ResourceLocation getId() {
-        return ID;
+    public Codec<TriggerInstance> codec() {
+        return TriggerInstance.CODEC;
     }
 
-    public void trigger(@NotNull ServerPlayer player) {
-        this.trigger(player, TriggerInstance::test);
+    public void trigger(ServerPlayer player) {
+        this.trigger(player, instance -> instance.test());
     }
 
-    @Override
-    protected @NotNull TriggerInstance createInstance(@NotNull JsonObject json, @NotNull ContextAwarePredicate player, @NotNull DeserializationContext conditionsParser) {
-        return new TriggerInstance(player);
-    }
+    public record TriggerInstance(Optional<ContextAwarePredicate> player) implements SimpleCriterionTrigger.SimpleInstance {
 
-    public static class TriggerInstance extends AbstractCriterionTriggerInstance {
-        public TriggerInstance(ContextAwarePredicate player) {
-            super(roadkillAdvancementCriteria.ID, player);
-        }
+        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(
+                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player)
+                ).apply(instance, TriggerInstance::new)
+        );
 
         public static TriggerInstance simple() {
-            return new TriggerInstance(ContextAwarePredicate.ANY);
+            return new TriggerInstance(Optional.empty());
         }
 
         public boolean test() {

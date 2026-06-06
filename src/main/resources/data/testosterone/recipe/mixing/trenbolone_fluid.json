@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "testosterone:testosterone_fluid"
+    },
+    {
+      "item": "testosterone:whey_protein"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "id": "testosterone:trenbolone_fluid"
+    }
+  ]
+}
