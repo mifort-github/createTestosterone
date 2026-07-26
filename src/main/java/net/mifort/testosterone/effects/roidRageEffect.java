@@ -2,13 +2,11 @@ package net.mifort.testosterone.effects;
 
 import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import net.mifort.testosterone.advancements.testosteroneModTriggers;
-import net.mifort.testosterone.client.hudOverlay;
 import net.mifort.testosterone.config.testosteroneConfigs;
 import net.mifort.testosterone.particles.airPassingParticleData;
 import net.mifort.testosterone.particles.runParticleData;
 import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.mifort.testosterone.testosterone;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -23,7 +21,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -200,7 +197,7 @@ public class roidRageEffect extends MobEffect {
 
                     if (new Random().nextInt(testosteroneConfigs.server().maxSpeed.get()) < speed) {
                         serverLevel.sendParticles(
-                                new airPassingParticleData(player.getUUID()),
+                                new airPassingParticleData(player.getUUID(), testosteroneConfigs.server().trailDuration.get()),
                                 player.getX(), player.getY(), player.getZ(),
                                 0, 0, 0, 0, 0);
                     }

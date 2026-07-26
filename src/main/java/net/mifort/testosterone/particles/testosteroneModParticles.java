@@ -1,6 +1,7 @@
 package net.mifort.testosterone.particles;
 
 import com.mojang.serialization.MapCodec;
+import net.mifort.testosterone.particles.shader.shaderParticleData;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
@@ -40,6 +41,21 @@ public final class testosteroneModParticles {
                         @Override
                         public StreamCodec<? super RegistryFriendlyByteBuf, airPassingParticleData> streamCodec() {
                             return airPassingParticleData.STREAM_CODEC;
+                        }
+                    }
+            );
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<shaderParticleData>> SHADER =
+            PARTICLES.register("shader_particle", () ->
+                    new ParticleType<>(false) {
+                        @Override
+                        public MapCodec<shaderParticleData> codec() {
+                            return shaderParticleData.CODEC;
+                        }
+
+                        @Override
+                        public StreamCodec<? super RegistryFriendlyByteBuf, shaderParticleData> streamCodec() {
+                            return shaderParticleData.STREAM_CODEC;
                         }
                     }
             );

@@ -10,6 +10,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.util.UUID;
@@ -18,12 +19,9 @@ import java.util.UUID;
 public class airPassingParticle extends SingleQuadParticle {
     SpriteSet spriteSet;
     float yRot;
-    double xRotMul;
-    float zMul;
-    float xMul;
     Player player;
 
-    protected airPassingParticle(ClientLevel pLevel, UUID playerUUID, double pX, double pY, double pZ, SpriteSet spriteSet) {
+    protected airPassingParticle(ClientLevel pLevel, UUID playerUUID, int duration, double pX, double pY, double pZ, SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ);
         this.spriteSet = spriteSet;
         this.rCol = this.gCol = this.bCol = 1;
@@ -34,31 +32,11 @@ public class airPassingParticle extends SingleQuadParticle {
             player = Minecraft.getInstance().player;
         }
 
-        yRot = player.yBodyRot;
-
-        yRot = -(yRot + 90) % 360;
-        if (yRot < 0) yRot += 360;
-
-        if (yRot < 90) {
-            zMul = 1;
-            xMul = 1;
-        } else if (yRot < 180) {
-            zMul = -1;
-            xMul = 1;
-        } else if (yRot < 270) {
-            zMul = -1;
-            xMul = -1;
-        } else {
-            zMul = 1;
-            xMul = -1;
-        }
-
-        yRot = (float) Math.toRadians(yRot);
-
-        xRotMul = (Math.asin(Math.sin(yRot - (Math.PI / 2)))) / Math.PI + 0.5;
+        yRot = -(player != null ? player.yBodyRot : 0);
+        yRot = (float) Math.toRadians(yRot - 90);
 
 
-        this.lifetime = 5;
+        this.lifetime = duration;
 
         xo = x = x + random.nextFloat() - 0.5;
         yo = y = y + 2 * random.nextFloat();
@@ -74,12 +52,6 @@ public class airPassingParticle extends SingleQuadParticle {
         float pY = (float) (Mth.lerp(pPartialTicks, this.yo, this.y) - playerPos.y());
         float pZ = (float) (Mth.lerp(pPartialTicks, this.zo, this.z) - playerPos.z());
 
-        double xRot = -Math.atan2(pY, pZ * zMul);
-        double xRot2 = -Math.atan2(pY, pX * xMul);
-
-        xRot = xRot * (1 - xRotMul);
-        xRot2 = xRot2 * xRotMul;
-
         float a = (float) (this.lifetime - this.age) / this.lifetime;
 
         this.alpha = a;
@@ -90,14 +62,12 @@ public class airPassingParticle extends SingleQuadParticle {
                 new Vector3f(0.5F, 1.0F, 0.0F),
                 new Vector3f(0.5F, -1.0F, 0.0F)};
 
-        for(int i = 0; i < 4; ++i) {
-            Vector3f vector3f = corners[i];
-            vector3f.mul(1f, a / 30, 0.1f);
-
-            vector3f.rotateX((float) (xRot + xRot2));
-            vector3f.rotateY(yRot);
-
-            vector3f.add(pX, pY, pZ);
+        Quaternionf rotation = BillBoardUtils.calculateRotationAndRotateWithDebugging(yRot, 0f, playerPos, new Vec3(x, y, z));
+        for (int i = 0; i < 4; ++i) {
+            Vector3f corner = corners[i];
+            corner.mul(1f, a / 30, 0.1f);
+            corner.rotate(rotation);
+            corner.add(pX, pY, pZ);
         }
 
         float u0 = this.getU0();
@@ -149,7 +119,7 @@ public class airPassingParticle extends SingleQuadParticle {
         public Particle createParticle(@NotNull airPassingParticleData type, @NotNull ClientLevel world,
                                        double x, double y, double z,
                                        double xSpeed, double ySpeed, double zSpeed) {
-            return new airPassingParticle(world, type.playerUUID(), x, y, z, spriteset);
+            return new airPassingParticle(world, type.playerUUID(), type.duration(), x, y, z, spriteset);
         }
     }
 }
