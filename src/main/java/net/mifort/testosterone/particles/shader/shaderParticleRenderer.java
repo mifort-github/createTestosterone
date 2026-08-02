@@ -20,7 +20,6 @@ public class shaderParticleRenderer {
     @Nullable
     public static ShaderInstance shaderInstance;
 
-    /** Called by RegisterShadersEvent callback. */
     public static void onShaderLoaded(ShaderInstance shader) {
         shaderInstance = shader;
         LOGGER.info("[shaderParticleRenderer] Shader loaded: '{}'", shader.getName());

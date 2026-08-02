@@ -24,7 +24,6 @@ public class RenderTypeWithCustomShaders implements ParticleRenderType {
     @Override
     public BufferBuilder begin(Tesselator tesselator, TextureManager textureManager) {
 
-        // Use the custom shader if loaded, otherwise fall back to default particle shader
         if (shaderParticleRenderer.shaderInstance != null) {
             RenderSystem.setShader(() -> shaderParticleRenderer.shaderInstance);
             shader = shaderParticleRenderer.shaderInstance;
@@ -33,17 +32,13 @@ public class RenderTypeWithCustomShaders implements ParticleRenderType {
             shader = GameRenderer.getParticleShader();
         }
 
-        // Bind particle atlas for texture
         RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_PARTICLES);
 
-        // Enable blending for alpha
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
 
         RenderSystem.depthMask(true);
 
-        // Back-face culling so interior faces don't show
-//        RenderSystem.enableCull();
         RenderSystem.disableCull();
 
         if (shaderParticleRenderer.shaderInstance != null) {

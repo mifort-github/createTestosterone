@@ -62,7 +62,7 @@ public class airPassingParticle extends SingleQuadParticle {
                 new Vector3f(0.5F, 1.0F, 0.0F),
                 new Vector3f(0.5F, -1.0F, 0.0F)};
 
-        Quaternionf rotation = BillBoardUtils.calculateRotationAndRotateWithDebugging(yRot, 0f, playerPos, new Vec3(x, y, z));
+        Quaternionf rotation = BillBoardUtils.calculateRotationAndRotate(yRot, 0f, playerPos, new Vec3(x, y, z));
         for (int i = 0; i < 4; ++i) {
             Vector3f corner = corners[i];
             corner.mul(1f, a / 30, 0.1f);

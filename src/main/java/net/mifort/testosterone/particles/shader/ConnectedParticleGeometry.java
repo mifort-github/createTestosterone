@@ -42,7 +42,6 @@ public class ConnectedParticleGeometry {
             c.rotateY(rotRadians);
         }
 
-// Figure out the connection edge (in camera-relative world space) up front
         Vector3f connectedAvg;
         if (shaderParticle != null) {
             Vec3[] toConnect = shaderParticle.getTopCoords();
@@ -51,7 +50,6 @@ public class ConnectedParticleGeometry {
             connectedAvg = new Vector3f(corners[0]).add(corners[1]).mul(0.5f).add(cx, cy, cz);
         }
 
-// This particle's own (still local, untranslated) right-edge midpoint
         Vector3f ownLocalAvg = new Vector3f(corners[2]).add(corners[3]).mul(0.5f).add(cx, cy, cz);
 
         Vector3f directionOfParticle = new Vector3f(connectedAvg).sub(ownLocalAvg);
