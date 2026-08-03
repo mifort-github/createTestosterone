@@ -238,7 +238,7 @@ public class testosteroneModBlocks {
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate((ctx, prov) -> prov.slabBlock(ctx.get(), prov.modLoc("block/cut_aequalis_bricks"), prov.modLoc("block/cut_aequalis")))
+            .blockstate((ctx, prov) -> prov.slabBlock(ctx.get(), prov.modLoc("block/cut_aequalis_bricks"), prov.modLoc("block/cut_aequalis_bricks")))
             .item().tag(AEQUALIS_ITEM_TAG).build()
             .recipe((ctx, prov) -> SingleItemRecipeBuilder
                     .stonecutting(Ingredient.of(AEQUALIS_ITEM_TAG), RecipeCategory.BUILDING_BLOCKS, ctx.get())

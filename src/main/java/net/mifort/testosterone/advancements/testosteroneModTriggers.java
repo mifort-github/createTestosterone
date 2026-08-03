@@ -13,11 +13,11 @@ public class testosteroneModTriggers {
             DeferredRegister.create(Registries.TRIGGER_TYPE, testosterone.MOD_ID);
 
     public static final Supplier<damageAdvancementCriteria> DAMAGE_TAKEN =
-            TRIGGERS.register("damage_taken", damageAdvancementCriteria::new);
+            TRIGGERS.register("damage_taken_trigger", damageAdvancementCriteria::new);
 
     public static final Supplier<inebriateAdvancementCriteria> INEBRIATE =
-            TRIGGERS.register("inebriate", inebriateAdvancementCriteria::new);
+            TRIGGERS.register("inebriate_trigger", inebriateAdvancementCriteria::new);
 
     public static final Supplier<roadkillAdvancementCriteria> ROADKILL =
-            TRIGGERS.register("roadkill", roadkillAdvancementCriteria::new);
+            TRIGGERS.register("roadkill_trigger", roadkillAdvancementCriteria::new);
 }
