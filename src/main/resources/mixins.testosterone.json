@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "mixins.testosterone.refmap.json",
   "mixins": [
+    "ConnectedPillarBlockAccessor",
+    "ConnectedPillarBlockMixin",
     "JohnRockRecipe",
     "PackageItemMixin",
     "PackageStyleMixin"
