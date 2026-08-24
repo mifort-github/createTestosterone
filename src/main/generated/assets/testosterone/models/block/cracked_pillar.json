@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "testosterone:block/cracked_cap",
+    "side": "testosterone:block/cracked_pillar"
+  }
+}

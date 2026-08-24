@@ -10,7 +10,7 @@
   "results": [
     {
       "amount": 10,
-      "fluid": "minecraft:milk"
+      "fluid": "milk:still_milk"
     }
   ]
 }

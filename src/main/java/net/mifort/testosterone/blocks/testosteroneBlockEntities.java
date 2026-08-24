@@ -1,12 +1,13 @@
 package net.mifort.testosterone.blocks;
 
+import static net.mifort.testosterone.testosterone.REGISTRATE;
+
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
+
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlockEntity;
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeRenderer;
-
-import static net.mifort.testosterone.testosterone.REGISTRATE;
 
 public class testosteroneBlockEntities {
     public static final BlockEntityEntry<decanterCentrifugeBlockEntity> DECANTER_CENTRIFUGE = REGISTRATE.blockEntity("decanter_centrifuge", decanterCentrifugeBlockEntity::new)

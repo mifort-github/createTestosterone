@@ -1,16 +1,21 @@
 package net.mifort.testosterone.effects;
 
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
+
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.particles.airPassingParticleData;
 import net.mifort.testosterone.particles.runParticleData;
-import net.mifort.testosterone.sounds.playerMach1Sound;
 import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -29,16 +34,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
 public class roidRageEffect extends MobEffect {
     public static final String MARKED_KEY = "testosterone:marked_key";
@@ -53,11 +48,11 @@ public class roidRageEffect extends MobEffect {
     private final UUID speedAttributeUUID;
 
     public static int getSpeed(Player player) {
-        return player.getPersistentData().getInt(SPEED_KEY);
+        return player.getCustomData().getInt(SPEED_KEY);
     }
 
     public static boolean isSwimming(Player player) {
-        return player.getPersistentData().getBoolean(SWIMMING_KEY);
+        return player.getCustomData().getBoolean(SWIMMING_KEY);
     }
 
     public roidRageEffect() {
@@ -67,7 +62,7 @@ public class roidRageEffect extends MobEffect {
         UUID stepAttreibuteUUID = UUID.fromString("4bbd2586-1548-4f78-b79f-682e42d1679a");
 
         addAttributeModifier(
-                ForgeMod.STEP_HEIGHT_ADDITION.get(),
+				testosteroneModAttributes.STEP_HEIGHT_ADDITION,
                 stepAttreibuteUUID.toString(),
                 1,
                 AttributeModifier.Operation.ADDITION
@@ -91,8 +86,8 @@ public class roidRageEffect extends MobEffect {
     public void applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
             Level level = player.level();
-            int speed = player.getPersistentData().getInt(SPEED_KEY);
-            boolean swimming = player.getPersistentData().getBoolean(SWIMMING_KEY);
+            int speed = player.getCustomData().getInt(SPEED_KEY);
+            boolean swimming = player.getCustomData().getBoolean(SWIMMING_KEY);
 
             if (level.isClientSide() && ConfigRegistry.DISPLAY_SPEED.get()) {
                 player.displayClientMessage(Component.literal(String.valueOf(speed)), true);
@@ -106,9 +101,9 @@ public class roidRageEffect extends MobEffect {
                 player.setPose(Pose.SWIMMING);
             }
 
-            long jumpedTick = player.getPersistentData().getLong(JUMPED_TICK_KEY);
-            boolean readyToJump = player.getPersistentData().getBoolean(READY_TO_JUMP_KEY);
-            boolean inJump = player.getPersistentData().getBoolean(IN_JUMP_KEY);
+            long jumpedTick = player.getCustomData().getLong(JUMPED_TICK_KEY);
+            boolean readyToJump = player.getCustomData().getBoolean(READY_TO_JUMP_KEY);
+            boolean inJump = player.getCustomData().getBoolean(IN_JUMP_KEY);
 
             AttributeInstance attributeInstance = player.getAttribute(Attributes.MOVEMENT_SPEED);
 
@@ -200,11 +195,11 @@ public class roidRageEffect extends MobEffect {
 
                 for (Entity other : collidingEntities) {
                     if (other instanceof LivingEntity) {
-                        other.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
-                        other.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
+                        other.getCustomData().putLong(MARKED_KEY, level.getGameTime());
+                        other.getCustomData().putUUID(MARKED_BY_KEY, player.getUUID());
 
                         other.hurt(CreateDamageSources.runOver(level, player), (float) speed / 50);
-                        level.playSound(null, player.blockPosition(), testosteroneModSounds.ENEMY_HIT_SFX.get(), SoundSource.PLAYERS);
+                        level.playSound(null, player.blockPosition(), testosteroneModSounds.ENEMY_HIT_SFX, SoundSource.PLAYERS);
 
                         other.addDeltaMovement(new Vec3(-Math.sin(rotRad) * speed * 0.01, speed * 0.002, Math.cos(rotRad) * speed * 0.01));
                     }
@@ -242,74 +237,16 @@ public class roidRageEffect extends MobEffect {
                 }
             }
 
-            player.getPersistentData().putInt(SPEED_KEY, speed);
-            player.getPersistentData().putLong(JUMPED_TICK_KEY, jumpedTick);
-            player.getPersistentData().putBoolean(READY_TO_JUMP_KEY, readyToJump);
-            player.getPersistentData().putBoolean(IN_JUMP_KEY, inJump);
-            player.getPersistentData().putBoolean(SWIMMING_KEY, swimming);
+            player.getCustomData().putInt(SPEED_KEY, speed);
+            player.getCustomData().putLong(JUMPED_TICK_KEY, jumpedTick);
+            player.getCustomData().putBoolean(READY_TO_JUMP_KEY, readyToJump);
+            player.getCustomData().putBoolean(IN_JUMP_KEY, inJump);
+            player.getCustomData().putBoolean(SWIMMING_KEY, swimming);
         }
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
         return true;
-    }
-
-    @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
-    public static class events {
-        @SubscribeEvent
-        public static void onFallDamage(LivingFallEvent event) {
-            if (event.getEntity() instanceof Player player) {
-                if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get())) {
-                        if (roidRageEffect.isSwimming(player)) {
-                            if (player.level() instanceof ServerLevel level) {
-                                level.playSound(null, player.blockPosition(), testosteroneModSounds.GROUND_SLAM_SFX.get(), SoundSource.PLAYERS);
-                                level.sendParticles(ParticleTypes.SPIT,
-                                        player.getX(), player.getY(), player.getZ(),
-                                        ((int) event.getDistance() * 10),
-                                        event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(), 0, event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get(),
-                                        1);
-
-                                level.getEntities().getAll().forEach(entity -> {
-                                    if (entity instanceof LivingEntity livingEntity) {
-                                        if (livingEntity == player) return;
-
-                                        if (player.distanceTo(livingEntity) < event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()) {
-                                            livingEntity.getPersistentData().putLong(MARKED_KEY, level.getGameTime());
-                                            livingEntity.getPersistentData().putUUID(MARKED_BY_KEY, player.getUUID());
-
-                                            livingEntity.hurt(CreateDamageSources.runOver(level, player), (float) (event.getDistance() / ConfigRegistry.FALL_DAMAGE_RADIUS.get()));
-
-
-                                            livingEntity.addDeltaMovement(new Vec3(0, event.getDistance() / 24, 0));
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    event.setCanceled(true);
-                }
-            }
-        }
-
-
-        @SubscribeEvent
-        public static void onLivingDeathEvent(LivingDeathEvent livingDeathEvent) {
-
-            LivingEntity entity = livingDeathEvent.getEntity();
-            Level level = entity.level();
-
-
-
-            if (!level.isClientSide) {
-                if (level.getGameTime() - entity.getPersistentData().getLong(MARKED_KEY) < 20) {
-                    Player player = level.getPlayerByUUID(entity.getPersistentData().getUUID(MARKED_BY_KEY));
-
-                    if (player != null) {
-                        testosteroneAdvancementUtils.ROADKILL.trigger((ServerPlayer) player);
-                    }
-                }
-            }
-        }
     }
 }

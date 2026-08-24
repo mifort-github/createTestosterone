@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "testosterone",
+  "version": "${version}",
+  "name": "Create: Testosterone",
+  "description": "An Addon for Create: Estrogen that adds usable testosterone, along with new items and more! \nCredits: spGrace, lillphildo, DakotaPride, ChisetteArt, whatchacallits, Falkory, Mayaqq",
+  "authors": [
+    "mifort, JonMyDude"
+  ],
+  "license": "GPL-3.0-only",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.mifort.testosterone.testosterone"
+    ],
+    "client": [
+      "net.mifort.testosterone.testosteroneClient"
+    ],
+    "fabric-datagen": [
+      "net.mifort.testosterone.datagen.testosteroneDataGenerator"
+    ],
+    "jei_mod_plugin": [
+      "net.mifort.testosterone.compat.jeiPlugin"
+    ]
+  },
+  "mixins": [
+    "testosterone.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "minecraft": "${minecraft_version}",
+    "create": ">=6.0.0",
+    "trinkets": "*"
+  }
+}

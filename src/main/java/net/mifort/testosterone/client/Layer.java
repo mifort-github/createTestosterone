@@ -2,7 +2,9 @@ package net.mifort.testosterone.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import net.mifort.testosterone.config.ConfigRegistry;
+import net.mifort.testosterone.network.packet.ClientEffectData;
 import net.mifort.testosterone.network.packet.effectCheckerC2SPacket;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.testosterone;
@@ -18,9 +20,8 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-    public static final String EFFECT_CHECKER_KEY = "testosterone:effect_checker_key";
 
-    public static final ResourceLocation BEARD_TEXTURE = new ResourceLocation(testosterone.MOD_ID, "textures/models/beard_texture.png");
+	public static final ResourceLocation BEARD_TEXTURE = new ResourceLocation(testosterone.MOD_ID, "textures/models/beard_texture.png");
 
     public static final ResourceLocation MUSTACHE_TEXTURE = new ResourceLocation(testosterone.MOD_ID, "textures/models/italianman_texture.png");
 
@@ -37,14 +38,14 @@ public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<Abstrac
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, AbstractClientPlayer pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         testosteroneModMessages.sendToServer(new effectCheckerC2SPacket(pLivingEntity.getId()));
 
-        int hasEffectInt = pLivingEntity.getPersistentData().getInt(EFFECT_CHECKER_KEY);
+		int hasEffectInt = ClientEffectData.getEffect(pLivingEntity.getId());
 
         if (!ConfigRegistry.RENDER_BEARD.get()) {
             return;
         }
 
         pPoseStack.pushPose();
-        pPoseStack.translate(0, 0, 0); // move the model
+        pPoseStack.translate(0, 0, 0);
 
         if (hasEffectInt == 1) {
             VertexConsumer vBuff = pBuffer.getBuffer(RenderType.entityTranslucent(BEARD_TEXTURE));

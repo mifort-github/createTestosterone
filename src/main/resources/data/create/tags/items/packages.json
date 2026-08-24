@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
-    "testosterone:testosterone_cardboard_package_12x12"
+    "testosterone:testosterone_cardboard_package_12x10",
+    "testosterone:testosterone_cardboard_package_10x8",
+    "testosterone:testosterone_cardboard_package_10x12",
+    "testosterone:testosterone_cardboard_package_12x12",
+
+    "testosterone:trenbolone_cardboard_package_12x10",
+    "testosterone:trenbolone_cardboard_package_10x8",
+    "testosterone:trenbolone_cardboard_package_10x12",
+    "testosterone:trenbolone_cardboard_package_12x12"
   ]
 }

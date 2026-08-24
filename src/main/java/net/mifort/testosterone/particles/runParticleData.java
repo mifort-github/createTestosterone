@@ -1,12 +1,13 @@
 package net.mifort.testosterone.particles;
 
+import java.util.UUID;
+
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
-
-import java.util.UUID;
 
 public record runParticleData(UUID playerUUID, int duration, long tick) implements ParticleOptions {
     public static final Deserializer<runParticleData> DESERIALIZER = new Deserializer<>() {
@@ -24,7 +25,7 @@ public record runParticleData(UUID playerUUID, int duration, long tick) implemen
 
     @Override
     public ParticleType<?> getType() {
-        return testosteroneModParticles.TESTOSTERONE_RUN.get();
+        return testosteroneModParticles.TESTOSTERONE_RUN;
     }
 
     @Override

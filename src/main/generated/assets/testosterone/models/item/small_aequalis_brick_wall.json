@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "testosterone:block/small_aequalis_bricks"
+  }
+}

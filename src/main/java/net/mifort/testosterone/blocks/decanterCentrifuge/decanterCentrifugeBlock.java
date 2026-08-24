@@ -1,8 +1,17 @@
 package net.mifort.testosterone.blocks.decanterCentrifuge;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
+
 import net.createmod.catnip.data.Iterate;
 import net.mifort.testosterone.blocks.testosteroneBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -14,10 +23,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings({"deprecation", "NullableProblems"})
 public class decanterCentrifugeBlock extends HorizontalKineticBlock implements IBE<decanterCentrifugeBlockEntity>, IWrenchable {
@@ -74,22 +79,24 @@ public class decanterCentrifugeBlock extends HorizontalKineticBlock implements I
         }
     }
 
-    @Override
-    public Direction getPreferredHorizontalFacing(BlockPlaceContext context) {
-        Direction preferredSide = null;
-        for (Direction side : Iterate.horizontalDirections) {
-            BlockEntity be = context.getLevel().getBlockEntity(context.getClickedPos().relative(side));
+	@Override
+	public Direction getPreferredHorizontalFacing(BlockPlaceContext context) {
+		Direction preferredSide = null;
 
+		for (Direction side : Iterate.horizontalDirections) {
+			BlockPos neighborPos = context.getClickedPos().relative(side);
 
-            if (be != null) {
-                @NotNull LazyOptional<IFluidHandler> cap = be.getCapability(ForgeCapabilities.FLUID_HANDLER);
+			Storage<FluidVariant> storage = FluidStorage.SIDED.find(
+					context.getLevel(),
+					neighborPos,
+					side.getOpposite()
+			);
 
-                if (cap.isPresent()) {
-                    preferredSide = side.getOpposite();
-                }
-            }
-        }
+			if (storage != null) {
+				preferredSide = side.getOpposite();
+			}
+		}
 
-        return  preferredSide;
-    }
+		return preferredSide;
+	}
 }

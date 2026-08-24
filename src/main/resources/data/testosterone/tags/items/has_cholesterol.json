@@ -6,6 +6,6 @@
     "minecraft:porkchop",
     "minecraft:mutton",
     "minecraft:rabbit",
-    "#forge:eggs"
+    "#c:eggs"
   ]
 }

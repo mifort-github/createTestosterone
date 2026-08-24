@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "testosterone:testosterone_fluid",
+    "testosterone:flowing_testosterone_fluid",
+    "testosterone:trenbolone_fluid",
+    "testosterone:flowing_trenbolone_fluid",
+    "testosterone:cholesterol_fluid",
+    "testosterone:flowing_cholesterol_fluid",
+    "testosterone:diluted_zinc_fluid",
+    "testosterone:flowing_diluted_zinc_fluid",
+    "testosterone:estrone_fluid",
+    "testosterone:flowing_estrone_fluid",
+    "testosterone:beer_fluid",
+    "testosterone:flowing_beer_fluid",
+    "testosterone:whey_fluid",
+    "testosterone:flowing_whey_fluid",
+    "testosterone:cheese_fluid",
+    "testosterone:flowing_cheese_fluid"
+  ]
+}

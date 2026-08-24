@@ -1,54 +1,44 @@
 package net.mifort.testosterone.chestLoot;
 
-import com.google.common.base.Suppliers;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.mifort.testosterone.items.curios.tie;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.mifort.testosterone.items.trinkets.tie;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.common.loot.LootModifier;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
-import java.util.function.Supplier;
 
-public class addTiesModifier extends LootModifier {
-    public static final Supplier<Codec<addTiesModifier>> CODEC = Suppliers.memoize(() ->
-            RecordCodecBuilder.create(inst ->
-                    codecStart(inst)
-                            .and(Codec.FLOAT.fieldOf("chance").forGetter(m -> m.chance))
-                            .apply(inst, addTiesModifier::new)));
+public final class addTiesModifier {
 
-    private final float chance;
+	private static final float CHANCE = 0.1f;
 
-    public addTiesModifier(LootItemCondition[] conditionsIn, float chance) {
-        super(conditionsIn);
-        this.chance = chance;
-    }
+	private addTiesModifier() {
 
-    @Override
-    protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        for (LootItemCondition condition : this.conditions) {
-            if (!condition.test(context)) {
-                return generatedLoot;
-            }
-        }
+	}
 
-        if (context.getRandom().nextFloat() > chance) {
-            return generatedLoot;
-        }
+	public static void register() {
+		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+			if (!source.isBuiltin()) {
+				return;
+			}
+			if (!isTargetChestTable(id)) {
+				return;
+			}
 
-        int pId = context.getRandom().nextInt(16);
-        generatedLoot.add(tie.getTieByColor(DyeColor.byId(pId).getName().toLowerCase()));
+			LootPool.Builder pool = LootPool.lootPool()
+					.setRolls(ConstantValue.exactly(1))
+					.when(LootItemRandomChanceCondition.randomChance(CHANCE));
 
-        return generatedLoot;
-    }
+			for (DyeColor color : DyeColor.values()) {
+				pool.add(LootItem.lootTableItem(tie.getTieByColor(color.getName().toLowerCase()).getItem()).setWeight(1));
+			}
 
-    @Override
-    public Codec<? extends IGlobalLootModifier> codec() {
-        return CODEC.get();
-    }
+			tableBuilder.withPool(pool);
+		});
+	}
+	private static boolean isTargetChestTable(ResourceLocation id) {
+		return id.getNamespace().equals("minecraft") && id.getPath().startsWith("chests/");
+	}
 }

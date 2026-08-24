@@ -3,7 +3,7 @@
   "heatRequirement": "superheated",
   "ingredients": [
     {
-      "amount": 250,
+      "amount": 20250,
       "fluid": "testosterone:testosterone_fluid"
     },
     {
@@ -12,7 +12,7 @@
   ],
   "results": [
     {
-      "amount": 250,
+      "amount": 20250,
       "fluid": "testosterone:trenbolone_fluid"
     }
   ]

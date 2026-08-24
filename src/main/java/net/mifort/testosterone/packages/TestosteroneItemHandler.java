@@ -1,8 +1,9 @@
 package net.mifort.testosterone.packages;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 public interface TestosteroneItemHandler {
     int getSlots();

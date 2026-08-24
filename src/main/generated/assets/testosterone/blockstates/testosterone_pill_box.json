@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "testosterone:block/testosterone_pill_box",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "testosterone:block/testosterone_pill_box"
+    },
+    "facing=south": {
+      "model": "testosterone:block/testosterone_pill_box",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "testosterone:block/testosterone_pill_box",
+      "y": 270
+    }
+  }
+}

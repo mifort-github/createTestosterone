@@ -9,7 +9,7 @@ public class ratRollingSound extends AbstractTickableSoundInstance {
     private final ratEntity rat;
 
     public ratRollingSound(ratEntity rat) {
-        super(testosteroneModSounds.RAT_RUN.get(), SoundSource.NEUTRAL, RandomSource.create());
+        super(testosteroneModSounds.RAT_RUN, SoundSource.NEUTRAL, RandomSource.create());
         this.rat = rat;
         this.looping = true;
         this.delay = 0;

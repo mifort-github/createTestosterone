@@ -1,70 +1,71 @@
 package net.mifort.testosterone.blocks.decanterCentrifuge;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+
 import net.mifort.testosterone.recipes.decantation;
 import net.mifort.testosterone.recipes.testosteroneModRecipes;
-import net.minecraft.client.Minecraft;
+import net.mifort.testosterone.testosterone;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class decanterCentrifugeBlockEntity extends KineticBlockEntity {
 
-    float tickCount = 0;
+	float tickCount = 0;
 
-    public decanterCentrifugeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
-    }
+	public decanterCentrifugeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
+	}
 
-    @Override
-    public void tick() {
-        super.tick();
+	@Override
+	public void tick() {
+		super.tick();
 
-        if (level != null && level.isClientSide) return;
+		if (level != null && level.isClientSide) return;
 
-        if (this.getBlockState().getBlock() instanceof decanterCentrifugeBlock decanterCentrifugeBlock) {
-            float minSpeed = decanterCentrifugeBlock.getMinimumRequiredSpeedLevel().getSpeedValue();
+		if (this.getBlockState().getBlock() instanceof decanterCentrifugeBlock decanterCentrifugeBlock) {
+			float minSpeed = decanterCentrifugeBlock.getMinimumRequiredSpeedLevel().getSpeedValue();
 
+			if (Math.abs(getSpeed()) >= minSpeed) {
+				tickCount += Math.abs(getSpeed());
 
-            if (Math.abs(getSpeed()) >= minSpeed) {
-                tickCount += Math.abs(getSpeed());
+				if (tickCount >= 256) {
+					tickCount -= 256;
 
-                if (tickCount >= 256) {
-                    tickCount -= 256;
+					List<decantation> allRecipes = findRecipe();
 
-                    List<decantation> allRecipes = findRecipe();
+					allRecipes.forEach(decantation -> {
 
+					});
 
-                    allRecipes.forEach(decantation -> {
-
-                    });
-
-                }
-                return;
-            }
-        }
-        tickCount = 0;
-    }
+				}
+				return;
+			}
+		}
+		tickCount = 0;
+	}
 
 
-    public List<decantation> findRecipe() {
-        Level level = getLevel();
+	public List<decantation> findRecipe() {
+		Level level = getLevel();
 
-        if (level != null) {
-            return level.getRecipeManager()
-                    .getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType())
-                    .stream()
-                    .filter(decantation.class::isInstance)
-                    .map(decantation.class::cast)
-                    .filter(r -> r.match(this))
-                    .toList();
-        } else {
-            return new ArrayList<>();
-        }
-    }
+		if (level != null) {
+			List<decantation> allDecantationRecipes = level.getRecipeManager()
+					.getAllRecipesFor(testosteroneModRecipes.DECANTATION.getType())
+					.stream()
+					.filter(decantation.class::isInstance)
+					.map(decantation.class::cast)
+					.toList();
+
+			return allDecantationRecipes.stream()
+					.filter(r -> r.match(this))
+					.toList();
+		} else {
+			return new ArrayList<>();
+		}
+	}
 }

@@ -1,6 +1,13 @@
 package net.mifort.testosterone.packages;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
 import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle;
+
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.testosteroneModItems;
@@ -10,8 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.*;
 
 public class TestosteronePackageStyles {
     public static final ResourceLocation TESTOSTERONE_TYPE = new ResourceLocation(testosterone.MOD_ID, "testosterone_cardboard");
@@ -63,9 +68,7 @@ public class TestosteronePackageStyles {
 
     public static ItemStack containing(TestosteroneItemHandler stacks) {
         if (isMajorityOfItemsTestosteroneItems(stacks)) {
-            ItemStack box = new ItemStack(
-                    testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.size()))
-            );
+            ItemStack box = new ItemStack(testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TESTOSTERONE_PILL_BOXES.size())));
 
             CompoundTag compound = new CompoundTag();
             compound.put("Items", stacks.serializeNBT());
@@ -73,9 +76,7 @@ public class TestosteronePackageStyles {
 
             return box;
         } else if (isMajorityOfItemsTrenboloneItems(stacks)) {
-            ItemStack box = new ItemStack(
-                    testosteroneModItems.ALL_TRENBOLONE_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TRENBOLONE_BOXES.size()))
-            );
+            ItemStack box = new ItemStack(testosteroneModItems.ALL_TRENBOLONE_BOXES.get(RANDOM.nextInt(testosteroneModItems.ALL_TRENBOLONE_BOXES.size())));
 
             CompoundTag compound = new CompoundTag();
             compound.put("Items", stacks.serializeNBT());
@@ -142,8 +143,6 @@ public class TestosteronePackageStyles {
                 .filter(e -> !getAllowedTrenboloneItemsToBeCounted().contains(e.getKey()))
                 .mapToInt(Map.Entry::getValue)
                 .sum();
-
-        System.out.println((trenboloneCount > otherCount) + "QWERTY");
 
         return trenboloneCount > otherCount;
     }

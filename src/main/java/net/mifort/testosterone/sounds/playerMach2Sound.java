@@ -10,7 +10,7 @@ public class playerMach2Sound extends AbstractTickableSoundInstance {
     private final Player player;
 
     public playerMach2Sound(Player player) {
-        super(testosteroneModSounds.MACH_2_SFX.get(), SoundSource.PLAYERS, RandomSource.create());
+        super(testosteroneModSounds.MACH_2_SFX, SoundSource.PLAYERS, RandomSource.create());
         this.player = player;
         this.looping = true;
         this.delay = 0;
@@ -32,7 +32,7 @@ public class playerMach2Sound extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        if (this.player.isRemoved() || !this.player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get())) {
+        if (this.player.isRemoved() || !this.player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT)) {
             this.stop();
         } else {
             this.x = player.getX();

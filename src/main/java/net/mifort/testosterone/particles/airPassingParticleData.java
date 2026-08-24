@@ -1,13 +1,15 @@
 package net.mifort.testosterone.particles;
 
+import java.util.UUID;
+
+import org.jetbrains.annotations.NotNull;
+
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.FriendlyByteBuf;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 
 public record airPassingParticleData(UUID playerUUID) implements ParticleOptions {
     public static final Deserializer<airPassingParticleData> DESERIALIZER = new Deserializer<>() {
@@ -22,10 +24,10 @@ public record airPassingParticleData(UUID playerUUID) implements ParticleOptions
             return new airPassingParticleData(pBuffer.readUUID());
         }
     };
-    
+
     @Override
     public @NotNull ParticleType<?> getType() {
-        return testosteroneModParticles.AIR_PASSING.get();
+        return testosteroneModParticles.AIR_PASSING;
     }
 
     @Override

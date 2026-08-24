@@ -3,19 +3,19 @@
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "tag": "forge:crops/wheat"
+      "tag": "c:crops/wheat"
     },
     {
       "item": "minecraft:sugar"
     },
     {
-      "amount": 250,
+      "amount": 20250,
       "fluid": "minecraft:water"
     }
   ],
   "results": [
     {
-      "amount": 25,
+      "amount": 2025,
       "fluid": "testosterone:beer_fluid"
     }
   ]

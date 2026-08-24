@@ -2,10 +2,10 @@
   "type": "create:filling",
   "ingredients": [
     {
-      "tag": "forge:eggs"
+      "tag": "c:eggs"
     },
     {
-      "amount": 250,
+      "amount": 20250,
       "fluid": "testosterone:testosterone_fluid",
       "nbt": {}
     }

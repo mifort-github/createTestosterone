@@ -2,6 +2,7 @@ package net.mifort.testosterone.blocks;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.copycat.CopycatBlock;
+
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.effects.roidRageEffect;
 import net.mifort.testosterone.effects.testosteroneModEffects;
@@ -33,7 +34,7 @@ public class fragileCopycatBlock extends CopycatBlock {
     public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         if (pContext instanceof EntityCollisionContext entityCollisionContext) {
             Entity entity = entityCollisionContext.getEntity();
-            if (entity instanceof Player player && player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()) && roidRageEffect.getSpeed(player) > ConfigRegistry.ABILITY_SPEED.get()) {
+            if (entity instanceof Player player && player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT) && roidRageEffect.getSpeed(player) > ConfigRegistry.ABILITY_SPEED.get()) {
                 if (pLevel instanceof Level level && !level.isClientSide()) {
                     level.destroyBlock(pPos, true, player);
                 }

@@ -1,25 +1,28 @@
 package net.mifort.testosterone.entities;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+
 import net.mifort.testosterone.entities.rat.ratEntity;
 import net.mifort.testosterone.testosterone;
+
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public class testosteroneEntities {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, testosterone.MOD_ID);
 
+	public static final EntityType<ratEntity> RAT = Registry.register(
+			BuiltInRegistries.ENTITY_TYPE,
+			new ResourceLocation(testosterone.MOD_ID, "rat"),
+			EntityType.Builder
+					.of(ratEntity::new, MobCategory.CREATURE)
+					.sized(1.0F, 1.0F)
+					.build("rat")
+	);
 
-    public static final RegistryObject<EntityType<ratEntity>> RAT =
-            ENTITY_TYPES.register("rat", () -> EntityType.Builder.of(ratEntity::new, MobCategory.CREATURE)
-                    .sized(1, 1).build("rat"));
-
-
-    public static void register(IEventBus eventBus) {
-        ENTITY_TYPES.register(eventBus);
-    }
+	public static void registerEntities() {
+		FabricDefaultAttributeRegistry.register(RAT, ratEntity.createAttributes());
+	}
 }

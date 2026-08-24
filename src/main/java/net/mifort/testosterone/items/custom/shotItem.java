@@ -1,5 +1,7 @@
 package net.mifort.testosterone.items.custom;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -10,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
 public class shotItem extends Item {
     MobEffect mobEffect;

@@ -1,8 +1,7 @@
 package net.mifort.testosterone.mixin;
 
-import net.minecraft.client.resources.SplashManager;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.util.profiling.ProfilerFiller;
+import java.util.List;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,10 +10,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
+import net.minecraft.client.resources.SplashManager;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 @Mixin(SplashManager.class)
 public class SplashMixin {
+
     @Unique
     private static final List<String> createTestosterone$testosteroneSplashes = List.of(
         "Now with testosterone!",

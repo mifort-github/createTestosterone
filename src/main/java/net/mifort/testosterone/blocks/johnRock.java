@@ -1,10 +1,14 @@
 package net.mifort.testosterone.blocks;
 
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.Queue;
+import java.util.Set;
+
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.sounds.testosteroneModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
@@ -15,13 +19,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
-
-import java.util.ArrayDeque;
-import java.util.HashSet;
-import java.util.Queue;
-import java.util.Set;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class johnRock extends Block {
     public static final BooleanProperty TOGGLED = BooleanProperty.create("toggled");
@@ -98,7 +97,7 @@ public class johnRock extends Block {
                 origin.getX(),
                 origin.getY(),
                 origin.getZ(),
-                newToggled ? testosteroneModSounds.JOHN_ROCK_DEACTIVATION.get() : testosteroneModSounds.JOHN_ROCK_ACTIVATION.get(),
+                newToggled ? testosteroneModSounds.JOHN_ROCK_DEACTIVATION : testosteroneModSounds.JOHN_ROCK_ACTIVATION,
                 SoundSource.BLOCKS,
                 1.0F,
                 1.0F

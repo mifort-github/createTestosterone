@@ -4,63 +4,45 @@ import net.mifort.testosterone.effects.testosteroneModEffects;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.network.NetworkEvent;
 
-import java.util.function.Supplier;
+public record effectCheckerC2SPacket(int livingEntityID) {
 
-public class effectCheckerC2SPacket {
-    int livingEntityID;
+	public effectCheckerC2SPacket(FriendlyByteBuf buf) {
+		this(buf.readInt());
+	}
 
-    public effectCheckerC2SPacket(int livingEntityID) {
-        this.livingEntityID = livingEntityID;
-    }
+	public void toBytes(FriendlyByteBuf buf) {
+		buf.writeInt(livingEntityID);
+	}
 
-    public effectCheckerC2SPacket(FriendlyByteBuf buf) {
-        this.livingEntityID = buf.readInt();
-    }
+	public void handle(ServerPlayer player) {
+		if (player == null) return;
 
-    public void toBytes(FriendlyByteBuf buf) {
-        buf.writeInt(livingEntityID);
-    }
+		LivingEntity livingEntity = (LivingEntity) player.level().getEntity(livingEntityID);
+		if (livingEntity == null) return;
 
-    public boolean handle(Supplier<NetworkEvent.Context> supplier) {
-        NetworkEvent.Context context = supplier.get();
-        context.enqueueWork(() -> {
-            // HERE WE ARE ON THE SERVER!
-            ServerPlayer player = context.getSender();
+		MobEffectInstance testosterone = livingEntity.getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT);
+		MobEffectInstance roidRage = livingEntity.getEffect(testosteroneModEffects.ROID_RAGE_EFFECT);
 
-            if (player != null) {
-                LivingEntity livingEntity = (LivingEntity) player.level().getEntity(livingEntityID);
-                int effectInt;
+		boolean hasTestosterone = testosterone != null;
+		boolean hasRoidRage = roidRage != null;
 
-                boolean hasTestosterone = livingEntity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get());
-                boolean hasRoidRage = livingEntity.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get());
+		int effectInt;
+		if (hasTestosterone && hasRoidRage) {
+			int testosteroneScore = (testosterone.getAmplifier() + 1) * testosterone.getDuration();
+			int roidRageScore = (roidRage.getAmplifier() + 1) * roidRage.getDuration();
+			effectInt = testosteroneScore > roidRageScore ? 1 : 2;
+		} else if (hasTestosterone) {
+			effectInt = 1;
+		} else if (hasRoidRage) {
+			effectInt = 2;
+		} else {
+			effectInt = 0;
+		}
 
-                if (hasTestosterone && hasRoidRage) {
-                    int testosteroneScore = (livingEntity.getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()).getAmplifier() + 1) * livingEntity.getEffect(testosteroneModEffects.TESTOSTERONE_EFFECT.get()).getDuration();
-                    int roidRageScore = (livingEntity.getEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()).getAmplifier() + 1) * livingEntity.getEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()).getDuration();
-
-                    if (testosteroneScore > roidRageScore) {
-                        effectInt = 1;
-                    } else {
-                        effectInt = 2;
-                    }
-
-                } else if (hasTestosterone) {
-                    effectInt = 1;
-                } else if (hasRoidRage) {
-                    effectInt = 2;
-                } else {
-                    effectInt = 0;
-                }
-
-                int[] nums = {livingEntityID, effectInt};
-
-                testosteroneModMessages.sendToPlayer(new effectCheckerS2CPacket(nums), player);
-            }
-        });
-        return true;
-    }
-
+		int[] nums = {livingEntityID, effectInt};
+		testosteroneModMessages.sendToPlayer(new effectCheckerS2CPacket(nums), player);
+	}
 }

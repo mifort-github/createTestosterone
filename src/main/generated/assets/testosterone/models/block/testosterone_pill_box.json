@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "testosterone:block/testosterone_pill_box/bottom",
+    "east": "testosterone:block/testosterone_pill_box/west",
+    "north": "testosterone:block/testosterone_pill_box/north",
+    "particle": "testosterone:block/testosterone_pill_box/top",
+    "south": "testosterone:block/testosterone_pill_box/south",
+    "up": "testosterone:block/testosterone_pill_box/top",
+    "west": "testosterone:block/testosterone_pill_box/east"
+  }
+}

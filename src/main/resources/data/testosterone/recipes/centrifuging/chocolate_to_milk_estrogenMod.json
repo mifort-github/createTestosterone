@@ -1,5 +1,11 @@
 {
   "type": "estrogen:centrifuging",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["estrogen"]
+    }
+  ],
   "ingredients": [
     {
       "amount": 5,
@@ -10,7 +16,7 @@
   "results": [
     {
       "amount": 10,
-      "fluid": "minecraft:milk"
+      "fluid": "milk:still_milk"
     }
   ]
 }

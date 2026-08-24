@@ -1,17 +1,18 @@
 package net.mifort.testosterone.particles;
 
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 
-import net.mifort.testosterone.testosterone;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-
-@Mod.EventBusSubscriber(modid = testosterone.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class testosteroneParticlesClientSetup {
-    @SubscribeEvent
-    public static void onRegisterParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(testosteroneModParticles.TESTOSTERONE_RUN.get(), runParticle.Factory::new);
-        event.registerSpriteSet(testosteroneModParticles.AIR_PASSING.get(), airPassingParticle.Factory::new);
-    }
+
+	public static void registerParticleFactories() {
+		ParticleFactoryRegistry.getInstance().register(
+				testosteroneModParticles.TESTOSTERONE_RUN,
+				runParticle.Factory::new
+		);
+
+		ParticleFactoryRegistry.getInstance().register(
+				testosteroneModParticles.AIR_PASSING,
+				airPassingParticle.Factory::new
+		);
+	}
 }

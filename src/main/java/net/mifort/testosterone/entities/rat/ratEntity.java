@@ -1,5 +1,14 @@
 package net.mifort.testosterone.entities.rat;
 
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.config.ConfigRegistry;
 import net.mifort.testosterone.entities.testosteroneEntities;
@@ -14,10 +23,22 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
@@ -29,25 +50,18 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.DistExecutor;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
-import java.util.Random;
 
 public class ratEntity extends Animal implements PlayerRideableJumping {
     public static final SoundEvent[] ambientSounds = {
-            testosteroneModSounds.RAT_SNIFF1.get(),
-            testosteroneModSounds.RAT_SNIFF2.get(),
-            testosteroneModSounds.RAT_SQUEAK1.get(),
-            testosteroneModSounds.RAT_SQUEAK2.get()
+            testosteroneModSounds.RAT_SNIFF1,
+            testosteroneModSounds.RAT_SNIFF2,
+            testosteroneModSounds.RAT_SQUEAK1,
+            testosteroneModSounds.RAT_SQUEAK2
     };
 
     public static final SoundEvent[] hurtSounds = {
-            testosteroneModSounds.RAT_HURT1.get(),
-            testosteroneModSounds.RAT_HURT2.get()
+            testosteroneModSounds.RAT_HURT1,
+            testosteroneModSounds.RAT_HURT2
     };
 
     private final ratRollingSound rollingSound;
@@ -68,7 +82,7 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Cat.class, 6.0F, 1.0D, 1.2D));
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.15D));
-        this.goalSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.TemptGoal(this, 1.2D, Ingredient.of(testosteroneModItems.CHEESE_ON_A_STICK.get(), testosteroneModBlocks.CHEESE_BLOCK), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.2D, Ingredient.of(testosteroneModItems.CHEESE_ON_A_STICK.get(), testosteroneModBlocks.CHEESE_BLOCK), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.1D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 3f));
@@ -91,7 +105,7 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
 
     @Override
     public AgeableMob getBreedOffspring(@NotNull ServerLevel level, @NotNull AgeableMob parent) {
-        return testosteroneEntities.RAT.get().create(level);
+        return testosteroneEntities.RAT.create(level);
     }
 
     @Override
@@ -127,6 +141,10 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         if(this.level().isClientSide()) {
             setupAnimationStates();
         }
+
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+			ratEntityClient.playRollingSound(this);
+		}
     }
 
     private void setupAnimationStates() {
@@ -138,30 +156,14 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
-    static class clientOnly {
-        static void playRollingSound(ratEntity rat, ratRollingSound rollingSound) {
-            SoundManager soundManager = Minecraft.getInstance().getSoundManager();
+	public ratRollingSound getRollingSound() {
+		return this.rollingSound;
+	}
 
-            if (rollingSound != null && rat.isBoosting()) {
-                if (!soundManager.isActive(rollingSound)) {
-                    soundManager.play(rollingSound);
-                }
-            } else {
-                if (rollingSound != null && soundManager.isActive(rollingSound)) {
-                    soundManager.stop(rollingSound);
-                }
-            }
-        }
-    }
-
-    protected void tickRidden(@NotNull Player pPlayer, @NotNull Vec3 pTravelVector) {
+	protected void tickRidden(@NotNull Player pPlayer, @NotNull Vec3 pTravelVector) {
         super.tickRidden(pPlayer, pTravelVector);
 
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> clientOnly.playRollingSound(this, rollingSound));
-
-
-        if (isHoldingStick(pPlayer)) {
+		if (isHoldingStick(pPlayer)) {
             this.setRot(pPlayer.getYRot(), pPlayer.getXRot() * 0.5F);
             this.yRotO = this.yBodyRot = this.yHeadRot = this.getYRot();
 
@@ -199,6 +201,7 @@ public class ratEntity extends Animal implements PlayerRideableJumping {
         Player rider = getControllingPassenger();
 
         if (rider != null) {
+			System.out.println("RIDER" + rider);
             ItemStack stick = getStick(rider);
 
             if (stick.hasTag()) {

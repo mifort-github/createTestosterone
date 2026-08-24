@@ -1,8 +1,14 @@
 package net.mifort.testosterone.items.custom;
 
+import dev.emi.trinkets.api.TrinketComponent;
+import dev.emi.trinkets.api.TrinketsApi;
+
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+
 import net.mifort.testosterone.advancements.testosteroneAdvancementUtils;
 import net.mifort.testosterone.items.testosteroneModItems;
-import net.mifort.testosterone.testosterone;
+
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -13,102 +19,128 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+
+import java.util.Optional;
 
 public class beerMug extends Item {
-    public static final int BEER_DURATION = 3600;
-    public static final int BEER_AMPLIFIER = 1;
-    private static final String BEER_DOWNSIDE = "testosterone:beer_downside_duration";
 
-    public beerMug(Properties pProperties) {
-        super(pProperties);
-    }
+	public static final int BEER_DURATION = 3600;
+	public static final int BEER_AMPLIFIER = 1;
 
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity living) {
-        if (!level.isClientSide) {
-            int current_downside = living.getPersistentData().getInt(BEER_DOWNSIDE);
-            living.getPersistentData().putInt(BEER_DOWNSIDE, current_downside + BEER_DURATION);
+	private static final String BEER_DOWNSIDE =
+			"testosterone:beer_downside_duration";
 
-            living.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, BEER_DURATION, BEER_AMPLIFIER));
+	public beerMug(Properties properties) {
+		super(properties);
+	}
 
-            if (living instanceof Player player) {
-                ItemStack bowl = new ItemStack(Items.BOWL);
-                if (!player.getInventory().add(bowl)) {
-                    player.drop(bowl, false);
-                }
-            }
-        }
+	@Override
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity living) {
+		if (!level.isClientSide) {
 
-        if (living instanceof Player player && !player.getAbilities().instabuild) {
-            stack.shrink(1);
-        }
+			int currentDownside = getBeerDownside(living);
 
+			setBeerDownside(living, currentDownside + BEER_DURATION);
 
-        return stack;
-    }
+			living.addEffect(
+					new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, BEER_DURATION, BEER_AMPLIFIER));
 
+			if (living instanceof Player player) {
 
-    @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.DRINK;
-    }
+				ItemStack bowl = new ItemStack(Items.BOWL);
 
-    @Mod.EventBusSubscriber(modid = testosterone.MOD_ID)
-    public static class downside {
-        @SubscribeEvent
-        public static void onTick(LivingEvent.LivingTickEvent event) {
-            if (event.getEntity() instanceof ServerPlayer player) {
-                int current = player.getPersistentData().getInt(BEER_DOWNSIDE);
+				if (!player.getInventory().add(bowl)) {
+					player.drop(bowl, false);
+				}
+			}
+		}
 
-                boolean matej = false;
+		if (living instanceof Player player && !player.getAbilities().instabuild) {
+			stack.shrink(1);
+		}
 
-                if (CuriosApi.getCuriosInventory(event.getEntity()).resolve().isPresent()) {
-                    ICuriosItemHandler curiosInventory = CuriosApi.getCuriosInventory(event.getEntity()).resolve().get();
+		return stack;
+	}
 
+	@Override
+	public UseAnim getUseAnimation(ItemStack stack) {
+		return UseAnim.DRINK;
+	}
 
-                    if (curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).isPresent()) {
-                        matej = curiosInventory.findFirstCurio(testosteroneModItems.TIE.get()).get().stack().getDisplayName().getString().equals("[matej]");
-                    }
-                }
+	public static void registerBeerEvents() {
 
-                if (!matej) {
-                    if (current > BEER_DURATION) {
-                        player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, false, true, true));
-                    }
+		ServerTickEvents.END_SERVER_TICK.register(server -> {
 
-                    if (current > 2 * BEER_DURATION) {
-                        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, true, true));
-                    }
+			for (ServerPlayer player : server.getPlayerList().getPlayers()) {
 
-                    if (current > 3 * BEER_DURATION) {
-                        player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 0, false, true, true));
-                    }
+				int current = getBeerDownside(player);
 
-                    if (current > 4 * BEER_DURATION) {
-                        player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, 0, false, true, true));
-                    }
+				if (current <= 0) {
+					continue;
+				}
 
-                    if (current > 5 * BEER_DURATION) {
-                        player.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, true, true));
-                        testosteroneAdvancementUtils.INEBRIATE.trigger(player);
-                    }
+				boolean matej = hasMatejTie(player);
 
-                    if (current > 0) {
-                        player.getPersistentData().putInt(BEER_DOWNSIDE, current - 1);
-                    }
-                }
-            }
-        }
+				if (!matej) {
+					if (current > BEER_DURATION) {
 
-        @SubscribeEvent
-        public static void onClear(MobEffectEvent.Remove event) {
-            event.getEntity().getPersistentData().putInt(BEER_DOWNSIDE, 0);
-        }
-    }
+						player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, false, true, true));
+					}
+
+					if (current > 2 * BEER_DURATION) {
+
+						player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0, false, true, true));
+					}
+
+					if (current > 3 * BEER_DURATION) {
+						player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 0, false, true, true));
+					}
+
+					if (current > 4 * BEER_DURATION) {
+						player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 100, 0, false, true, true));
+					}
+
+					if (current > 5 * BEER_DURATION) {
+
+						player.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0, false, true, true));
+
+						testosteroneAdvancementUtils.INEBRIATE.trigger(player);
+					}
+				}
+
+				setBeerDownside(player, current - 1);
+			}
+		});
+	}
+
+	private static boolean hasMatejTie(ServerPlayer player) {
+
+		Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+
+		if (component.isEmpty()) {
+			return false;
+		}
+
+		for (var equipped : component.get().getAllEquipped()) {
+			ItemStack stack = equipped.getB();
+
+			if (stack.is(testosteroneModItems.TIE.get()) && stack.getDisplayName().getString().equals("[matej]")) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private static int getBeerDownside(LivingEntity entity) {
+		CompoundTag data = entity.getCustomData();
+
+		return data.getInt(BEER_DOWNSIDE);
+	}
+
+	private static void setBeerDownside(LivingEntity entity, int value) {
+		CompoundTag data = entity.getCustomData();
+
+		data.putInt(BEER_DOWNSIDE, Math.max(0, value));
+	}
 }

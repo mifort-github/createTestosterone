@@ -1,5 +1,9 @@
 package net.mifort.testosterone.ponder;
 
+import java.util.Random;
+
+import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
+
 import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.element.ElementLink;
@@ -14,9 +18,6 @@ import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
-import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
-
-import java.util.Random;
 
 // TODO: make independent from estrogen (translatable)
 
@@ -78,9 +79,9 @@ public class johnScene {
 
         scene.idle(5);
 
-        scene.world().modifyBlock(obToJohn1, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
-        scene.world().modifyBlock(obToJohn2, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
-        scene.world().modifyBlock(obToJohn3, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
+        scene.world().modifyBlock(obToJohn1, oldState -> testosteroneModBlocks.JOHN_ROCK.defaultBlockState(), true);
+        scene.world().modifyBlock(obToJohn2, oldState -> testosteroneModBlocks.JOHN_ROCK.defaultBlockState(), true);
+        scene.world().modifyBlock(obToJohn3, oldState -> testosteroneModBlocks.JOHN_ROCK.defaultBlockState(), true);
         //scene.world.modifyBlock(util.grid.at(x, 3, z), s -> s.setValue(testosteroneModBlocks.JOHN_ROCK, johnRock.TOGGLED));
 
         scene.idle(75);
@@ -114,9 +115,9 @@ public class johnScene {
         scene.idle(20);
         scene.world().moveDeployer(deployerPos, 1, 25);
         scene.idle(26);
-        scene.world().modifyBlock(obToJohn4, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
-        scene.world().modifyBlock(obToJohn5, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
-        scene.world().modifyBlock(obToJohn6, oldState -> testosteroneModBlocks.JOHN_ROCK.get().defaultBlockState(), true);
+        scene.world().modifyBlock(obToJohn4, oldState -> testosteroneModBlocks.JOHN_ROCK.defaultBlockState(), true);
+        scene.world().modifyBlock(obToJohn5, oldState -> testosteroneModBlocks.JOHN_ROCK.defaultBlockState(), true);
+        scene.world().modifyBlock(obToJohn6, oldState -> testosteroneModBlocks.JOHN_ROCK.defaultBlockState(), true);
         scene.world().moveDeployer(deployerPos, -1, 25);
 
         scene.idle(40);
@@ -168,7 +169,7 @@ public class johnScene {
                 .placeNearTarget()
                 .attachKeyFrame()
                 .text("John Rocks change state when given a redstone signal");
-        
+
 		scene.idle(5);
 
         scene.world().toggleRedstonePower(redstonepart);
@@ -178,11 +179,11 @@ public class johnScene {
         scene.world().toggleRedstonePower(redstonepart);
 		scene.effects().indicateRedstone(util.grid().at(3, 1, 1));
 		scene.world().cycleBlockProperty(bottomJohnPos, johnRock.TOGGLED);
-        
+
 		scene.idle(20);
-        
+
 		scene.world().toggleRedstonePower(redstonepart);
-        
+
 		// John Wall Show
 		scene.idle(5);
 		scene.world().showSection(lbottomJohn, Direction.SOUTH);
@@ -207,32 +208,32 @@ public class johnScene {
 		scene.world().toggleRedstonePower(redstonepart);
         scene.effects().indicateRedstone(util.grid().at(3, 1, 1));
 		allJohns.forEach(w -> scene.world().cycleBlockProperty(w, johnRock.TOGGLED));
-        
+
 		scene.idle(15);
-        
+
 		scene.overlay().showText(60)
                 .pointAt(util.vector().blockSurface(bottomJohnPos, Direction.WEST))
                 .placeNearTarget()
                 .attachKeyFrame()
                 .text("Multiple John Rocks can be placed next to each other");
-        
+
 		scene.idle(5);
-        
+
 		scene.world().toggleRedstonePower(redstonepart);
-        
+
 		scene.idle(75);
-        
+
 		scene.overlay().showText(85)
                 .pointAt(util.vector().centerOf(util.grid().at(2, 2, 3)))
                 .placeNearTarget()
                 .attachKeyFrame()
                 .text("While in the inactive state, any entity can go through the block");
-        
+
 		scene.idle(30);
 
         ElementLink<ParrotElement> birb = scene.special().createBirb(util.vector().of(3, 2, 8), ParrotPose.FlappyPose::new);
         scene.special().moveParrot(birb, util.vector().of(0, 0, -300), 1000);
-        
+
 		scene.idle(70);
     }
 

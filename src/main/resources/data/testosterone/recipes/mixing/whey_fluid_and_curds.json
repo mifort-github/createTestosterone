@@ -2,11 +2,11 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "amount": 250,
-      "fluidTag": "forge:milk"
+      "amount": 20250,
+      "fluidTag": "c:milk"
     },
     {
-      "amount": 25,
+      "amount": 2025,
       "fluid": "testosterone:beer_fluid"
     }
   ],
@@ -19,7 +19,7 @@
       "item": "testosterone:cheese_curds"
     },
     {
-      "amount": 250,
+      "amount": 20250,
       "fluid": "testosterone:whey_fluid"
     }
   ]

@@ -1,18 +1,24 @@
 package net.mifort.testosterone.particles;
 
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.mifort.testosterone.config.ConfigRegistry;
-import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.*;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
+import java.util.UUID;
+
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
-import java.util.UUID;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+
+import net.mifort.testosterone.config.ConfigRegistry;
+import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SingleQuadParticle;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 
 public class airPassingParticle extends SingleQuadParticle {

@@ -6,7 +6,7 @@
       "item": "testosterone:rat_fur"
     },
     "I": {
-      "tag": "forge:dyes/blue"
+      "tag": "c:blue_dyes"
     }
   },
   "pattern": [

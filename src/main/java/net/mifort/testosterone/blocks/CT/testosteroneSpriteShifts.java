@@ -1,7 +1,14 @@
 package net.mifort.testosterone.blocks.CT;
 
-import com.simibubi.create.foundation.block.connected.*;
+import com.simibubi.create.foundation.block.connected.AllCTTypes;
+import com.simibubi.create.foundation.block.connected.CTModel;
+import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
+import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
+import com.simibubi.create.foundation.block.connected.ConnectedTextureBehaviour;
+import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
+import com.simibubi.create.foundation.block.connected.RotatedPillarCTBehaviour;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
+
 import net.mifort.testosterone.testosterone;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;

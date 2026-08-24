@@ -1,28 +1,23 @@
 package net.mifort.testosterone.ponder;
 
-import com.simibubi.create.AllFluids;
+import java.util.Random;
+
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;
-import net.createmod.catnip.math.Pointing;
+
+import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 import net.createmod.ponder.api.PonderPalette;
 import net.createmod.ponder.api.element.ElementLink;
-import net.createmod.ponder.api.element.ParrotElement;
-import net.createmod.ponder.api.element.ParrotPose;
 import net.createmod.ponder.api.element.WorldSectionElement;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.createmod.ponder.api.scene.Selection;
-import net.mifort.testosterone.blocks.johnRock;
-import net.mifort.testosterone.blocks.testosteroneModBlocks;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-
-import java.util.Random;
 
 // TODO: make independent from estrogen (translatable)
 
@@ -51,10 +46,9 @@ public class decanterScene {
 
         BlockPos tankPos1 = util.grid().at(3, 1, 2);
         BlockPos tankPos2 = util.grid().at(3, 1, 4);
-        FluidStack cholesterol = new FluidStack(testosteroneFluids.CHOLESTEROL_FLUID.get()
-                .getSource(), 16000);
-        FluidStack testosterone = new FluidStack(testosteroneFluids.TESTOSTERONE_FLUID.get()
-                .getSource(), 400);
+        FluidStack cholesterol = new FluidStack(FluidVariant.of(testosteroneFluids.CHOLESTEROL_FLUID.getSource()), 16000);
+        FluidStack testosterone = new FluidStack(FluidVariant.of(testosteroneFluids.TESTOSTERONE_FLUID
+                .getSource()), 400);
 
 
         scene.world().setKineticSpeed(decanter1sele, 0); //sets speed to 0
@@ -104,7 +98,7 @@ public class decanterScene {
 
         scene.world().showSection(tank1, Direction.WEST); //summons tank1
         scene.world().modifyBlockEntity(tankPos1, FluidTankBlockEntity.class, be -> be.getTankInventory()
-                .fill(cholesterol, IFluidHandler.FluidAction.EXECUTE));
+                .setFluid(cholesterol));
         scene.idle(5);
         scene.world().showSection(tank2, Direction.WEST); //summons tank2
 
@@ -124,18 +118,27 @@ public class decanterScene {
         scene.idle(10);
 
 
-        for (int i = 0; i < 50; i++) {
-            final int drainAmount = (i < 36) ? 400
-                    : (i == 36 ? 300
-                    : (i == 37 ? 200
-                    : (i > 37 ? 100
-                    : 100)));
-            scene.world().modifyBlockEntity(tankPos1, FluidTankBlockEntity.class,
-                    be -> be.getTankInventory().drain(drainAmount, IFluidHandler.FluidAction.EXECUTE));
-            scene.world().modifyBlockEntity(tankPos2, FluidTankBlockEntity.class,
-                    be -> be.getTankInventory().fill(testosterone, IFluidHandler.FluidAction.EXECUTE));
-            scene.idle(1);
-        }
+		for (int i = 0; i < 50; i++) {
+			final int drainAmount = (i < 36) ? 400
+					: (i == 36 ? 300
+					: (i == 37 ? 200
+					: 100));
+
+			scene.world().modifyBlockEntity(tankPos1, FluidTankBlockEntity.class, be -> {
+				FluidStack current = be.getTankInventory().getFluid();
+				int newAmount = Math.toIntExact(Math.max(0, current.getAmount() - drainAmount));
+				be.getTankInventory().setFluid(
+						newAmount == 0 ? FluidStack.EMPTY : new FluidStack(current.getFluid(), newAmount));
+			});
+
+			scene.world().modifyBlockEntity(tankPos2, FluidTankBlockEntity.class, be -> {
+				FluidStack current = be.getTankInventory().getFluid();
+				int newAmount = Math.toIntExact((current.isEmpty() ? 0 : current.getAmount()) + testosterone.getAmount());
+				be.getTankInventory().setFluid(new FluidStack(testosterone.getFluid(), newAmount));
+			});
+
+			scene.idle(1);
+		}
         scene.idle(25);
         scene.rotateCameraY(-90);
         scene.idle(40);

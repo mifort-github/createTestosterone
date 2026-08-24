@@ -1,20 +1,19 @@
 package net.mifort.testosterone.mixin;
 
-import net.mifort.testosterone.effects.roidRageEffect;
-import net.mifort.testosterone.effects.testosteroneModEffects;
-import net.mifort.testosterone.sounds.playerMach1Sound;
-import net.mifort.testosterone.sounds.playerMach2Sound;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.world.entity.player.Player;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import net.mifort.testosterone.effects.roidRageEffect;
+import net.mifort.testosterone.effects.testosteroneModEffects;
+import net.mifort.testosterone.sounds.playerMach1Sound;
+import net.mifort.testosterone.sounds.playerMach2Sound;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.world.entity.player.Player;
 
 @Mixin(AbstractClientPlayer.class)
 public abstract class playerRunningSound {
@@ -35,7 +34,7 @@ public abstract class playerRunningSound {
 
         SoundManager soundManager = mc.getSoundManager();
 
-        if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT.get()) && player.isSprinting()) {
+        if (player.hasEffect(testosteroneModEffects.ROID_RAGE_EFFECT) && player.isSprinting()) {
             if (testosterone$mach1 == null) testosterone$mach1 = new playerMach1Sound(player);
             if (testosterone$mach2 == null) testosterone$mach2 = new playerMach2Sound(player);
 

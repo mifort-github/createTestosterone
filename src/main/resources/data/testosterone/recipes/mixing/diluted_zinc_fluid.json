@@ -3,16 +3,16 @@
   "heatRequirement": "heated",
   "ingredients": [
     {
-      "tag": "forge:ingots/zinc"
+      "tag": "c:zinc_ingots"
     },
     {
-      "amount": 250,
+      "amount": 20250,
       "fluid": "minecraft:water"
     }
   ],
   "results": [
     {
-      "amount": 250,
+      "amount": 20250,
       "fluid": "testosterone:diluted_zinc_fluid"
     },
     {

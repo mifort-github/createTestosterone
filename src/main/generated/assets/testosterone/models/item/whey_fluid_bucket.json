@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "testosterone:item/whey_fluid_bucket"
+  }
+}
