@@ -6,7 +6,6 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 
-import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import net.createmod.catnip.lang.FontHelper;
 import net.fabricmc.api.ModInitializer;
 
@@ -25,7 +24,6 @@ import net.mifort.testosterone.items.addItemModifier;
 import net.mifort.testosterone.items.custom.beerMug;
 import net.mifort.testosterone.items.testosteroneModCreativeModTabs;
 import net.mifort.testosterone.items.testosteroneModItems;
-import net.mifort.testosterone.items.trinkets.trinketsTieRenderer;
 import net.mifort.testosterone.network.testosteroneModMessages;
 import net.mifort.testosterone.particles.testosteroneModParticles;
 import net.mifort.testosterone.potions.testosteroneModPotions;
