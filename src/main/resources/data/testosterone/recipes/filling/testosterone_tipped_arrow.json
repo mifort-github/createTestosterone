@@ -14,7 +14,7 @@
     {
       "item": "minecraft:tipped_arrow",
       "nbt": {
-        "Potion": "testosterone:testosterone_potion"
+        "Potion": "testosterone:man_power_potion"
       }
     }
   ]

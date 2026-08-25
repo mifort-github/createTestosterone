@@ -1,0 +1,19 @@
+{
+  "type": "createestrogen:centrifuging",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": ["createestrogen"]
+    }
+  ],
+  "ingredients": [
+    {
+      "amount_per_tick": 81,
+      "fluid": "estrogen:testosterone_mixture"
+    }
+  ],
+  "result": {
+    "amount_per_tick": 810,
+    "fluid": "testosterone:testosterone_fluid"
+  }
+}
