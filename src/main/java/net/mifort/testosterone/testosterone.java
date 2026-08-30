@@ -69,6 +69,7 @@ public class testosterone implements ModInitializer {
 		testosteroneEntities.registerEntities();
 
 		testosteroneFluids.register();
+		testosteroneFluids.registerFluidInteractions();
 
 		testosteroneAdvancementUtils.register();
 

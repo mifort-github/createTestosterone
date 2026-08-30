@@ -7,6 +7,8 @@
     "JohnRockRecipe",
     "PackageItemMixin",
     "PackageStyleMixin",
+    "fluids.FluidTypeMixin",
+    "fluids.LiquidBlockMixin",
     "manPower.LivingEntityHurtMixin",
     "roidRage.EntityMaxUpStepAccessor",
     "roidRage.LivingEntityDeathMixin",
