@@ -6,23 +6,29 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Set;
 
-public class johnRock extends Block {
+public class johnRock extends Block implements LiquidBlockContainer {
     public static final BooleanProperty TOGGLED = BooleanProperty.create("toggled");
     public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
 
@@ -144,11 +150,8 @@ public class johnRock extends Block {
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (context instanceof EntityCollisionContext entityCollisionContext) {
-            Entity entity = entityCollisionContext.getEntity();
-            if (entity != null && state.getValue(TOGGLED)) {
-                return Shapes.empty();
-            }
+        if (state.getValue(TOGGLED)) {
+            return Shapes.empty();
         }
 
         return Shapes.block();
@@ -162,6 +165,16 @@ public class johnRock extends Block {
         }
 
         return super.getOcclusionShape(pState, pLevel, pPos);
+    }
+
+    @Override
+    public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
+        return Shapes.block();
+    }
+
+    @Override
+    public boolean canBeReplaced(BlockState state, net.minecraft.world.level.material.Fluid fluid) {
+        return false;
     }
 
     @Override
@@ -180,5 +193,15 @@ public class johnRock extends Block {
     @Override
     public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
         return state.getValue(TOGGLED);
+    }
+
+    @Override
+    public boolean canPlaceLiquid(@Nullable Player p_295256_, BlockGetter p_54766_, BlockPos p_54767_, BlockState p_54768_, Fluid p_54769_) {
+        return false;
+    }
+
+    @Override
+    public boolean placeLiquid(LevelAccessor p_54770_, BlockPos p_54771_, BlockState p_54772_, FluidState p_54773_) {
+        return false;
     }
 }
