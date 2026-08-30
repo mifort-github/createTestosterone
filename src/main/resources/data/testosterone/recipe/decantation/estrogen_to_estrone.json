@@ -1,16 +1,11 @@
+
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "estrogen"
-    }
-  ],
   "type": "testosterone:decantation",
   "ingredients": [
     {
       "type": "neoforge:single",
       "amount": 1,
-      "fluid": "estrogen:estrogen_liquid"
+      "fluid": "estrogen:liquid_estrogen"
     }
   ],
   "results": [
@@ -20,3 +15,4 @@
     }
   ]
 }
+

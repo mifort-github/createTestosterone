@@ -1,0 +1,13 @@
+{
+  "type": "createestrogen:centrifuging",
+  "ingredients": [
+    {
+      "amount_per_tick": 5,
+      "fluid": "create:chocolate"
+    }
+  ],
+  "result": {
+    "amount_per_tick": 10,
+    "fluid": "minecraft:milk"
+  }
+}

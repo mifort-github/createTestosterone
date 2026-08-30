@@ -1,0 +1,13 @@
+{
+  "type": "createestrogen:centrifuging",
+  "ingredients": [
+    {
+      "amount_per_tick": 1,
+      "fluid": "estrogen:testosterone_mixture"
+    }
+  ],
+  "result": {
+    "amount_per_tick": 5,
+    "fluid": "testosterone:testosterone_fluid"
+  }
+}
