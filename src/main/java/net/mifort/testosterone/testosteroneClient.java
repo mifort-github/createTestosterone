@@ -20,7 +20,8 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.mifort.testosterone.client.hudOverlay;
 import net.mifort.testosterone.client.layerRegister;
 import net.mifort.testosterone.client.testosteroneItemColor;
-import net.mifort.testosterone.compat.CreateJeiCompat;
+import net.mifort.testosterone.compat.emi.CreateEmiCompat;
+import net.mifort.testosterone.compat.jei.CreateJeiCompat;
 import net.mifort.testosterone.config.renderButton;
 import net.mifort.testosterone.entities.rat.ratModel;
 import net.mifort.testosterone.entities.rat.ratRenderer;
@@ -54,6 +55,10 @@ public class testosteroneClient implements ClientModInitializer {
 
 		if (FabricLoader.getInstance().isModLoaded("jei")) {
 			CreateJeiCompat.register();
+		}
+
+		if (FabricLoader.getInstance().isModLoaded("emi")) {
+			CreateEmiCompat.register();
 		}
 
 		renderButton.register();

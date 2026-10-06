@@ -145,5 +145,6 @@
   "testosterone.ponder.john_rock.text_1": "John Rocks change state when given a redstone signal",
   "testosterone.ponder.john_rock.text_2": "Multiple John Rocks can be placed next to each other",
   "testosterone.ponder.john_rock.text_3": "While in the inactive state, any entity can go through the block",
-  "attribute.testosterone.step_height_addition": "Step Height"
+  "attribute.testosterone.step_height_addition": "Step Height",
+  "emi.category.testosterone.decantation": "Decantation"
 }

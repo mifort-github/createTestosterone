@@ -21,7 +21,10 @@
       "net.mifort.testosterone.datagen.testosteroneDataGenerator"
     ],
     "jei_mod_plugin": [
-      "net.mifort.testosterone.compat.jeiPlugin"
+      "net.mifort.testosterone.compat.jei.jeiPlugin"
+    ],
+    "emi":[
+      "net.mifort.testosterone.compat.emi.emiPlugin"
     ]
   },
   "mixins": [

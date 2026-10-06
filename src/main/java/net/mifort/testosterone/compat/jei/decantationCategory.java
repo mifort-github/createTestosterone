@@ -1,4 +1,4 @@
-package net.mifort.testosterone.compat;
+package net.mifort.testosterone.compat.jei;
 
 import io.github.fabricators_of_create.porting_lib.fluids.FluidStack;
 
@@ -38,7 +38,7 @@ public class decantationCategory implements IRecipeCategory<decantation> {
 
 	private final IDrawable background;
 	private final IDrawable icon;
-	private final AnimatedDecantation animation = new AnimatedDecantation();
+	private final AnimatedJeiDecantation animation = new AnimatedJeiDecantation();
 
 	int xOffset = 0;
 	int yOffset = -7;

@@ -1,4 +1,4 @@
-package net.mifort.testosterone.compat;
+package net.mifort.testosterone.compat.jei;
 
 import com.simibubi.create.compat.jei.ConversionRecipe;
 import com.simibubi.create.compat.jei.category.MysteriousItemConversionCategory;

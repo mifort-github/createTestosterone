@@ -1,4 +1,4 @@
-package net.mifort.testosterone.compat;
+package net.mifort.testosterone.compat.jei;
 
 import java.util.List;
 

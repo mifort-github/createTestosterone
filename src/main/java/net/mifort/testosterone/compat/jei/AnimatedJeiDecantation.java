@@ -1,4 +1,4 @@
-package net.mifort.testosterone.compat;
+package net.mifort.testosterone.compat.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -9,7 +9,7 @@ import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;
 
-public class AnimatedDecantation extends AnimatedKinetics {
+public class AnimatedJeiDecantation extends AnimatedKinetics {
 
     @Override
     public void draw(GuiGraphics graphics, int xOffset, int yOffset) {
