@@ -24,6 +24,10 @@ public class fluidEffectHandler {
 	}
 
 	private static void applyPotionEffect(LivingEntity entity) {
+		if (entity.level() instanceof ServerLevel serverLevel && !serverLevel.isPositionEntityTicking(entity.blockPosition())) {
+			return;
+		}
+
 		FluidState fluidState = entity.level().getFluidState(entity.blockPosition());
 
 		if (fluidState.getType() == testosteroneFluids.TESTOSTERONE_FLUID.get() || fluidState.getType() == testosteroneFluids.TESTOSTERONE_FLUID.getSource()) {
