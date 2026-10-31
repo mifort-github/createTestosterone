@@ -30,6 +30,11 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.rebar.concrete_lib.ConcreteLib;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksBlock;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksRecipes;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksRegister;
+import net.rebar.concrete_lib.lib.blocks.CLBlocks;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -154,6 +159,14 @@ public class testosteroneModBlocks {
 	);
 
 
+	public static final Block CHISELED_AEQUALIS_BRICKS = registerBlock(
+			"chiseled_cut_aequalis_bricks",
+			new Block(
+					BlockBehaviour.Properties.copy(Blocks.STONE)
+							.sound(SoundType.DEEPSLATE)
+			)
+	);
+
 	public static final Block CUT_AEQUALIS_BRICKS = registerBlock(
 			"cut_aequalis_bricks",
 			new Block(
@@ -246,13 +259,19 @@ public class testosteroneModBlocks {
 			)
 	);
 
-	public static final bigBricks BIG_AEQUALIS_BRICKS = registerBlock(
-			"big_aequalis_bricks",
-			new bigBricks(
-					BlockBehaviour.Properties.copy(Blocks.STONE)
-							.sound(SoundType.DEEPSLATE)
-			)
-	);
+
+	private static final BigBricksRegister BIG_BRICKS = ConcreteLib.bigBricks(testosterone.MOD_ID);
+
+	public static CLBlocks.BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS =
+			BIG_BRICKS.register("big_aequalis_bricks",
+					BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+					BigBricksRecipes.of(CUT_AEQUALIS_BRICKS));
+
+
+	public static CLBlocks.BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS =
+			BIG_BRICKS.register("big_chiseled_aequalis_bricks",
+					BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+					BigBricksRecipes.of(CHISELED_AEQUALIS_BRICKS));
 
 
 	public static final Block CRACKED_PILLAR = registerBlock(

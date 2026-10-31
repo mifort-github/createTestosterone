@@ -10,19 +10,18 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.rebar.concrete_lib.ConcreteLib;
+import net.rebar.concrete_lib.lib.mobs.CLMobs;
 
 public class testosteroneEntities {
+	public static CLMobs MOBS = ConcreteLib.mobs(testosterone.MOD_ID);
 
-	public static final EntityType<ratEntity> RAT = Registry.register(
-			BuiltInRegistries.ENTITY_TYPE,
-			new ResourceLocation(testosterone.MOD_ID, "rat"),
-			EntityType.Builder
-					.of(ratEntity::new, MobCategory.CREATURE)
-					.sized(1.0F, 1.0F)
-					.build("rat")
-	);
+	public static CLMobs.MobEntry<ratEntity> RAT =
+			MOBS.mob("rat",
+					EntityType.Builder.of(ratEntity::new, MobCategory.CREATURE).sized(1, 1),
+					ratEntity::createAttributes);
 
-	public static void registerEntities() {
-		FabricDefaultAttributeRegistry.register(RAT, ratEntity.createAttributes());
+	public static void register() {
+
 	}
 }

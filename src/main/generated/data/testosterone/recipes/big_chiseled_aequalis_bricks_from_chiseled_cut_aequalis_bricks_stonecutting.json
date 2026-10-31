@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "testosterone:chiseled_cut_aequalis_bricks"
+  },
+  "result": "testosterone:big_chiseled_aequalis_bricks"
+}

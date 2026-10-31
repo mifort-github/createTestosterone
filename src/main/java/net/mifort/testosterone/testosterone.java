@@ -66,7 +66,7 @@ public class testosterone implements ModInitializer {
 
 		testosteroneModPotions.registerPotions();
 
-		testosteroneEntities.registerEntities();
+		testosteroneEntities.register();
 
 		testosteroneFluids.register();
 		testosteroneFluids.registerFluidInteractions();

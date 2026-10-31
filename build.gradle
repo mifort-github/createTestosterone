@@ -90,6 +90,9 @@ dependencies {
 //    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version")
 //    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version")
 //    modCompileOnly("dev.emi:emi:$emi_version")
+
+	// TODO: change to maven
+	implementation files("libs/concrete_lib-fabric-1.0.0-dev-shadow.jar")
 }
 
 processResources {

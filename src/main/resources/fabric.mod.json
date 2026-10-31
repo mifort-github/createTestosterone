@@ -35,6 +35,7 @@
     "fabric-api": ">=${fabric_api_version}",
     "minecraft": "${minecraft_version}",
     "create": ">=6.0.0",
-    "trinkets": "*"
+    "trinkets": "*",
+    "concrete_lib": "^1.0.0"
   }
 }

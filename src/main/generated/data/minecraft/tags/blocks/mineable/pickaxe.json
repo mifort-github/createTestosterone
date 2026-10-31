@@ -13,6 +13,7 @@
     "testosterone:polished_cut_aequalis_slab",
     "testosterone:polished_cut_aequalis_wall",
     "testosterone:cut_aequalis_bricks",
+    "testosterone:chiseled_cut_aequalis_bricks",
     "testosterone:cut_aequalis_brick_stairs",
     "testosterone:cut_aequalis_brick_slab",
     "testosterone:cut_aequalis_brick_wall",
@@ -23,12 +24,13 @@
     "testosterone:smooth_aequalis",
     "testosterone:smooth_diamond_aequalis",
     "testosterone:smooth_dark_diamond_aequalis",
-    "testosterone:big_aequalis_bricks",
     "testosterone:cracked_pillar",
     "testosterone:john_rock",
     "testosterone:cheese_block",
     "testosterone:fragile_copycat_block",
     "testosterone:decanter_centrifuge",
-    "testosterone:trenbolone_vial"
+    "testosterone:trenbolone_vial",
+    "testosterone:big_aequalis_bricks",
+    "testosterone:big_chiseled_aequalis_bricks"
   ]
 }

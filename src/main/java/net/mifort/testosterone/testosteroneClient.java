@@ -26,6 +26,7 @@ import net.mifort.testosterone.config.renderButton;
 import net.mifort.testosterone.entities.rat.ratModel;
 import net.mifort.testosterone.entities.rat.ratRenderer;
 import net.mifort.testosterone.entities.testosteroneEntities;
+import net.mifort.testosterone.entities.testosteroneModelLayers;
 import net.mifort.testosterone.events.overlayRegistry;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.testosteroneModItems;
@@ -67,9 +68,8 @@ public class testosteroneClient implements ClientModInitializer {
 
 		testosteroneParticlesClientSetup.registerParticleFactories();
 
-		EntityRendererRegistry.register(testosteroneEntities.RAT, ratRenderer::new);
-
-		EntityModelLayerRegistry.registerModelLayer(ratModel.LAYER_LOCATION, ratModel::createBodyLayer);
+		testosteroneModelLayers.registerLayers();
+		testosteroneModelLayers.registerRenderers();
 
 		registerPackageModels(TestosteronePackageStyles.TESTOSTERONE_PILL_STYLES);
 		registerPackageModels(TestosteronePackageStyles.TRENBOLONE_VIAL_STYLES);

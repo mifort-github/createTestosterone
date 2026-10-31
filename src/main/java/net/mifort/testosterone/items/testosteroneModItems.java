@@ -183,7 +183,7 @@ public class testosteroneModItems {
 			REGISTRATE.item(
 							"stupid_rat_spawn_egg",
 							properties -> new SpawnEggItem(
-									testosteroneEntities.RAT,
+									testosteroneEntities.RAT.get(),
 									0xFFFFFF,
 									0xFFFFFF,
 									properties

@@ -30,8 +30,10 @@
   "block.testosterone.aequalis_pillar": "Aequalis Pillar",
   "block.testosterone.beer_fluid": "Beer Fluid",
   "block.testosterone.big_aequalis_bricks": "Big Aequalis Bricks",
+  "block.testosterone.big_chiseled_aequalis_bricks": "Big Chiseled Aequalis Bricks",
   "block.testosterone.cheese_block": "Cheese Block",
   "block.testosterone.cheese_fluid": "Cheese Fluid",
+  "block.testosterone.chiseled_cut_aequalis_bricks": "Chiseled Cut Aequalis Bricks",
   "block.testosterone.cholesterol_fluid": "Cholesterol Fluid",
   "block.testosterone.cracked_pillar": "Cracked Pillar",
   "block.testosterone.cut_aequalis": "Cut Aequalis",
@@ -145,6 +147,5 @@
   "testosterone.ponder.john_rock.text_1": "John Rocks change state when given a redstone signal",
   "testosterone.ponder.john_rock.text_2": "Multiple John Rocks can be placed next to each other",
   "testosterone.ponder.john_rock.text_3": "While in the inactive state, any entity can go through the block",
-  "attribute.testosterone.step_height_addition": "Step Height",
   "emi.category.testosterone.decantation": "Decantation"
 }

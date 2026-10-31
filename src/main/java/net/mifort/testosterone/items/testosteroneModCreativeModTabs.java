@@ -95,7 +95,10 @@ public class testosteroneModCreativeModTabs {
 						output.accept(testosteroneModBlocks.SMOOTH_AEQUALIS);
 						output.accept(testosteroneModBlocks.SMOOTH_DIAMOND_AEQUALIS);
 						output.accept(testosteroneModBlocks.SMOOTH_DARK_DIAMOND_AEQUALIS);
-						output.accept(testosteroneModBlocks.BIG_AEQUALIS_BRICKS);
+
+						output.accept(testosteroneModBlocks.CHISELED_AEQUALIS_BRICKS);
+						output.accept(testosteroneModBlocks.BIG_AEQUALIS_BRICKS.get());
+						output.accept(testosteroneModBlocks.BIG_CHISELED_AEQUALIS_BRICKS.get());
 					})
 					.build());
 
