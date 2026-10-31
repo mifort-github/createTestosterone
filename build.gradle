@@ -139,7 +139,6 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
-
 }
 
 dependencies {
@@ -176,6 +175,11 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     compileOnly 'org.spongepowered:mixin:0.8.5'
+
+
+
+    // TODO: change to maven
+    implementation files("libs/concrete_lib-forge-1.0.0-dev-shadow.jar")
 }
 
 mixin {

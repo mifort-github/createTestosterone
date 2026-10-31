@@ -10,6 +10,7 @@ import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
 import net.mifort.testosterone.blocks.blockModels.fragileCopycatModel;
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlock;
 import net.mifort.testosterone.items.testosteroneModFoods;
+import net.mifort.testosterone.testosterone;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -17,9 +18,15 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.rebar.concrete_lib.ConcreteLib;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksBlock;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksRecipes;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksRegister;
+import net.rebar.concrete_lib.lib.blocks.CLBlocks;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -158,6 +165,13 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
 
+    public static final BlockEntry<Block> CHISELED_AEQUALIS_BRICKS = REGISTRATE.block("chiseled_cut_aequalis_bricks", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .simpleItem()
+            .register();
+
     public static final BlockEntry<StairBlock> CUT_AEQUALIS_BRICK_STAIRS = REGISTRATE.block("cut_aequalis_brick_stairs", p -> new StairBlock(Blocks.STONE_STAIRS::defaultBlockState, p))
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
@@ -170,7 +184,7 @@ public class testosteroneModBlocks {
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate((ctx, prov) -> prov.slabBlock(ctx.get(), prov.modLoc("block/cut_aequalis_bricks"), prov.modLoc("block/cut_aequalis")))
+            .blockstate((ctx, prov) -> prov.slabBlock(ctx.get(), prov.modLoc("block/cut_aequalis_bricks"), prov.modLoc("block/cut_aequalis_bricks")))
             .simpleItem()
             .register();
 
@@ -244,19 +258,19 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<bigBricks> BIG_AEQUALIS_BRICKS = REGISTRATE.block("big_aequalis_bricks", bigBricks::new)
-            .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.sound(SoundType.DEEPSLATE))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate((ctx, prov) -> {})
-            .simpleItem()
-            .register();
+
+    private static final BigBricksRegister BIG_BRICKS = ConcreteLib.bigBricks(testosterone.MOD_ID);
+
+    public static CLBlocks.BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS =
+            BIG_BRICKS.register("big_aequalis_bricks",
+                    BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+                    BigBricksRecipes.of(CUT_AEQUALIS_BRICKS));
 
 
-
-
-
-
+    public static CLBlocks.BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS =
+            BIG_BRICKS.register("big_chiseled_aequalis_bricks",
+                    BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+                    BigBricksRecipes.of(CHISELED_AEQUALIS_BRICKS));
 
 
     // PIZZA TOWER

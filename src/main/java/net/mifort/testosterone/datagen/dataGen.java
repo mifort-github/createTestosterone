@@ -10,13 +10,21 @@ import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.packages.TestosteronePackageStyles;
 import net.mifort.testosterone.ponder.testosteronePonder;
 import net.mifort.testosterone.testosterone;
+import net.minecraft.data.DataProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksModelProvider;
+
+import java.util.function.Supplier;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -25,6 +33,9 @@ public class dataGen {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         addResourcePackTranslatable("programmer_art", "Testosterone Programmer Art", "§fProgrammer Art for the Testosterone mod.");
+
+        event.getGenerator().addProvider(true, (DataProvider.Factory<BigBricksModelProvider>) output ->
+                new BigBricksModelProvider(output, testosterone.MOD_ID)).withoutPickaxeTag();
 
         REGISTRATE.addDataGenerator(ProviderType.LANG, provider -> {
             PonderIndex.addPlugin(new testosteronePonder());
@@ -93,7 +104,14 @@ public class dataGen {
 
         addItemDescription(testosteroneModBlocks.AEQUALIS.asItem(), "A _strange stone_ formed when §kestrone§r and §ktestosterone§r touch.");
 
-        addEntityName(testosteroneEntities.RAT.getId(), "Stupid Rat");
+        addEntityName(testosteroneEntities.RAT.id(), "Stupid Rat");
+
+        translateBlock(testosteroneModBlocks.BIG_AEQUALIS_BRICKS);
+        translateBlock(testosteroneModBlocks.BIG_CHISELED_AEQUALIS_BRICKS);
+
+        tag(testosteroneModBlocks.BIG_AEQUALIS_BRICKS, BlockTags.MINEABLE_WITH_PICKAXE);
+        tag(testosteroneModBlocks.BIG_CHISELED_AEQUALIS_BRICKS, BlockTags.MINEABLE_WITH_PICKAXE);
+
     }
 
     private static void addEntityName(ResourceLocation entity, String translation) {
@@ -170,5 +188,37 @@ public class dataGen {
     }
     private static void addCategoryTranslatable(String categoryId, String title) {
         REGISTRATE.addLang("category", new ResourceLocation(testosterone.MOD_ID, categoryId), title);
+    }
+
+    public static void translateBlock(Supplier<? extends Block> block, String name) {
+        REGISTRATE.addDataGenerator(ProviderType.LANG,
+                prov -> prov.add(block.get().getDescriptionId(), name));
+    }
+
+    public static void translateBlock(Supplier<? extends Block> block) {
+        REGISTRATE.addDataGenerator(ProviderType.LANG, prov -> {
+            Block b = block.get();
+            ResourceLocation id = ForgeRegistries.BLOCKS.getKey(b);
+            prov.add(b.getDescriptionId(), titleCase(id.getPath()));
+        });
+    }
+
+    private static String titleCase(String path) {
+        StringBuilder sb = new StringBuilder();
+        for (String word : path.split("_")) {
+            if (word.isEmpty()) continue;
+            if (sb.length() > 0) sb.append(' ');
+            sb.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1));
+        }
+        return sb.toString();
+    }
+
+    @SafeVarargs
+    public static void tag(Supplier<? extends Block> block, TagKey<Block>... tags) {
+        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> {
+            for (TagKey<Block> tag : tags) {
+                prov.addTag(tag).add(block.get());
+            }
+        });
     }
 }

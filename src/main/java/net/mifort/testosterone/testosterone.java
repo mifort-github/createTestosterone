@@ -59,6 +59,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.resource.PathPackResources;
 import org.slf4j.Logger;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
@@ -113,7 +114,12 @@ public class testosterone {
         testosteroneModPotions.register(modEventBus);
 
         // entities
-        testosteroneEntities.register(modEventBus);
+        testosteroneEntities.register();
+
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            testosteroneModelLayers.registerLayers();
+            testosteroneModelLayers.registerRenderers();
+        }
 
         // config
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ConfigRegistry.CLIENT_SPEC, "testosterone-client.toml");
@@ -163,8 +169,6 @@ public class testosterone {
 
             PonderIndex.addPlugin(new testosteronePonder());
 
-            EntityRenderers.register(testosteroneEntities.RAT.get(), ratRenderer::new);
-
             if (ModList.get().isLoaded("jei")) {
                 CreateJeiCompat.register();
             }
@@ -196,14 +200,6 @@ public class testosterone {
         }
 
         @SubscribeEvent
-        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(
-                    testosteroneModelLayers.RAT_MODEL_LAYER,
-                    ratModel::createBodyLayer
-            );
-        }
-
-        @SubscribeEvent
         public static void onAddPackFinders(AddPackFindersEvent event) {
             if (event.getPackType() == PackType.CLIENT_RESOURCES) {
                 Path resourcePath = ModList.get().getModFileById(testosterone.MOD_ID).getFile().findResource("programmer_art");
@@ -223,14 +219,6 @@ public class testosterone {
                         )
                 );
             }
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = testosterone.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ModEventBusEvents  {
-        @SubscribeEvent
-        public static void registerAttributes(EntityAttributeCreationEvent event) {
-            event.put(testosteroneEntities.RAT.get(), ratEntity.createAttributes().build());
         }
     }
 }
