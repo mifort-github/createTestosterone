@@ -152,14 +152,14 @@ public class testosteroneFluids {
 		FluidInteractionRegistry.addInteraction(TESTOSTERONE_FLUID_TYPE,
 				new FluidInteractionRegistry.InteractionInformation(
 						ESTROGEN_FLUID_TYPE,
-						testosteroneModBlocks.AEQUALIS.defaultBlockState()
+						testosteroneModBlocks.AEQUALIS.get().defaultBlockState()
 				)
 		);
 
 		FluidInteractionRegistry.addInteraction(ESTROGEN_FLUID_TYPE,
 				new FluidInteractionRegistry.InteractionInformation(
 						TESTOSTERONE_FLUID_TYPE,
-						testosteroneModBlocks.AEQUALIS.defaultBlockState()
+						testosteroneModBlocks.AEQUALIS.get().defaultBlockState()
 				)
 		);
 	}
@@ -168,14 +168,14 @@ public class testosteroneFluids {
 		FluidInteractionRegistry.addInteraction(TESTOSTERONE_FLUID_TYPE,
 				new FluidInteractionRegistry.InteractionInformation(
 						ESTRONE_FLUID_TYPE,
-						testosteroneModBlocks.AEQUALIS.defaultBlockState()
+						testosteroneModBlocks.AEQUALIS.get().defaultBlockState()
 				)
 		);
 
 		FluidInteractionRegistry.addInteraction(ESTRONE_FLUID_TYPE,
 				new FluidInteractionRegistry.InteractionInformation(
 						TESTOSTERONE_FLUID_TYPE,
-						testosteroneModBlocks.AEQUALIS.defaultBlockState()
+						testosteroneModBlocks.AEQUALIS.get().defaultBlockState()
 				)
 		);
 	}

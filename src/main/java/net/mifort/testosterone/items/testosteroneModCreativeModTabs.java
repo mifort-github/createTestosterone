@@ -69,7 +69,7 @@ public class testosteroneModCreativeModTabs {
 
 						output.accept(testosteroneModBlocks.CRACKED_PILLAR);
 
-						output.accept(testosteroneModBlocks.AEQUALIS);
+						output.accept(testosteroneModBlocks.AEQUALIS.get());
 						output.accept(testosteroneModBlocks.CUT_AEQUALIS);
 						output.accept(testosteroneModBlocks.CUT_AEQUALIS_STAIRS);
 						output.accept(testosteroneModBlocks.CUT_AEQUALIS_SLAB);

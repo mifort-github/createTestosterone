@@ -83,13 +83,13 @@ public class testosteroneModBlocks {
 					.simpleItem()
 					.register();
 
-	public static final Block AEQUALIS = registerBlock(
-			"aequalis",
-			new Block(
-					BlockBehaviour.Properties.copy(Blocks.STONE)
-							.sound(SoundType.DEEPSLATE)
-			)
-	);
+	public static final BlockEntry<Block> AEQUALIS = REGISTRATE.block(
+					"aequalis", Block::new)
+			.initialProperties(() -> Blocks.STONE)
+			.properties(properties -> properties.sound(SoundType.DEEPSLATE))
+			.item()
+			.build()
+			.register();
 
 	public static final Block CUT_AEQUALIS = registerBlock(
 			"cut_aequalis",
@@ -260,18 +260,32 @@ public class testosteroneModBlocks {
 	);
 
 
-	private static final BigBricksRegister BIG_BRICKS = ConcreteLib.bigBricks(testosterone.MOD_ID);
+//	private static final BigBricksRegister BIG_BRICKS = ConcreteLib.bigBricks(testosterone.MOD_ID);
+//
+//	public static CLBlocks.BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS =
+//			BIG_BRICKS.register("big_aequalis_bricks",
+//					BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+//					BigBricksRecipes.of(CUT_AEQUALIS_BRICKS));
+//
+//
+//	public static CLBlocks.BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS =
+//			BIG_BRICKS.register("big_chiseled_aequalis_bricks",
+//					BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+//					BigBricksRecipes.of(CHISELED_AEQUALIS_BRICKS));
 
-	public static CLBlocks.BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS =
-			BIG_BRICKS.register("big_aequalis_bricks",
-					BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
-					BigBricksRecipes.of(CUT_AEQUALIS_BRICKS));
+	public static final BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS = REGISTRATE.block(
+			"big_aequalis_bricks", BigBricksBlock::new)
+			.initialProperties(() -> CUT_AEQUALIS_BRICKS)
+			.item()
+			.build()
+			.register();
 
-
-	public static CLBlocks.BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS =
-			BIG_BRICKS.register("big_chiseled_aequalis_bricks",
-					BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
-					BigBricksRecipes.of(CHISELED_AEQUALIS_BRICKS));
+	public static final BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS = REGISTRATE.block(
+					"big_chiseled_aequalis_bricks", BigBricksBlock::new)
+			.initialProperties(() -> CHISELED_AEQUALIS_BRICKS)
+			.item()
+			.build()
+			.register();
 
 
 	public static final Block CRACKED_PILLAR = registerBlock(

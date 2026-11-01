@@ -50,14 +50,14 @@ public class emiPlugin implements EmiPlugin {
 			));
 		}
 
-		addCollision(registry, testosteroneFluids.TESTOSTERONE_FLUID.get(), testosteroneFluids.ESTRONE_FLUID.get(), testosteroneModBlocks.AEQUALIS);
+		addCollision(registry, testosteroneFluids.TESTOSTERONE_FLUID.get(), testosteroneFluids.ESTRONE_FLUID.get(), testosteroneModBlocks.AEQUALIS.get());
 
 
 		ResourceLocation liquidEstrogenId = new ResourceLocation("estrogen", "liquid_estrogen");
 		Fluid liquidEstrogen = BuiltInRegistries.FLUID.get(liquidEstrogenId);
 
 		if (liquidEstrogen != Fluids.EMPTY) {
-			addCollision(registry, testosteroneFluids.TESTOSTERONE_FLUID.get(), liquidEstrogen, testosteroneModBlocks.AEQUALIS, "_estrogen");
+			addCollision(registry, testosteroneFluids.TESTOSTERONE_FLUID.get(), liquidEstrogen, testosteroneModBlocks.AEQUALIS.get(), "_estrogen");
 		}
 	}
 
