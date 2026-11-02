@@ -104,14 +104,10 @@ public class dataGen {
 
         addItemDescription(testosteroneModBlocks.AEQUALIS.asItem(), "A _strange stone_ formed when §kestrone§r and §ktestosterone§r touch.");
 
+        addItemDescription(testosteroneModBlocks.BIG_AEQUALIS_BRICKS.asItem(), "More big bricks with Big Bricks mod!");
+        addItemDescription(testosteroneModBlocks.BIG_CHISELED_AEQUALIS_BRICKS.asItem(), "More big bricks with Big Bricks mod!");
+
         addEntityName(testosteroneEntities.RAT.id(), "Stupid Rat");
-
-        translateBlock(testosteroneModBlocks.BIG_AEQUALIS_BRICKS);
-        translateBlock(testosteroneModBlocks.BIG_CHISELED_AEQUALIS_BRICKS);
-
-        tag(testosteroneModBlocks.BIG_AEQUALIS_BRICKS, BlockTags.MINEABLE_WITH_PICKAXE);
-        tag(testosteroneModBlocks.BIG_CHISELED_AEQUALIS_BRICKS, BlockTags.MINEABLE_WITH_PICKAXE);
-
     }
 
     private static void addEntityName(ResourceLocation entity, String translation) {

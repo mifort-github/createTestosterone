@@ -6,6 +6,7 @@ import com.simibubi.create.content.decoration.palettes.ConnectedPillarBlock;
 import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
 import net.mifort.testosterone.blocks.blockModels.fragileCopycatModel;
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlock;
@@ -27,6 +28,8 @@ import net.rebar.concrete_lib.lib.big_bricks.BigBricksBlock;
 import net.rebar.concrete_lib.lib.big_bricks.BigBricksRecipes;
 import net.rebar.concrete_lib.lib.big_bricks.BigBricksRegister;
 import net.rebar.concrete_lib.lib.blocks.CLBlocks;
+
+import java.util.function.Supplier;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -258,18 +261,12 @@ public class testosteroneModBlocks {
             .simpleItem()
             .register();
 
-
-    private static final BigBricksRegister BIG_BRICKS = ConcreteLib.bigBricks(testosterone.MOD_ID);
-
-    public static CLBlocks.BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS =
-            BIG_BRICKS.register("big_aequalis_bricks",
-                    BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+    public static BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS =
+            bigBricks("big_aequalis_bricks", CUT_AEQUALIS_BRICKS,
                     BigBricksRecipes.of(CUT_AEQUALIS_BRICKS));
 
-
-    public static CLBlocks.BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS =
-            BIG_BRICKS.register("big_chiseled_aequalis_bricks",
-                    BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE),
+    public static BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS =
+            bigBricks("big_chiseled_aequalis_bricks", CUT_AEQUALIS_BRICKS,
                     BigBricksRecipes.of(CHISELED_AEQUALIS_BRICKS));
 
 
@@ -369,6 +366,18 @@ public class testosteroneModBlocks {
                 .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(75 + xRot, -45 + yRot, zRot).scale(0.4F).end()
                 .end();
 
+    }
+
+    private static BlockEntry<BigBricksBlock> bigBricks(String name, Supplier<? extends Block> copyFrom,
+                                                        BigBricksRecipes recipes) {
+        BlockEntry<BigBricksBlock> entry = REGISTRATE.block(name, BigBricksBlock::new)
+                .initialProperties(copyFrom::get)
+                .blockstate(NonNullBiConsumer.noop())
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .item().model(NonNullBiConsumer.noop()).build()
+                .register();
+        BigBricksRegister.addRecipes(entry.getId(), recipes);
+        return entry;
     }
 
 } // tags, ponder
