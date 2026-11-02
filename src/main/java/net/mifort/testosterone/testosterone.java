@@ -52,6 +52,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -110,6 +111,11 @@ public class testosterone {
         // entities
         testosteroneEntities.register();
 
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            testosteroneModelLayers.registerLayers();
+            testosteroneModelLayers.registerRenderers();
+        }
+
         // config
         testosteroneConfigs.register(modContainer);
 
@@ -126,6 +132,7 @@ public class testosterone {
 
 
         REGISTRATE.addDataGenerator(ProviderType.LANG, dataGen::registerLang);
+        modEventBus.addListener(dataGen::gatherData);
     }
 
     public void loadComplete(FMLLoadCompleteEvent event) {
@@ -175,22 +182,6 @@ public class testosterone {
                         PartialModel.of(style.getRiggingModel())
                 );
             });
-        }
-
-        @SubscribeEvent
-        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerEntityRenderer(
-                    testosteroneEntities.RAT.get(),
-                    ratRenderer::new
-            );
-        }
-
-        @SubscribeEvent
-        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(
-                    testosteroneModelLayers.RAT_MODEL_LAYER,
-                    ratModel::createBodyLayer
-            );
         }
 
         @SubscribeEvent

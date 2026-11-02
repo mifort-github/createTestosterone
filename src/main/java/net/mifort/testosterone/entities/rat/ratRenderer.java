@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ratRenderer extends MobRenderer<ratEntity, ratModel<ratEntity>> {
     public ratRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new ratModel<>(pContext.bakeLayer(testosteroneModelLayers.RAT_MODEL_LAYER)), 0.8f);
+        super(pContext, new ratModel<>(pContext.bakeLayer(ratModel.LAYER_LOCATION)), 0.8f);
     }
 
     @Override

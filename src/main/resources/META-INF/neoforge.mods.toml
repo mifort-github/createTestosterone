@@ -93,6 +93,13 @@ versionRange="[9.2.0,)"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.${mod_id}]]
+modId = "concrete_lib"
+mandatory = true
+versionRange="[1.0.0,2.0.0)"
+ordering = "NONE"
+side = "BOTH"
+
 [[mixins]]
 config="mixins.testosterone.json"
 

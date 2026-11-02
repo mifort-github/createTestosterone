@@ -146,6 +146,9 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    // TODO: change to maven
+    implementation files("libs/concrete_lib-neoforge-1.0.0.jar")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

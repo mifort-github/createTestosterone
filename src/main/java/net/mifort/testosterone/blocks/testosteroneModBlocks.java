@@ -7,6 +7,7 @@ import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.mifort.testosterone.blocks.CT.testosteroneSpriteShifts;
 import net.mifort.testosterone.blocks.blockModels.fragileCopycatModel;
 import net.mifort.testosterone.blocks.decanterCentrifuge.decanterCentrifugeBlock;
@@ -27,6 +28,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksBlock;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksRecipes;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksRegister;
+
+import java.util.function.Supplier;
 
 import static net.mifort.testosterone.testosterone.REGISTRATE;
 
@@ -222,6 +228,17 @@ public class testosteroneModBlocks {
                     .save(prov, ctx.getId().withPrefix("stone_cutting/aequalis/")))
             .register();
 
+    public static final BlockEntry<Block> CHISELED_AEQUALIS_BRICKS = REGISTRATE.block("chiseled_cut_aequalis_bricks", Block::new)
+            .initialProperties(() -> Blocks.STONE)
+            .properties(p -> p.sound(SoundType.DEEPSLATE))
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .item().tag(AEQUALIS_ITEM_TAG).build()
+            .recipe((ctx, prov) -> SingleItemRecipeBuilder
+                    .stonecutting(Ingredient.of(AEQUALIS_ITEM_TAG), RecipeCategory.BUILDING_BLOCKS, ctx.get())
+                    .unlockedBy("has_aequalis", RegistrateRecipeProvider.has(AEQUALIS_ITEM_TAG))
+                    .save(prov, ctx.getId().withPrefix("stone_cutting/aequalis/")))
+            .register();
+
     public static final BlockEntry<StairBlock> CUT_AEQUALIS_BRICK_STAIRS = REGISTRATE.block("cut_aequalis_brick_stairs", p -> new StairBlock(Blocks.STONE_STAIRS.defaultBlockState(), p))
             .initialProperties(() -> Blocks.STONE)
             .properties(p -> p.sound(SoundType.DEEPSLATE))
@@ -350,21 +367,14 @@ public class testosteroneModBlocks {
                     .save(prov, ctx.getId().withPrefix("stone_cutting/smooth_aequalis/")))
             .register();
 
-    public static final BlockEntry<bigBricks> BIG_AEQUALIS_BRICKS = REGISTRATE.block("big_aequalis_bricks", bigBricks::new)
-            .initialProperties(() -> Blocks.STONE)
-            .properties(p -> p.sound(SoundType.DEEPSLATE))
-            .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .blockstate((ctx, prov) -> {})
-            .item().tag(AEQUALIS_ITEM_TAG).build()
-            .recipe((ctx, prov) -> SingleItemRecipeBuilder
-                    .stonecutting(Ingredient.of(AEQUALIS_ITEM_TAG), RecipeCategory.BUILDING_BLOCKS, ctx.get())
-                    .unlockedBy("has_aequalis", RegistrateRecipeProvider.has(AEQUALIS_ITEM_TAG))
-                    .save(prov, ctx.getId().withPrefix("stone_cutting/aequalis/")))
-            .register();
 
+    public static BlockEntry<BigBricksBlock> BIG_AEQUALIS_BRICKS =
+            bigBricks("big_aequalis_bricks", CUT_AEQUALIS_BRICKS,
+                    BigBricksRecipes.of(CUT_AEQUALIS_BRICKS));
 
-
-
+    public static BlockEntry<BigBricksBlock> BIG_CHISELED_AEQUALIS_BRICKS =
+            bigBricks("big_chiseled_aequalis_bricks", CUT_AEQUALIS_BRICKS,
+                    BigBricksRecipes.of(CHISELED_AEQUALIS_BRICKS));
 
 
 
@@ -465,6 +475,23 @@ public class testosteroneModBlocks {
                 .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(75 + xRot, -45 + yRot, zRot).scale(0.4F).end()
                 .end();
 
+    }
+
+    private static BlockEntry<BigBricksBlock> bigBricks(String name, Supplier<? extends Block> copyFrom,
+                                                        BigBricksRecipes recipes) {
+        BlockEntry<BigBricksBlock> entry = REGISTRATE.block(name, BigBricksBlock::new)
+                .initialProperties(copyFrom::get)
+                .blockstate(NonNullBiConsumer.noop())
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .item().model(NonNullBiConsumer.noop())
+                .tag(AEQUALIS_ITEM_TAG).build()
+                .recipe((ctx, prov) -> SingleItemRecipeBuilder
+                        .stonecutting(Ingredient.of(AEQUALIS_ITEM_TAG), RecipeCategory.BUILDING_BLOCKS, ctx.get())
+                        .unlockedBy("has_aequalis", RegistrateRecipeProvider.has(AEQUALIS_ITEM_TAG))
+                        .save(prov, ctx.getId().withPrefix("stone_cutting/aequalis/")))
+                .register();
+        BigBricksRegister.addRecipes(entry.getId(), recipes);
+        return entry;
     }
 
 } // tags, ponder

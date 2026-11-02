@@ -3,7 +3,6 @@ package net.mifort.testosterone.datagen;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import net.mifort.testosterone.blocks.testosteroneModBlocks;
 import net.mifort.testosterone.effects.testosteroneModEffects;
-import net.mifort.testosterone.entities.testosteroneEntities;
 import net.mifort.testosterone.fluids.testosteroneFluids;
 import net.mifort.testosterone.items.testosteroneModItems;
 import net.mifort.testosterone.packages.TestosteronePackageStyles;
@@ -12,8 +11,14 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.rebar.concrete_lib.lib.big_bricks.BigBricksModelProvider;
 
 public class dataGen {
+    public static void gatherData(GatherDataEvent event) {
+        event.getGenerator().addProvider(true,
+                new BigBricksModelProvider(event.getGenerator().getPackOutput(), testosterone.MOD_ID));
+    }
 
     public static void registerLang(RegistrateLangProvider provider) {
 
@@ -101,6 +106,9 @@ public class dataGen {
         addPonderTranslatable(provider, "decanter_main.text_2", "The centrifuge requires at least 100 RPM to work, connected at either the top or the bottom...");
         addPonderTranslatable(provider, "decanter_main.text_3", "...with the sides used for fluid conversion.");
         addPonderTranslatable(provider, "decanter_main.text_4", "Centrifuges can be stacked on top of each other.");
+
+        addItemDescription(provider, testosteroneModBlocks.BIG_AEQUALIS_BRICKS.asItem(), "More big bricks with Big Bricks mod!");
+        addItemDescription(provider, testosteroneModBlocks.BIG_CHISELED_AEQUALIS_BRICKS.asItem(), "More big bricks with Big Bricks mod!");
     }
 
     private static void addItemDescription(RegistrateLangProvider provider, Item item, String translation) {
