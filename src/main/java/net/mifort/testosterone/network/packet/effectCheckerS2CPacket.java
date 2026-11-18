@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import static net.mifort.testosterone.client.Layer.EFFECT_CHECKER_KEY;
@@ -34,8 +35,12 @@ public class effectCheckerS2CPacket implements CustomPacketPayload {
     public static void handle(effectCheckerS2CPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             // HERE WE ARE ON THE CLIENT!
-            Minecraft.getInstance().level.getEntity(packet.data[0])
-                    .getPersistentData().putInt(EFFECT_CHECKER_KEY, packet.data[1]);
+            if (Minecraft.getInstance().level == null) return;
+
+            Entity entity = Minecraft.getInstance().level.getEntity(packet.data[0]);
+            if (entity != null) {
+                entity.getPersistentData().putInt(EFFECT_CHECKER_KEY, packet.data[1]);
+            }
         });
     }
 }

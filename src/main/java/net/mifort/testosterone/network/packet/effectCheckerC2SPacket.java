@@ -31,7 +31,10 @@ public record effectCheckerC2SPacket(int livingEntityID) implements CustomPacket
             // HERE WE ARE ON THE SERVER!
             ServerPlayer player = (ServerPlayer) context.player();
 
-            LivingEntity livingEntity = (LivingEntity) player.level().getEntity(packet.livingEntityID());
+            if (!(player.level().getEntity(packet.livingEntityID()) instanceof LivingEntity livingEntity)) {
+                return;
+            }
+
             int effectInt;
 
             boolean hasTestosterone = livingEntity.hasEffect(testosteroneModEffects.TESTOSTERONE_EFFECT);

@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     public static final String EFFECT_CHECKER_KEY = "testosterone:effect_checker_key";
+    private static final String LAST_CHECK_KEY = "testosterone:effect_checker_last";
+    private static final int CHECK_INTERVAL_TICKS = 20;
 
     public static final ResourceLocation BEARD_TEXTURE = ResourceLocation.fromNamespaceAndPath(testosterone.MOD_ID, "textures/models/beard_texture.png");
 
@@ -36,7 +39,13 @@ public class Layer extends RenderLayer<AbstractClientPlayer, PlayerModel<Abstrac
 
     @Override
     public void render(@NotNull PoseStack pPoseStack, @NotNull MultiBufferSource pBuffer, int pPackedLight, AbstractClientPlayer pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        PacketDistributor.sendToServer(new effectCheckerC2SPacket(pLivingEntity.getId()));
+        long now = pLivingEntity.level().getGameTime();
+        CompoundTag data = pLivingEntity.getPersistentData();
+
+        if (!data.contains(LAST_CHECK_KEY) || now - data.getLong(LAST_CHECK_KEY) >= CHECK_INTERVAL_TICKS) {
+            data.putLong(LAST_CHECK_KEY, now);
+            PacketDistributor.sendToServer(new effectCheckerC2SPacket(pLivingEntity.getId()));
+        }
 
         int hasEffectInt = pLivingEntity.getPersistentData().getInt(EFFECT_CHECKER_KEY);
 
